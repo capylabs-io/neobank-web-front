@@ -23,7 +23,7 @@ return{
     drawer,
     cardData,
     isInventory,
-    navChange
+    navChange,
 };
 });
 /* eslint-enable */

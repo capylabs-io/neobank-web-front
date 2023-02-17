@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex firstSection justify-center align-center">
+  <div class="d-flex firstSection justify-center align-center mt-2">
     <div class="left d-flex justify-center align-center">
       <div class="rectangle" data-aos="fade-right"></div>
       <div
@@ -15,7 +15,7 @@
       class="right d-flex flex-column justify-center align-center"
       data-aos="fade-left"
     >
-      <div class="d-flex flex-column row-gap-25" :style="{ width: '80%' }">
+      <div class="d-flex flex-column row-gap-25" :style="{ width: '90%' }">
         <div class="black--text display-2 font-weight-bold content-title">
           What is VParadise?
         </div>
@@ -56,10 +56,11 @@ export default {
 .firstSection {
   height: 700px;
   @media (max-width: 1280px) {
-    margin-top: 50px;
-    height: 900px;
+    margin-top: 70px;
+    height: max-content;
     flex-direction: column;
     row-gap: 30px;
+    padding-bottom: 50px;
   }
 }
 .first-section-image {

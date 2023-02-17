@@ -9,7 +9,7 @@
   >
     <div
       class="introduction-content d-flex flex-column justify-center align-center row-gap-30"
-      :style="{ width: '32%' }"
+      :style="{ width: '70%' }"
       data-aos-delay="200"
       data-aos-duration="11000"
       data-aos-easing="ease-in-out"

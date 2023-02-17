@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex thirdsection justify-center align-center">
+  <div class="d-flex thirdsection justify-center align-center mt-2">
     <div class="left d-flex justify-center align-center">
       <div class="rectangle" data-aos="zoom-in-right"></div>
       <div
@@ -14,7 +14,7 @@
       class="right d-flex flex-column justify-center align-center"
       data-aos="zoom-in-left"
     >
-      <div class="d-flex flex-column row-gap-25" :style="{ width: '80%' }">
+      <div class="d-flex flex-column row-gap-25" :style="{ width: '90%' }">
         <div class="black--text display-2 font-weight-bold content-title">
           Bank Anywhere
         </div>
@@ -50,9 +50,10 @@ export default {
 .thirdsection {
   height: 700px;
   @media (max-width: 1280px) {
-    height: 900px;
+    height: max-content;
     flex-direction: column;
     row-gap: 30px;
+    padding-bottom: 20px;
   }
 }
 .first-section-image {

@@ -1,10 +1,10 @@
 <template>
-  <div class="d-flex secondsection justify-center align-center">
+  <div class="d-flex secondsection justify-center align-center mt-2">
     <div
       class="right d-flex flex-column justify-center align-center"
       data-aos="fade-up-right"
     >
-      <div class="d-flex flex-column row-gap-25" :style="{ width: '80%' }">
+      <div class="d-flex flex-column row-gap-25" :style="{ width: '90%' }">
         <div class="black--text display-2 font-weight-bold content-title">
           A new Era is coming
         </div>
@@ -69,7 +69,8 @@ export default {
   @media (max-width: 1280px) {
     margin-top: 50px;
     flex-direction: column-reverse;
-    height: 900px;
+    height: max-content;
+    padding-bottom: 20px;
     row-gap: 30px;
   }
 }
