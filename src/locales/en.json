@@ -1,0 +1,111 @@
+{
+  "navbar": {
+    "new": "NEWS",
+    "media": "MEDIA",
+    "btnplay": "Play Now",
+    "btnlogin": "Login"
+  },
+  "introduction": {
+    "title": "Choose 3 Of Your Best Fighters From Across The World To Battle In A Tournament For Endless Fortune And Fame!",
+    "btnplay": "Play For Free"
+  },
+  "mode": {
+    "card1": {
+      "title": "Adventure Awaits",
+      "text": "Explore a wide variety of herores. Venture into contrasting biomes with unique enemy factions, environments and battlefields."
+    },
+    "card2": {
+      "title": "Build an Empire",
+      "text": "Manage resources, research new advancements and level up your heroes. Plan your team to match your playstyle."
+    },
+    "card3": {
+      "title": "Wage War",
+      "text": "Dive into a deep combat system utilizing troop abilities and powerful magic. Combine troops to maximize available spells and damage potential."
+    }
+  },
+  "hero": {
+    "heroType": "TANKER",
+    "heroRank": "LEGENDARY",
+    "heroDes": "Spike throws cactus grenades that send needles flying, and a show-stopping Super: a field of cactus spines that slows down and damages enemies!",
+    "heroAbi1": "Pincushion",
+    "heroAbi2": "Life Plant",
+    "heroAbi3": "Curveball"
+  },
+  "new": {
+    "btnView": "VIEW ALL",
+    "new1": {
+      "subtitle": "NEWS",
+      "title": "Changes are coming!",
+      "link": "10 Oct 2022"
+    },
+    "new2": {
+      "subtitle": "NEWS",
+      "title": "Changes are coming!",
+      "link": "10 Oct 2022"
+    },
+    "new3": {
+      "subtitle": "NEWS",
+      "title": "Changes are coming!",
+      "link": "10 Oct 2022"
+    },
+    "new4": {
+      "subtitle": "NEWS",
+      "title": "Changes are coming!",
+      "link": "10 Oct 2022"
+    }
+  },
+  "community": {
+    "text": "We have several friendly communities where people discuss about everything related to Fighter Club. Come and join in the conversation with the developers team as we can discuss features together and learn from the feedback we get!",
+    "btndiscordtext1": "Join Our",
+    "btndiscordtext2": "Server On"
+  },
+  "signin": {
+    "ID": "Your email or phone number",
+    "signin": "Sign in",
+    "username" : "Username",
+    "password": "Password",
+    "remember-me":"Remember me",
+    "forget-password": "Forget password",
+    "create-new-account": "Create new account",
+    "forget-password-des":"Enter your username that you use to sign in with.",
+    "sign-up":"Sign up",
+    "email":"Email",
+    "phone":"Phone Number",
+    "confirm-password":"Confirm Password",
+    "date-of-birth":"Date of birth",
+    "accept-term-service" :"Accept Term and Services",
+    "contact-support" : "Contact  Player Support",
+    "forget-password-done": "If your username matches an existing account we will send a password reset email within a few minutes. If you have not received an email check your spam folder or",
+    "forget-password-contact" : " contact Player Support.",
+    "reset-password": "change password",
+    "reset-password-des" : "Please enter your new password below for your account ",
+    "new-password" : "New password",
+    "new-password-confirm" : "Enter new password again",
+    "verify-your-account": "Verify your account",
+    "register-confirm-sent-sub" : "Please check the verification link in your email:",
+    "resend-verify-link" : "Resend verify link",
+    "verified-successfully": "Verified successfully!",
+    "verified-successfully-sub": "You will be redirected back to Homepage in... ",
+    "log-in-now" : "Log in now"
+  },
+  "account": {
+    "account-details": "Account details",
+    "personal-info": "Personal information",
+    "privacy-commmunication":"privacy & communication",
+    "game-privacy":"game data and profile privacy",
+    "country" : "Country / Region",
+    "change-password-sub":"We recommend updating your password periodically to prevent unauthorized access.",
+    "old-password" : "Old Password",
+    "enter-old-passwrord" : "Enter old password",
+    "enter-new-passwrord" : "Enter new password",
+    "re-enter-new-password" : "Re-enter new password",
+    "share-game-data":"Share Game Data",
+    "share-game-data-des":"Fighter Force collects your activity, usage info, performance info, personal identifiers and device identifiers for functionality, account management, analytics and debugging. Data that Fighter Force collects is encrypted in transit and will not be used for any other purpose",
+    "communication-preferences":"Communication preferences",
+    "languge": "Languge",
+    "push-notification":"Push notification",
+    "push-notification-des" : "Receive push notifications from Fighter Force",
+    "new-offers":"News and Special Offers",
+    "new-offers-des":"Receive selected news, event information, updates and special offers of Fighter Force"
+  }
+}
