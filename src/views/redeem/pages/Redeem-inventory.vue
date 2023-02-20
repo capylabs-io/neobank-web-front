@@ -26,6 +26,7 @@ export default {
           image: require(`@/assets/redeem/card/cgv-card.webp`),
           icon: require(`@/assets/redeem/card/cgv-icon.webp`),
           price: "50",
+          status: "Hot",
           title: "50.000đ voucher film ticket CGV",
           detailheader:
             "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
@@ -39,6 +40,7 @@ export default {
           icon: require(`@/assets/redeem/card/viettel-icon.webp`),
           price: "50",
           title: "50.000đ mobile top up Viettel",
+          status: "New",
           detailheader:
             "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
           firstDetail:
@@ -51,6 +53,7 @@ export default {
           icon: require(`@/assets/redeem/card/baemin-icon.webp`),
           price: "100",
           title: "100.000đ voucher Baemin",
+          status: "Expired",
           detailheader:
             "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
           firstDetail:
@@ -63,6 +66,7 @@ export default {
           icon: require(`@/assets/redeem/card/viettel-icon.webp`),
           price: "50",
           title: "10% off max 10k voucher ETC ",
+          status: "Hot",
           detailheader:
             "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
           firstDetail:
@@ -75,6 +79,7 @@ export default {
           icon: require(`@/assets/redeem/card/viettel-icon.webp`),
           price: "50",
           title: "50.000đ mobile top up Viettel",
+          status: "New",
           detailheader:
             "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
           firstDetail:
@@ -87,6 +92,7 @@ export default {
           icon: require(`@/assets/redeem/card/viettel-icon.webp`),
           price: "50",
           title: "50.000đ mobile top up Viettel",
+          status: "Hot",
           detailheader:
             "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
           firstDetail:
@@ -99,6 +105,7 @@ export default {
           icon: require(`@/assets/redeem/card/viettel-icon.webp`),
           price: "50",
           title: "50.000đ mobile top up Viettel",
+          status: "Expired",
           detailheader:
             "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
           firstDetail:

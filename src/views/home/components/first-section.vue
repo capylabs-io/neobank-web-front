@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex firstSection justify-center align-center mt-2">
+  <div class="d-flex firstSection justify-center align-center">
     <div class="left d-flex justify-center align-center">
       <div class="rectangle" data-aos="fade-right"></div>
       <div
@@ -20,24 +20,11 @@
           What is VParadise?
         </div>
         <div class="text-left black--text">
-          Simply put, Coastal is a bank. We are a community bank that does many
-          of the things other banks do. Like – lend money, manage your deposits,
-          offer online banking, and provide other financial services. However,
-          there are differences. We are rooted in community, bold enough to try
-          new things, and truly care about people.
-        </div>
-        <div class="text-left black--text">
-          That is why, when we had the opportunity to grow our community and
-          help MORE people, we jumped on the chance to do so. Several years ago,
-          we began offering Banking as a Service (BaaS) to Fintechs on a mission
-          to make banking easier and more accessible.
-        </div>
-        <div class="text-left black--text">
-          So what is BaaS, you ask? It is simple. We provide banking
-          infrastructure, compliance oversight, years of industry experience,
-          and Member FDIC insurance so our Fintech partners can now deliver you
-          – the customer – customized banking solutions that fit your lifestyle
-          or specific financial situation. Everybody wins.
+          Simply put, VParadise is a bank. We are a community bank that does
+          many of the things other banks do. Like – lend money, manage your
+          deposits, offer online banking, and provide other financial services.
+          However, there are differences. We are rooted in community, bold
+          enough to try new things, and truly care about people.
         </div>
       </div>
     </div>
@@ -54,7 +41,7 @@ export default {
 
 <style lang="scss" scoped>
 .firstSection {
-  height: 700px;
+  height: max-content;
   @media (max-width: 1280px) {
     margin-top: 70px;
     height: max-content;

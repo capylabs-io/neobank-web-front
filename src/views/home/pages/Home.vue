@@ -8,7 +8,7 @@
       }"
     ></div>
 
-    <div class="container DMSans mx-auto">
+    <div class="container DMSans mx-auto d-flex flex-column">
       <intro></intro>
       <introduction></introduction>
       <firstsection></firstsection>
@@ -46,13 +46,18 @@ export default {
       windowWidth: window.innerWidth,
     };
   },
+  mounted: {},
   created() {
     window.addEventListener("scroll", this.handleScroll);
+    this.change();
   },
   unmounted() {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
+    change() {
+      this.userStore.navChange = false;
+    },
     handleScroll() {
       const doorway = document.querySelector(".doorway");
       const scrollY = window.scrollY;
@@ -96,7 +101,9 @@ export default {
 }
 .container {
   overflow-x: hidden !important;
+  row-gap: 150px;
   z-index: 2;
+  padding-bottom: 100px;
 }
 
 .tag {

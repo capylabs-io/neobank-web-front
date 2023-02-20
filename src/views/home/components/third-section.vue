@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex thirdsection justify-center align-center mt-2">
+  <div class="d-flex thirdsection justify-center align-center">
     <div class="left d-flex justify-center align-center">
       <div class="rectangle" data-aos="zoom-in-right"></div>
       <div
@@ -23,14 +23,14 @@
           accounts anytime. Take advantage of mobile deposit, funds transfer,
           and bill pay.
         </div>
-        <div class="d-flex col-gap-8 logo-group">
+        <!-- <div class="d-flex col-gap-8 logo-group">
           <div class="logo">
             <v-img :src="require(`@/assets/home/apple.webp`)"></v-img>
           </div>
           <div class="logo">
             <v-img :src="require(`@/assets/home/android.webp`)"></v-img>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -48,7 +48,9 @@ export default {
 
 <style lang="scss" scoped>
 .thirdsection {
-  height: 700px;
+  height: max-content;
+  padding-bottom: 100px;
+
   @media (max-width: 1280px) {
     height: max-content;
     flex-direction: column;

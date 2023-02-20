@@ -1,34 +1,61 @@
 <template>
   <v-card
     height="290px"
-    max-width="225px"
+    max-width="14.3%"
     elevation="2"
     rounded="8"
     class="pa-4"
+    @click="Click"
   >
-    <v-hover v-slot="{ hover }">
+    <div
+      class="card-image d-flex flex-column"
+      :style="{
+        backgroundImage: 'url(' + cards.image + ')',
+      }"
+    >
       <div
-        class="card-image d-flex flex-column"
+        class="mt-3 pa-1"
         :style="{
-          backgroundImage: 'url(' + cards.image + ')',
+          background: '#FDDF59',
+          width: 'max-content',
+          height: 'max-content',
+          position: 'absolute',
+          'border-bottom-right-radius': '8px',
+          'border-top-right-radius': '8px',
         }"
+        v-if="cards.status == 'Expired'"
       >
-        <div
-          class="mt-3 pa-1"
-          :style="{
-            background: '#FDDF59',
-            width: 'max-content',
-            height: 'max-content',
-            position: 'absolute',
-            'border-bottom-right-radius': '8px',
-            'border-top-right-radius': '8px',
-          }"
-        >
-          {{ cards.price }}.000₫
-        </div>
-        <tooltip class="tooltip" :cards="cards" v-if="hover"></tooltip>
+        {{ cards.status }}
       </div>
-    </v-hover>
+      <div
+        class="mt-3 pa-1"
+        :style="{
+          background: '#f65970',
+          width: 'max-content',
+          height: 'max-content',
+          position: 'absolute',
+          'border-bottom-right-radius': '8px',
+          'border-top-right-radius': '8px',
+        }"
+        v-else-if="cards.status == 'Hot'"
+      >
+        {{ cards.status }}
+      </div>
+      <div
+        class="mt-3 pa-1"
+        :style="{
+          background: '#4c99eb',
+          width: 'max-content',
+          height: 'max-content',
+          position: 'absolute',
+          'border-bottom-right-radius': '8px',
+          'border-top-right-radius': '8px',
+        }"
+        v-else
+      >
+        {{ cards.status }}
+      </div>
+    </div>
     <div class="d-flex mt-3 font-weight-bold align-center justify-center">
       <div>
         <v-img class="card-icon" :src="cards.icon"></v-img>
@@ -60,18 +87,29 @@
 </template>
 
 <script>
-import tooltip from "@/views/redeem/components/card-tooltip.vue";
+import { mapStores } from "pinia";
+import { userStore } from "../../stores/userStore";
+// import tooltip from "@/views/redeem/components/card-tooltip.vue";
 export default {
   props: ["cards"],
+
   components: {
-    tooltip: tooltip,
+    // tooltip: tooltip,
+  },
+  computed: {
+    ...mapStores(userStore),
   },
   data() {
     return {
       index: 1,
     };
   },
-  methods: {},
+  methods: {
+    Click() {
+      this.userStore.drawerDetail = !this.userStore.drawerDetail;
+      this.userStore.detailCard = this.cards;
+    },
+  },
 };
 </script>
 

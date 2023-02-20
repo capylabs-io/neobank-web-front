@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <v-footer color="footer" class="d-flex flex-column footer">
+  <div class="d-flex flex-column footer justify-space-between" >
     <div class="mx-auto d-flex flex-column align-center mt-5">
       <div class="footer-logo DMSans mb-10">
         <v-img :src="require(`@/assets/home/footer-logo.webp`)"></v-img>
@@ -67,11 +67,18 @@
         design by CapyLabs
       </div>
     </div>
-  </v-footer>
+  </div>
 </template>
 
 <script>
-export default {};
+import { mapStores } from "pinia";
+import { userStore } from "../views/stores/userStore";
+
+export default {
+  computed: {
+    ...mapStores(userStore),
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -79,6 +86,7 @@ export default {};
   font-size: 14px;
   height: 400px;
   width: 100%;
+  background-color: #f7f6ff;
   @media (max-width: 1280px) {
     height: max-content;
   }

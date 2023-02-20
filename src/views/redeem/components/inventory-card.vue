@@ -22,8 +22,37 @@
           'border-bottom-right-radius': '8px',
           'border-top-right-radius': '8px',
         }"
+        v-if="cards.status == 'Expired'"
       >
-        {{ cards.price }}.000₫
+        {{ cards.status }}
+      </div>
+      <div
+        class="mt-3 pa-1"
+        :style="{
+          background: '#f65970',
+          width: 'max-content',
+          height: 'max-content',
+          position: 'absolute',
+          'border-bottom-right-radius': '8px',
+          'border-top-right-radius': '8px',
+        }"
+        v-else-if="cards.status == 'Hot'"
+      >
+        {{ cards.status }}
+      </div>
+      <div
+        class="mt-3 pa-1"
+        :style="{
+          background: '#4c99eb',
+          width: 'max-content',
+          height: 'max-content',
+          position: 'absolute',
+          'border-bottom-right-radius': '8px',
+          'border-top-right-radius': '8px',
+        }"
+        v-else
+      >
+        {{ cards.status }}
       </div>
     </div>
     <div class="d-flex mt-3 font-weight-bold align-center justify-center">
@@ -58,62 +87,6 @@
         <span class="font-weight-bold text-capitalize pl-2">Redeemed</span>
       </div>
     </v-btn>
-
-    <!-- <v-card
-      v-if="drawer"
-      elevation="8"
-      class="drawer pa-5 d-flex flex-column justify-space-between"
-    >
-      <v-card class="drawer-card" flat>
-        <div
-          class="drawer-image d-flex flex-column"
-          :style="{
-            backgroundImage: 'url(' + cards.image + ')',
-          }"
-        >
-          <div
-            class="mt-3 pa-1"
-            :style="{
-              background: '#FDDF59',
-              width: 'max-content',
-              height: 'max-content',
-              position: 'absolute',
-              'border-bottom-right-radius': '8px',
-              'border-top-right-radius': '8px',
-            }"
-          >
-            {{ cards.price }}.000₫
-          </div>
-        </div>
-        <div
-          class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
-        >
-          <div>
-            <v-img class="drawer-icon" :src="cards.icon"></v-img>
-          </div>
-          <span class="mt-3"> {{ cards.detailheader }} </span>
-        </div>
-        <div class="mt-3 text-left">{{ cards.firstDetail }}</div>
-        <div class="mt-3 text-left">{{ cards.secondDetail }}</div>
-      </v-card>
-
-      <v-btn icon elevation="4" class="btn-arrow" @click.stop="drawer = !drawer"
-        ><v-icon> mdi-arrow-left</v-icon>
-      </v-btn>
-
-      <v-btn
-        class="d-flex column-gap-10 mx-auto mt-3 unpurchased drawer-btn"
-        elevation="2"
-        rounded
-        text
-      >
-        <div>
-          <span class="white--text font-weight-bold pr-2 text-capitalize"
-            >Redeem Now</span
-          >
-        </div>
-      </v-btn>
-    </v-card> -->
   </v-card>
 </template>
 

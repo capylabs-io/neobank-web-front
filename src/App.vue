@@ -1,11 +1,11 @@
 <template>
   <v-app>
-    <app-navbar v-if="index == 1"></app-navbar>
+    <app-navbar v-if="!index == 1"></app-navbar>
     <page-navbar v-else></page-navbar>
     <v-main>
       <router-view :key="$route.fullPath" />
     </v-main>
-    <app-footer></app-footer>
+    <app-footer v-if="!userStore.navChange"></app-footer>
   </v-app>
 </template>
 <script>

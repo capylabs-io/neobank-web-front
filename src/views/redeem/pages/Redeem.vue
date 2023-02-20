@@ -1,11 +1,11 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="redeem d-flex DMSans">
-    <v-navigation-drawer
+    <!-- <v-navigation-drawer
       absolute
       temporary
       v-model="userStore.drawer"
-      left
+      right
       hide-overlay
       width="480px"
       color="white"
@@ -43,15 +43,6 @@
         <div class="mt-3 text-left">{{ userStore.cardData.firstDetail }}</div>
         <div class="mt-3 text-left">{{ userStore.cardData.secondDetail }}</div>
       </v-card>
-
-      <!-- <v-btn
-        icon
-        elevation="4"
-        class="btn-arrow"
-        @click.stop="userStore.drawer = !userStore.drawer"
-        ><v-icon> mdi-arrow-left</v-icon>
-      </v-btn> -->
-
       <v-btn
         class="d-flex column-gap-10 mx-auto unpurchased drawer-btn"
         elevation="2"
@@ -64,7 +55,9 @@
           >
         </div>
       </v-btn>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
+    <inventoryDrawer></inventoryDrawer>
+    <detail></detail>
     <left-content></left-content>
     <right-content v-if="!userStore.isInventory"></right-content>
     <inventory-content v-else></inventory-content>
@@ -75,6 +68,9 @@
 import leftContent from "@/views/redeem/pages/Redeem-left-content.vue";
 import rightContent from "@/views/redeem/pages/Redeem-right-content.vue";
 import inventoryContent from "@/views/redeem/pages/Redeem-inventory.vue";
+import detailDrawer from "@/views/redeem/components/card-detail-drawer.vue";
+import inventoryDrawer from "@/views/redeem/components/inventory-card-drawer.vue";
+
 import { mapStores } from "pinia";
 import { userStore } from "../../stores/userStore";
 
@@ -83,14 +79,25 @@ export default {
     rightContent: rightContent,
     leftContent: leftContent,
     inventoryContent: inventoryContent,
+    detail: detailDrawer,
+    inventoryDrawer: inventoryDrawer,
   },
+  mounted: {},
   computed: {
     ...mapStores(userStore),
+  },
+  created() {
+    this.change();
   },
   data() {
     return {
       inventory: true,
     };
+  },
+  methods: {
+    change() {
+      this.userStore.navChange = false;
+    },
   },
 };
 </script>

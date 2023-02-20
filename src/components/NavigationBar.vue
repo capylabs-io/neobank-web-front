@@ -8,7 +8,6 @@
         :src="require(`@/assets/home/web-logo.webp`)"
       ></v-img>
       <router-link
-        @click="userStore.navChange = false"
         to="/"
         class="white--text text-decoration-none align-self-center"
       >
@@ -21,14 +20,12 @@
         <div class="text-none text-uppercase">WORLD</div>
       </router-link>
       <router-link
-        @click="userStore.navChange = true"
         to="/vn/redeem"
         class="white--text text-decoration-none align-self-center"
       >
         <div class="text-none text-uppercase">REDEEM</div>
       </router-link>
       <router-link
-        @click="userStore.navChange = false"
         to="/vn/login"
         class="white--text text-decoration-none align-self-center"
       >

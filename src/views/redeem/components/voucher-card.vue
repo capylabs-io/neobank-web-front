@@ -1,7 +1,7 @@
 <template>
   <v-card
     height="290px"
-    max-width="225px"
+    max-width="14.3%"
     elevation="2"
     rounded="8"
     class="pa-3"

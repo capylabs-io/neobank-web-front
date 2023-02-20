@@ -9,8 +9,13 @@
         class="sign-in-form ma-auto pa-4 pa-sm-8"
       >
         <div class="btn-back pa-0 cursor-pointer">
-          <v-icon small color="black"> mdi-chevron-left</v-icon>
-          <span class="text-capitalize">Back</span>
+          <router-link
+            to="/"
+            class="black--text text-decoration-none align-self-center"
+          >
+            <v-icon small color="black"> mdi-chevron-left</v-icon>
+            <span class="text-capitalize">Back</span>
+          </router-link>
         </div>
         <div class="text-center font-weight-bold">
           <span :style="{ 'font-size': '30px' }"> Login</span>
@@ -80,16 +85,29 @@
 import FacebookIcon from "@/components/svg/facebook.vue";
 import GoogleIcon from "@/components/svg/google.vue";
 import AppleIcon from "@/components/svg/apple.vue";
+import { mapStores } from "pinia";
+import { userStore } from "../../stores/userStore";
 export default {
   components: {
     FacebookIcon,
     GoogleIcon,
     AppleIcon,
   },
+  created() {
+    this.change();
+  },
+  computed: {
+    ...mapStores(userStore),
+  },
   data() {
     return {
       isShow: true,
     };
+  },
+  methods: {
+    change() {
+      this.userStore.navChange = true;
+    },
   },
 };
 </script>

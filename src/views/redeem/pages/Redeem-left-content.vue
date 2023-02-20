@@ -16,7 +16,7 @@
         <span>tung.bro.bro69@gmail.com</span>
       </div>
       <div
-        class="d-flex left-profile-section align-center font-weight-bold mt-2 column-gap-10 pa-2"
+        class="d-flex left-profile-section align-center font-weight-bold column-gap-10 pa-2"
       >
         <span :style="{ 'font-size': '18px' }">1000</span>
         <div>
@@ -83,6 +83,7 @@ export default {
 .left-first {
   height: 26%;
   background: white;
+  row-gap: 10px;
 }
 .left-second {
   height: 9%;
