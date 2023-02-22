@@ -1,7 +1,8 @@
 <template>
   <v-app>
-    <app-navbar v-if="!index == 1"></app-navbar>
-    <page-navbar v-else></page-navbar>
+    <app-navbar v-if="userStore.pageIndex == 1"></app-navbar>
+    <page-navbar v-else-if="userStore.pageIndex == 2"></page-navbar>
+    <div v-else></div>
     <v-main>
       <router-view :key="$route.fullPath" />
     </v-main>
@@ -23,6 +24,14 @@ export default {
   },
   computed: {
     ...mapStores(userStore),
+  },
+  created() {
+    let user = JSON.parse(sessionStorage.getItem("user"));
+    if (user) {
+      this.userStore.isSignin = true;
+    } else {
+      this.userStore.isSignin = false;
+    }
   },
   data() {
     return {

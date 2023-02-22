@@ -1,7 +1,8 @@
 import axios from "axios";
 import utils from "@/plugins/utils";
 
-axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT;
+// axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT;
+axios.defaults.baseURL = 'https://metabank-dev-api.capylabs.io/api/';
 
 const USER_API = "/users/";
 const UPLOAD_API = "/upload/";

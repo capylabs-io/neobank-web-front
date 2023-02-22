@@ -6,18 +6,36 @@ import i18n from "./i18n";
 import VueParallaxJs from 'vue-parallax-js'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-import { createPinia } from 'pinia'
+import { createPinia, PiniaVuePlugin } from 'pinia'
+import { markRaw } from "vue";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+import alert from "@/plugins/alert";
+import loading from "@/plugins/loading";
+import PluginHelper from "@/helpers/PluginHelper";
+import utils from "@/plugins/utils";
+import dialog from "@/plugins/dialog";
+import { rules } from "@/plugins/rules";
+import moment from "moment";
 
-// const options = {
-//   minWidth: 980,   /* minumum window width for parallax to take effect */
-//   className: String,  /* this class gets added to all elements
-//                       that are being animated, by default none */
-//   container: String,  /* element that actually scrolls, by default it's window */
-// }
+Vue.use(PiniaVuePlugin);
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
+
+pinia.use(({ store }) => {
+  store.router = markRaw(router);
+});
 Vue.use(VueParallaxJs)
 Vue.config.productionTip = false
-
-const pinia = createPinia();
+Vue.use(
+  PluginHelper.create({
+    $utils: utils,
+    $rules: rules,
+    $dialog: dialog,
+    $alert: alert,
+    $loading: loading,
+    $moment: moment,
+  })
+);
 Vue.use(pinia)
 new Vue({
   created() {

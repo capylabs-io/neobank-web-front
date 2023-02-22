@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     change() {
-      this.userStore.navChange = false;
+      this.userStore.pageIndex = 1;
     },
     handleScroll() {
       const doorway = document.querySelector(".doorway");

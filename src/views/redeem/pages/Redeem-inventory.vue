@@ -34,6 +34,7 @@ export default {
             "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
           secondDetail:
             " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
+          isRedeem: false,
         },
         {
           image: require(`@/assets/redeem/card/viettel-card.webp`),
@@ -47,6 +48,7 @@ export default {
             "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
           secondDetail:
             " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
+          isRedeem: false,
         },
         {
           image: require(`@/assets/redeem/card/baemin-card.webp`),
@@ -60,6 +62,7 @@ export default {
             "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
           secondDetail:
             " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
+          isRedeem: false,
         },
         {
           image: require(`@/assets/redeem/card/viettel-card.webp`),
@@ -73,6 +76,7 @@ export default {
             "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
           secondDetail:
             " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
+          isRedeem: false,
         },
         {
           image: require(`@/assets/redeem/card/viettel-card.webp`),
@@ -86,6 +90,7 @@ export default {
             "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
           secondDetail:
             " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
+          isRedeem: true,
         },
         {
           image: require(`@/assets/redeem/card/viettel-card.webp`),
@@ -99,6 +104,7 @@ export default {
             "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
           secondDetail:
             " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
+          isRedeem: true,
         },
         {
           image: require(`@/assets/redeem/card/viettel-card.webp`),
@@ -112,6 +118,7 @@ export default {
             "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
           secondDetail:
             " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
+          isRedeem: false,
         },
       ],
       index: 1,

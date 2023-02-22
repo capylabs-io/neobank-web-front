@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex nav-bar mt-5">
+  <div class="d-flex nav-bar">
     <div
       class="d-flex gap-24 DMSans black--text nav-container justify-center align-center mx-auto pa-7"
     >
@@ -45,14 +45,7 @@
 </template>
 
 <script>
-import { mapStores } from "pinia";
-import { userStore } from "../views/stores/userStore";
-export default {
-  data() {},
-  computed: {
-    ...mapStores(userStore),
-  },
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>
@@ -60,6 +53,7 @@ export default {
   width: 100%;
   position: fixed;
   z-index: 99;
+  margin-top: 80px;
 }
 .nav-container {
   border-radius: 40px;

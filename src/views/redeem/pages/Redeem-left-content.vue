@@ -31,7 +31,7 @@
       <div class="pa-2 content" @click="storeClick">
         <div class="d-flex column-gap-10">
           <div>
-            <v-icon> mdi-account-box</v-icon>
+            <v-icon>mdi-store </v-icon>
           </div>
           <span>Redeem store</span>
         </div>
@@ -42,6 +42,14 @@
             <v-icon> mdi-treasure-chest</v-icon>
           </div>
           <span>Inventory</span>
+        </div>
+      </div>
+      <div class="pa-2 content" @click="accountClick()">
+        <div class="d-flex column-gap-10">
+          <div>
+            <v-icon> mdi-account-box</v-icon>
+          </div>
+          <span>Account setting</span>
         </div>
       </div>
     </div>
@@ -65,10 +73,13 @@ export default {
   },
   methods: {
     inventoryClick() {
-      this.userStore.isInventory = true;
+      this.userStore.index = 2;
     },
     storeClick() {
-      this.userStore.isInventory = false;
+      this.userStore.index = 1;
+    },
+    accountClick() {
+      this.userStore.index = 3;
     },
   },
 };
@@ -86,11 +97,11 @@ export default {
   row-gap: 10px;
 }
 .left-second {
-  height: 9%;
+  height: 13%;
   background: white;
 }
 .left-third {
-  height: 65%;
+  height: 61%;
   background: white;
 }
 .right {

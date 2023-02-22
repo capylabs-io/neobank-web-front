@@ -1,66 +1,12 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="redeem d-flex DMSans">
-    <!-- <v-navigation-drawer
-      absolute
-      temporary
-      v-model="userStore.drawer"
-      right
-      hide-overlay
-      width="480px"
-      color="white"
-      class="pa-5 drawer d-flex flex-column"
-    >
-      <v-card class="drawer-card" flat>
-        <div
-          class="drawer-image d-flex flex-column"
-          :style="{
-            backgroundImage: 'url(' + userStore.cardData.image + ')',
-          }"
-        >
-          <div
-            class="mt-3 pa-1"
-            :style="{
-              background: '#FDDF59',
-              width: 'max-content',
-              height: 'max-content',
-              position: 'absolute',
-              'border-bottom-right-radius': '8px',
-              'border-top-right-radius': '8px',
-            }"
-          >
-            {{ userStore.cardData.price }}.000₫
-          </div>
-        </div>
-        <div
-          class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
-        >
-          <div>
-            <v-img class="drawer-icon" :src="userStore.cardData.icon"></v-img>
-          </div>
-          <span class="mt-3"> {{ userStore.cardData.detailheader }} </span>
-        </div>
-        <div class="mt-3 text-left">{{ userStore.cardData.firstDetail }}</div>
-        <div class="mt-3 text-left">{{ userStore.cardData.secondDetail }}</div>
-      </v-card>
-      <v-btn
-        class="d-flex column-gap-10 mx-auto unpurchased drawer-btn"
-        elevation="2"
-        rounded
-        text
-      >
-        <div>
-          <span class="white--text font-weight-bold pr-2 text-capitalize"
-            >Redeem Now</span
-          >
-        </div>
-      </v-btn>
-    </v-navigation-drawer> -->
     <inventoryDrawer></inventoryDrawer>
     <detail></detail>
     <left-content></left-content>
-    <right-content v-if="!userStore.isInventory"></right-content>
-    <inventory-content v-else></inventory-content>
+    <right-content v-if="userStore.index == 1"></right-content>
+    <inventory-content v-else-if="userStore.index == 2"></inventory-content>
+    <accountSetting v-else></accountSetting>
   </div>
 </template>
 
@@ -68,6 +14,7 @@
 import leftContent from "@/views/redeem/pages/Redeem-left-content.vue";
 import rightContent from "@/views/redeem/pages/Redeem-right-content.vue";
 import inventoryContent from "@/views/redeem/pages/Redeem-inventory.vue";
+import accountSettingVue from "@/views/redeem/pages/account-setting.vue";
 import detailDrawer from "@/views/redeem/components/card-detail-drawer.vue";
 import inventoryDrawer from "@/views/redeem/components/inventory-card-drawer.vue";
 
@@ -81,6 +28,7 @@ export default {
     inventoryContent: inventoryContent,
     detail: detailDrawer,
     inventoryDrawer: inventoryDrawer,
+    accountSetting: accountSettingVue,
   },
   mounted: {},
   computed: {
@@ -96,7 +44,7 @@ export default {
   },
   methods: {
     change() {
-      this.userStore.navChange = false;
+      this.userStore.pageIndex = 2;
     },
   },
 };

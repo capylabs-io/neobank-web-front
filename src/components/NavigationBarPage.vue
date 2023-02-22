@@ -88,11 +88,7 @@
 
     <div class="align-self-center DMSans" v-if="userStore.isSignin">
       <v-btn class="pa-5" color="introbtn">
-        <router-link
-          @click="userStore.navChange = false"
-          to="/vn/login"
-          class="text-decoration-none white--text"
-        >
+        <router-link to="/vn/login" class="text-decoration-none white--text">
           <div class="text-capitalize">LOGIN</div>
         </router-link>
       </v-btn>
@@ -103,7 +99,7 @@
           <v-btn icon flat class="align-self-center">
             <v-icon color="black" large>mdi-account</v-icon>
           </v-btn>
-          <div class="align-self-center">Nguyen Hai Long</div>
+          <div class="align-self-center">{{ userStore.userData.email }}</div>
         </div>
         <!-- <v-app-bar-nav-icon
               v-bind="attrs"
@@ -130,6 +126,7 @@
         </v-list-item>
         <v-list-item>
           <router-link
+            @click="signout"
             to="/vn/login"
             class="black--text text-decoration-none align-self-center"
           >
@@ -156,6 +153,12 @@ export default {
         return false;
       }
     },
+    signout() {
+      this.userStore.logout;
+    },
+  },
+  created() {
+
   },
 };
 </script>

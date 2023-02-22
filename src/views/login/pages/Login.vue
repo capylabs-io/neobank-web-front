@@ -24,6 +24,8 @@
           Your email or phone number
         </div>
         <v-text-field
+          v-model="userStore.signInData.identifier"
+          :rules="rules.checkIdentifier"
           type="text"
           background-color="cream"
           class="mt-2"
@@ -32,8 +34,11 @@
         ></v-text-field>
         <div class="text-xl text-left">Password</div>
         <v-text-field
-          :append-icon="isShow ? 'mdi-eye' : 'mdi-eye-off'"
-          type="password"
+          v-model="userStore.signInData.password"
+          :append-icon="userStore.isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
+          :rules="rules.password"
+          :type="userStore.isShowPass ? 'text' : 'password'"
+          @click:append="userStore.isShowPass = !userStore.isShowPass"
           solo
           dense
           background-color="cream"
@@ -63,6 +68,7 @@
           <v-btn
             color="#5E6BE9"
             class="py-5 px-10 btn-submit white--text font-weight-bold full-width"
+            @click="submitForm"
             >Sign in</v-btn
           >
         </div>
@@ -87,6 +93,7 @@ import GoogleIcon from "@/components/svg/google.vue";
 import AppleIcon from "@/components/svg/apple.vue";
 import { mapStores } from "pinia";
 import { userStore } from "../../stores/userStore";
+import { rules } from "@/plugins/rules";
 export default {
   components: {
     FacebookIcon,
@@ -101,12 +108,25 @@ export default {
   },
   data() {
     return {
+      rules: rules,
       isShow: true,
     };
   },
   methods: {
+    gotoRouter(url) {
+      this.$router.push({
+        params: "vn",
+        name: url,
+      });
+    },
     change() {
+      this.userStore.pageIndex = 3;
       this.userStore.navChange = true;
+    },
+    submitForm() {
+      if (this.$refs.form.validate()) {
+        this.userStore.signIn();
+      }
     },
   },
 };

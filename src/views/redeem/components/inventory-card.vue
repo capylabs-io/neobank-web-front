@@ -63,7 +63,7 @@
     </div>
 
     <v-btn
-      v-if="!cards.purchased"
+      v-if="!cards.isRedeem"
       class="d-flex column-gap-10 mx-auto mt-3 unpurchased"
       elevation="2"
       rounded
