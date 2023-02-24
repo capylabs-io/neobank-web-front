@@ -1,7 +1,10 @@
 <template>
   <div class="d-flex firstSection justify-center align-center">
     <div class="left d-flex justify-center align-center">
-      <div class="rectangle" data-aos="fade-right"></div>
+      <div
+        class="rectangle"
+        data-aos="fade-right"
+      />
       <div
         class="first-section-image mx-auto"
         data-aos="fade-right"
@@ -9,13 +12,16 @@
         :style="{
           backgroundImage: 'url(' + require(`@/assets/home/image4.webp`) + ')',
         }"
-      ></div>
+      />
     </div>
     <div
       class="right d-flex flex-column justify-center align-center"
       data-aos="fade-left"
     >
-      <div class="d-flex flex-column row-gap-25" :style="{ width: '90%' }">
+      <div
+        class="d-flex flex-column row-gap-25"
+        :style="{ width: '90%' }"
+      >
         <div class="black--text display-2 font-weight-bold content-title">
           What is VParadise?
         </div>

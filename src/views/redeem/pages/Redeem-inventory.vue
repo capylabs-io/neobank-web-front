@@ -5,10 +5,13 @@
         v-for="card in inventoryCards"
         :key="card"
         :cards="card"
-      ></inventoryCard>
+      />
     </div>
     <div class="mt-3">
-      <v-pagination :length="3" light></v-pagination>
+      <v-pagination
+        :length="3"
+        light
+      />
     </div>
   </div>
 </template>

@@ -16,14 +16,14 @@
       </div>
     </div>
     <div class="left d-flex justify-center align-center">
-      <div class="rectangle" data-aos="fade-up-left"></div>
+      <div class="rectangle" data-aos="fade-up-left" />
       <div
         class="second-section-image mx-auto"
         data-aos="fade-up-left"
         :style="{
           backgroundImage: 'url(' + require(`@/assets/home/image2.webp`) + ')',
         }"
-      ></div>
+      />
     </div>
   </div>
 </template>

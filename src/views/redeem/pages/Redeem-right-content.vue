@@ -1,45 +1,44 @@
 <template>
   <div class="right d-flex flex-column">
-    <div class="d-flex justify-space-between">
-      <div class="d-flex column-gap-10">
-        <v-btn elevation="3" rounded text @click="index = 1">Clothes</v-btn>
-        <v-btn elevation="3" rounded text @click="index = 2">Voucher</v-btn>
+    <div class="right-container">
+      <div class="d-flex justify-space-between button-filter">
+        <div class="d-flex column-gap-10">
+          <v-btn elevation="3" rounded text @click="index = 1"> Clothes </v-btn>
+          <v-btn elevation="3" rounded text @click="index = 2"> Voucher </v-btn>
+        </div>
+        <div class="d-flex column-gap-10">
+          <v-btn elevation="3" rounded text> A-Z </v-btn>
+          <v-btn class="d-flex" elevation="3" rounded text>
+            <span> Price </span>
+            <v-icon>mdi-arrow-up</v-icon>
+          </v-btn>
+          <v-btn elevation="3" text>
+            <span> Price </span> <v-icon>mdi-arrow-down</v-icon>
+          </v-btn>
+        </div>
       </div>
-      <div class="d-flex column-gap-10">
-        <v-btn elevation="3" rounded text>A-Z</v-btn>
-        <v-btn class="d-flex" elevation="3" rounded text>
-          <span> Price </span>
-          <v-icon>mdi-arrow-up</v-icon>
-        </v-btn>
-        <v-btn elevation="3" text>
-          <span> Price </span> <v-icon>mdi-arrow-down</v-icon></v-btn
-        >
-      </div>
-    </div>
 
-    <div class="d-flex flex-wrap gap-45 card-container" v-if="index == 2">
-      <!-- <voucherCard
+      <div v-if="index == 2" class="d-flex flex-wrap gap-45 card-container">
+        <!-- <voucherCard
         v-for="card in voucherCards"
         :key="card"
         :cards="card"
       ></voucherCard> -->
-      
-      <voucherCard
-        v-for="card in voucher"
-        :key="card"
-        :cards="card"
-      ></voucherCard>
-    </div>
 
-    <div class="d-flex flex-wrap gap-45 card-container" v-else>
-      <clothesCard
-        v-for="card in clothesCards"
-        :key="card"
-        :status="card"
-      ></clothesCard>
-    </div>
-    <div class="mt-3">
-      <v-pagination :length="3" light></v-pagination>
+        <voucherCard
+          v-for="(card, index) in voucher"
+          :key="index"
+          :id="index"
+          :cards="card"
+        />
+      </div>
+
+      <div v-else class="d-flex flex-wrap gap-45 card-container">
+        <clothesCard v-for="card in clothesCards" :key="card" :status="card" />
+      </div>
+      <div class="mt-3">
+        <v-pagination :length="3" light />
+      </div>
     </div>
   </div>
 </template>
@@ -48,12 +47,11 @@
 import voucherCard from "@/views/redeem/components/voucher-card.vue";
 import clothesCard from "@/views/redeem/components/clothes-card.vue";
 export default {
-  props: ["voucher"],
-
   components: {
     voucherCard: voucherCard,
     clothesCard: clothesCard,
   },
+  props: ["voucher"],
   data() {
     return {
       clothesCards: [
@@ -168,7 +166,6 @@ export default {
 <style lang="scss" scoped>
 .right {
   width: 85%;
-  max-width: fit-content;
   background: #f5f5f5;
   padding: 30px 100px;
 }
@@ -185,7 +182,6 @@ export default {
   border-radius: 8px;
   text-transform: capitalize;
 }
-
 .gap-45 {
   gap: 45px;
 }
@@ -204,8 +200,12 @@ export default {
     color: #2970ff;
   }
 }
+.right-container {
+  width: fit-content;
+}
 .card-container {
-  max-width: max-content;
   margin-top: 45px;
+}
+.button-filter {
 }
 </style>

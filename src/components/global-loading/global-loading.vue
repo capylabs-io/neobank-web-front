@@ -1,6 +1,12 @@
 <template>
-  <v-overlay z-index="998" v-if="loadingController.numberRequests > 0">
-    <v-progress-circular indeterminate size="32"></v-progress-circular>
+  <v-overlay
+    v-if="loadingController.numberRequests > 0"
+    z-index="998"
+  >
+    <v-progress-circular
+      indeterminate
+      size="32"
+    />
   </v-overlay>
 </template>
 <script>

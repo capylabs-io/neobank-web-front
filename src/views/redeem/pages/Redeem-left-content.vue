@@ -6,8 +6,7 @@
           :style="{ 'border-radius': '10px' }"
           class
           :src="require(`@/assets/redeem/user-profile.webp`)"
-        >
-        </v-img>
+        />
       </div>
       <div>
         <span class="font-weight-bold">Tung69 #291090</span>
@@ -23,12 +22,15 @@
           <v-img
             :style="{ 'border-radius': '40px' }"
             :src="require(`@/assets/redeem/coin.webp`)"
-          ></v-img>
+          />
         </div>
       </div>
     </div>
     <div class="d-flex flex-column justify-center left-second pa-8 row-gap-6">
-      <div class="pa-2 content" @click="storeClick">
+      <div
+        class="pa-2 content"
+        @click="storeClick"
+      >
         <div class="d-flex column-gap-10">
           <div>
             <v-icon>mdi-store </v-icon>
@@ -36,7 +38,10 @@
           <span>Redeem store</span>
         </div>
       </div>
-      <div class="pa-2 content" @click="inventoryClick">
+      <div
+        class="pa-2 content"
+        @click="inventoryClick"
+      >
         <div class="d-flex column-gap-10">
           <div>
             <v-icon> mdi-treasure-chest</v-icon>
@@ -44,7 +49,10 @@
           <span>Inventory</span>
         </div>
       </div>
-      <div class="pa-2 content" @click="accountClick()">
+      <div
+        class="pa-2 content"
+        @click="accountClick()"
+      >
         <div class="d-flex column-gap-10">
           <div>
             <v-icon> mdi-account-box</v-icon>
@@ -56,7 +64,9 @@
     <div class="d-flex flex-column align-left justify-end left-third pa-8">
       <div class="d-flex column-gap-10">
         <div>
-          <v-icon color="red"> mdi-cog</v-icon>
+          <v-icon color="red">
+            mdi-cog
+          </v-icon>
         </div>
         <span :style="{ color: 'red' }">Log-out</span>
       </div>
@@ -66,7 +76,7 @@
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "../../stores/userStore";
+import { userStore } from "../../../stores/userStore";
 export default {
   computed: {
     ...mapStores(userStore),

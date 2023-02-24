@@ -1,6 +1,6 @@
 import moment from "moment";
 export const rules = {
-  required: [(v) => (!!v && (typeof v !== "string" || !!v.trim())) || v === 0 || "This is required field"],
+  required: (v) => (!!v && (typeof v !== "string" || !!v.trim())) || v === 0 || "This is required field",
   checkIdentifier: [
     (v) =>
       (!!v && (typeof v !== "string" || !!v.trim())) || v === 0 || "Please input your email or your phone",

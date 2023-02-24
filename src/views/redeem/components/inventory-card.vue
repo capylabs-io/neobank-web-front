@@ -13,6 +13,7 @@
       }"
     >
       <div
+        v-if="cards.status == 'Expired'"
         class="mt-3 pa-1"
         :style="{
           background: '#FDDF59',
@@ -22,11 +23,11 @@
           'border-bottom-right-radius': '8px',
           'border-top-right-radius': '8px',
         }"
-        v-if="cards.status == 'Expired'"
       >
         {{ cards.status }}
       </div>
       <div
+        v-else-if="cards.status == 'Hot'"
         class="mt-3 pa-1"
         :style="{
           background: '#f65970',
@@ -36,11 +37,11 @@
           'border-bottom-right-radius': '8px',
           'border-top-right-radius': '8px',
         }"
-        v-else-if="cards.status == 'Hot'"
       >
         {{ cards.status }}
       </div>
       <div
+        v-else
         class="mt-3 pa-1"
         :style="{
           background: '#4c99eb',
@@ -50,14 +51,16 @@
           'border-bottom-right-radius': '8px',
           'border-top-right-radius': '8px',
         }"
-        v-else
       >
         {{ cards.status }}
       </div>
     </div>
     <div class="d-flex mt-3 font-weight-bold align-center justify-center">
       <div>
-        <v-img class="card-icon" :src="cards.icon"></v-img>
+        <v-img
+          class="card-icon"
+          :src="cards.icon"
+        />
       </div>
       <span> {{ cards.title }} </span>
     </div>
@@ -82,7 +85,9 @@
       rounded
       text
     >
-      <v-icon color="success">mdi-check</v-icon>
+      <v-icon color="success">
+        mdi-check
+      </v-icon>
       <div>
         <span class="font-weight-bold text-capitalize pl-2">Redeemed</span>
       </div>
@@ -92,7 +97,7 @@
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "../../stores/userStore";
+import { userStore } from "../../../stores/userStore";
 export default {
   computed: {
     ...mapStores(userStore),

@@ -6,19 +6,21 @@
           Account setting
         </div>
       </v-card-title>
-      <v-divider></v-divider>
+      <v-divider />
       <v-list>
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-subtitle class="text-left">Name</v-list-item-subtitle>
+            <v-list-item-subtitle class="text-left">
+              Name
+            </v-list-item-subtitle>
             <v-list-item-content>Hai Long</v-list-item-content>
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-subtitle class="text-left"
-              >BANK ACCOUNT</v-list-item-subtitle
-            >
+            <v-list-item-subtitle class="text-left">
+              BANK ACCOUNT
+            </v-list-item-subtitle>
             <v-list-item-content>4932104954890</v-list-item-content>
           </v-list-item-content>
         </v-list-item>
@@ -30,14 +32,17 @@
                 class="cursor-pointer"
                 @click="userStore.changePersonalInfoEdit()"
               >
-                <v-icon class="mr-2" color="violet"
-                  >mdi-square-edit-outline
+                <v-icon
+                  class="mr-2"
+                  color="violet"
+                >
+                  mdi-square-edit-outline
                 </v-icon>
               </div>
             </v-list-item-subtitle>
-            <v-list-item-content
-              >longnguyenhai834@gmail.com</v-list-item-content
-            >
+            <v-list-item-content>
+              longnguyenhai834@gmail.com
+            </v-list-item-content>
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
@@ -48,11 +53,14 @@
                 class="cursor-pointer"
                 @click="userStore.changePersonalInfoEdit()"
               >
-                <v-icon class="mr-2" color="violet"
-                  >mdi-square-edit-outline
+                <v-icon
+                  class="mr-2"
+                  color="violet"
+                >
+                  mdi-square-edit-outline
                 </v-icon>
-              </div></v-list-item-subtitle
-            >
+              </div>
+            </v-list-item-subtitle>
             <v-list-item-content>(+84)-456453522</v-list-item-content>
           </v-list-item-content>
         </v-list-item>
@@ -64,11 +72,14 @@
                 class="cursor-pointer"
                 @click="userStore.changePersonalInfoEdit()"
               >
-                <v-icon class="mr-2" color="violet"
-                  >mdi-square-edit-outline
+                <v-icon
+                  class="mr-2"
+                  color="violet"
+                >
+                  mdi-square-edit-outline
                 </v-icon>
-              </div></v-list-item-subtitle
-            >
+              </div>
+            </v-list-item-subtitle>
             <v-list-item-content>**********</v-list-item-content>
           </v-list-item-content>
         </v-list-item>
@@ -79,7 +90,7 @@
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "../../stores/userStore";
+import { userStore } from "../../../stores/userStore";
 export default {
   computed: {
     ...mapStores(userStore),

@@ -1,14 +1,19 @@
 <template>
   <v-snackbar
     :value="alert.show"
-    @input="close"
     :color="color"
     :timeout="timeout"
     top
     class="plugin__alert"
+    @input="close"
   >
-    <v-icon class="mr-3 mt-n1">{{ icon }}</v-icon>
-    <span class="text-h6" v-html="alert.message"></span>
+    <v-icon class="mr-3 mt-n1">
+      {{ icon }}
+    </v-icon>
+    <span
+      class="text-h6"
+      v-html="alert.message"
+    />
     <!-- <v-btn icon @click="close">
       <v-icon>mdi-close</v-icon>
     </v-btn> -->

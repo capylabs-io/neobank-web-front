@@ -14,14 +14,18 @@ export const userStore = defineStore(
     const navChange = ref(false);
     const pageIndex = ref(1);
     const index = ref(1);
-    const isSignin = ref(false);
+    const cfDialog = ref(false);
+    const scrollY = ref(1);
     const jwt = ref("");
     const rememberMe = ref(false);
     const isShowPass = ref(false);
+    const username = ref("");
+    const password = ref("");
+    const voucherId = ref("");
     const bearerToken = ref(
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3MDUwOTA1LCJleHAiOjE2Nzk2NDI5MDV9.gCEGMkbCLUiaymG7PPoGsS5OstagMUR6GRFvmrP8VC8"
     );
-    const pagination = ref({ page: 1, pageCount: 1, pageSize: 5, total: 5 });
+    const pagination = ref({ page: 0, pageCount: 0, pageSize: 0, total: 0 });
 
     const signInData = ref({
       identifier: "",
@@ -39,32 +43,15 @@ export const userStore = defineStore(
       secondDetail: "",
     });
     const voucherData = ref([]);
-    // const voucherData = ref([
-    //   {
-    //     name: "",
-    //     price: "",
-    //     title: "",
-    //     quantity: 1,
-    //     iconUrl: "",
-    //     expiredTime: "",
-    //     shortDescription: "",
-    //     fullDescription: "",
-    //     isActive: false,
-    //     imageUrl: "",
-    //     createdAt: "",
-    //     updatedAt: "",
-    //     publishedAt: "",
-    //   },
-    // ]);
     const detailCard = ref({
-      image: null,
-      icon: null,
       price: "",
+      imageUrl: "",
+      iconUrl: "",
       title: "",
       status: "",
-      detailheader: "",
-      firstDetail: "",
-      secondDetail: "",
+      shortDescription: "",
+      fullDescription: "",
+      quantity: "",
     });
     const userData = ref({
       id: 1,
@@ -75,7 +62,10 @@ export const userStore = defineStore(
     async function signIn() {
       try {
         loading.increaseRequest();
-        const res = await Auth.signIn(this.signInData);
+        const res = await Auth.signIn({
+          identifier: this.username,
+          password: this.password,
+        });
         if (!res) {
           snackbar.commonError(`Error occurred! Please try again later!`);
           return;
@@ -83,12 +73,9 @@ export const userStore = defineStore(
         snackbar.success("Login successfully!");
         this.jwt = res.data.jwt;
         this.userData = res.data.user;
-        if (this.rememberMe) {
-          this.signInData = signInData;
-        } else {
-          this.signInData = "";
+        if (!this.rememberMe) {
+          this.password = "";
         }
-        this.isSignin = true;
         this.router.push({
           params: "vn",
           name: "home",
@@ -109,7 +96,29 @@ export const userStore = defineStore(
         }
         snackbar.success("Fetch successfully!");
         this.voucherData = res.data.data.map((voucher) => voucher.attributes);
+        // .sort((a, b) => b.id - a.id);
+        // console.log("sort",voucherData);
         this.pagination = res.data.meta;
+        console.log("pagination", pagination);
+        // this.router.push({
+        //   params: "vn",
+        //   name: "Redeem",
+        // });
+      } catch (error) {
+        console.error(`Error: ${error}`);
+        snackbar.commonError(error);
+      }
+    }
+    async function purchaseVoucher(id) {
+      try {
+        loading.increaseRequest();
+        const res = await Voucher.purchaseVouchers(id);
+        if (!res) {
+          snackbar.commonError(`Error occurred! Please try again later!`);
+          return;
+        }
+        snackbar.success("Voucher Purchased successfully!");
+        console.log("respon", res.data);
         // this.router.push({
         //   params: "vn",
         //   name: "Redeem",
@@ -121,7 +130,9 @@ export const userStore = defineStore(
     }
 
     function logout() {
-      this.isSignin = false;
+      this.jwt = "";
+      this.signInData = "";
+      this.userData = null;
     }
     const isConnected = computed(() => this.jwt);
 
@@ -133,10 +144,11 @@ export const userStore = defineStore(
       cardData,
       index,
       navChange,
-      isSignin,
       drawerDetail,
       detailCard,
       signInData,
+      username,
+      password,
       jwt,
       pageIndex,
       isShowPass,
@@ -145,6 +157,9 @@ export const userStore = defineStore(
       bearerToken,
       voucherData,
       pagination,
+      cfDialog,
+      voucherId,
+      scrollY,
       //action
       signIn,
       logout,
@@ -154,7 +169,7 @@ export const userStore = defineStore(
   {
     persist: [
       {
-        paths: ["signInData", "rememberMe"],
+        paths: ["password", "rememberMe", "username"],
         storage: localStorage,
       },
       {

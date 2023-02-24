@@ -1,8 +1,8 @@
 <template>
   <v-navigation-drawer
+    v-model="userStore.drawerDetail"
     absolute
     temporary
-    v-model="userStore.drawerDetail"
     right
     hide-overlay
     width="480px"
@@ -13,10 +13,11 @@
       <div
         class="drawer-image d-flex flex-column"
         :style="{
-          backgroundImage: 'url(' + userStore.detailCard.image + ')',
+          backgroundImage: 'url(' + userStore.detailCard.imageUrl + ')',
         }"
       >
         <div
+          v-if="userStore.detailCard.status == 'Expired'"
           class="mt-3 pa-1"
           :style="{
             background: '#FDDF59',
@@ -26,11 +27,11 @@
             'border-bottom-right-radius': '8px',
             'border-top-right-radius': '8px',
           }"
-          v-if="userStore.detailCard.status == 'Expired'"
         >
           {{ userStore.detailCard.status }}
         </div>
         <div
+          v-else-if="userStore.detailCard.status == 'Hot'"
           class="mt-3 pa-1"
           :style="{
             background: '#f65970',
@@ -40,11 +41,11 @@
             'border-bottom-right-radius': '8px',
             'border-top-right-radius': '8px',
           }"
-          v-else-if="userStore.detailCard.status == 'Hot'"
         >
           {{ userStore.detailCard.status }}
         </div>
         <div
+          v-else
           class="mt-3 pa-1"
           :style="{
             background: '#4c99eb',
@@ -54,7 +55,6 @@
             'border-bottom-right-radius': '8px',
             'border-top-right-radius': '8px',
           }"
-          v-else
         >
           {{ userStore.detailCard.status }}
         </div>
@@ -63,36 +63,51 @@
         class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
       >
         <div>
-          <v-img class="drawer-icon" :src="userStore.detailCard.icon"></v-img>
+          <v-img class="drawer-icon" :src="userStore.detailCard.iconUrl" />
         </div>
-        <span class="mt-3"> {{ userStore.detailCard.detailheader }} </span>
+        <span class="mt-3"> {{ userStore.detailCard.title }} </span>
       </div>
       <div class="mt-3 text-left draw-text">
-        {{ userStore.detailCard.firstDetail }}
-        {{ userStore.detailCard.secondDetail }}
+        {{ userStore.detailCard.shortDescription }}
+        {{ userStore.detailCard.fullDescription }}
       </div>
     </v-card>
     <div class="d-flex col-gap-10 align-center amount-container">
-      <v-btn icon v-if="index == 0" disabled><v-icon>mdi-minus</v-icon></v-btn>
-      <v-btn icon v-else @click="index--"><v-icon>mdi-minus</v-icon></v-btn>
+      <v-btn v-if="userStore.detailCard.quantity == 0" icon disabled>
+        <v-icon>mdi-minus</v-icon>
+      </v-btn>
+      <v-btn v-else icon @click="decrease">
+        <v-icon>mdi-minus</v-icon>
+      </v-btn>
       <div class="">
-        <v-input class="number">{{ index }}</v-input>
+        <v-input class="number">
+          {{ userStore.detailCard.quantity }}
+        </v-input>
       </div>
-      <v-btn v-if="index == 10" disabled icon @click="index++"
-        ><v-icon>mdi-plus</v-icon></v-btn
+      <v-btn
+        v-if="userStore.detailCard.quantity == 10"
+        disabled
+        icon
+        @click="increase"
       >
-      <v-btn v-else icon @click="index++"><v-icon>mdi-plus</v-icon></v-btn>
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+      <v-btn v-else icon @click="increase">
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
     </div>
+    <div>id: {{ userStore.voucherId }}</div>
     <v-btn
       class="d-flex mx-auto unpurchased drawer-btn"
       elevation="2"
       rounded
       text
+      @click="buy"
     >
       <div>
         <span class="white--text font-weight-bold pr-2 text-capitalize"
-          >Buy Now</span
-        >
+          >Buy Now
+        </span>
       </div>
     </v-btn>
   </v-navigation-drawer>
@@ -100,7 +115,7 @@
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "../../stores/userStore";
+import { userStore } from "../../../stores/userStore";
 export default {
   computed: {
     ...mapStores(userStore),
@@ -109,6 +124,23 @@ export default {
     return {
       index: 0,
     };
+  },
+  methods: {
+    increase() {
+      var number = this.userStore.detailCard.quantity;
+      number++;
+      this.userStore.detailCard.quantity = number + "";
+    },
+    decrease() {
+      var number = this.userStore.detailCard.quantity;
+      number--;
+      this.userStore.detailCard.quantity = number + "";
+    },
+    buy() {
+      this.userStore.drawerDetail = !this.userStore.drawerDetail;
+      this.userStore.cfDialog = true;
+      this.userStore.purchaseVoucher();
+    },
   },
 };
 </script>

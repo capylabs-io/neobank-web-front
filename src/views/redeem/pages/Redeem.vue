@@ -1,15 +1,16 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="redeem d-flex DMSans">
-    <inventoryDrawer></inventoryDrawer>
-    <detail></detail>
-    <left-content></left-content>
+    <confirmDialog></confirmDialog>
+    <inventoryDrawer />
+    <detail />
+    <left-content />
     <right-content
       v-if="userStore.index == 1"
       :voucher="userStore.voucherData"
-    ></right-content>
-    <inventory-content v-else-if="userStore.index == 2"></inventory-content>
-    <accountSetting v-else></accountSetting>
+    />
+    <inventory-content v-else-if="userStore.index == 2" />
+    <accountSetting v-else />
   </div>
 </template>
 
@@ -20,9 +21,10 @@ import inventoryContent from "@/views/redeem/pages/Redeem-inventory.vue";
 import accountSettingVue from "@/views/redeem/pages/account-setting.vue";
 import detailDrawer from "@/views/redeem/components/card-detail-drawer.vue";
 import inventoryDrawer from "@/views/redeem/components/inventory-card-drawer.vue";
+import confirmDialog from "@/components/dialog/confirm-dialog.vue";
 
 import { mapStores } from "pinia";
-import { userStore } from "../../stores/userStore";
+import { userStore } from "../../../stores/userStore";
 
 export default {
   components: {
@@ -32,6 +34,7 @@ export default {
     detail: detailDrawer,
     inventoryDrawer: inventoryDrawer,
     accountSetting: accountSettingVue,
+    confirmDialog: confirmDialog,
   },
   mounted: {},
   computed: {
@@ -75,7 +78,7 @@ export default {
   background: white;
 }
 .right {
-  width: 95%;
+  width: 85%;
   background: #f5f5f5;
   padding: 30px 100px;
 }

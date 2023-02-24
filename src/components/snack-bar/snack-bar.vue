@@ -1,21 +1,28 @@
 <template>
   <v-snackbar
     :value="snackBarController.show"
-    @input="snackBarController.close()"
     :color="snackBarController.color"
     :timeout="snackBarController.timeout"
     min-width="375px"
     top
     class="plugin__alert"
+    @input="snackBarController.close()"
   >
     <div class="message-text d-flex align-center">
-      <v-icon class="mr-3">{{ snackBarController.icon }}</v-icon>
-      <div v-html="snackBarController.message"></div>
+      <v-icon class="mr-3">
+        {{ snackBarController.icon }}
+      </v-icon>
+      <div v-html="snackBarController.message" />
     </div>
-    <template v-slot:action="{ attrs }">
-      <v-btn icon text v-bind="attrs" @click="snackBarController.close()"
-        ><v-icon>mdi-close</v-icon></v-btn
+    <template #action="{ attrs }">
+      <v-btn
+        icon
+        text
+        v-bind="attrs"
+        @click="snackBarController.close()"
       >
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
     </template>
   </v-snackbar>
 </template>

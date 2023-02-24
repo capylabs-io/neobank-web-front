@@ -9,10 +9,11 @@
     <div
       class="card-image d-flex flex-column"
       :style="{
-        backgroundImage: 'url(' + cards.image + ')',
+        backgroundImage: 'url(' + cards.imageUrl + ')',
       }"
     >
       <div
+        v-if="cards.status == 'New'"
         class="mt-3 pa-1"
         :style="{
           background: '#FDDF59',
@@ -23,19 +24,55 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.price }}.000₫
+        {{ cards.status }}
+      </div>
+      <div
+        v-else-if="cards.status == 'Hot'"
+        class="mt-3 pa-1"
+        :style="{
+          background: '#f65970',
+          width: 'max-content',
+          height: 'max-content',
+          position: 'absolute',
+          'border-bottom-right-radius': '8px',
+          'border-top-right-radius': '8px',
+        }"
+      >
+        {{ cards.status }}
+      </div>
+      <div
+        v-else
+        class="mt-3 pa-1"
+        :style="{
+          background: '#CBCBCB',
+          width: 'max-content',
+          height: 'max-content',
+          position: 'absolute',
+          'border-bottom-right-radius': '8px',
+          'border-top-right-radius': '8px',
+        }"
+      >
+        {{ cards.status }}
       </div>
     </div>
     <div
       class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
     >
       <div>
-        <v-img class="card-icon" :src="cards.icon"></v-img>
+        <v-img
+          class="card-icon"
+          :src="cards.icon"
+        />
       </div>
-      <span class="mt-3"> {{ cards.detailheader }} </span>
+      <span class="mt-3"> {{ cards.title }} </span>
+      <span class="mt-3"> {{ cards.shortDescription }} </span>
     </div>
-    <div class="mt-3 text-left">HSD: 31 Oct 2022</div>
-    <div class="mt-3 text-left">Notice: lorem ipsum</div>
+    <div class="mt-3 text-left">
+      HSD: 31 Oct 2022
+    </div>
+    <div class="mt-3 text-left">
+      Notice: lorem ipsum
+    </div>
   </v-card>
 </template>
 

@@ -2,7 +2,7 @@ import axios from "axios";
 import utils from "@/plugins/utils";
 
 // axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT;
-axios.defaults.baseURL = "https://metabank-dev-api.capylabs.io/api/";
+axios.defaults.baseURL = "https://neobank-dev-api.capylabs.io/api/";
 
 const USER_API = "/users/";
 
@@ -64,6 +64,7 @@ export const Voucher = {
         Authorization: "Bearer " + token,
       },
     }),
+  purchaseVouchers: (id) => axios.post(`vouchers/${id}/purchase`),
 };
 
 export default {

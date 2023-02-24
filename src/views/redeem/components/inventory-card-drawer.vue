@@ -1,22 +1,26 @@
 <template>
   <v-navigation-drawer
+    v-model="userStore.drawer"
     absolute
     temporary
-    v-model="userStore.drawer"
     right
     hide-overlay
     width="480px"
     color="white"
     class="pa-5 drawer d-flex flex-column"
   >
-    <v-card class="drawer-card" flat>
+    <v-card
+      class="drawer-card"
+      flat
+    >
       <div
         class="drawer-image d-flex flex-column"
         :style="{
           backgroundImage: 'url(' + userStore.cardData.image + ')',
         }"
       >
-      <div
+        <div
+          v-if="userStore.cardData.status == 'Expired'"
           class="mt-3 pa-1"
           :style="{
             background: '#FDDF59',
@@ -26,11 +30,11 @@
             'border-bottom-right-radius': '8px',
             'border-top-right-radius': '8px',
           }"
-          v-if="userStore.cardData.status == 'Expired'"
         >
           {{ userStore.cardData.status }}
         </div>
         <div
+          v-else-if="userStore.cardData.status == 'Hot'"
           class="mt-3 pa-1"
           :style="{
             background: '#f65970',
@@ -40,11 +44,11 @@
             'border-bottom-right-radius': '8px',
             'border-top-right-radius': '8px',
           }"
-          v-else-if="userStore.cardData.status == 'Hot'"
         >
           {{ userStore.cardData.status }}
         </div>
         <div
+          v-else
           class="mt-3 pa-1"
           :style="{
             background: '#4c99eb',
@@ -54,7 +58,6 @@
             'border-bottom-right-radius': '8px',
             'border-top-right-radius': '8px',
           }"
-          v-else
         >
           {{ userStore.cardData.status }}
         </div>
@@ -63,12 +66,19 @@
         class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
       >
         <div>
-          <v-img class="drawer-icon" :src="userStore.cardData.icon"></v-img>
+          <v-img
+            class="drawer-icon"
+            :src="userStore.cardData.icon"
+          />
         </div>
         <span class="mt-3"> {{ userStore.cardData.detailheader }} </span>
       </div>
-      <div class="mt-3 text-left">{{ userStore.cardData.firstDetail }}</div>
-      <div class="mt-3 text-left">{{ userStore.cardData.secondDetail }}</div>
+      <div class="mt-3 text-left">
+        {{ userStore.cardData.firstDetail }}
+      </div>
+      <div class="mt-3 text-left">
+        {{ userStore.cardData.secondDetail }}
+      </div>
     </v-card>
     <v-btn
       class="d-flex column-gap-10 mx-auto unpurchased drawer-btn"
@@ -77,9 +87,7 @@
       text
     >
       <div>
-        <span class="white--text font-weight-bold pr-2 text-capitalize"
-          >Redeem Now</span
-        >
+        <span class="white--text font-weight-bold pr-2 text-capitalize">Redeem Now</span>
       </div>
     </v-btn>
   </v-navigation-drawer>
@@ -87,7 +95,7 @@
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "../../stores/userStore";
+import { userStore } from "../../../stores/userStore";
 export default {
   computed: {
     ...mapStores(userStore),

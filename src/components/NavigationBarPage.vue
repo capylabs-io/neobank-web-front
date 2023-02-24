@@ -1,34 +1,40 @@
 <template>
   <div class="nav-bar d-flex justify-space-between">
     <div
-      class="d-flex gap-24 DMSans black--text align-center pa-7"
       v-if="isMobile"
+      class="d-flex gap-24 DMSans black--text align-center pa-7"
     >
       <div>
         <v-img
           class="nav-logo align-self-center"
           :src="require(`@/assets/home/web-logo.webp`)"
-        ></v-img>
+        />
       </div>
       <router-link
+        to="/"
+        class="black--text text-decoration-none align-self-center"
         @click="userStore.navChange = false"
-        to="/"
-        class="black--text text-decoration-none align-self-center"
       >
-        <div class="text-capitalize active">HOME</div>
+        <div class="text-capitalize active">
+          HOME
+        </div>
       </router-link>
       <router-link
         to="/"
         class="black--text text-decoration-none align-self-center"
       >
-        <div class="text-capitalize active">WORLD</div>
+        <div class="text-capitalize active">
+          WORLD
+        </div>
       </router-link>
       <router-link
-        @click="userStore.navChange = true"
         to="/vn/redeem"
         class="black--text text-decoration-none align-self-center"
+        @click="userStore.navChange = true"
       >
-        <div class="text-capitalize active">REDEEM</div>
+        <div class="text-capitalize active">
+          REDEEM
+        </div>
       </router-link>
 
       <!-- <router-link
@@ -42,64 +48,107 @@
       </v-btn> -->
     </div>
 
-    <div class="d-flex align-center justify-space-between" v-else>
+    <div
+      v-else
+      class="d-flex align-center justify-space-between"
+    >
       <div>
         <v-img
           class="nav-logo align-self-center"
           :src="require(`@/assets/home/web-logo.webp`)"
-        ></v-img>
+        />
       </div>
       <div>
-        <v-menu offset-y class="">
-          <template v-slot:activator="{ on, attrs }">
+        <v-menu
+          offset-y
+          class=""
+        >
+          <template #activator="{ on, attrs }">
             <v-app-bar-nav-icon
               v-bind="attrs"
               v-on="on"
               @click.stop="expansion = !expansion"
-            ></v-app-bar-nav-icon>
+            />
           </template>
           <router-link
             to="/"
             class="black--text text-decoration-none align-self-center"
           >
-            <div class="text-capitalize active">HOME</div>
+            <div class="text-capitalize active">
+              HOME
+            </div>
           </router-link>
           <router-link
             to="/"
             class="black--text text-decoration-none align-self-center"
           >
-            <div class="text-capitalize active">WORLD</div>
+            <div class="text-capitalize active">
+              WORLD
+            </div>
           </router-link>
           <router-link
             to="/vn/redeem"
             class="black--text text-decoration-none align-self-center"
           >
-            <div class="text-capitalize active">REDEEM</div>
+            <div class="text-capitalize active">
+              REDEEM
+            </div>
           </router-link>
           <router-link
             to="/vn/login"
             class="black--text text-decoration-none align-self-center"
           >
-            <div class="text-capitalize active">LOGIN</div>
+            <div class="text-capitalize active">
+              LOGIN
+            </div>
           </router-link>
         </v-menu>
       </div>
     </div>
 
-    <div class="align-self-center DMSans" v-if="!userStore.jwt">
-      <v-btn class="pa-5" color="introbtn">
-        <router-link to="/vn/login" class="text-decoration-none white--text">
-          <div class="text-capitalize">LOGIN</div>
+    <div
+      v-if="!userStore.jwt"
+      class="align-self-center DMSans"
+    >
+      <v-btn
+        class="pa-5"
+        color="introbtn"
+      >
+        <router-link
+          to="/vn/login"
+          class="text-decoration-none white--text"
+        >
+          <div class="text-capitalize">
+            LOGIN
+          </div>
         </router-link>
       </v-btn>
     </div>
-    <v-menu offset-y v-else>
-      <template v-slot:activator="{ on, attrs }">
-        <div class="d-flex pa-3 gap-15 active" v-bind="attrs" v-on="on">
-          <v-btn icon flat class="align-self-center">
-            <v-icon color="black" large>mdi-account</v-icon>
+    <v-menu
+      v-else
+      offset-y
+    >
+      <template #activator="{ on, attrs }">
+        <div
+          class="d-flex pa-3 gap-15 active"
+          v-bind="attrs"
+          v-on="on"
+        >
+          <v-btn
+            icon
+            flat
+            class="align-self-center"
+          >
+            <v-icon
+              color="black"
+              large
+            >
+              mdi-account
+            </v-icon>
           </v-btn>
-          <div class="align-self-center">{{ userStore.userData.email }}</div>
+          <div class="align-self-center">
+            {{ userStore.userData.email }}
+          </div>
         </div>
         <!-- <v-app-bar-nav-icon
               v-bind="attrs"
@@ -113,7 +162,9 @@
             to="/"
             class="black--text text-decoration-none align-self-center"
           >
-            <div class="text-capitalize active">WORLD</div>
+            <div class="text-capitalize active">
+              WORLD
+            </div>
           </router-link>
         </v-list-item>
         <v-list-item>
@@ -121,16 +172,20 @@
             to="/vn/redeem"
             class="black--text text-decoration-none align-self-center"
           >
-            <div class="text-capitalize active">REDEEM</div>
+            <div class="text-capitalize active">
+              REDEEM
+            </div>
           </router-link>
         </v-list-item>
         <v-list-item>
           <router-link
-            @click="signout"
             to="/vn/login"
             class="black--text text-decoration-none align-self-center"
+            @click="signout"
           >
-            <div class="text-capitalize active">LOGOUT</div>
+            <div class="text-capitalize active">
+              LOGOUT
+            </div>
           </router-link>
         </v-list-item>
       </v-list>
@@ -140,11 +195,12 @@
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "../views/stores/userStore";
+import { userStore } from "../stores/userStore";
 export default {
   computed: {
     ...mapStores(userStore),
   },
+  created() {},
   methods: {
     isMobile() {
       if (window.innerWidth <= 599) {
@@ -154,13 +210,9 @@ export default {
       }
     },
     signout() {
-      sessionStorage.removeItem("userData");
-      sessionStorage.removeItem("jwt");
       this.userStore.logout;
-      this.userStore.$reset;
     },
   },
-  created() {},
 };
 </script>
 

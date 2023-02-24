@@ -8,7 +8,7 @@
   >
     <div class="card-image d-flex flex-column justify-center align-center">
       <div class="image">
-        <v-img :src="require(`@/assets/redeem/voucher-icon.webp`)"></v-img>
+        <v-img :src="require(`@/assets/redeem/voucher-icon.webp`)" />
       </div>
     </div>
     <div class="mt-3 font-weight-bold">Valentine Chocolate backpack</div>
@@ -30,7 +30,7 @@
         <v-img
           :style="{ 'border-radius': '40px' }"
           :src="require(`@/assets/redeem/coin.webp`)"
-        ></v-img>
+        />
       </div>
     </v-btn>
     <v-btn
@@ -40,7 +40,7 @@
       rounded
       text
     >
-      <v-icon color="success">mdi-check</v-icon>
+      <v-icon color="success"> mdi-check </v-icon>
       <div>
         <span class="font-weight-bold text-capitalize pl-2">Purchased</span>
       </div>

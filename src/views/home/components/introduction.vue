@@ -22,10 +22,17 @@
         Journey into the future of banking with VParadise, a harmony between
         technologies and banking
       </div>
-      <v-btn color="introbtn" class="white--text pa-5">
-        <div class="text-decoration-none">Discover now</div>
-        <v-icon color="white">mdi-arrow-right-thin</v-icon></v-btn
+      <v-btn
+        color="introbtn"
+        class="white--text pa-5"
       >
+        <div class="text-decoration-none">
+          Discover now
+        </div>
+        <v-icon color="white">
+          mdi-arrow-right-thin
+        </v-icon>
+      </v-btn>
     </div>
     <!-- <div class="rectangle align-self-center"></div>
     <div class="d-flex flex-column title justify-center align-center">

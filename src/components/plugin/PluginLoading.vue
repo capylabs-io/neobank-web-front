@@ -1,6 +1,9 @@
 <template>
-  <div v-show="loading.active" class="plugin__loading">
-    <v-progress-circular indeterminate></v-progress-circular>
+  <div
+    v-show="loading.active"
+    class="plugin__loading"
+  >
+    <v-progress-circular indeterminate />
   </div>
 </template>
 

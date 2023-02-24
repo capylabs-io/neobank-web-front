@@ -1,30 +1,44 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="d-flex flex-column footer justify-space-between" >
+  <div class="d-flex flex-column footer justify-space-between">
     <div class="mx-auto d-flex flex-column align-center mt-5">
       <div class="footer-logo DMSans mb-10">
-        <v-img :src="require(`@/assets/home/footer-logo.webp`)"></v-img>
+        <v-img :src="require(`@/assets/home/footer-logo.webp`)" />
       </div>
       <div class="d-flex policy mx-auto">
         <div class="d-flex flex-column text-left group">
           <div class="text-none text-capitalize black--text font-weight-bold">
             Credit Card
           </div>
-          <div class="text-none text-capitalize black--text">Youth Card</div>
-          <div class="text-none text-capitalize black--text">Black Card</div>
-          <div class="text-none text-capitalize black--text">Platinum Card</div>
-          <div class="text-none text-capitalize black--text">World Card</div>
+          <div class="text-none text-capitalize black--text">
+            Youth Card
+          </div>
+          <div class="text-none text-capitalize black--text">
+            Black Card
+          </div>
+          <div class="text-none text-capitalize black--text">
+            Platinum Card
+          </div>
+          <div class="text-none text-capitalize black--text">
+            World Card
+          </div>
         </div>
         <div class="d-flex flex-column text-left group">
           <div class="text-none text-capitalize black--text font-weight-bold">
             Loan
           </div>
-          <div class="text-none text-capitalize black--text">Overview</div>
+          <div class="text-none text-capitalize black--text">
+            Overview
+          </div>
           <div class="text-none text-capitalize black--text">
             Conditions & Fees
           </div>
-          <div class="text-none text-capitalize black--text">Car Loan</div>
-          <div class="text-none text-capitalize black--text">Home Loan</div>
+          <div class="text-none text-capitalize black--text">
+            Car Loan
+          </div>
+          <div class="text-none text-capitalize black--text">
+            Home Loan
+          </div>
         </div>
         <div class="d-flex flex-column text-left group">
           <div class="text-none text-capitalize black--text font-weight-bold">
@@ -33,31 +47,43 @@
           <div class="text-none text-capitalize black--text">
             Regular Saving
           </div>
-          <div class="text-none text-capitalize black--text">Easy Saving</div>
+          <div class="text-none text-capitalize black--text">
+            Easy Saving
+          </div>
         </div>
         <div class="d-flex flex-column text-left group">
           <div class="text-none text-capitalize black--text font-weight-bold">
             Products
           </div>
-          <div class="text-none text-capitalize black--text">Account</div>
+          <div class="text-none text-capitalize black--text">
+            Account
+          </div>
           <div class="text-none text-capitalize black--text">
             Internet Banking
           </div>
-          <div class="text-none text-capitalize black--text">AIA Insurance</div>
-          <div class="text-none text-capitalize black--text">NeoBank</div>
+          <div class="text-none text-capitalize black--text">
+            AIA Insurance
+          </div>
+          <div class="text-none text-capitalize black--text">
+            NeoBank
+          </div>
         </div>
         <div class="d-flex flex-column text-left group">
           <div class="text-none text-capitalize black--text font-weight-bold">
             Others
           </div>
-          <div class="text-none text-capitalize black--text">Promotions</div>
+          <div class="text-none text-capitalize black--text">
+            Promotions
+          </div>
           <div class="text-none text-capitalize black--text">
             Documents & Fees
           </div>
           <div class="text-none text-capitalize black--text">
             Tools & Utility
           </div>
-          <div class="text-none text-capitalize black--text">FAQs</div>
+          <div class="text-none text-capitalize black--text">
+            FAQs
+          </div>
         </div>
       </div>
     </div>
@@ -72,7 +98,7 @@
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "../views/stores/userStore";
+import { userStore } from "../stores/userStore";
 
 export default {
   computed: {

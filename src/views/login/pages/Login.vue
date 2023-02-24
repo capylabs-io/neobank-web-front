@@ -13,7 +13,12 @@
             to="/"
             class="black--text text-decoration-none align-self-center"
           >
-            <v-icon small color="black"> mdi-chevron-left</v-icon>
+            <v-icon
+              small
+              color="black"
+            >
+              mdi-chevron-left
+            </v-icon>
             <span class="text-capitalize">Back</span>
           </router-link>
         </div>
@@ -24,62 +29,88 @@
           Your email or phone number
         </div>
         <v-text-field
-          v-model="userStore.signInData.identifier"
+          v-model="userStore.username"
           :rules="rules.checkIdentifier"
           type="text"
           background-color="cream"
           class="mt-2"
-          solo
+          solo  
           dense
-        ></v-text-field>
-        <div class="text-xl text-left">Password</div>
+        />
+        <div class="text-xl text-left">
+          Password
+        </div>
         <v-text-field
-          v-model="userStore.signInData.password"
+          v-model="userStore.password"
           :append-icon="userStore.isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
-          :rules="rules.password"
           :type="userStore.isShowPass ? 'text' : 'password'"
-          @click:append="userStore.isShowPass = !userStore.isShowPass"
+          :rules="rules.password"
           solo
           dense
           background-color="cream"
           class="mt-2"
-        ></v-text-field>
+        />
         <v-row class="mt-sm-2">
-          <v-col cols="4" class="pa-1"
-            ><v-btn color="#2B69EA" class="full-width py-0 py-sm-5 px-10"
-              ><FacebookIcon /></v-btn
-          ></v-col>
-          <v-col cols="4" class="pa-1"
-            ><v-btn color="white" class="full-width py-0 py-sm-5 px-10"
-              ><GoogleIcon /></v-btn
-          ></v-col>
-          <v-col cols="4" class="pa-1"
-            ><v-btn color="black" class="full-width py-0 py-sm-5 px-10"
-              ><AppleIcon /></v-btn
-          ></v-col>
+          <v-col
+            cols="4"
+            class="pa-1"
+          >
+            <v-btn
+              color="#2B69EA"
+              class="full-width py-0 py-sm-5 px-10"
+            >
+              <FacebookIcon />
+            </v-btn>
+          </v-col>
+          <v-col
+            cols="4"
+            class="pa-1"
+          >
+            <v-btn
+              color="white"
+              class="full-width py-0 py-sm-5 px-10"
+            >
+              <GoogleIcon />
+            </v-btn>
+          </v-col>
+          <v-col
+            cols="4"
+            class="pa-1"
+          >
+            <v-btn
+              color="black"
+              class="full-width py-0 py-sm-5 px-10"
+            >
+              <AppleIcon />
+            </v-btn>
+          </v-col>
         </v-row>
         <v-checkbox
           class="text-lg mt-sm-4"
           hide-details="true"
           label="Remember me"
-        ></v-checkbox>
+        />
 
         <div class="text-center mt-2">
           <v-btn
             color="#5E6BE9"
             class="py-5 px-10 btn-submit white--text font-weight-bold full-width"
             @click="submitForm"
-            >Sign in</v-btn
           >
+            Sign in
+          </v-btn>
         </div>
         <div class="text-center">
           <div
             x-small
             class="text-capitalize text-md cursor-pointer mt-2"
-          ></div>
+          />
         </div>
         <div class="text-center">
-          <div x-small class="text-capitalize text-md cursor-pointer"></div>
+          <div
+            x-small
+            class="text-capitalize text-md cursor-pointer"
+          />
         </div>
       </v-form>
       <!-- </div> -->
@@ -92,7 +123,7 @@ import FacebookIcon from "@/components/svg/facebook.vue";
 import GoogleIcon from "@/components/svg/google.vue";
 import AppleIcon from "@/components/svg/apple.vue";
 import { mapStores } from "pinia";
-import { userStore } from "../../stores/userStore";
+import { userStore } from "../../../stores/userStore";
 import { rules } from "@/plugins/rules";
 export default {
   components: {
@@ -100,12 +131,8 @@ export default {
     GoogleIcon,
     AppleIcon,
   },
-  created() {
+  mounted() {
     this.change();
-    let signIn = JSON.parse(localStorage.getItem("signInData"));
-    if (signIn) {
-      this.userStore.signInData = signIn;
-    }
   },
   computed: {
     ...mapStores(userStore),
@@ -135,8 +162,6 @@ export default {
   },
 };
 </script>
-
-.
 <style lang="scss" scoped>
 .login {
   width: 100%;

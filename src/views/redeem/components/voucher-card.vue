@@ -1,19 +1,20 @@
 <template>
-  <v-card
-    height="290px"
-    max-width="14.3%"
-    elevation="2"
-    rounded="8"
-    class="pa-4"
-    @click="Click"
-  >
+  <v-card height="290px" width="14.3%" elevation="2" rounded="8" class="pa-2">
+    <v-skeleton-loader
+      v-if="!cards.imageUrl"
+      color="lighten-4"
+      class="pa-3 card-image mx-auto"
+      type="image"
+    />
     <div
+      v-else
       class="card-image d-flex flex-column"
       :style="{
         backgroundImage: 'url(' + cards.imageUrl + ')',
       }"
     >
       <div
+        v-if="cards.status == 'New'"
         class="mt-3 pa-1"
         :style="{
           background: '#FDDF59',
@@ -23,11 +24,11 @@
           'border-bottom-right-radius': '8px',
           'border-top-right-radius': '8px',
         }"
-        v-if="cards.status == 'Expired'"
       >
         {{ cards.status }}
       </div>
       <div
+        v-else-if="cards.status == 'Hot'"
         class="mt-3 pa-1"
         :style="{
           background: '#f65970',
@@ -37,54 +38,86 @@
           'border-bottom-right-radius': '8px',
           'border-top-right-radius': '8px',
         }"
-        v-else-if="cards.status == 'Hot'"
       >
         {{ cards.status }}
       </div>
       <div
+        v-else
         class="mt-3 pa-1"
         :style="{
-          background: '#4c99eb',
+          background: '#CBCBCB',
           width: 'max-content',
           height: 'max-content',
           position: 'absolute',
           'border-bottom-right-radius': '8px',
           'border-top-right-radius': '8px',
         }"
-        v-else
       >
         {{ cards.status }}
       </div>
     </div>
+
     <v-hover v-slot="{ hover }">
       <div class="d-flex mt-3 font-weight-bold align-center justify-center">
         <div>
-          <v-img class="card-icon" :src="cards.iconUrl"></v-img>
+          <v-img class="card-icon" :src="cards.iconUrl" />
         </div>
-        <span> {{ cards.title }} </span>
-        <tooltip class="tooltip" v-if="hover" :cards="cards"></tooltip>
+        <div
+          class="d-inline-block text-truncate voucher-title"
+          style="max-width: 80%"
+        >
+          {{ cards.title }}
+        </div>
+        <tooltip v-if="hover" class="tooltip" :cards="cards" />
       </div>
     </v-hover>
 
     <v-btn
-      class="d-flex column-gap-10 mx-auto mt-3 unpurchased"
+      v-if="cards.status == 'Expired'"
+      class="d-flex column-gap-10 mx-auto mt-3 expired"
       elevation="2"
       rounded
       text
+      disabled
+      color="expired"
     >
       <div>
         <span
-          class="white--text font-weight-bold pr-2"
-          :style="{ 'font-size': '18px' }"
+          class="font-weight-bold pr-2"
+          :style="{ 'font-size': '18px', color: '#AFAFAF' }"
         >
-          {{ cards.price }}000</span
+          {{ cards.price }}</span
         >
       </div>
       <div>
         <v-img
           :style="{ 'border-radius': '40px' }"
           :src="require(`@/assets/redeem/coin.webp`)"
-        ></v-img>
+        />
+      </div>
+    </v-btn>
+
+    <v-btn
+      v-else
+      class="d-flex column-gap-10 mx-auto mt-3 unpurchased"
+      elevation="2"
+      rounded
+      text
+      @click="Click"
+    >
+      <div>
+        <span
+          class="white--text font-weight-bold pr-2"
+          :style="{ 'font-size': '18px' }"
+        >
+          {{ cards.price }}</span
+        >
+      </div>
+      <div>
+        <v-img
+          :style="{ 'border-radius': '40px' }"
+          :src="require(`@/assets/redeem/coin.webp`)"
+        />
       </div>
     </v-btn>
   </v-card>
@@ -92,26 +125,27 @@
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "../../stores/userStore";
+import { userStore } from "../../../stores/userStore";
 import tooltip from "@/views/redeem/components/card-tooltip.vue";
 export default {
-  props: ["cards"],
-
   components: {
     tooltip: tooltip,
   },
+  props: ["cards", "id"],
   computed: {
     ...mapStores(userStore),
   },
   data() {
     return {
       index: 1,
+      loading: true,
     };
   },
   methods: {
     Click() {
       this.userStore.drawerDetail = !this.userStore.drawerDetail;
       this.userStore.detailCard = this.cards;
+      this.userStore.voucherId = this.id + 1;
     },
   },
 };
@@ -119,8 +153,8 @@ export default {
 
 <style lang="scss" scoped>
 .card-image {
-  border-radius: 8px;
   height: 140px;
+  border-radius: 8px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -128,11 +162,7 @@ export default {
 .card-icon {
   border-radius: 100px;
 }
-/*
-.image {
-  width: 140px;
-  height: 140px;
-}*/
+
 .column-gap-10 {
   column-gap: 10px;
 }
@@ -153,6 +183,10 @@ export default {
   background: #5752e3;
   padding: 4px, 16px, 4px, 16px;
 }
+.expired {
+  padding: 4px, 16px, 4px, 16px;
+}
+
 .purchased {
   background: #00ff2926;
   color: #22c33c;

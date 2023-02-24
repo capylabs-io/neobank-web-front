@@ -1,12 +1,12 @@
 <template>
   <v-app>
-    <app-navbar v-if="userStore.pageIndex == 1"></app-navbar>
-    <page-navbar v-else-if="userStore.pageIndex == 2"></page-navbar>
-    <div v-else></div>
+    <app-navbar v-if="userStore.pageIndex == 1" />
+    <page-navbar v-else-if="userStore.pageIndex == 2" />
+    <div v-else />
     <v-main>
       <router-view :key="$route.fullPath" />
     </v-main>
-    <app-footer v-if="!userStore.navChange"></app-footer>
+    <app-footer v-if="!userStore.navChange" />
   </v-app>
 </template>
 <script>
@@ -14,7 +14,7 @@ import FooterVue from "./components/Footer.vue";
 import HomeNavigationBar from "./components/NavigationBar.vue";
 import PageNavigationBar from "./components/NavigationBarPage.vue";
 import { mapStores } from "pinia";
-import { userStore } from "../src/views/stores/userStore";
+import { userStore } from "../src/stores/userStore";
 
 export default {
   components: {

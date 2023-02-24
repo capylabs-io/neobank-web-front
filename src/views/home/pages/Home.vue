@@ -1,19 +1,19 @@
 <template>
   <div class="home mx-auto">
     <div
-      v-if="windowWidth > 1280"
+      v-if="windowWidth > 1280 || userStore.scrollY < 1280"
       class="doorway tag"
       :style="{
         backgroundImage: 'url(' + require(`@/assets/home/door.webp`) + ')',
       }"
-    ></div>
+    />
 
     <div class="container DMSans mx-auto d-flex flex-column">
-      <intro></intro>
-      <introduction></introduction>
-      <firstsection></firstsection>
-      <secondSection></secondSection>
-      <thirdSection></thirdSection>
+      <intro />
+      <introduction />
+      <firstsection />
+      <secondSection />
+      <thirdSection />
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@ import intro from "../components/intro-doorway.vue";
 import secondsection from "../components/second-section.vue";
 import thirdSectionVue from "../components/third-section.vue";
 import { mapStores } from "pinia";
-import { userStore } from "../../stores/userStore";
+import { userStore } from "../../../stores/userStore";
 
 export default {
   name: "HomeView",
@@ -62,6 +62,7 @@ export default {
       const doorway = document.querySelector(".doorway");
       const scrollY = window.scrollY;
       this.scrollValue = scrollY;
+      this.userStore.scrollY = scrollY;
       const introDoorway = document.querySelector(".intro-doorway");
       console.log(scrollY);
       if (scrollY > 0 && scrollY > 400) {
@@ -94,7 +95,7 @@ export default {
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 3;
+  z-index: 2;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
