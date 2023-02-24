@@ -2,19 +2,22 @@ import axios from "axios";
 import utils from "@/plugins/utils";
 
 // axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT;
-axios.defaults.baseURL = 'https://metabank-dev-api.capylabs.io/api/';
+axios.defaults.baseURL = "https://metabank-dev-api.capylabs.io/api/";
 
 const USER_API = "/users/";
-const UPLOAD_API = "/upload/";
-const DESTROY_API = "/upload/files/";
 
 const APIHelper = (api) => ({
-  search: (params, option) => axios.get(api, { params: utils.filterObject(params) }, option),
-  count: (params, option) => axios.get(api + "count", { params: utils.filterObject(params) }, option),
-  fetch: (params, option) => axios.get(api, { params: utils.filterObject(params) }, option),
+  search: (params, option) =>
+    axios.get(api, { params: utils.filterObject(params) }, option),
+  count: (params, option) =>
+    axios.get(api + "count", { params: utils.filterObject(params) }, option),
+  fetch: (params, option) =>
+    axios.get(api, { params: utils.filterObject(params) }, option),
   fetchOne: (id, option) => axios.get(api + id, option),
-  create: (params, options) => axios.post(api, utils.filterObject(params), options),
-  update: (id, params, option) => axios.put(api + id, utils.filterObject(params), option),
+  create: (params, options) =>
+    axios.post(api, utils.filterObject(params), options),
+  update: (id, params, option) =>
+    axios.put(api + id, utils.filterObject(params), option),
   remove: (id, option) => axios.delete(api + id, option),
 });
 export const APIRespository = APIHelper;
@@ -35,7 +38,8 @@ export const Auth = {
     axios.post("auth/forgot-password", {
       email,
     }),
-  resetPassword: (resetPasswordData) => axios.post("auth/reset-password", resetPasswordData),
+  resetPassword: (resetPasswordData) =>
+    axios.post("auth/reset-password", resetPasswordData),
 };
 
 export const User = {
@@ -53,18 +57,15 @@ export const User = {
       password,
     }),
 };
-
-export const Upload = {
-  upload: (formData) =>
-    axios.post(UPLOAD_API, formData, {
+export const Voucher = {
+  fetchVouchers: (token) =>
+    axios.get("vouchers", {
       headers: {
-        "Content-Type": "multipart/form-data",
+        Authorization: "Bearer " + token,
       },
     }),
-  destroy: (id) => axios.delete(DESTROY_API + id),
 };
 
 export default {
   Auth,
-  Upload,
 };

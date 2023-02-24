@@ -17,7 +17,6 @@ import dialog from "@/plugins/dialog";
 import { rules } from "@/plugins/rules";
 import moment from "moment";
 
-Vue.use(PiniaVuePlugin);
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 
@@ -26,6 +25,7 @@ pinia.use(({ store }) => {
 });
 Vue.use(VueParallaxJs)
 Vue.config.productionTip = false
+Vue.use(PiniaVuePlugin);
 Vue.use(
   PluginHelper.create({
     $utils: utils,

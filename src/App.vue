@@ -25,14 +25,7 @@ export default {
   computed: {
     ...mapStores(userStore),
   },
-  created() {
-    let user = JSON.parse(sessionStorage.getItem("user"));
-    if (user) {
-      this.userStore.isSignin = true;
-    } else {
-      this.userStore.isSignin = false;
-    }
-  },
+  created() {},
   data() {
     return {
       index: 2,

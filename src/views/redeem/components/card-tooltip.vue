@@ -34,8 +34,8 @@
       </div>
       <span class="mt-3"> {{ cards.detailheader }} </span>
     </div>
-    <div class="mt-3 text-left">{{ cards.firstDetail }}</div>
-    <div class="mt-3 text-left">{{ cards.secondDetail }}</div>
+    <div class="mt-3 text-left">HSD: 31 Oct 2022</div>
+    <div class="mt-3 text-left">Notice: lorem ipsum</div>
   </v-card>
 </template>
 

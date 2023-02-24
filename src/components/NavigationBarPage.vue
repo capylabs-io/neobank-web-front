@@ -86,7 +86,7 @@
       </div>
     </div>
 
-    <div class="align-self-center DMSans" v-if="userStore.isSignin">
+    <div class="align-self-center DMSans" v-if="!userStore.jwt">
       <v-btn class="pa-5" color="introbtn">
         <router-link to="/vn/login" class="text-decoration-none white--text">
           <div class="text-capitalize">LOGIN</div>
@@ -154,12 +154,13 @@ export default {
       }
     },
     signout() {
+      sessionStorage.removeItem("userData");
+      sessionStorage.removeItem("jwt");
       this.userStore.logout;
+      this.userStore.$reset;
     },
   },
-  created() {
-
-  },
+  created() {},
 };
 </script>
 

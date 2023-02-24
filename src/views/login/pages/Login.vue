@@ -102,6 +102,10 @@ export default {
   },
   created() {
     this.change();
+    let signIn = JSON.parse(localStorage.getItem("signInData"));
+    if (signIn) {
+      this.userStore.signInData = signIn;
+    }
   },
   computed: {
     ...mapStores(userStore),

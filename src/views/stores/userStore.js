@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import { Auth } from "@/plugins/api.js";
+import { Auth, Voucher } from "@/plugins/api.js";
 import { snackBarController } from "@/components/snack-bar/snack-bar-controller.js";
 import { loadingController } from "@/components/global-loading/global-loading-controller.js";
-
+// import { voucherInfo } from "@/views/stores/interface/voucherInfo";
 export const userStore = defineStore(
   "user",
   () => {
@@ -18,10 +18,16 @@ export const userStore = defineStore(
     const jwt = ref("");
     const rememberMe = ref(false);
     const isShowPass = ref(false);
+    const bearerToken = ref(
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3MDUwOTA1LCJleHAiOjE2Nzk2NDI5MDV9.gCEGMkbCLUiaymG7PPoGsS5OstagMUR6GRFvmrP8VC8"
+    );
+    const pagination = ref({ page: 1, pageCount: 1, pageSize: 5, total: 5 });
+
     const signInData = ref({
       identifier: "",
       password: "",
     });
+
     const cardData = ref({
       image: null,
       icon: null,
@@ -32,6 +38,24 @@ export const userStore = defineStore(
       firstDetail: "",
       secondDetail: "",
     });
+    const voucherData = ref([]);
+    // const voucherData = ref([
+    //   {
+    //     name: "",
+    //     price: "",
+    //     title: "",
+    //     quantity: 1,
+    //     iconUrl: "",
+    //     expiredTime: "",
+    //     shortDescription: "",
+    //     fullDescription: "",
+    //     isActive: false,
+    //     imageUrl: "",
+    //     createdAt: "",
+    //     updatedAt: "",
+    //     publishedAt: "",
+    //   },
+    // ]);
     const detailCard = ref({
       image: null,
       icon: null,
@@ -62,7 +86,7 @@ export const userStore = defineStore(
         if (this.rememberMe) {
           this.signInData = signInData;
         } else {
-          this.signInData = null;
+          this.signInData = "";
         }
         this.isSignin = true;
         this.router.push({
@@ -74,12 +98,30 @@ export const userStore = defineStore(
         snackbar.commonError(error);
       }
     }
+
+    async function fetchVoucher() {
+      try {
+        loading.increaseRequest();
+        const res = await Voucher.fetchVouchers(this.bearerToken);
+        if (!res) {
+          snackbar.commonError(`Error occurred! Please try again later!`);
+          return;
+        }
+        snackbar.success("Fetch successfully!");
+        this.voucherData = res.data.data.map((voucher) => voucher.attributes);
+        this.pagination = res.data.meta;
+        // this.router.push({
+        //   params: "vn",
+        //   name: "Redeem",
+        // });
+      } catch (error) {
+        console.error(`Error: ${error}`);
+        snackbar.commonError(error);
+      }
+    }
+
     function logout() {
       this.isSignin = false;
-      this.jwt = "";
-      this.signInData = "";
-      // sessionStorage.clear();
-      // localStorage.clear();
     }
     const isConnected = computed(() => this.jwt);
 
@@ -100,10 +142,13 @@ export const userStore = defineStore(
       isShowPass,
       userData,
       rememberMe,
-
+      bearerToken,
+      voucherData,
+      pagination,
       //action
       signIn,
       logout,
+      fetchVoucher,
     };
   },
   {

@@ -18,10 +18,16 @@
     </div>
 
     <div class="d-flex flex-wrap gap-45 card-container" v-if="index == 2">
-      <voucherCard
+      <!-- <voucherCard
         v-for="card in voucherCards"
         :key="card"
-        :status="card"
+        :cards="card"
+      ></voucherCard> -->
+      
+      <voucherCard
+        v-for="card in voucher"
+        :key="card"
+        :cards="card"
       ></voucherCard>
     </div>
 
@@ -29,7 +35,7 @@
       <clothesCard
         v-for="card in clothesCards"
         :key="card"
-        :cards="card"
+        :status="card"
       ></clothesCard>
     </div>
     <div class="mt-3">
@@ -42,13 +48,15 @@
 import voucherCard from "@/views/redeem/components/voucher-card.vue";
 import clothesCard from "@/views/redeem/components/clothes-card.vue";
 export default {
+  props: ["voucher"],
+
   components: {
     voucherCard: voucherCard,
     clothesCard: clothesCard,
   },
   data() {
     return {
-      voucherCards: [
+      clothesCards: [
         { index: 2 },
         { index: 1 },
         { index: 1 },
@@ -59,7 +67,7 @@ export default {
         { index: 1 },
         { index: 2 },
       ],
-      clothesCards: [
+      voucherCards: [
         {
           image: require(`@/assets/redeem/card/cgv-card.webp`),
           icon: require(`@/assets/redeem/card/cgv-icon.webp`),

@@ -4,7 +4,10 @@
     <inventoryDrawer></inventoryDrawer>
     <detail></detail>
     <left-content></left-content>
-    <right-content v-if="userStore.index == 1"></right-content>
+    <right-content
+      v-if="userStore.index == 1"
+      :voucher="userStore.voucherData"
+    ></right-content>
     <inventory-content v-else-if="userStore.index == 2"></inventory-content>
     <accountSetting v-else></accountSetting>
   </div>
@@ -36,6 +39,9 @@ export default {
   },
   created() {
     this.change();
+    this.userStore.fetchVoucher();
+    console.log("data", this.userStore.voucherData);
+    console.log("pagination", this.userStore.pagination);
   },
   data() {
     return {
