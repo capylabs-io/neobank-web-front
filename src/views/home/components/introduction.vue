@@ -22,16 +22,9 @@
         Journey into the future of banking with VParadise, a harmony between
         technologies and banking
       </div>
-      <v-btn
-        color="introbtn"
-        class="white--text pa-5"
-      >
-        <div class="text-decoration-none">
-          Discover now
-        </div>
-        <v-icon color="white">
-          mdi-arrow-right-thin
-        </v-icon>
+      <v-btn color="introbtn" class="white--text pa-5">
+        <div class="text-decoration-none">Discover now</div>
+        <v-icon color="white"> mdi-arrow-right-thin </v-icon>
       </v-btn>
     </div>
     <!-- <div class="rectangle align-self-center"></div>
@@ -72,7 +65,7 @@ export default {
 <style lang="scss" scoped>
 .introduction {
   width: 100%;
-  height: 100vh;
+  height: 210vh;
   position: relative;
   background-size: cover;
   background-position: center;
@@ -80,8 +73,16 @@ export default {
   z-index: 2;
 }
 .introduction-content {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 45%;
+  left: 15%;
+}
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .title {
   width: 47%;

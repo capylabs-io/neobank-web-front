@@ -9,14 +9,11 @@
     color="white"
     class="pa-5 drawer d-flex flex-column"
   >
-    <v-card
-      class="drawer-card"
-      flat
-    >
+    <v-card class="drawer-card" flat>
       <div
         class="drawer-image d-flex flex-column"
         :style="{
-          backgroundImage: 'url(' + userStore.cardData.image + ')',
+          backgroundImage: 'url(' + userStore.cardData.imageUrl + ')',
         }"
       >
         <div
@@ -66,18 +63,15 @@
         class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
       >
         <div>
-          <v-img
-            class="drawer-icon"
-            :src="userStore.cardData.icon"
-          />
+          <v-img class="drawer-icon" :src="userStore.cardData.iconUrl" />
         </div>
-        <span class="mt-3"> {{ userStore.cardData.detailheader }} </span>
+        <span class="mt-3"> {{ userStore.cardData.title }} </span>
       </div>
       <div class="mt-3 text-left">
-        {{ userStore.cardData.firstDetail }}
+        {{ userStore.cardData.shortDescription }}
       </div>
       <div class="mt-3 text-left">
-        {{ userStore.cardData.secondDetail }}
+        {{ userStore.cardData.fullDescription }}
       </div>
     </v-card>
     <v-btn
@@ -87,7 +81,9 @@
       text
     >
       <div>
-        <span class="white--text font-weight-bold pr-2 text-capitalize">Redeem Now</span>
+        <span class="white--text font-weight-bold pr-2 text-capitalize"
+          >Redeem Now</span
+        >
       </div>
     </v-btn>
   </v-navigation-drawer>
@@ -126,8 +122,11 @@ export default {
   height: 100vh;
 }
 .drawer-btn {
+  position: sticky;
+  bottom: 0;
+  right: 0;
   width: 100%;
-  margin-top: 50%;
+  margin-top: 20px;
 }
 .unpurchased {
   background: #5752e3;

@@ -1,15 +1,15 @@
 <template>
   <v-card
     height="290px"
-    max-width="225px"
+    width="250px"
     elevation="2"
     rounded="8"
-    class="pa-4 inventory-card"
+    class="pa-2 inventory-card"
   >
     <div
       class="card-image d-flex flex-column"
       :style="{
-        backgroundImage: 'url(' + cards.image + ')',
+        backgroundImage: 'url(' + cards.imageUrl + ')',
       }"
     >
       <div
@@ -57,15 +57,27 @@
     </div>
     <div class="d-flex mt-3 font-weight-bold align-center justify-center">
       <div>
-        <v-img
-          class="card-icon"
-          :src="cards.icon"
-        />
+        <v-img class="card-icon" :src="cards.iconUrl" />
       </div>
-      <span> {{ cards.title }} </span>
+      <div
+        class="d-inline-block text-truncate voucher-title"
+        style="max-width: 80%"
+      >
+        {{ cards.title }}
+      </div>
     </div>
-
     <v-btn
+      class="d-flex column-gap-10 mx-auto mt-3 unpurchased"
+      elevation="2"
+      rounded
+      text
+      @click.stop="openClick"
+    >
+      <div>
+        <span class="white--text font-weight-bold text-capitalize">Open</span>
+      </div>
+    </v-btn>
+    <!-- <v-btn
       v-if="!cards.isRedeem"
       class="d-flex column-gap-10 mx-auto mt-3 unpurchased"
       elevation="2"
@@ -91,7 +103,7 @@
       <div>
         <span class="font-weight-bold text-capitalize pl-2">Redeemed</span>
       </div>
-    </v-btn>
+    </v-btn> -->
   </v-card>
 </template>
 
@@ -159,7 +171,7 @@ export default {
 }
 .inventory-card {
   border-radius: 8px;
-  display: inline-block;
+  /* display: inline-block;*/
   animation: fadeleft 1s ease-in-out;
 }
 .unpurchased {

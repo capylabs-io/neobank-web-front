@@ -139,7 +139,6 @@ export default {
     buy() {
       this.userStore.drawerDetail = !this.userStore.drawerDetail;
       this.userStore.cfDialog = true;
-      this.userStore.purchaseVoucher();
     },
   },
 };

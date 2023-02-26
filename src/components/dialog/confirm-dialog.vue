@@ -14,13 +14,7 @@
         >
           No
         </v-btn>
-        <v-btn
-          color="green-darken-1"
-          variant="text"
-          @click="userStore.cfDialog = false"
-        >
-          Yes
-        </v-btn>
+        <v-btn color="green-darken-1" variant="text" @click="buy"> Yes </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -32,6 +26,12 @@ import { userStore } from "../../stores/userStore";
 export default {
   computed: {
     ...mapStores(userStore),
+  },
+  methods: {
+    buy() {
+      this.userStore.cfDialog = false;
+      this.userStore.purchaseVoucher();
+    },
   },
 };
 </script>

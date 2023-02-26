@@ -8,6 +8,7 @@
     <right-content
       v-if="userStore.index == 1"
       :voucher="userStore.voucherData"
+      :userVoucher="userStore.userVoucherList"
     />
     <inventory-content v-else-if="userStore.index == 2" />
     <accountSetting v-else />
@@ -36,15 +37,14 @@ export default {
     accountSetting: accountSettingVue,
     confirmDialog: confirmDialog,
   },
-  mounted: {},
   computed: {
     ...mapStores(userStore),
   },
-  created() {
+  mounted() {
     this.change();
     this.userStore.fetchVoucher();
-    console.log("data", this.userStore.voucherData);
-    console.log("pagination", this.userStore.pagination);
+    this.userStore.fetchUserVoucher();
+    this.userStore.checkIncludes();
   },
   data() {
     return {

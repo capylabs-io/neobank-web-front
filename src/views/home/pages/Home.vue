@@ -9,7 +9,7 @@
     />
 
     <div class="container DMSans mx-auto d-flex flex-column">
-      <intro />
+      <!-- <intro /> -->
       <introduction />
       <firstsection />
       <secondSection />
@@ -21,7 +21,7 @@
 <script>
 import firstSectionVue from "../components/first-section.vue";
 import introductionVue from "../components/introduction.vue";
-import intro from "../components/intro-doorway.vue";
+// import intro from "../components/intro-doorway.vue";
 import secondsection from "../components/second-section.vue";
 import thirdSectionVue from "../components/third-section.vue";
 import { mapStores } from "pinia";
@@ -34,7 +34,7 @@ export default {
     firstsection: firstSectionVue,
     secondSection: secondsection,
     thirdSection: thirdSectionVue,
-    intro: intro,
+    // intro: intro,
   },
   computed: {
     ...mapStores(userStore),
@@ -60,19 +60,30 @@ export default {
     },
     handleScroll() {
       const doorway = document.querySelector(".doorway");
+      const introduction = document.querySelector(".introduction-content");
       const scrollY = window.scrollY;
       this.scrollValue = scrollY;
       this.userStore.scrollY = scrollY;
-      const introDoorway = document.querySelector(".intro-doorway");
-      console.log(scrollY);
-      if (scrollY > 0 && scrollY > 400) {
-        introDoorway.style.opacity = "0.6";
-        introDoorway.className += ".visible";
+      // const introDoorway = document.querySelector(".intro-doorway");
+      // console.log(scrollY);
+      // if (scrollY > 0 && scrollY > 400) {
+      //   introDoorway.style.opacity = "0.6";
+      //   introDoorway.className += ".visible";
+      // } else {
+      //   introDoorway.style.opacity = "1";
+      // }
+      if (scrollY >= 999) {
+        introduction.style.position = "relative";
+        introduction.style.top = "50vh";
+        introduction.style.left = "auto";
       } else {
-        introDoorway.style.opacity = "1";
+        introduction.style.position = "fixed";
+        introduction.style.top = "45%";
+        introduction.style.left = "15%";
       }
       doorway.style.backgroundSize = 100 + scrollY / 7 + "%";
       doorway.style.opacity = 1 + scrollY / 6 + "";
+
       // const maxBackgroundSize = 120;
       // const backgroundSize = scrollY / (maxBackgroundSize - 100); // increases as user scrolls
       // doorway.style.transform =
@@ -95,7 +106,7 @@ export default {
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 3;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

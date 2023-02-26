@@ -17,7 +17,6 @@
           </v-btn>
         </div>
       </div>
-
       <div v-if="index == 2" class="d-flex flex-wrap gap-45 card-container">
         <!-- <voucherCard
         v-for="card in voucherCards"
@@ -26,9 +25,9 @@
       ></voucherCard> -->
 
         <voucherCard
-          v-for="(card, index) in voucher"
-          :key="index"
-          :id="index"
+          v-for="card in voucher"
+          :key="card.id"
+          :id="card.id"
           :cards="card"
         />
       </div>
@@ -51,7 +50,7 @@ export default {
     voucherCard: voucherCard,
     clothesCard: clothesCard,
   },
-  props: ["voucher"],
+  props: ["voucher", "userVoucher"],
   data() {
     return {
       clothesCards: [

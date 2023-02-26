@@ -43,6 +43,10 @@ export const userStore = defineStore(
       secondDetail: "",
     });
     const voucherData = ref([]);
+    const voucherDataId = ref([]);
+    const userVoucher = ref([]);
+    const userVoucherId = ref([]);
+    const voucherPurchased = ref([]);
     const detailCard = ref({
       price: "",
       imageUrl: "",
@@ -95,11 +99,15 @@ export const userStore = defineStore(
           return;
         }
         snackbar.success("Fetch successfully!");
-        this.voucherData = res.data.data.map((voucher) => voucher.attributes);
+        // this.voucherData = res.data.data.map((voucher) => voucher.attributes);
+        this.voucherData = res.data.data;
+        this.voucherDataList = this.voucherData.map((index) => index.id);
         // .sort((a, b) => b.id - a.id);
         // console.log("sort",voucherData);
         this.pagination = res.data.meta;
         console.log("pagination", pagination);
+        console.log("storeVoucher", voucherData);
+        console.log("storeVoucherid", voucherDataId);
         // this.router.push({
         //   params: "vn",
         //   name: "Redeem",
@@ -109,16 +117,42 @@ export const userStore = defineStore(
         snackbar.commonError(error);
       }
     }
-    async function purchaseVoucher(id) {
+    async function purchaseVoucher() {
       try {
         loading.increaseRequest();
-        const res = await Voucher.purchaseVouchers(id);
+        const res = await Voucher.purchaseVouchers(
+          this.voucherId,
+          this.bearerToken
+        );
         if (!res) {
           snackbar.commonError(`Error occurred! Please try again later!`);
           return;
         }
         snackbar.success("Voucher Purchased successfully!");
-        console.log("respon", res.data);
+        console.log("purchase", res.data);
+        // this.router.push({
+        //   params: "vn",
+        //   name: "Redeem",
+        // });
+      } catch (error) {
+        console.error(`Error: ${error}`);
+        snackbar.commonError(error);
+      }
+    }
+    async function fetchUserVoucher() {
+      try {
+        loading.increaseRequest();
+        const res = await Voucher.fetchUserVouchers(this.bearerToken);
+        if (!res) {
+          snackbar.commonError(`Error occurred! Please try again later!`);
+          return;
+        }
+        snackbar.success("Voucher Purchased successfully!");
+        this.userVoucher = res.data.map((index) => index.voucher);
+        this.userVoucherList = res.data.map((index) => index.voucher.id);
+        console.log("userVoucher", userVoucher);
+        console.log("userVoucherId", userVoucherId);
+
         // this.router.push({
         //   params: "vn",
         //   name: "Redeem",
@@ -129,6 +163,15 @@ export const userStore = defineStore(
       }
     }
 
+    function checkIncludes() {
+      this.voucherPurchased = this.voucherDataId.filter((data) => {
+        return this.userVoucherId.includes(data);
+      });
+      // const checkInclude = this.voucherData.filter((data) => {
+      //   return this.userVoucherList.includes(data);
+      // });
+      console.log("Purchased voucher", voucherPurchased);
+    }
     function logout() {
       this.jwt = "";
       this.signInData = "";
@@ -160,10 +203,17 @@ export const userStore = defineStore(
       cfDialog,
       voucherId,
       scrollY,
+      userVoucher,
+      userVoucherId,
+      voucherDataId,
+      voucherPurchased,
       //action
       signIn,
       logout,
       fetchVoucher,
+      fetchUserVoucher,
+      purchaseVoucher,
+      checkIncludes,
     };
   },
   {

@@ -1,7 +1,7 @@
 <template>
   <v-card height="290px" width="14.3%" elevation="2" rounded="8" class="pa-2">
     <v-skeleton-loader
-      v-if="!cards.imageUrl"
+      v-if="!cards.attributes.imageUrl"
       color="lighten-4"
       class="pa-3 card-image mx-auto"
       type="image"
@@ -10,11 +10,11 @@
       v-else
       class="card-image d-flex flex-column"
       :style="{
-        backgroundImage: 'url(' + cards.imageUrl + ')',
+        backgroundImage: 'url(' + cards.attributes.imageUrl + ')',
       }"
     >
       <div
-        v-if="cards.status == 'New'"
+        v-if="cards.attributes.status == 'New'"
         class="mt-3 pa-1"
         :style="{
           background: '#FDDF59',
@@ -25,10 +25,10 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.status }}
+        {{ cards.attributes.status }}
       </div>
       <div
-        v-else-if="cards.status == 'Hot'"
+        v-else-if="cards.attributes.status == 'Hot'"
         class="mt-3 pa-1"
         :style="{
           background: '#f65970',
@@ -39,7 +39,7 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.status }}
+        {{ cards.attributes.status }}
       </div>
       <div
         v-else
@@ -53,27 +53,27 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.status }}
+        {{ cards.attributes.status }}
       </div>
     </div>
 
     <v-hover v-slot="{ hover }">
       <div class="d-flex mt-3 font-weight-bold align-center justify-center">
         <div>
-          <v-img class="card-icon" :src="cards.iconUrl" />
+          <v-img class="card-icon" :src="cards.attributes.iconUrl" />
         </div>
         <div
           class="d-inline-block text-truncate voucher-title"
           style="max-width: 80%"
         >
-          {{ cards.title }}
+          {{ cards.attributes.title }}
         </div>
         <tooltip v-if="hover" class="tooltip" :cards="cards" />
       </div>
     </v-hover>
 
     <v-btn
-      v-if="cards.status == 'Expired'"
+      v-if="cards.attributes.status == 'Expired'"
       class="d-flex column-gap-10 mx-auto mt-3 expired"
       elevation="2"
       rounded
@@ -86,7 +86,7 @@
           class="font-weight-bold pr-2"
           :style="{ 'font-size': '18px', color: '#AFAFAF' }"
         >
-          {{ cards.price }}</span
+          {{ cards.attributes.price }}</span
         >
       </div>
       <div>
@@ -110,7 +110,7 @@
           class="white--text font-weight-bold pr-2"
           :style="{ 'font-size': '18px' }"
         >
-          {{ cards.price }}</span
+          {{ cards.attributes.price }}</span
         >
       </div>
       <div>
@@ -145,7 +145,7 @@ export default {
     Click() {
       this.userStore.drawerDetail = !this.userStore.drawerDetail;
       this.userStore.detailCard = this.cards;
-      this.userStore.voucherId = this.id + 1;
+      this.userStore.voucherId = this.id;
     },
   },
 };

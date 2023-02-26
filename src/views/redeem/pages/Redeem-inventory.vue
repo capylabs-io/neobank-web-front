@@ -2,26 +2,31 @@
   <div class="right d-flex flex-column align-center">
     <div class="mt-5 d-flex gap-45 card-container flex-wrap">
       <inventoryCard
-        v-for="card in inventoryCards"
+        v-for="card in userStore.userVoucher"
         :key="card"
         :cards="card"
       />
+      <!-- <inventoryCard
+        v-for="card in inventoryCards"
+        :key="card"
+        :cards="card"
+      /> -->
     </div>
     <div class="mt-3">
-      <v-pagination
-        :length="3"
-        light
-      />
+      <v-pagination :length="3" light />
     </div>
   </div>
 </template>
 
 <script>
+import { mapStores } from "pinia";
+import { userStore } from "@/stores/userStore";
 import inventoryCard from "@/views/redeem/components/inventory-card.vue";
 export default {
   components: {
     inventoryCard: inventoryCard,
   },
+
   data() {
     return {
       inventoryCards: [
@@ -127,6 +132,9 @@ export default {
       index: 1,
     };
   },
+  computed: {
+    ...mapStores(userStore),
+  },
   watch: {
     group() {
       this.drawer = false;
@@ -136,7 +144,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .right {
-  max-width: max-content;
   width: 85%;
   background: #f5f5f5;
   padding: 30px 100px;
