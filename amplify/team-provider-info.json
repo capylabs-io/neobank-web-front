@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-neobankwebfront-dev-133536-authRole",
+      "UnauthRoleArn": "arn:aws:iam::385424877344:role/amplify-neobankwebfront-dev-133536-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::385424877344:role/amplify-neobankwebfront-dev-133536-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-neobankwebfront-dev-133536-deployment",
+      "UnauthRoleName": "amplify-neobankwebfront-dev-133536-unauthRole",
+      "StackName": "amplify-neobankwebfront-dev-133536",
+      "StackId": "arn:aws:cloudformation:us-east-1:385424877344:stack/amplify-neobankwebfront-dev-133536/c94e68e0-b59f-11ed-9338-0ec6108f3deb",
+      "AmplifyAppId": "d19hjv4vkebbey"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d19hjv4vkebbey",
+          "type": "manual"
+        }
+      }
+    }
+  }
+}
