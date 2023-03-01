@@ -1,6 +1,6 @@
 <template>
-  <div class="right d-flex flex-column align-center">
-    <v-card class="card-content mt-3">
+  <div class="account-setting d-flex flex-column align-center mx-auto pa-6">
+    <v-card class="card-content">
       <v-card-title class="">
         <div class="text-lg greyblack--text font-weight-medium text-uppercase">
           Account setting
@@ -99,9 +99,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.right {
-  min-height: 100%;
-  padding: 20px;
+.account-setting{
+  max-width: 1400px;
+}
   .card-content {
     width: 100%;
     background: #ffffff;
@@ -118,7 +118,6 @@ export default {
   .text-sub {
     color: rgba(0, 0, 0, 0.6);
   }
-}
 .col-gap-15 {
   column-gap: 15px;
 }

@@ -11,6 +11,10 @@ export default new Vuetify({
     light: true,
     themes: {
       light: {
+        primary: "#2970FF",
+        secondary: "#f5f8ff",
+        
+        //TODO: Remove unnecessary colors
         introbtn: "#5752E3",
         footer: "#F7F6FF",
         expired: "#E7E7E7",

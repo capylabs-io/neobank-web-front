@@ -1,8 +1,9 @@
 <template>
-  <div class="left d-flex flex-column row-gap-3">
+  <div class="d-flex flex-column justify-space-between full-height">
+    <div class="d-flex flex-column">
     <div
       v-if="!userStore.jwt"
-      class="d-flex flex-column align-center justify-center left-first pa-8"
+      class="d-flex flex-column align-center justify-center left-first pa-6"
     >
       <div>
         <v-img
@@ -11,14 +12,14 @@
           :src="require(`@/assets/redeem/user-profile.webp`)"
         />
       </div>
-      <div>
+      <div class="mt-3">
         <span class="font-weight-bold">Tung69 #291090</span>
       </div>
       <div class="subtitle-2">
         <span>tung.bro.bro69@gmail.com</span>
       </div>
       <div
-        class="d-flex left-profile-section align-center font-weight-bold column-gap-10 pa-2"
+        class="d-flex left-profile-section align-center font-weight-bold mt-3"
       >
         <span :style="{ 'font-size': '18px' }">1000</span>
         <div>
@@ -31,7 +32,7 @@
     </div>
     <div
       v-else
-      class="d-flex flex-column align-center justify-center left-first pa-8"
+      class="d-flex flex-column align-center justify-center left-first pa-6"
     >
       <div>
         <v-img
@@ -40,7 +41,7 @@
           :src="require(`@/assets/redeem/user-profile.webp`)"
         />
       </div>
-      <div>
+      <div class="mt-3  ">
         <span class="font-weight-bold"
           >{{ userStore.userData.username }} #291090</span
         >
@@ -49,7 +50,7 @@
         <span>{{ userStore.userData.email }}</span>
       </div>
       <div
-        class="d-flex left-profile-section align-center font-weight-bold column-gap-10 pa-2"
+        class="d-flex left-profile-section align-center font-weight-bold mt-3 pa-2"
       >
         <span :style="{ 'font-size': '18px' }">{{
           userStore.userData.token
@@ -62,38 +63,36 @@
         </div>
       </div>
     </div>
-    <div class="d-flex flex-column justify-center left-second pa-8 row-gap-1">
-      <div class="pa-2 content store" @click="storeClick">
-        <div class="d-flex column-gap-10">
-          <div>
-            <v-icon>mdi-store </v-icon>
-          </div>
+    <v-divider></v-divider>
+    <div class="d-flex flex-column justify-center left-second pa-6">
+      <!-- TODO: Change to v-list -->
+      <div @click="storeClick()">
+        <div class="pa-2 content d-flex store active cursor-pointer">
+            <v-icon class="mr-2">mdi-store </v-icon>
           <span>Redeem store</span>
         </div>
       </div>
-      <div class="pa-2 content inventory" @click="inventoryClick">
-        <div class="d-flex column-gap-10">
-          <div>
-            <v-icon> mdi-treasure-chest</v-icon>
-          </div>
+      <div class="mt-2" @click="inventoryClick()">
+        <div class="pa-2 content d-flex inventory cursor-pointer">
+            <v-icon class="mr-2"> mdi-treasure-chest</v-icon>
           <span>Inventory</span>
         </div>
       </div>
-      <div class="pa-2 content setting" @click="accountClick()">
-        <div class="d-flex column-gap-10">
-          <div>
-            <v-icon> mdi-account-box</v-icon>
-          </div>
+      <div class="mt-2" @click="accountClick()">
+        <div class="pa-2 content d-flex setting cursor-pointer">
+            <v-icon class="mr-2"> mdi-account-box</v-icon>
           <span>Account setting</span>
         </div>
       </div>
     </div>
-    <div class="d-flex flex-column align-left justify-end left-third pa-8">
+    <v-divider></v-divider>
+  </div>
+    <div class="d-flex flex-column align-left justify-end left-third pa-6">
       <v-btn class="" @click="signout()" text>
-          <div class="mr-2">
-            <v-icon color="red"> mdi-logout </v-icon>
-          </div>
-          <div class="text-capitalize" :style="{ color: 'red' }">Log-out</div>
+        <div class="mr-2">
+          <v-icon color="red"> mdi-logout </v-icon>
+        </div>
+        <div class="text-capitalize" :style="{ color: 'red' }">Log-out</div>
       </v-btn>
     </div>
   </div>
@@ -111,58 +110,43 @@ export default {
   },
   methods: {
     inventoryClick() {
+      const store = document.querySelector(".store");
+      const inventory = document.querySelector(".inventory");
+      const setting = document.querySelector(".setting");
       this.userStore.index = 2;
+      store.classList.remove("active");
+      inventory.classList.add("active");
+      setting.classList.remove("active");
     },
     storeClick() {
+      const store = document.querySelector(".store");
+      const inventory = document.querySelector(".inventory");
+      const setting = document.querySelector(".setting");
       this.userStore.index = 1;
+      store.classList.add("active");
+      inventory.classList.remove("active");
+      setting.classList.remove("active");
     },
     accountClick() {
+      const store = document.querySelector(".store");
+      const inventory = document.querySelector(".inventory");
+      const setting = document.querySelector(".setting");
       this.userStore.index = 3;
+      store.classList.remove("active");
+      inventory.classList.remove("active");
+      setting.classList.add("active");
     },
     signout() {
       this.userStore.logout();
       this.$router.push("/vn/login");
     },
-    carousel() {
-      const store = document.querySelector(".store");
-      const inventory = document.querySelector(".inventory");
-      const setting = document.querySelector(".setting");
-      if (this.userStore.index == 1) {
-        inventory.className += "active";
-      } else if (this.userStore.index == 2) {
-        store.className += "active";
-      } else {
-        setting.className += "active";
-      }
-    },
+    carousel() {},
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.left {
-  width: 15%;
-  background: #f5f5f5;
-  height: 100vh;
-}
-.left-first {
-  height: 28%;
-  background: white;
-  row-gap: 10px;
-}
-.left-second {
-  height: 13%;
-  background: white;
-}
-.left-third {
-  height: 59%;
-  background: white;
-}
-.right {
-  width: 95%;
-  background: #f5f5f5;
-  padding: 30px 100px;
-}
+
 .column-gap-10 {
   column-gap: 10px;
 }
@@ -187,12 +171,14 @@ export default {
 }
 .content:hover {
   background: #f5f8ff;
+  color: #2970ff;
   .v-icon {
     color: #2970ff;
   }
 }
 .active {
   background: #f5f8ff;
+  color: #2970ff;
   .v-icon {
     color: #2970ff;
   }

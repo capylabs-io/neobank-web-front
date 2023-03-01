@@ -1,7 +1,6 @@
 <template>
   <div class="nav-bar d-flex justify-space-between">
     <div
-      v-if="isMobile"
       class="d-flex gap-24 DMSans black--text align-center pa-7"
     >
       <div>
@@ -11,22 +10,25 @@
         />
       </div>
       <router-link
-        to="/"
-        class="black--text text-decoration-none align-self-center"
+        to="/vn/home"
+        class="text-decoration-none align-self-center"
+        active-class="active"
       >
-        <div class="text-capitalize active">HOME</div>
+        <div class="text-capitalize">HOME</div>
       </router-link>
       <router-link
-        to="/"
-        class="black--text text-decoration-none align-self-center"
+        to="/vn/home"
+        class="text-decoration-none align-self-center"
+        active-class="active"
       >
-        <div class="text-capitalize active">WORLD</div>
+        <div class="text-capitalize">WORLD</div>
       </router-link>
       <router-link
         to="/vn/redeem"
-        class="black--text text-decoration-none align-self-center"
+        class="text-decoration-none align-self-center"
+        active-class="active"
       >
-        <div class="text-capitalize active">REDEEM</div>
+        <div class="text-capitalize">REDEEM</div>
       </router-link>
 
       <!-- <router-link
@@ -40,7 +42,7 @@
       </v-btn> -->
     </div>
 
-    <div v-else class="d-flex align-center justify-space-between">
+    <!-- <div v-else class="d-flex align-center justify-space-between">
       <div>
         <v-img
           class="nav-logo align-self-center"
@@ -59,30 +61,27 @@
           <router-link
             to="/"
             class="black--text text-decoration-none align-self-center"
+            active-class="active"
           >
             <div class="text-capitalize active">HOME</div>
           </router-link>
           <router-link
             to="/"
             class="black--text text-decoration-none align-self-center"
+            active-class="active"
           >
             <div class="text-capitalize active">WORLD</div>
           </router-link>
           <router-link
             to="/vn/redeem"
             class="black--text text-decoration-none align-self-center"
+            active-class="active"
           >
             <div class="text-capitalize active">REDEEM</div>
           </router-link>
-          <router-link
-            to="/vn/login"
-            class="black--text text-decoration-none align-self-center"
-          >
-            <div class="text-capitalize active">LOGIN</div>
-          </router-link>
         </v-menu>
       </div>
-    </div>
+    </div> -->
 
     <!-- <v-menu
       v-else
@@ -172,6 +171,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+a{
+  color: black !important;
+}
+.active{
+  color: var(--v-primary-base) !important;
+}
 .nav-bar {
   position: fixed;
   left: 0;
@@ -182,6 +187,7 @@ export default {
   font-size: 16px;
   font-weight: bold;
   z-index: 100;
+  box-shadow: 0px 1px 3px 0px #1219261a;
 }
 .nav-logo {
   height: 38px;

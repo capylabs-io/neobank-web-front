@@ -60,4 +60,14 @@ nav {
     }
   }
 }
+
+.full-width{
+  width: 100% !important;
+}
+.full-height{
+  height: 100% !important;
+}
+.cursor-pointer{
+  cursor: pointer !important;;
+}
 </style>

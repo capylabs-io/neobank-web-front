@@ -1,5 +1,5 @@
 <template>
-  <v-card height="290px" width="250px" elevation="2" rounded="8" class="pa-2">
+  <v-card elevation="2" rounded="8" class="pa-3">
     <v-skeleton-loader
       v-if="!cards.attributes.imageUrl"
       color="lighten-4"
@@ -12,8 +12,8 @@
     <div v-else class="card-image d-flex flex-column">
       <div class="full-width">
         <v-img
-            class="card-image"
-            height="140px"
+          class="card-image"
+          height="140px"
           :src="cards.attributes.imageUrl"
         ></v-img>
       </div>
@@ -62,14 +62,13 @@
     </div>
 
     <v-hover v-slot="{ hover }">
-      <div class="d-flex mt-6 font-weight-bold align-center justify-center">
+      <div
+        class="d-flex mt-3 font-weight-bold align-center justify-center column-gap-10"
+      >
         <div>
           <v-img class="card-icon" :src="cards.attributes.iconUrl" />
         </div>
-        <div
-          class="d-inline-block text-truncate voucher-title"
-          style="height: 50px ,  max-width:60%"
-        >
+        <div class="d-inline-block text-truncate voucher-title">
           {{ cards.attributes.title }}
         </div>
         <tooltip v-if="hover" class="tooltip" :cards="cards" />
@@ -78,7 +77,7 @@
 
     <v-btn
       v-if="cards.attributes.status == 'Expired'"
-      class="d-flex column-gap-10 mx-auto mt-3 mt-5 expired"
+      class="d-flex column-gap-10 mx-auto mt-3 expired"
       elevation="2"
       rounded
       text
@@ -102,7 +101,7 @@
     </v-btn>
     <v-btn
       v-else-if="purchased"
-      class="d-flex column-gap-10 mx-auto mt-3 mt-5 purchased"
+      class="d-flex column-gap-10 mx-auto mt-3 purchased"
       elevation="2"
       rounded
       text
@@ -114,7 +113,7 @@
     </v-btn>
     <v-btn
       v-else
-      class="d-flex column-gap-10 mx-auto mt-3 mt-5 unpurchased"
+      class="d-flex column-gap-10 mx-auto mt-3 unpurchased"
       elevation="2"
       rounded
       text

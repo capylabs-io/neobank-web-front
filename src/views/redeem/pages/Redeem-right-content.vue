@@ -1,10 +1,26 @@
 <template>
-  <div class="right d-flex flex-column">
-    <div class="right-container">
+  <div class="d-flex flex-column">
+    <div class="right-container mx-auto pa-6 full-height">
       <div class="d-flex justify-space-between button-filter">
         <div class="d-flex column-gap-10">
-          <v-btn elevation="3" rounded text @click="index = 1"> Clothes </v-btn>
-          <v-btn elevation="3" rounded text @click="index = 2"> Voucher </v-btn>
+          <v-btn
+            class="clothes active"
+            elevation="3"
+            rounded
+            text
+            @click="clothesTab()"
+          >
+            Clothes
+          </v-btn>
+          <v-btn
+            class="voucher"
+            elevation="3"
+            rounded
+            text
+            @click="voucherTab()"
+          >
+            Voucher
+          </v-btn>
         </div>
         <div class="d-flex column-gap-10">
           <v-btn elevation="3" rounded text> A-Z </v-btn>
@@ -17,29 +33,54 @@
           </v-btn>
         </div>
       </div>
-      <div v-if="index == 2" class="d-flex flex-wrap gap-45 card-container">
-        <voucherCard
+      <div v-if="index == 2" class="full-width mt-6 card-container">
+        <!-- <voucherCard
           v-for="card in voucher"
           :key="card.id"
           :id="card.id"
           :cards="card"
-        />
+        /> -->
+        <!-- TODO: use vue-responsive-components to make right container responsive better -->
+        <v-row>
+          <v-col
+            cols="12"
+            xl="2"
+            md="3"
+            sm="6"
+            xs="12"
+            v-for="card in voucher"
+            :key="card.id"
+          >
+            <voucherCard :id="card.id" :cards="card" />
+          </v-col>
+        </v-row>
       </div>
 
-      <div v-else class="d-flex flex-wrap gap-45 card-container">
-        <clothesCard
-          v-for="card in clothesCards"
-          :key="card.id"
-          :status="card"
-        />
+      <div v-else class="mt-6 full-width">
+        <v-row>
+          <!-- TODO: use vue-responsive-components to make right container responsive better -->
+          <v-col
+            cols="12"
+            xl="2"
+            md="3"
+            sm="6"
+            xs="12"
+            v-for="card in clothesCards"
+            :key="card.id"
+          >
+            <clothesCard :status="card" />
+          </v-col>
+        </v-row>
       </div>
-      <div class="pagination" v-if="index == 2">
-        <v-pagination
-          v-model="userStore.voucherPage"
-          :length="userStore.totalVoucherPage"
-          light
-        />
-      </div>
+    </div>
+    <div class="pagination">
+      <v-pagination
+        v-model="userStore.voucherPage"
+        :length="userStore.totalVoucherPage"
+        light
+        circle
+        color="#5752e3"
+      />
     </div>
   </div>
 </template>
@@ -50,6 +91,7 @@ import clothesCard from "@/views/redeem/components/clothes-card.vue";
 import { userStore } from "@/stores/userStore";
 import { mapStores } from "pinia";
 export default {
+  props: ["voucher", "userVoucher"],
   components: {
     voucherCard: voucherCard,
     clothesCard: clothesCard,
@@ -57,7 +99,9 @@ export default {
   computed: {
     ...mapStores(userStore),
   },
-  props: ["voucher", "userVoucher"],
+  mounted() {
+    console.log("voucher", this.voucher);
+  },
   data() {
     return {
       clothesCards: [
@@ -71,111 +115,29 @@ export default {
         { index: 1 },
         { index: 2 },
       ],
-      // voucherCards: [
-      //   {
-      //     image: require(`@/assets/redeem/card/cgv-card.webp`),
-      //     icon: require(`@/assets/redeem/card/cgv-icon.webp`),
-      //     price: "50",
-      //     status: "Hot",
-      //     title: "50.000đ voucher film ticket CGV",
-      //     detailheader:
-      //       "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
-      //     firstDetail:
-      //       "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
-      //     secondDetail:
-      //       " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
-      //   },
-      //   {
-      //     image: require(`@/assets/redeem/card/viettel-card.webp`),
-      //     icon: require(`@/assets/redeem/card/viettel-icon.webp`),
-      //     price: "50",
-      //     title: "50.000đ mobile top up Viettel",
-      //     status: "New",
-      //     detailheader:
-      //       "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
-      //     firstDetail:
-      //       "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
-      //     secondDetail:
-      //       " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
-      //   },
-      //   {
-      //     image: require(`@/assets/redeem/card/baemin-card.webp`),
-      //     icon: require(`@/assets/redeem/card/baemin-icon.webp`),
-      //     price: "100",
-      //     title: "100.000đ voucher Baemin",
-      //     status: "Expired",
-      //     detailheader:
-      //       "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
-      //     firstDetail:
-      //       "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
-      //     secondDetail:
-      //       " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
-      //   },
-      //   {
-      //     image: require(`@/assets/redeem/card/viettel-card.webp`),
-      //     icon: require(`@/assets/redeem/card/viettel-icon.webp`),
-      //     price: "50",
-      //     title: "10% off max 10k voucher ETC ",
-      //     status: "Hot",
-      //     detailheader:
-      //       "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
-      //     firstDetail:
-      //       "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
-      //     secondDetail:
-      //       " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
-      //   },
-      //   {
-      //     image: require(`@/assets/redeem/card/viettel-card.webp`),
-      //     icon: require(`@/assets/redeem/card/viettel-icon.webp`),
-      //     price: "50",
-      //     title: "50.000đ mobile top up Viettel",
-      //     status: "New",
-      //     detailheader:
-      //       "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
-      //     firstDetail:
-      //       "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
-      //     secondDetail:
-      //       " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
-      //   },
-      //   {
-      //     image: require(`@/assets/redeem/card/viettel-card.webp`),
-      //     icon: require(`@/assets/redeem/card/viettel-icon.webp`),
-      //     price: "50",
-      //     title: "50.000đ mobile top up Viettel",
-      //     status: "Hot",
-      //     detailheader:
-      //       "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
-      //     firstDetail:
-      //       "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
-      //     secondDetail:
-      //       " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
-      //   },
-      //   {
-      //     image: require(`@/assets/redeem/card/viettel-card.webp`),
-      //     icon: require(`@/assets/redeem/card/viettel-icon.webp`),
-      //     price: "50",
-      //     title: "50.000đ mobile top up Viettel",
-      //     status: "Expired",
-      //     detailheader:
-      //       "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
-      //     firstDetail:
-      //       "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
-      //     secondDetail:
-      //       " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
-      //   },
-      // ],
+
       index: 1,
     };
+  },
+  methods: {
+    clothesTab() {
+      this.index = 1;
+      const clothes = document.querySelector(".clothes");
+      const voucher = document.querySelector(".voucher");
+      clothes.classList.add("active");
+      voucher.classList.remove("active");
+    },
+    voucherTab() {
+      this.index = 2;
+      const clothes = document.querySelector(".clothes");
+      const voucher = document.querySelector(".voucher");
+      clothes.classList.remove("active");
+      voucher.classList.add("active");
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
-.right {
-  width: 85%;
-  background: #f5f5f5;
-  padding: 30px 100px;
-  overflow-y: auto;
-}
 .column-gap-10 {
   column-gap: 10px;
 }
@@ -208,17 +170,19 @@ export default {
   }
 }
 .right-container {
+  max-width: 1500px;
 }
 .card-container {
-  margin-top: 45px;
-  margin-bottom: 45px;
-  height: 400px;
+  height: 600px;
 }
 .button-filter {
 }
+
+.active {
+  background: #5752e3;
+  color: white;
+}
 .pagination {
-  position: absolute;
-  margin-top: 200px;
-  z-index: 99;
+  z-index: 97;
 }
 </style>

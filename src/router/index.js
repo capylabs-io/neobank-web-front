@@ -1,11 +1,11 @@
 import Vue from "vue";
-import VueRouter from 'vue-router'
+import VueRouter from "vue-router";
 import Home from "../views/home/pages/Home.vue";
 import i18n from "@/i18n";
 Vue.use(VueRouter);
 const routes = [
   {
-    path: "/",
+    path: "",
     redirect: `/${i18n.locale}`,
   },
   {

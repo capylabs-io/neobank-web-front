@@ -14,10 +14,7 @@
     > -->
     <div class="card-image d-flex flex-column">
       <div class="full-width">
-        <v-img
-          class="card-image"
-            :src="cards.attributes.imageUrl"
-        ></v-img>
+        <v-img class="card-image" :src="cards.attributes.imageUrl"></v-img>
       </div>
       <div
         v-if="cards.attributes.status == 'New'"
@@ -66,20 +63,12 @@
       class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
     >
       <div>
-        <v-img
-          class="card-icon"
-          :src="cards.attributes.iconUrl"
-        />
+        <v-img class="card-icon" :src="cards.attributes.iconUrl" />
       </div>
-      <span class="mt-3"> {{ cards.attributes.title }} </span>
       <span class="mt-3"> {{ cards.attributes.shortDescription }} </span>
     </div>
-    <div class="mt-3 text-left">
-      HSD: 31 Oct 2022
-    </div>
-    <div class="mt-3 text-left">
-      Notice: lorem ipsum
-    </div>
+    <div class="mt-3 text-left">HSD: 31 Oct 2022</div>
+    <div class="mt-3 text-left">Notice: lorem ipsum</div>
   </v-card>
 </template>
 
@@ -95,6 +84,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.v-card {
+  z-index: 98;
+}
 .card-image {
   border-radius: 8px;
   height: 200px;

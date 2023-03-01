@@ -1,17 +1,23 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="redeem d-flex DMSans">
+  <div class="redeem DMSans">
     <confirmDialog></confirmDialog>
     <inventoryDrawer />
     <detail />
-    <left-content />
-    <right-content
-      v-if="userStore.index == 1"
-      :voucher="userStore.slicedVoucherStore"
-      :userVoucher="userStore.userVoucherList"
-    />
-    <inventory-content v-else-if="userStore.index == 2" />
-    <accountSetting v-else />
+    <div class="redeem-content d-flex">
+      <div class="left">
+        <left-content />
+      </div>
+      <div class="right">
+        <right-content
+          v-if="userStore.index == 1"
+          :voucher="userStore.slicedVoucherStore"
+          :userVoucher="userStore.userVoucherList"
+        />
+        <inventory-content v-else-if="userStore.index == 2" />
+        <accountSetting v-else />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -71,29 +77,17 @@ export default {
   overflow-y: hidden;
   overflow-x: hidden;
 }
+.redeem-content{
+  margin-top: 80px;
+  height: calc(100vh - 80px); 
+}
 .left {
   width: 15%;
-  background: #f5f5f5;
-  height: 100vh;
-  padding-top: 85px;
-}
-.left-first {
-  height: 26%;
-  background: white;
-}
-.left-second {
-  height: 9%;
-  background: white;
-}
-.left-third {
-  height: 65%;
   background: white;
 }
 .right {
   width: 85%;
-  background: #f5f5f5;
-  padding: 30px 100px;
-  padding-top: 100px;
+  background: var(--v-secondary-base);
 }
 .column-gap-10 {
   column-gap: 10px;

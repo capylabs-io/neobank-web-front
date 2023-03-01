@@ -11,18 +11,21 @@
       <router-link
         to="/"
         class="white--text text-decoration-none align-self-center"
+        active-class="active"
       >
         <div class="text-none text-uppercase nav-link">HOME</div>
       </router-link>
       <router-link
-        to="/"
+        to="/vn/home"
         class="white--text text-decoration-none align-self-center"
+        active-class="active"
       >
         <div class="text-none text-uppercase nav-link">WORLD</div>
       </router-link>
       <router-link
         to="/vn/redeem"
         class="white--text text-decoration-none align-self-center"
+        active-class="active"
       >
         <div class="text-none text-uppercase nav-link">REDEEM</div>
       </router-link>
@@ -30,6 +33,7 @@
         v-if="!userStore.jwt"
         to="/vn/login"
         class="white--text text-decoration-none align-self-center"
+        active-class="active"
       >
         <div class="text-none text-uppercase nav-link">LOGIN</div>
       </router-link>
@@ -46,18 +50,21 @@
       <router-link
         to="/"
         class="black--text text-decoration-none align-self-center"
+        active-class="active"
       >
         <div class="text-none text-uppercase nav-link">HOME</div>
       </router-link>
       <router-link
-        to="/"
+        to="/vn/home"
         class="black--text text-decoration-none align-self-center"
+        active-class="active"
       >
         <div class="text-none text-uppercase nav-link">WORLD</div>
       </router-link>
       <router-link
         to="/vn/redeem"
         class="black--text text-decoration-none align-self-center"
+        active-class="active"
       >
         <div class="text-none text-uppercase nav-link">REDEEM</div>
       </router-link>
@@ -65,6 +72,7 @@
         v-if="!userStore.jwt"
         to="/vn/login"
         class="black--text text-decoration-none align-self-center"
+        active-class="active"
       >
         <div class="text-none text-uppercase nav-link">LOGIN</div>
       </router-link>
@@ -86,6 +94,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.active {
+  color: var(--v-primary-base) !important;
+}
 .nav-bar {
   width: 100%;
   position: fixed;
