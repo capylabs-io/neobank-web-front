@@ -11,7 +11,6 @@ export const userStore = defineStore(
     const snackbar = snackBarController(); //store
     const drawer = ref(false);
     const drawerDetail = ref(false);
-    const navChange = ref(false);
     const pageIndex = ref(1);
     const index = ref(1);
     const cfDialog = ref(false);
@@ -154,37 +153,37 @@ export const userStore = defineStore(
       userData.value = "";
     }
     const isConnected = computed(() => jwt);
-    // const slicedVoucherStore = computed(() => {
-    //   if (!this.voucherData) return [];
-    //   return this.voucherData.slice(
-    //     (this.voucherPage - 1) * this.vouchersPerPage,
-    //     this.voucherPage * this.vouchersPerPage
-    //   );
-    // });
 
-    // const totalVoucherPage = computed(() => {
-    //   if (!this.voucherData || this.voucherData.length == 0) return 1;
-    //   if (this.voucherData.length % this.vouchersPerPage == 0)
-    //     return this.voucherData.length / this.vouchersPerPage;
-    //   else
-    //     return Math.floor(this.voucherData.length / this.vouchersPerPage) + 1;
-    // });
+    const slicedVoucherStore = computed(() => {
+      if (!voucherData.value) return [];
+      return voucherData.value.slice(
+        (voucherPage.value - 1) * vouchersPerPage.value,
+        voucherPage.value * vouchersPerPage.value
+      );
+    });
 
-    // const filterVoucherStore = computed(() =>
-    //   this.voucherData.filter((a, b) => b.status - a.status)
-    // );
+    const totalVoucherPage = computed(() => {
+      if (!voucherData.value || voucherData.value.length == 0) return 1;
+      if (voucherData.value.length % vouchersPerPage.value == 0)
+        return voucherData.value.length / vouchersPerPage.value;
+      else
+        return Math.floor(voucherData.value.length / vouchersPerPage.value) + 1;
+    });
+
+    const filterVoucherStore = computed(() =>
+      voucherData.value.filter((a, b) => b.price - a.price)
+    );
 
     return {
       //computed
       isConnected,
-      // slicedVoucherStore,
-      // filterVoucherStore,
-      // totalVoucherPage,
+      slicedVoucherStore,
+      filterVoucherStore,
+      totalVoucherPage,
       //states
       drawer,
       cardData,
       index,
-      navChange,
       drawerDetail,
       detailCard,
       signInData,

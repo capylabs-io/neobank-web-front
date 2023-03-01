@@ -13,7 +13,6 @@
       <router-link
         to="/"
         class="black--text text-decoration-none align-self-center"
-        @click="userStore.navChange = false"
       >
         <div class="text-capitalize active">HOME</div>
       </router-link>
@@ -26,7 +25,6 @@
       <router-link
         to="/vn/redeem"
         class="black--text text-decoration-none align-self-center"
-        @click="userStore.navChange = true"
       >
         <div class="text-capitalize active">REDEEM</div>
       </router-link>
@@ -86,13 +84,6 @@
       </div>
     </div>
 
-    <div v-if="!userStore.jwt" class="align-self-center DMSans">
-      <v-btn class="pa-5 mr-5" color="introbtn">
-        <router-link to="/vn/login" class="text-decoration-none white--text">
-          <div class="text-capitalize">LOGIN</div>
-        </router-link>
-      </v-btn>
-    </div>
     <!-- <v-menu
       v-else
       offset-y

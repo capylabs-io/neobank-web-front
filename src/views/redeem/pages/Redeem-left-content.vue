@@ -1,7 +1,7 @@
 <template>
   <div class="left d-flex flex-column row-gap-3">
     <div
-      v-if="!userStore.isConnected"
+      v-if="!userStore.jwt"
       class="d-flex flex-column align-center justify-center left-first pa-8"
     >
       <div>

@@ -7,7 +7,7 @@
     <left-content />
     <right-content
       v-if="userStore.index == 1"
-      :voucher="userStore.voucherData"
+      :voucher="userStore.slicedVoucherStore"
       :userVoucher="userStore.userVoucherList"
     />
     <inventory-content v-else-if="userStore.index == 2" />
@@ -41,11 +41,15 @@ export default {
     ...mapStores(userStore),
   },
   mounted() {
+    if (!this.userStore.jwt) {
+      this.$router.push("/vn/login");
+    }
     this.change();
     this.userStore.fetchUserVoucher();
     this.userStore.fetchVoucher();
     setTimeout(() => {
       this.userStore.checkIncludes();
+      console.log("dataFilter:", this.userStore.filterVoucherStore);
     }, 1500);
   },
   data() {

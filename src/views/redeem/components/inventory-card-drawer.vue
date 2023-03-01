@@ -10,12 +10,13 @@
     class="drawer d-flex flex-column"
   >
     <v-card class="drawer-card" flat>
-      <div
-        class="drawer-image d-flex flex-column"
-        :style="{
-          backgroundImage: 'url(' + userStore.cardData.imageUrl + ')',
-        }"
-      >
+      <div class="drawer-image d-flex flex-column">
+        <div class="full-width">
+          <v-img
+            class="drawer-image"
+            :src="userStore.cardData.imageUrl"
+          ></v-img>
+        </div>
         <div
           v-if="userStore.cardData.status == 'Expired'"
           class="mt-3 pa-1 px-3"

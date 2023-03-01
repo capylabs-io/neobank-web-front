@@ -33,12 +33,12 @@
           :status="card"
         />
       </div>
-      <div class="mt-3">
-        <!-- <v-pagination
+      <div class="pagination" v-if="index == 2">
+        <v-pagination
           v-model="userStore.voucherPage"
           :length="userStore.totalVoucherPage"
           light
-        /> -->
+        />
       </div>
     </div>
   </div>
@@ -208,12 +208,17 @@ export default {
   }
 }
 .right-container {
-  width: fit-content;
 }
 .card-container {
   margin-top: 45px;
   margin-bottom: 45px;
+  height: 400px;
 }
 .button-filter {
+}
+.pagination {
+  position: absolute;
+  margin-top: 200px;
+  z-index: 99;
 }
 </style>

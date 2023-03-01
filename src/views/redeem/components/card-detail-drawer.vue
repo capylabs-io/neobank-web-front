@@ -10,13 +10,20 @@
     class="drawer d-flex flex-column"
   >
     <v-card class="drawer-card" flat>
-      <div
+      <div class="drawer-image d-flex flex-column">
+        <div class="full-width">
+          <v-img
+            class="drawer-image"
+            :src="userStore.detailCard.attributes.imageUrl"
+          ></v-img>
+        </div>
+        <!-- <div
         class="drawer-image d-flex flex-column"
         :style="{
           backgroundImage:
             'url(' + userStore.detailCard.attributes.imageUrl + ')',
         }"
-      >
+      > -->
         <div
           v-if="userStore.detailCard.attributes.status == 'Expired'"
           class="mt-3 pa-1 px-3"
@@ -76,7 +83,7 @@
         {{ userStore.detailCard.attributes.fullDescription }}
       </div>
     </v-card>
-    <div class="d-flex col-gap-10 align-center amount-container">
+    <!-- <div class="d-flex col-gap-10 align-center amount-container">
       <v-btn v-if="userStore.detailCard.attributes.quantity == 0" icon disabled>
         <v-icon>mdi-minus</v-icon>
       </v-btn>
@@ -99,7 +106,7 @@
       <v-btn v-else icon @click="increase">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
-    </div>
+    </div> -->
     <div>id: {{ userStore.voucherId }}</div>
     <v-btn
       class="d-flex mx-auto unpurchased drawer-btn"

@@ -6,13 +6,17 @@
       class="pa-3 card-image mx-auto"
       type="image"
     />
-    <div
-      v-else
-      class="card-image d-flex flex-column"
-      :style="{
-        backgroundImage: 'url(' + cards.attributes.imageUrl + ')',
-      }"
-    >
+    <!-- :style="{
+      backgroundImage: 'url(' + cards.attributes.imageUrl + ')',
+    }" -->
+    <div v-else class="card-image d-flex flex-column">
+      <div class="full-width">
+        <v-img
+            class="card-image"
+            height="140px"
+          :src="cards.attributes.imageUrl"
+        ></v-img>
+      </div>
       <div
         v-if="cards.attributes.status == 'New'"
         class="mt-3 pa-1 px-3"
@@ -58,7 +62,7 @@
     </div>
 
     <v-hover v-slot="{ hover }">
-      <div class="d-flex mt-3 font-weight-bold align-center justify-center">
+      <div class="d-flex mt-6 font-weight-bold align-center justify-center">
         <div>
           <v-img class="card-icon" :src="cards.attributes.iconUrl" />
         </div>
@@ -74,7 +78,7 @@
 
     <v-btn
       v-if="cards.attributes.status == 'Expired'"
-      class="d-flex column-gap-10 mx-auto mt-3 mt-8 expired"
+      class="d-flex column-gap-10 mx-auto mt-3 mt-5 expired"
       elevation="2"
       rounded
       text
@@ -98,7 +102,7 @@
     </v-btn>
     <v-btn
       v-else-if="purchased"
-      class="d-flex column-gap-10 mx-auto mt-3 mt-8 purchased"
+      class="d-flex column-gap-10 mx-auto mt-3 mt-5 purchased"
       elevation="2"
       rounded
       text
@@ -110,7 +114,7 @@
     </v-btn>
     <v-btn
       v-else
-      class="d-flex column-gap-10 mx-auto mt-3 mt-8 unpurchased"
+      class="d-flex column-gap-10 mx-auto mt-3 mt-5 unpurchased"
       elevation="2"
       rounded
       text
@@ -158,9 +162,11 @@ export default {
   },
   methods: {
     Click() {
-      this.userStore.drawerDetail = !this.userStore.drawerDetail;
-      this.userStore.detailCard = this.cards;
-      this.userStore.voucherId = this.id;
+      if (this.userStore.userData.token > this.cards.attributes.price) {
+        this.userStore.drawerDetail = !this.userStore.drawerDetail;
+        this.userStore.detailCard = this.cards;
+        this.userStore.voucherId = this.id;
+      }
     },
   },
 };

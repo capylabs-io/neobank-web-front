@@ -6,12 +6,19 @@
     rounded="8"
     class="pa-4"
   >
-    <div
+    <!-- <div
       class="card-image d-flex flex-column"
       :style="{
         backgroundImage: 'url(' + cards.attributes.imageUrl + ')',
       }"
-    >
+    > -->
+    <div class="card-image d-flex flex-column">
+      <div class="full-width">
+        <v-img
+          class="card-image"
+            :src="cards.attributes.imageUrl"
+        ></v-img>
+      </div>
       <div
         v-if="cards.attributes.status == 'New'"
         class="mt-3 pa-1"
@@ -61,7 +68,7 @@
       <div>
         <v-img
           class="card-icon"
-          :src="cards.attributes.icon"
+          :src="cards.attributes.iconUrl"
         />
       </div>
       <span class="mt-3"> {{ cards.attributes.title }} </span>

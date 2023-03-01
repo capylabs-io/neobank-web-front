@@ -13,12 +13,7 @@
             to="/"
             class="black--text text-decoration-none align-self-center"
           >
-            <v-icon
-              small
-              color="black"
-            >
-              mdi-chevron-left
-            </v-icon>
+            <v-icon small color="black"> mdi-chevron-left </v-icon>
             <span class="text-capitalize">Back</span>
           </router-link>
         </div>
@@ -34,53 +29,34 @@
           type="text"
           background-color="cream"
           class="mt-2"
-          solo  
+          solo
           dense
         />
-        <div class="text-xl text-left">
-          Password
-        </div>
+        <div class="text-xl text-left">Password</div>
         <v-text-field
           v-model="userStore.password"
           :append-icon="userStore.isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
           :type="userStore.isShowPass ? 'text' : 'password'"
           :rules="rules.password"
+          @click:append="userStore.isShowPass = !userStore.isShowPass"
           solo
           dense
           background-color="cream"
           class="mt-2"
         />
         <v-row class="mt-sm-2">
-          <v-col
-            cols="4"
-            class="pa-1"
-          >
-            <v-btn
-              color="#2B69EA"
-              class="full-width py-0 py-sm-5 px-10"
-            >
+          <v-col cols="4" class="pa-1">
+            <v-btn color="#2B69EA" class="full-width py-0 py-sm-5 px-10">
               <FacebookIcon />
             </v-btn>
           </v-col>
-          <v-col
-            cols="4"
-            class="pa-1"
-          >
-            <v-btn
-              color="white"
-              class="full-width py-0 py-sm-5 px-10"
-            >
+          <v-col cols="4" class="pa-1">
+            <v-btn color="white" class="full-width py-0 py-sm-5 px-10">
               <GoogleIcon />
             </v-btn>
           </v-col>
-          <v-col
-            cols="4"
-            class="pa-1"
-          >
-            <v-btn
-              color="black"
-              class="full-width py-0 py-sm-5 px-10"
-            >
+          <v-col cols="4" class="pa-1">
+            <v-btn color="black" class="full-width py-0 py-sm-5 px-10">
               <AppleIcon />
             </v-btn>
           </v-col>
@@ -101,16 +77,10 @@
           </v-btn>
         </div>
         <div class="text-center">
-          <div
-            x-small
-            class="text-capitalize text-md cursor-pointer mt-2"
-          />
+          <div x-small class="text-capitalize text-md cursor-pointer mt-2" />
         </div>
         <div class="text-center">
-          <div
-            x-small
-            class="text-capitalize text-md cursor-pointer"
-          />
+          <div x-small class="text-capitalize text-md cursor-pointer" />
         </div>
       </v-form>
       <!-- </div> -->
@@ -152,7 +122,6 @@ export default {
     },
     change() {
       this.userStore.pageIndex = 3;
-      this.userStore.navChange = true;
     },
     submitForm() {
       if (this.$refs.form.validate()) {

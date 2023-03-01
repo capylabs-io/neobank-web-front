@@ -6,12 +6,17 @@
     rounded="8"
     class="pa-2 inventory-card"
   >
-    <div
-      class="card-image d-flex flex-column"
-      :style="{
-        backgroundImage: 'url(' + cards.imageUrl + ')',
-      }"
-    >
+     <!-- :style="{
+      backgroundImage: 'url(' + cards.attributes.imageUrl + ')',
+    }" -->
+    <div class="card-image d-flex flex-column">
+      <div class="full-width">
+        <v-img
+          class="card-image"
+          height="140px"
+          :src="cards.imageUrl"
+        ></v-img>
+      </div>
       <div
         v-if="cards.status == 'Expired'"
         class="mt-3 pa-1 px-3"
