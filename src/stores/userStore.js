@@ -25,8 +25,9 @@ export const userStore = defineStore(
     const bearerToken = ref(
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3MDUwOTA1LCJleHAiOjE2Nzk2NDI5MDV9.gCEGMkbCLUiaymG7PPoGsS5OstagMUR6GRFvmrP8VC8"
     );
-    const pagination = ref({ page: 0, pageCount: 0, pageSize: 0, total: 0 });
-
+    const pagination = ref({ page: 1, pageCount: 1, pageSize: 1, total: 1 });
+    const vouchersPerPage = ref(10);
+    const voucherPage = ref(1);
     const signInData = ref({
       identifier: "",
       password: "",
@@ -47,21 +48,8 @@ export const userStore = defineStore(
     const userVoucher = ref([]);
     const userVoucherId = ref([]);
     const voucherPurchased = ref([]);
-    const detailCard = ref({
-      price: "",
-      imageUrl: "",
-      iconUrl: "",
-      title: "",
-      status: "",
-      shortDescription: "",
-      fullDescription: "",
-      quantity: "",
-    });
-    const userData = ref({
-      id: 1,
-      username: "",
-      email: "",
-    });
+    const detailCard = ref({});
+    const userData = ref({});
 
     async function signIn() {
       try {
@@ -99,19 +87,14 @@ export const userStore = defineStore(
           return;
         }
         snackbar.success("Fetch successfully!");
-        // this.voucherData = res.data.data.map((voucher) => voucher.attributes);
         this.voucherData = res.data.data;
-        this.voucherDataList = this.voucherData.map((index) => index.id);
+        this.pagination = res.data.meta.pagination;
+        this.voucherDataId = this.voucherData.map((index) => index.id);
         // .sort((a, b) => b.id - a.id);
         // console.log("sort",voucherData);
-        this.pagination = res.data.meta;
         console.log("pagination", pagination);
         console.log("storeVoucher", voucherData);
         console.log("storeVoucherid", voucherDataId);
-        // this.router.push({
-        //   params: "vn",
-        //   name: "Redeem",
-        // });
       } catch (error) {
         console.error(`Error: ${error}`);
         snackbar.commonError(error);
@@ -130,10 +113,10 @@ export const userStore = defineStore(
         }
         snackbar.success("Voucher Purchased successfully!");
         console.log("purchase", res.data);
-        // this.router.push({
-        //   params: "vn",
-        //   name: "Redeem",
-        // });
+        this.$router.push({
+          params: "vn",
+          name: "Redeem",
+        });
       } catch (error) {
         console.error(`Error: ${error}`);
         snackbar.commonError(error);
@@ -149,14 +132,9 @@ export const userStore = defineStore(
         }
         snackbar.success("Voucher Purchased successfully!");
         this.userVoucher = res.data.map((index) => index.voucher);
-        this.userVoucherList = res.data.map((index) => index.voucher.id);
+        this.userVoucherId = res.data.map((index) => index.voucher.id);
         console.log("userVoucher", userVoucher);
         console.log("userVoucherId", userVoucherId);
-
-        // this.router.push({
-        //   params: "vn",
-        //   name: "Redeem",
-        // });
       } catch (error) {
         console.error(`Error: ${error}`);
         snackbar.commonError(error);
@@ -164,24 +142,44 @@ export const userStore = defineStore(
     }
 
     function checkIncludes() {
-      this.voucherPurchased = this.voucherDataId.filter((data) => {
-        return this.userVoucherId.includes(data);
-      });
-      // const checkInclude = this.voucherData.filter((data) => {
-      //   return this.userVoucherList.includes(data);
-      // });
+      if (this.voucherDataId && this.userVoucherId) {
+        this.voucherPurchased = this.voucherDataId.filter((data) =>
+          this.userVoucherId.includes(data)
+        );
+      }
       console.log("Purchased voucher", voucherPurchased);
     }
     function logout() {
-      this.jwt = "";
-      this.signInData = "";
-      this.userData = null;
+      jwt.value = "";
+      userData.value = "";
     }
-    const isConnected = computed(() => this.jwt);
+    const isConnected = computed(() => jwt);
+    // const slicedVoucherStore = computed(() => {
+    //   if (!this.voucherData) return [];
+    //   return this.voucherData.slice(
+    //     (this.voucherPage - 1) * this.vouchersPerPage,
+    //     this.voucherPage * this.vouchersPerPage
+    //   );
+    // });
+
+    // const totalVoucherPage = computed(() => {
+    //   if (!this.voucherData || this.voucherData.length == 0) return 1;
+    //   if (this.voucherData.length % this.vouchersPerPage == 0)
+    //     return this.voucherData.length / this.vouchersPerPage;
+    //   else
+    //     return Math.floor(this.voucherData.length / this.vouchersPerPage) + 1;
+    // });
+
+    // const filterVoucherStore = computed(() =>
+    //   this.voucherData.filter((a, b) => b.status - a.status)
+    // );
 
     return {
-      //
+      //computed
       isConnected,
+      // slicedVoucherStore,
+      // filterVoucherStore,
+      // totalVoucherPage,
       //states
       drawer,
       cardData,
@@ -207,6 +205,8 @@ export const userStore = defineStore(
       userVoucherId,
       voucherDataId,
       voucherPurchased,
+      voucherPage,
+      vouchersPerPage,
       //action
       signIn,
       logout,

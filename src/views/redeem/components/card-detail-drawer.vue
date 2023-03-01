@@ -7,18 +7,19 @@
     hide-overlay
     width="480px"
     color="white"
-    class="pa-5 drawer d-flex flex-column"
+    class="drawer d-flex flex-column"
   >
     <v-card class="drawer-card" flat>
       <div
         class="drawer-image d-flex flex-column"
         :style="{
-          backgroundImage: 'url(' + userStore.detailCard.imageUrl + ')',
+          backgroundImage:
+            'url(' + userStore.detailCard.attributes.imageUrl + ')',
         }"
       >
         <div
-          v-if="userStore.detailCard.status == 'Expired'"
-          class="mt-3 pa-1"
+          v-if="userStore.detailCard.attributes.status == 'Expired'"
+          class="mt-3 pa-1 px-3"
           :style="{
             background: '#FDDF59',
             width: 'max-content',
@@ -28,11 +29,11 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.detailCard.status }}
+          {{ userStore.detailCard.attributes.status }}
         </div>
         <div
-          v-else-if="userStore.detailCard.status == 'Hot'"
-          class="mt-3 pa-1"
+          v-else-if="userStore.detailCard.attributes.status == 'Hot'"
+          class="mt-3 pa-1 px-3"
           :style="{
             background: '#f65970',
             width: 'max-content',
@@ -42,13 +43,13 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.detailCard.status }}
+          {{ userStore.detailCard.attributes.status }}
         </div>
         <div
           v-else
-          class="mt-3 pa-1"
+          class="mt-3 pa-1 px-3"
           :style="{
-            background: '#4c99eb',
+            background: '#FDDF59',
             width: 'max-content',
             height: 'max-content',
             position: 'absolute',
@@ -56,24 +57,27 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.detailCard.status }}
+          {{ userStore.detailCard.attributes.status }}
         </div>
       </div>
       <div
         class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
       >
         <div>
-          <v-img class="drawer-icon" :src="userStore.detailCard.iconUrl" />
+          <v-img
+            class="drawer-icon"
+            :src="userStore.detailCard.attributes.iconUrl"
+          />
         </div>
-        <span class="mt-3"> {{ userStore.detailCard.title }} </span>
+        <span class="mt-3"> {{ userStore.detailCard.attributes.title }} </span>
       </div>
       <div class="mt-3 text-left draw-text">
-        {{ userStore.detailCard.shortDescription }}
-        {{ userStore.detailCard.fullDescription }}
+        {{ userStore.detailCard.attributes.shortDescription }}
+        {{ userStore.detailCard.attributes.fullDescription }}
       </div>
     </v-card>
     <div class="d-flex col-gap-10 align-center amount-container">
-      <v-btn v-if="userStore.detailCard.quantity == 0" icon disabled>
+      <v-btn v-if="userStore.detailCard.attributes.quantity == 0" icon disabled>
         <v-icon>mdi-minus</v-icon>
       </v-btn>
       <v-btn v-else icon @click="decrease">
@@ -81,11 +85,11 @@
       </v-btn>
       <div class="">
         <v-input class="number">
-          {{ userStore.detailCard.quantity }}
+          {{ userStore.detailCard.attributes.quantity }}
         </v-input>
       </div>
       <v-btn
-        v-if="userStore.detailCard.quantity == 10"
+        v-if="userStore.detailCard.attributes.quantity == 10"
         disabled
         icon
         @click="increase"
@@ -127,14 +131,14 @@ export default {
   },
   methods: {
     increase() {
-      var number = this.userStore.detailCard.quantity;
+      var number = this.userStore.detailCard.attributes.quantity;
       number++;
-      this.userStore.detailCard.quantity = number + "";
+      this.userStore.detailCard.attributes.quantity = number + "";
     },
     decrease() {
-      var number = this.userStore.detailCard.quantity;
+      var number = this.userStore.detailCard.attributes.quantity;
       number--;
-      this.userStore.detailCard.quantity = number + "";
+      this.userStore.detailCard.attributes.quantity = number + "";
     },
     buy() {
       this.userStore.drawerDetail = !this.userStore.drawerDetail;
@@ -181,6 +185,8 @@ export default {
 .drawer {
   background: white !important;
   height: 100vh;
+  padding: 85px 20px;
+  z-index: 99;
 }
 .amount-container {
   position: sticky;

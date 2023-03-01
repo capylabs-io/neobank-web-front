@@ -14,7 +14,7 @@
     >
       <div
         v-if="cards.status == 'Expired'"
-        class="mt-3 pa-1"
+        class="mt-3 pa-1 px-3"
         :style="{
           background: '#FDDF59',
           width: 'max-content',
@@ -28,7 +28,7 @@
       </div>
       <div
         v-else-if="cards.status == 'Hot'"
-        class="mt-3 pa-1"
+        class="mt-3 pa-1 px-3"
         :style="{
           background: '#f65970',
           width: 'max-content',
@@ -42,7 +42,7 @@
       </div>
       <div
         v-else
-        class="mt-3 pa-1"
+        class="mt-3 pa-1 px-3"
         :style="{
           background: '#4c99eb',
           width: 'max-content',
@@ -61,13 +61,13 @@
       </div>
       <div
         class="d-inline-block text-truncate voucher-title"
-        style="max-width: 80%"
+        style="height: 50px ,  max-width:60%"
       >
         {{ cards.title }}
       </div>
     </div>
     <v-btn
-      class="d-flex column-gap-10 mx-auto mt-3 unpurchased"
+      class="d-flex column-gap-10 mx-auto mt-3 mt-8 unpurchased"
       elevation="2"
       rounded
       text
@@ -79,7 +79,7 @@
     </v-btn>
     <!-- <v-btn
       v-if="!cards.isRedeem"
-      class="d-flex column-gap-10 mx-auto mt-3 unpurchased"
+      class="d-flex column-gap-10 mx-auto mt-3 mt-8 unpurchased"
       elevation="2"
       rounded
       text
@@ -92,7 +92,7 @@
 
     <v-btn
       v-else
-      class="d-flex column-gap-10 mx-auto mt-3 purchased"
+      class="d-flex column-gap-10 mx-auto mt-3 mt-8 purchased"
       elevation="2"
       rounded
       text
@@ -147,6 +147,8 @@ export default {
 }
 .card-icon {
   border-radius: 100px;
+  width: 40px;
+  height: 40px;
 }
 .drawer-icon {
   border-radius: 100px;

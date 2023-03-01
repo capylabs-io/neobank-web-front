@@ -15,26 +15,20 @@
         class="black--text text-decoration-none align-self-center"
         @click="userStore.navChange = false"
       >
-        <div class="text-capitalize active">
-          HOME
-        </div>
+        <div class="text-capitalize active">HOME</div>
       </router-link>
       <router-link
         to="/"
         class="black--text text-decoration-none align-self-center"
       >
-        <div class="text-capitalize active">
-          WORLD
-        </div>
+        <div class="text-capitalize active">WORLD</div>
       </router-link>
       <router-link
         to="/vn/redeem"
         class="black--text text-decoration-none align-self-center"
         @click="userStore.navChange = true"
       >
-        <div class="text-capitalize active">
-          REDEEM
-        </div>
+        <div class="text-capitalize active">REDEEM</div>
       </router-link>
 
       <!-- <router-link
@@ -48,10 +42,7 @@
       </v-btn> -->
     </div>
 
-    <div
-      v-else
-      class="d-flex align-center justify-space-between"
-    >
+    <div v-else class="d-flex align-center justify-space-between">
       <div>
         <v-img
           class="nav-logo align-self-center"
@@ -59,10 +50,7 @@
         />
       </div>
       <div>
-        <v-menu
-          offset-y
-          class=""
-        >
+        <v-menu offset-y class="">
           <template #activator="{ on, attrs }">
             <v-app-bar-nav-icon
               v-bind="attrs"
@@ -74,57 +62,38 @@
             to="/"
             class="black--text text-decoration-none align-self-center"
           >
-            <div class="text-capitalize active">
-              HOME
-            </div>
+            <div class="text-capitalize active">HOME</div>
           </router-link>
           <router-link
             to="/"
             class="black--text text-decoration-none align-self-center"
           >
-            <div class="text-capitalize active">
-              WORLD
-            </div>
+            <div class="text-capitalize active">WORLD</div>
           </router-link>
           <router-link
             to="/vn/redeem"
             class="black--text text-decoration-none align-self-center"
           >
-            <div class="text-capitalize active">
-              REDEEM
-            </div>
+            <div class="text-capitalize active">REDEEM</div>
           </router-link>
           <router-link
             to="/vn/login"
             class="black--text text-decoration-none align-self-center"
           >
-            <div class="text-capitalize active">
-              LOGIN
-            </div>
+            <div class="text-capitalize active">LOGIN</div>
           </router-link>
         </v-menu>
       </div>
     </div>
 
-    <div
-      v-if="!userStore.jwt"
-      class="align-self-center DMSans"
-    >
-      <v-btn
-        class="pa-5"
-        color="introbtn"
-      >
-        <router-link
-          to="/vn/login"
-          class="text-decoration-none white--text"
-        >
-          <div class="text-capitalize">
-            LOGIN
-          </div>
+    <div v-if="!userStore.jwt" class="align-self-center DMSans">
+      <v-btn class="pa-5 mr-5" color="introbtn">
+        <router-link to="/vn/login" class="text-decoration-none white--text">
+          <div class="text-capitalize">LOGIN</div>
         </router-link>
       </v-btn>
     </div>
-    <v-menu
+    <!-- <v-menu
       v-else
       offset-y
     >
@@ -136,7 +105,7 @@
         >
           <v-btn
             icon
-            flat
+            text
             class="align-self-center"
           >
             <v-icon
@@ -150,11 +119,6 @@
             {{ userStore.userData.email }}
           </div>
         </div>
-        <!-- <v-app-bar-nav-icon
-              v-bind="attrs"
-              v-on="on"
-              @click.stop="expansion = !expansion"
-            ></v-app-bar-nav-icon> -->
       </template>
       <v-list class="d-flex flex-column">
         <v-list-item>
@@ -189,7 +153,7 @@
           </router-link>
         </v-list-item>
       </v-list>
-    </v-menu>
+    </v-menu> -->
   </div>
 </template>
 
@@ -218,7 +182,7 @@ export default {
 
 <style lang="scss" scoped>
 .nav-bar {
-  position: sticky;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;

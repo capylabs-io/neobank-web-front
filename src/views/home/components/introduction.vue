@@ -6,6 +6,10 @@
       backgroundImage:
         'url(' + require(`@/assets/home/intro-background.webp`) + ')',
     }"
+    data-aos="zoom-in"
+    data-aos-delay="200"
+    data-aos-duration="11000"
+    data-aos-easing="ease-in-out"
   >
     <div
       class="introduction-content d-flex flex-column justify-center align-center row-gap-30"
@@ -15,10 +19,10 @@
       data-aos-easing="ease-in-out"
       data-aos="zoom-in"
     >
-      <div class="text-center white--text display-3 font-weight-bold">
+      <div class="text-center white--text text-xl-h2 font-weight-bold">
         Welcome to VParadise
       </div>
-      <div class="text-center white--text body-1">
+      <div class="text-center white--text text-xl-h6">
         Journey into the future of banking with VParadise, a harmony between
         technologies and banking
       </div>
@@ -64,19 +68,21 @@ export default {
 
 <style lang="scss" scoped>
 .introduction {
+  position: fixed;
   width: 100%;
-  height: 210vh;
+  height: 105vh;
   position: relative;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: 2;
+  z-index: 3;
 }
+/*
 .introduction-content {
   position: fixed;
   top: 45%;
   left: 15%;
-}
+}*/
 .content {
   position: relative;
   display: flex;

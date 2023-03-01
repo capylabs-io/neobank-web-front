@@ -9,11 +9,11 @@
     <div
       class="card-image d-flex flex-column"
       :style="{
-        backgroundImage: 'url(' + cards.imageUrl + ')',
+        backgroundImage: 'url(' + cards.attributes.imageUrl + ')',
       }"
     >
       <div
-        v-if="cards.status == 'New'"
+        v-if="cards.attributes.status == 'New'"
         class="mt-3 pa-1"
         :style="{
           background: '#FDDF59',
@@ -24,10 +24,10 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.status }}
+        {{ cards.attributes.status }}
       </div>
       <div
-        v-else-if="cards.status == 'Hot'"
+        v-else-if="cards.attributes.status == 'Hot'"
         class="mt-3 pa-1"
         :style="{
           background: '#f65970',
@@ -38,7 +38,7 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.status }}
+        {{ cards.attributes.status }}
       </div>
       <div
         v-else
@@ -52,7 +52,7 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.status }}
+        {{ cards.attributes.status }}
       </div>
     </div>
     <div
@@ -61,11 +61,11 @@
       <div>
         <v-img
           class="card-icon"
-          :src="cards.icon"
+          :src="cards.attributes.icon"
         />
       </div>
-      <span class="mt-3"> {{ cards.title }} </span>
-      <span class="mt-3"> {{ cards.shortDescription }} </span>
+      <span class="mt-3"> {{ cards.attributes.title }} </span>
+      <span class="mt-3"> {{ cards.attributes.shortDescription }} </span>
     </div>
     <div class="mt-3 text-left">
       HSD: 31 Oct 2022

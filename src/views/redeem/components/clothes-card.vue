@@ -1,7 +1,7 @@
 <template>
   <v-card
     height="290px"
-    max-width="14.3%"
+    max-width="250px"
     elevation="2"
     rounded="8"
     class="pa-3"
@@ -14,7 +14,7 @@
     <div class="mt-3 font-weight-bold">Valentine Chocolate backpack</div>
     <v-btn
       v-if="status.index == 1"
-      class="d-flex column-gap-10 mx-auto mt-3 unpurchased"
+      class="d-flex column-gap-10 mx-auto mt-3 mt-8 unpurchased"
       elevation="2"
       rounded
       text
@@ -35,7 +35,7 @@
     </v-btn>
     <v-btn
       v-else
-      class="d-flex column-gap-10 mx-auto mt-3 purchased"
+      class="d-flex column-gap-10 mx-auto mt-3 mt-8 purchased"
       elevation="2"
       rounded
       text

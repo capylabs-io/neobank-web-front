@@ -1,16 +1,16 @@
 <template>
   <div class="home mx-auto">
     <div
-      v-if="windowWidth > 1280 || userStore.scrollY < 1280"
+      v-if="windowWidth > 1280 || userStore.scrollY < 1070"
       class="doorway tag"
       :style="{
         backgroundImage: 'url(' + require(`@/assets/home/door.webp`) + ')',
       }"
     />
 
+    <introduction />
     <div class="container DMSans mx-auto d-flex flex-column">
       <!-- <intro /> -->
-      <introduction />
       <firstsection />
       <secondSection />
       <thirdSection />
@@ -60,34 +60,26 @@ export default {
     },
     handleScroll() {
       const doorway = document.querySelector(".doorway");
-      const introduction = document.querySelector(".introduction-content");
+      const introduction = document.querySelector(".introduction");
+      const container = document.querySelector(".container");
       const scrollY = window.scrollY;
       this.scrollValue = scrollY;
       this.userStore.scrollY = scrollY;
-      // const introDoorway = document.querySelector(".intro-doorway");
-      // console.log(scrollY);
-      // if (scrollY > 0 && scrollY > 400) {
-      //   introDoorway.style.opacity = "0.6";
-      //   introDoorway.className += ".visible";
-      // } else {
-      //   introDoorway.style.opacity = "1";
-      // }
-      if (scrollY >= 999) {
+      console.log(scrollY);
+
+      if (this.userStore.scrollY >= 1105) {
         introduction.style.position = "relative";
-        introduction.style.top = "50vh";
-        introduction.style.left = "auto";
+        introduction.style.animation = " zoom-in-zoom-out 3s ease-out";
+        container.style.animation = " zoom-out-zoom-in 3s ease-out";
+        // introduction.style.top = "40vh";
+        // introduction.style.left = "auto";
       } else {
         introduction.style.position = "fixed";
-        introduction.style.top = "45%";
-        introduction.style.left = "15%";
+        // introduction.style.top = "45%";
+        // introduction.style.left = "15%";
       }
       doorway.style.backgroundSize = 100 + scrollY / 7 + "%";
       doorway.style.opacity = 1 + scrollY / 6 + "";
-
-      // const maxBackgroundSize = 120;
-      // const backgroundSize = scrollY / (maxBackgroundSize - 100); // increases as user scrolls
-      // doorway.style.transform =
-      //   "scale(" + (100 + backgroundSize * 1) / 100 + ")";
     },
   },
 };
@@ -96,9 +88,6 @@ export default {
 <style lang="scss">
 .home {
   overflow-x: hidden !important;
-  @media (min-width: 1920px) {
-    width: 1560px;
-  }
 }
 .doorway {
   position: fixed;
@@ -106,15 +95,20 @@ export default {
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 3;
+  z-index: 4;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 .container {
+  @media (min-width: 1920px) {
+    width: 1560px;
+  }
+
   overflow-x: hidden !important;
   row-gap: 150px;
   z-index: 2;
+  padding-top: 400px;
   padding-bottom: 100px;
 }
 
@@ -139,6 +133,34 @@ export default {
 .logo-group {
   @media (max-width: 1280px) {
     margin: 0 auto;
+  }
+}
+@keyframes zoom-out-zoom-in {
+  0% {
+    transform: scale(1, 1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.25, 1.25);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+}
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1.5, 1.5);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.25, 1.25);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 0;
   }
 }
 </style>

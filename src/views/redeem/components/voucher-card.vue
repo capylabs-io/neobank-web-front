@@ -1,5 +1,5 @@
 <template>
-  <v-card height="290px" width="14.3%" elevation="2" rounded="8" class="pa-2">
+  <v-card height="290px" width="250px" elevation="2" rounded="8" class="pa-2">
     <v-skeleton-loader
       v-if="!cards.attributes.imageUrl"
       color="lighten-4"
@@ -15,7 +15,7 @@
     >
       <div
         v-if="cards.attributes.status == 'New'"
-        class="mt-3 pa-1"
+        class="mt-3 pa-1 px-3"
         :style="{
           background: '#FDDF59',
           width: 'max-content',
@@ -29,7 +29,7 @@
       </div>
       <div
         v-else-if="cards.attributes.status == 'Hot'"
-        class="mt-3 pa-1"
+        class="mt-3 pa-1 px-3"
         :style="{
           background: '#f65970',
           width: 'max-content',
@@ -43,7 +43,7 @@
       </div>
       <div
         v-else
-        class="mt-3 pa-1"
+        class="mt-3 pa-1 px-3"
         :style="{
           background: '#CBCBCB',
           width: 'max-content',
@@ -64,7 +64,7 @@
         </div>
         <div
           class="d-inline-block text-truncate voucher-title"
-          style="max-width: 80%"
+          style="height: 50px ,  max-width:60%"
         >
           {{ cards.attributes.title }}
         </div>
@@ -74,7 +74,7 @@
 
     <v-btn
       v-if="cards.attributes.status == 'Expired'"
-      class="d-flex column-gap-10 mx-auto mt-3 expired"
+      class="d-flex column-gap-10 mx-auto mt-3 mt-8 expired"
       elevation="2"
       rounded
       text
@@ -96,10 +96,21 @@
         />
       </div>
     </v-btn>
-
+    <v-btn
+      v-else-if="purchased"
+      class="d-flex column-gap-10 mx-auto mt-3 mt-8 purchased"
+      elevation="2"
+      rounded
+      text
+    >
+      <v-icon color="success"> mdi-check </v-icon>
+      <div>
+        <span class="font-weight-bold text-capitalize pl-2">Purchased</span>
+      </div>
+    </v-btn>
     <v-btn
       v-else
-      class="d-flex column-gap-10 mx-auto mt-3 unpurchased"
+      class="d-flex column-gap-10 mx-auto mt-3 mt-8 unpurchased"
       elevation="2"
       rounded
       text
@@ -139,7 +150,11 @@ export default {
     return {
       index: 1,
       loading: true,
+      purchased: true,
     };
+  },
+  mounted() {
+    this.purchased = this.userStore.voucherPurchased.includes(this.id);
   },
   methods: {
     Click() {
@@ -161,6 +176,8 @@ export default {
 }
 .card-icon {
   border-radius: 100px;
+  width: 40px;
+  height: 40px;
 }
 
 .column-gap-10 {
@@ -169,7 +186,7 @@ export default {
 .tooltip {
   position: absolute;
   width: 400px;
-  top: 45%;
+  top: 7%;
   margin-left: 100px;
   z-index: 99;
 }

@@ -42,9 +42,11 @@ export default {
   },
   mounted() {
     this.change();
-    this.userStore.fetchVoucher();
     this.userStore.fetchUserVoucher();
-    this.userStore.checkIncludes();
+    this.userStore.fetchVoucher();
+    setTimeout(() => {
+      this.userStore.checkIncludes();
+    }, 1500);
   },
   data() {
     return {
@@ -60,10 +62,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.redeem {
+  height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
 .left {
   width: 15%;
   background: #f5f5f5;
   height: 100vh;
+  padding-top: 85px;
 }
 .left-first {
   height: 26%;
@@ -81,6 +89,7 @@ export default {
   width: 85%;
   background: #f5f5f5;
   padding: 30px 100px;
+  padding-top: 100px;
 }
 .column-gap-10 {
   column-gap: 10px;

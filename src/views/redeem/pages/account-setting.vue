@@ -32,12 +32,12 @@
                 class="cursor-pointer"
                 @click="userStore.changePersonalInfoEdit()"
               >
-                <v-icon
+                <!-- <v-icon
                   class="mr-2"
                   color="violet"
                 >
                   mdi-square-edit-outline
-                </v-icon>
+                </v-icon> -->
               </div>
             </v-list-item-subtitle>
             <v-list-item-content>
@@ -53,12 +53,12 @@
                 class="cursor-pointer"
                 @click="userStore.changePersonalInfoEdit()"
               >
-                <v-icon
+                <!-- <v-icon
                   class="mr-2"
                   color="violet"
                 >
                   mdi-square-edit-outline
-                </v-icon>
+                </v-icon> -->
               </div>
             </v-list-item-subtitle>
             <v-list-item-content>(+84)-456453522</v-list-item-content>
@@ -72,12 +72,12 @@
                 class="cursor-pointer"
                 @click="userStore.changePersonalInfoEdit()"
               >
-                <v-icon
+                <!-- <v-icon
                   class="mr-2"
                   color="violet"
                 >
                   mdi-square-edit-outline
-                </v-icon>
+                </v-icon> -->
               </div>
             </v-list-item-subtitle>
             <v-list-item-content>**********</v-list-item-content>

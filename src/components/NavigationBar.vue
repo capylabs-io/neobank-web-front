@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex nav-bar">
     <div
-      v-if="userStore.scrollY < 2090"
+      v-if="userStore.scrollY < 1100"
       class="d-flex gap-24 DMSans black--text nav-container justify-center align-center mx-auto pa-7"
     >
       <v-img

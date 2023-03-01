@@ -1,16 +1,27 @@
 <template>
-  <div class="right d-flex flex-column align-center">
-    <div class="mt-5 d-flex gap-45 card-container flex-wrap">
+  <div class="right d-flex flex-column">
+    <div class="d-flex justify-space-between button-filter">
+      <div class="d-flex column-gap-10">
+        <v-btn elevation="3" rounded text> Clothes </v-btn>
+        <v-btn elevation="3" rounded text> Voucher </v-btn>
+      </div>
+      <div class="d-flex column-gap-10">
+        <v-btn elevation="3" rounded text> A-Z </v-btn>
+        <v-btn class="d-flex" elevation="3" rounded text>
+          <span> Price </span>
+          <v-icon>mdi-arrow-up</v-icon>
+        </v-btn>
+        <v-btn elevation="3" text>
+          <span> Price </span> <v-icon>mdi-arrow-down</v-icon>
+        </v-btn>
+      </div>
+    </div>
+    <div class="d-flex gap-45 card-container flex-wrap">
       <inventoryCard
         v-for="card in userStore.userVoucher"
-        :key="card"
+        :key="card.id"
         :cards="card"
       />
-      <!-- <inventoryCard
-        v-for="card in inventoryCards"
-        :key="card"
-        :cards="card"
-      /> -->
     </div>
     <div class="mt-3">
       <v-pagination :length="3" light />
@@ -29,107 +40,106 @@ export default {
 
   data() {
     return {
-      inventoryCards: [
-        {
-          image: require(`@/assets/redeem/card/cgv-card.webp`),
-          icon: require(`@/assets/redeem/card/cgv-icon.webp`),
-          price: "50",
-          status: "Hot",
-          title: "50.000đ voucher film ticket CGV",
-          detailheader:
-            "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
-          firstDetail:
-            "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
-          secondDetail:
-            " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
-          isRedeem: false,
-        },
-        {
-          image: require(`@/assets/redeem/card/viettel-card.webp`),
-          icon: require(`@/assets/redeem/card/viettel-icon.webp`),
-          price: "50",
-          title: "50.000đ mobile top up Viettel",
-          status: "New",
-          detailheader:
-            "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
-          firstDetail:
-            "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
-          secondDetail:
-            " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
-          isRedeem: false,
-        },
-        {
-          image: require(`@/assets/redeem/card/baemin-card.webp`),
-          icon: require(`@/assets/redeem/card/baemin-icon.webp`),
-          price: "100",
-          title: "100.000đ voucher Baemin",
-          status: "Expired",
-          detailheader:
-            "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
-          firstDetail:
-            "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
-          secondDetail:
-            " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
-          isRedeem: false,
-        },
-        {
-          image: require(`@/assets/redeem/card/viettel-card.webp`),
-          icon: require(`@/assets/redeem/card/viettel-icon.webp`),
-          price: "50",
-          title: "10% off max 10k voucher ETC ",
-          status: "Hot",
-          detailheader:
-            "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
-          firstDetail:
-            "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
-          secondDetail:
-            " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
-          isRedeem: false,
-        },
-        {
-          image: require(`@/assets/redeem/card/viettel-card.webp`),
-          icon: require(`@/assets/redeem/card/viettel-icon.webp`),
-          price: "50",
-          title: "50.000đ mobile top up Viettel",
-          status: "New",
-          detailheader:
-            "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
-          firstDetail:
-            "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
-          secondDetail:
-            " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
-          isRedeem: true,
-        },
-        {
-          image: require(`@/assets/redeem/card/viettel-card.webp`),
-          icon: require(`@/assets/redeem/card/viettel-icon.webp`),
-          price: "50",
-          title: "50.000đ mobile top up Viettel",
-          status: "Hot",
-          detailheader:
-            "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
-          firstDetail:
-            "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
-          secondDetail:
-            " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
-          isRedeem: true,
-        },
-        {
-          image: require(`@/assets/redeem/card/viettel-card.webp`),
-          icon: require(`@/assets/redeem/card/viettel-icon.webp`),
-          price: "50",
-          title: "50.000đ mobile top up Viettel",
-          status: "Expired",
-          detailheader:
-            "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
-          firstDetail:
-            "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
-          secondDetail:
-            " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
-          isRedeem: false,
-        },
-      ],
-      index: 1,
+      // inventoryCards: [
+      //   {
+      //     image: require(`@/assets/redeem/card/cgv-card.webp`),
+      //     icon: require(`@/assets/redeem/card/cgv-icon.webp`),
+      //     price: "50",
+      //     status: "Hot",
+      //     title: "50.000đ voucher film ticket CGV",
+      //     detailheader:
+      //       "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
+      //     firstDetail:
+      //       "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
+      //     secondDetail:
+      //       " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
+      //     isRedeem: false,
+      //   },
+      //   {
+      //     image: require(`@/assets/redeem/card/viettel-card.webp`),
+      //     icon: require(`@/assets/redeem/card/viettel-icon.webp`),
+      //     price: "50",
+      //     title: "50.000đ mobile top up Viettel",
+      //     status: "New",
+      //     detailheader:
+      //       "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
+      //     firstDetail:
+      //       "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
+      //     secondDetail:
+      //       " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
+      //     isRedeem: false,
+      //   },
+      //   {
+      //     image: require(`@/assets/redeem/card/baemin-card.webp`),
+      //     icon: require(`@/assets/redeem/card/baemin-icon.webp`),
+      //     price: "100",
+      //     title: "100.000đ voucher Baemin",
+      //     status: "Expired",
+      //     detailheader:
+      //       "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
+      //     firstDetail:
+      //       "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
+      //     secondDetail:
+      //       " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
+      //     isRedeem: false,
+      //   },
+      //   {
+      //     image: require(`@/assets/redeem/card/viettel-card.webp`),
+      //     icon: require(`@/assets/redeem/card/viettel-icon.webp`),
+      //     price: "50",
+      //     title: "10% off max 10k voucher ETC ",
+      //     status: "Hot",
+      //     detailheader:
+      //       "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
+      //     firstDetail:
+      //       "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
+      //     secondDetail:
+      //       " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
+      //     isRedeem: false,
+      //   },
+      //   {
+      //     image: require(`@/assets/redeem/card/viettel-card.webp`),
+      //     icon: require(`@/assets/redeem/card/viettel-icon.webp`),
+      //     price: "50",
+      //     title: "50.000đ mobile top up Viettel",
+      //     status: "New",
+      //     detailheader:
+      //       "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
+      //     firstDetail:
+      //       "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
+      //     secondDetail:
+      //       " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
+      //     isRedeem: true,
+      //   },
+      //   {
+      //     image: require(`@/assets/redeem/card/viettel-card.webp`),
+      //     icon: require(`@/assets/redeem/card/viettel-icon.webp`),
+      //     price: "50",
+      //     title: "50.000đ mobile top up Viettel",
+      //     status: "Hot",
+      //     detailheader:
+      //       "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
+      //     firstDetail:
+      //       "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
+      //     secondDetail:
+      //       " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
+      //     isRedeem: true,
+      //   },
+      //   {
+      //     image: require(`@/assets/redeem/card/viettel-card.webp`),
+      //     icon: require(`@/assets/redeem/card/viettel-icon.webp`),
+      //     price: "50",
+      //     title: "50.000đ mobile top up Viettel",
+      //     status: "Expired",
+      //     detailheader:
+      //       "Phi khong dung - giam 10% toi da 10k thanh toan dich vu phi khong dung tu 50k tren VParadise",
+      //     firstDetail:
+      //       "Sit pellentesque montes eu habitant mattis libero sed interdum at. Vel porttitor malesuada amet velit vestibulum parturient habitasse. Nibh lobortis aliquam turpis commodo pellentesque scelerisque lectus. Vitae sollicitudin pellentesque sed pharetra in massa.",
+      //     secondDetail:
+      //       " Euismod ultrices gravida consequat semper in molestie lacinia eu risus. Lorem pulvinar habitant cursus tortor ut sed in felis. Donec mattis tincidunt maecenas et eu eget dui. Posuere velit viverra adipiscing ornare. Feugiat magna massa lorem sed ut. Eget lacus ultrices etiam dapibus. ",
+      //     isRedeem: false,
+      //   },
+      // ],
     };
   },
   computed: {
@@ -181,6 +191,7 @@ export default {
   }
 }
 .card-container {
-  max-width: max-content;
+  margin-top: 45px;
+  margin-bottom: 45px;
 }
 </style>

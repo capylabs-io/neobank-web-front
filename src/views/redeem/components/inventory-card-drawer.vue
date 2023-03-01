@@ -7,7 +7,7 @@
     hide-overlay
     width="480px"
     color="white"
-    class="pa-5 drawer d-flex flex-column"
+    class="drawer d-flex flex-column"
   >
     <v-card class="drawer-card" flat>
       <div
@@ -18,7 +18,7 @@
       >
         <div
           v-if="userStore.cardData.status == 'Expired'"
-          class="mt-3 pa-1"
+          class="mt-3 pa-1 px-3"
           :style="{
             background: '#FDDF59',
             width: 'max-content',
@@ -32,7 +32,7 @@
         </div>
         <div
           v-else-if="userStore.cardData.status == 'Hot'"
-          class="mt-3 pa-1"
+          class="mt-3 pa-1 px-3"
           :style="{
             background: '#f65970',
             width: 'max-content',
@@ -46,7 +46,7 @@
         </div>
         <div
           v-else
-          class="mt-3 pa-1"
+          class="mt-3 pa-1 px-3"
           :style="{
             background: '#4c99eb',
             width: 'max-content',
@@ -67,10 +67,8 @@
         </div>
         <span class="mt-3"> {{ userStore.cardData.title }} </span>
       </div>
-      <div class="mt-3 text-left">
+      <div class="mt-3 text-left draw-text">
         {{ userStore.cardData.shortDescription }}
-      </div>
-      <div class="mt-3 text-left">
         {{ userStore.cardData.fullDescription }}
       </div>
     </v-card>
@@ -101,6 +99,9 @@ export default {
 
 <style lang="scss" scoped>
 .drawer-image {
+  position: sticky;
+  left: 0;
+  top: 0;
   border-radius: 8px;
   height: 240px;
   background-size: cover;
@@ -112,15 +113,31 @@ export default {
   width: 40px;
   height: 40px;
 }
+
+.draw-text {
+  height: 400px;
+  overflow-y: auto;
+}
+.col-gap-10 {
+  column-gap: 10px;
+}
 .btn-arrow {
   position: absolute;
   background-color: white;
   z-index: 99;
 }
+.number {
+  background: #d0dbf4;
+  width: 50px;
+  height: 30px;
+}
 .drawer {
   background: white !important;
   height: 100vh;
+  padding: 85px 20px;
+  z-index: 99;
 }
+
 .drawer-btn {
   position: sticky;
   bottom: 0;
@@ -131,5 +148,7 @@ export default {
 .unpurchased {
   background: #5752e3;
   padding: 4px, 16px, 4px, 16px;
+}
+.disable {
 }
 </style>

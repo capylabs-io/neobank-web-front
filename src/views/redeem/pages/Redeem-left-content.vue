@@ -1,6 +1,9 @@
 <template>
   <div class="left d-flex flex-column row-gap-3">
-    <div class="d-flex flex-column align-center justify-center left-first pa-8">
+    <div
+      v-if="!userStore.isConnected"
+      class="d-flex flex-column align-center justify-center left-first pa-8"
+    >
       <div>
         <v-img
           :style="{ 'border-radius': '10px' }"
@@ -26,11 +29,41 @@
         </div>
       </div>
     </div>
-    <div class="d-flex flex-column justify-center left-second pa-8 row-gap-6">
+    <div
+      v-else
+      class="d-flex flex-column align-center justify-center left-first pa-8"
+    >
+      <div>
+        <v-img
+          :style="{ 'border-radius': '10px' }"
+          class
+          :src="require(`@/assets/redeem/user-profile.webp`)"
+        />
+      </div>
+      <div>
+        <span class="font-weight-bold"
+          >{{ userStore.userData.username }} #291090</span
+        >
+      </div>
+      <div class="subtitle-2">
+        <span>{{ userStore.userData.email }}</span>
+      </div>
       <div
-        class="pa-2 content"
-        @click="storeClick"
+        class="d-flex left-profile-section align-center font-weight-bold column-gap-10 pa-2"
       >
+        <span :style="{ 'font-size': '18px' }">{{
+          userStore.userData.token
+        }}</span>
+        <div>
+          <v-img
+            :style="{ 'border-radius': '40px' }"
+            :src="require(`@/assets/redeem/coin.webp`)"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-column justify-center left-second pa-8 row-gap-1">
+      <div class="pa-2 content store" @click="storeClick">
         <div class="d-flex column-gap-10">
           <div>
             <v-icon>mdi-store </v-icon>
@@ -38,10 +71,7 @@
           <span>Redeem store</span>
         </div>
       </div>
-      <div
-        class="pa-2 content"
-        @click="inventoryClick"
-      >
+      <div class="pa-2 content inventory" @click="inventoryClick">
         <div class="d-flex column-gap-10">
           <div>
             <v-icon> mdi-treasure-chest</v-icon>
@@ -49,10 +79,7 @@
           <span>Inventory</span>
         </div>
       </div>
-      <div
-        class="pa-2 content"
-        @click="accountClick()"
-      >
+      <div class="pa-2 content setting" @click="accountClick()">
         <div class="d-flex column-gap-10">
           <div>
             <v-icon> mdi-account-box</v-icon>
@@ -62,14 +89,12 @@
       </div>
     </div>
     <div class="d-flex flex-column align-left justify-end left-third pa-8">
-      <div class="d-flex column-gap-10">
-        <div>
-          <v-icon color="red">
-            mdi-cog
-          </v-icon>
-        </div>
-        <span :style="{ color: 'red' }">Log-out</span>
-      </div>
+      <v-btn class="" @click="signout()" text>
+          <div class="mr-2">
+            <v-icon color="red"> mdi-logout </v-icon>
+          </div>
+          <div class="text-capitalize" :style="{ color: 'red' }">Log-out</div>
+      </v-btn>
     </div>
   </div>
 </template>
@@ -81,6 +106,9 @@ export default {
   computed: {
     ...mapStores(userStore),
   },
+  mounted() {
+    this.carousel();
+  },
   methods: {
     inventoryClick() {
       this.userStore.index = 2;
@@ -90,6 +118,22 @@ export default {
     },
     accountClick() {
       this.userStore.index = 3;
+    },
+    signout() {
+      this.userStore.logout();
+      this.$router.push("/vn/login");
+    },
+    carousel() {
+      const store = document.querySelector(".store");
+      const inventory = document.querySelector(".inventory");
+      const setting = document.querySelector(".setting");
+      if (this.userStore.index == 1) {
+        inventory.className += "active";
+      } else if (this.userStore.index == 2) {
+        store.className += "active";
+      } else {
+        setting.className += "active";
+      }
     },
   },
 };
@@ -102,7 +146,7 @@ export default {
   height: 100vh;
 }
 .left-first {
-  height: 26%;
+  height: 28%;
   background: white;
   row-gap: 10px;
 }
@@ -111,7 +155,7 @@ export default {
   background: white;
 }
 .left-third {
-  height: 61%;
+  height: 59%;
   background: white;
 }
 .right {
@@ -125,8 +169,8 @@ export default {
 .row-gap-3 {
   row-gap: 3px;
 }
-.row-gap-6 {
-  row-gap: 6px;
+.row-gap-1 {
+  row-gap: 1px;
 }
 
 .gap-30 {
@@ -142,6 +186,12 @@ export default {
   border-radius: 8px;
 }
 .content:hover {
+  background: #f5f8ff;
+  .v-icon {
+    color: #2970ff;
+  }
+}
+.active {
   background: #f5f8ff;
   .v-icon {
     color: #2970ff;

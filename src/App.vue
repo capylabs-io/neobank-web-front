@@ -6,7 +6,7 @@
     <v-main>
       <router-view :key="$route.fullPath" />
     </v-main>
-    <app-footer v-if="!userStore.navChange" />
+    <app-footer v-if="userStore.pageIndex == 1" />
   </v-app>
 </template>
 <script>
