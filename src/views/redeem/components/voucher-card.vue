@@ -6,9 +6,7 @@
       class="pa-3 card-image mx-auto"
       type="image"
     />
-    <!-- :style="{
-      backgroundImage: 'url(' + cards.attributes.imageUrl + ')',
-    }" -->
+
     <div v-else class="card-image d-flex flex-column">
       <div class="full-width">
         <v-img
@@ -163,7 +161,8 @@ export default {
     Click() {
       if (this.userStore.userData.token > this.cards.attributes.price) {
         this.userStore.drawerDetail = !this.userStore.drawerDetail;
-        this.userStore.detailCard = this.cards;
+        this.userStore.setDetailStoreCard(this.cards);
+        // this.userStore.detailCard = this.cards;
         this.userStore.voucherId = this.id;
       }
     },

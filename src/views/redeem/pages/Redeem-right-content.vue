@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column">
+  <div class="d-flex flex-column justify-space-between">
     <div class="right-container mx-auto pa-6 full-height">
       <div class="d-flex justify-space-between button-filter">
         <div class="d-flex column-gap-10">
@@ -23,12 +23,23 @@
           </v-btn>
         </div>
         <div class="d-flex column-gap-10">
-          <v-btn elevation="3" rounded text> A-Z </v-btn>
-          <v-btn class="d-flex" elevation="3" rounded text>
+          <v-btn elevation="3" rounded text @click="filterBy('asc')">
+            A-Z
+          </v-btn>
+          <v-btn elevation="3" rounded text @click="filterBy('desc')">
+            Z-A
+          </v-btn>
+          <v-btn
+            class="d-flex"
+            elevation="3"
+            rounded
+            text
+            @click="filterBy('priceUp')"
+          >
             <span> Price </span>
             <v-icon>mdi-arrow-up</v-icon>
           </v-btn>
-          <v-btn elevation="3" text>
+          <v-btn elevation="3" text @click="filterBy('priceDown')">
             <span> Price </span> <v-icon>mdi-arrow-down</v-icon>
           </v-btn>
         </div>
@@ -44,7 +55,7 @@
         <v-row>
           <v-col
             cols="12"
-            xl="2"
+            xl="3"
             md="3"
             sm="6"
             xs="12"
@@ -134,6 +145,11 @@ export default {
       clothes.classList.remove("active");
       voucher.classList.add("active");
     },
+    filterBy(key) {
+      this.userStore.sortBy = key;
+      console.log("key", key);
+      console.log("data", this.userStore.filterVoucherStore);
+    },
   },
 };
 </script>
@@ -173,7 +189,7 @@ export default {
   max-width: 1500px;
 }
 .card-container {
-  height: 600px;
+  height: max-content;
 }
 .button-filter {
 }

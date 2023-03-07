@@ -6,12 +6,6 @@
     rounded="8"
     class="pa-4"
   >
-    <!-- <div
-      class="card-image d-flex flex-column"
-      :style="{
-        backgroundImage: 'url(' + cards.attributes.imageUrl + ')',
-      }"
-    > -->
     <div class="card-image d-flex flex-column">
       <div class="full-width">
         <v-img class="card-image" :src="cards.attributes.imageUrl"></v-img>

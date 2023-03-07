@@ -37,7 +37,7 @@
         <v-row>
           <v-col
             cols="12"
-            xl="2"
+            xl="3"
             md="3"
             sm="6"
             xs="12"

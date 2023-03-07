@@ -14,19 +14,12 @@
         <div class="full-width">
           <v-img
             class="drawer-image"
-            :src="userStore.detailCard.attributes.imageUrl"
+            :src="userStore.detailCard.imageUrl"
           ></v-img>
         </div>
-        <!-- <div
-        class="drawer-image d-flex flex-column"
-        :style="{
-          backgroundImage:
-            'url(' + userStore.detailCard.attributes.imageUrl + ')',
-        }"
-      > -->
         <div
-          v-if="userStore.detailCard.attributes.status == 'Expired'"
-          class="mt-3 pa-1 px-3"
+          v-if="userStore.detailCard.status == 'Expired'"
+          class="mt-3 pa-1 px-3 status"
           :style="{
             background: '#FDDF59',
             width: 'max-content',
@@ -36,11 +29,11 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.detailCard.attributes.status }}
+          {{ userStore.detailCard.status }}
         </div>
         <div
-          v-else-if="userStore.detailCard.attributes.status == 'Hot'"
-          class="mt-3 pa-1 px-3"
+          v-else-if="userStore.detailCard.status == 'Hot'"
+          class="mt-3 pa-1 px-3 status"
           :style="{
             background: '#f65970',
             width: 'max-content',
@@ -50,11 +43,11 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.detailCard.attributes.status }}
+          {{ userStore.detailCard.status }}
         </div>
         <div
           v-else
-          class="mt-3 pa-1 px-3"
+          class="mt-3 pa-1 px-3 status"
           :style="{
             background: '#FDDF59',
             width: 'max-content',
@@ -64,23 +57,20 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.detailCard.attributes.status }}
+          {{ userStore.detailCard.status }}
         </div>
       </div>
       <div
         class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
       >
         <div>
-          <v-img
-            class="drawer-icon"
-            :src="userStore.detailCard.attributes.iconUrl"
-          />
+          <v-img class="drawer-icon" :src="userStore.detailCard.iconUrl" />
         </div>
-        <span class="mt-3"> {{ userStore.detailCard.attributes.title }} </span>
+        <span class="mt-3"> {{ userStore.detailCard.title }} </span>
       </div>
       <div class="mt-3 text-left draw-text">
-        {{ userStore.detailCard.attributes.shortDescription }}
-        {{ userStore.detailCard.attributes.fullDescription }}
+        {{ userStore.detailCard.shortDescription }}
+        {{ userStore.detailCard.fullDescription }}
       </div>
     </v-card>
     <!-- <div class="d-flex col-gap-10 align-center amount-container">
@@ -165,6 +155,10 @@ export default {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  z-index: 99;
+}
+.status {
+  z-index: 99;
 }
 .drawer-icon {
   border-radius: 100px;

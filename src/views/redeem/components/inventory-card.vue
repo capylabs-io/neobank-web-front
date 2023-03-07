@@ -1,8 +1,5 @@
 <template>
   <v-card elevation="2" rounded="8" class="pa-3 inventory-card">
-    <!-- :style="{
-      backgroundImage: 'url(' + cards.attributes.imageUrl + ')',
-    }" -->
     <div class="card-image d-flex flex-column">
       <div class="full-width">
         <v-img class="card-image" height="140px" :src="cards.imageUrl"></v-img>

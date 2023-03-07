@@ -77,9 +77,9 @@ export default {
   overflow-y: hidden;
   overflow-x: hidden;
 }
-.redeem-content{
+.redeem-content {
   margin-top: 80px;
-  height: calc(100vh - 80px); 
+  height: calc(100vh - 80px);
 }
 .left {
   width: 15%;
@@ -88,6 +88,7 @@ export default {
 .right {
   width: 85%;
   background: var(--v-secondary-base);
+  overflow-y: auto;
 }
 .column-gap-10 {
   column-gap: 10px;

@@ -18,6 +18,7 @@ export const userStore = defineStore(
     const jwt = ref("");
     const rememberMe = ref(false);
     const isShowPass = ref(false);
+    const sortBy = ref("");
     const username = ref("");
     const password = ref("");
     const voucherId = ref("");
@@ -47,7 +48,16 @@ export const userStore = defineStore(
     const userVoucher = ref([]);
     const userVoucherId = ref([]);
     const voucherPurchased = ref([]);
-    const detailCard = ref({});
+    const detailCard = ref({
+      image: null,
+      icon: null,
+      price: "",
+      title: "",
+      status: "",
+      detailheader: "",
+      firstDetail: "",
+      secondDetail: "",
+    });
     const userData = ref({});
 
     async function signIn() {
@@ -139,7 +149,9 @@ export const userStore = defineStore(
         snackbar.commonError(error);
       }
     }
-
+    function setDetailStoreCard(cards) {
+      this.detailCard = cards.attributes;
+    }
     function checkIncludes() {
       if (this.voucherDataId && this.userVoucherId) {
         this.voucherPurchased = this.voucherDataId.filter((data) =>
@@ -155,24 +167,48 @@ export const userStore = defineStore(
     const isConnected = computed(() => jwt);
 
     const slicedVoucherStore = computed(() => {
-      if (!voucherData.value) return [];
-      return voucherData.value.slice(
+      if (!filterVoucherStore.value) return [];
+      return filterVoucherStore.value.slice(
         (voucherPage.value - 1) * vouchersPerPage.value,
         voucherPage.value * vouchersPerPage.value
       );
     });
 
     const totalVoucherPage = computed(() => {
-      if (!voucherData.value || voucherData.value.length == 0) return 1;
-      if (voucherData.value.length % vouchersPerPage.value == 0)
-        return voucherData.value.length / vouchersPerPage.value;
+      if (!filterVoucherStore.value || filterVoucherStore.value.length == 0)
+        return 1;
+      if (filterVoucherStore.value.length % vouchersPerPage.value == 0)
+        return filterVoucherStore.value.length / vouchersPerPage.value;
       else
-        return Math.floor(voucherData.value.length / vouchersPerPage.value) + 1;
+        return (
+          Math.floor(filterVoucherStore.value.length / vouchersPerPage.value) +
+          1
+        );
     });
 
-    const filterVoucherStore = computed(() =>
-      voucherData.value.filter((a, b) => b.price - a.price)
-    );
+    const filterVoucherStore = computed(() => {
+      let filterVoucherStore = [];
+      if ((sortBy.value = "asc")) {
+        filterVoucherStore = voucherData.value.sort(
+          (a, b) => b.attributes.title - a.attributes.title
+        );
+      } else if ((sortBy.value = "desc")) {
+        filterVoucherStore = voucherData.value.sort(
+          (a, b) => a.attributes.title - b.attributes.title
+        );
+      } else if ((sortBy.value = "priceUp")) {
+        filterVoucherStore = voucherData.value.sort(
+          (a, b) => a.attributes.price - b.attributes.price
+        );
+      } else if ((sortBy.value = "priceDown")) {
+        filterVoucherStore = voucherData.value.sort(
+          (a, b) => b.attributes.price - a.attributes.price
+        );
+      } else {
+        filterVoucherStore = voucherData.value.sort((a, b) => b.id - a.id);
+      }
+      return filterVoucherStore;
+    });
 
     return {
       //computed
@@ -206,6 +242,7 @@ export const userStore = defineStore(
       voucherPurchased,
       voucherPage,
       vouchersPerPage,
+      sortBy,
       //action
       signIn,
       logout,
@@ -213,6 +250,7 @@ export const userStore = defineStore(
       fetchUserVoucher,
       purchaseVoucher,
       checkIncludes,
+      setDetailStoreCard,
     };
   },
   {

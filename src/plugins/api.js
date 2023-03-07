@@ -65,16 +65,20 @@ export const Voucher = {
       },
     }),
   purchaseVouchers: (id, token) =>
-    axios.post(`vouchers/${id}/purchase`, {
-     
-    }, { headers: {
-      Authorization: "Bearer " + token,
-    }}),
-  fetchUserVouchers: (token) =>
-    axios.get("user-vouchers", {
+    axios.post(
+      `vouchers/${id}/purchase`,
+      {},
+      {
         headers: {
           Authorization: "Bearer " + token,
         },
+      }
+    ),
+  fetchUserVouchers: (token) =>
+    axios.get("user-vouchers", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
     }),
 };
 
