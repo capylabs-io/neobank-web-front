@@ -2,55 +2,34 @@
   <div class="d-flex flex-column justify-space-between">
     <div class="right-container mx-auto pa-6 full-height">
       <div class="d-flex justify-space-between button-filter">
-        <div class="d-flex column-gap-10">
-          <v-btn
-            class="clothes active"
-            elevation="3"
-            rounded
-            text
-            @click="clothesTab()"
-          >
+        <div class="d-flex column-gap-10 left-filter-group pa-1">
+          <v-btn class="clothes active" rounded text @click="clothesTab()">
             Clothes
           </v-btn>
-          <v-btn
-            class="voucher"
-            elevation="3"
-            rounded
-            text
-            @click="voucherTab()"
-          >
+          <v-btn class="voucher" rounded text @click="voucherTab()">
             Voucher
           </v-btn>
         </div>
-        <div class="d-flex column-gap-10">
-          <v-btn elevation="3" rounded text @click="filterBy('asc')">
-            A-Z
-          </v-btn>
-          <v-btn elevation="3" rounded text @click="filterBy('desc')">
-            Z-A
-          </v-btn>
-          <v-btn
-            class="d-flex"
-            elevation="3"
-            rounded
-            text
-            @click="filterBy('priceUp')"
-          >
-            <span> Price </span>
-            <v-icon>mdi-arrow-up</v-icon>
-          </v-btn>
-          <v-btn elevation="3" text @click="filterBy('priceDown')">
-            <span> Price </span> <v-icon>mdi-arrow-down</v-icon>
-          </v-btn>
+        <div class="right-filter-group pa-2">
+          <!-- <v-card class="d-flex text-left px-3 right-filter-group">
+            <div class="d-flex flex-column">
+              <span class="overline">SORT BY</span>
+              <span class="text-small">--Select One--</span>
+            </div>
+            <v-icon>mdi-chevron-down</v-icon>
+          </v-card> -->
+          <div class="text-left">SORT BY: {{ userStore.sortBy }}</div>
+          <v-select
+            v-model="userStore.sortBy"
+            class="filter mt-2"
+            :items="sort"
+            item-text="name"
+            label="---Select One---"
+            outlined
+          ></v-select>
         </div>
       </div>
       <div v-if="index == 2" class="full-width mt-6 card-container">
-        <!-- <voucherCard
-          v-for="card in voucher"
-          :key="card.id"
-          :id="card.id"
-          :cards="card"
-        /> -->
         <!-- TODO: use vue-responsive-components to make right container responsive better -->
         <v-row>
           <v-col
@@ -115,6 +94,25 @@ export default {
   },
   data() {
     return {
+      // sort: ["Name(A-Z)", "Name(Z-A)", "Price Up", "Price Down"],
+      sort: [
+        {
+          value: "asc",
+          name: "Name(A-Z)",
+        },
+        {
+          value: "desc",
+          name: "Name(Z-A)",
+        },
+        {
+          value: "priceUp",
+          name: "Price Up",
+        },
+        {
+          value: "priceDown",
+          name: "Price Down",
+        },
+      ],
       clothesCards: [
         { index: 2 },
         { index: 1 },
@@ -144,11 +142,6 @@ export default {
       const voucher = document.querySelector(".voucher");
       clothes.classList.remove("active");
       voucher.classList.add("active");
-    },
-    filterBy(key) {
-      this.userStore.sortBy = key;
-      console.log("key", key);
-      console.log("data", this.userStore.filterVoucherStore);
     },
   },
 };
@@ -195,10 +188,25 @@ export default {
 }
 
 .active {
-  background: #5752e3;
-  color: white;
+  background: #f5f8ff;
+  color: #2970ff;
+  font-weight: bold;
 }
 .pagination {
   z-index: 97;
+}
+.left-filter-group {
+  background-color: white;
+  height: max-content;
+  border-radius: 12px;
+}
+.right-filter-group {
+  width: max-content;
+  background-color: white;
+  border-radius: 12px;
+}
+.v-select {
+  padding: 0;
+  margin: 0;
 }
 </style>

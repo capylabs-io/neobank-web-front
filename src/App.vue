@@ -4,6 +4,7 @@
     <page-navbar v-else-if="userStore.pageIndex == 2" />
     <div v-else />
     <v-main>
+      <SnackBar />
       <router-view :key="$route.fullPath" />
     </v-main>
     <app-footer v-if="userStore.pageIndex == 1" />
@@ -15,12 +16,13 @@ import HomeNavigationBar from "./components/NavigationBar.vue";
 import PageNavigationBar from "./components/NavigationBarPage.vue";
 import { mapStores } from "pinia";
 import { userStore } from "../src/stores/userStore";
-
+import SnackBar from "@/components/snack-bar/snack-bar.vue";
 export default {
   components: {
     "app-navbar": HomeNavigationBar,
     "page-navbar": PageNavigationBar,
     "app-footer": FooterVue,
+    SnackBar,
   },
   computed: {
     ...mapStores(userStore),
@@ -61,13 +63,75 @@ nav {
   }
 }
 
-.full-width{
+.full-width {
   width: 100% !important;
 }
-.full-height{
+.full-height {
   height: 100% !important;
 }
-.cursor-pointer{
-  cursor: pointer !important;;
+.cursor-pointer {
+  cursor: pointer !important;
+}
+.display-xxl {
+  font-size: 72px;
+  line-height: 90px;
+}
+.display-xl {
+  font-size: 60px;
+  line-height: 72px;
+}
+.display-large {
+  font-size: 48px;
+  line-height: 60px;
+}
+.display-medium {
+  font-size: 36px;
+  line-height: 44px;
+}
+.display-small {
+  font-size: 30px;
+  line-height: 38px;
+}
+.display-xs {
+  font-size: 24px;
+  line-height: 36px;
+}
+
+.text-xl {
+  font-size: 20px;
+  line-height: 32px;
+}
+.text-large {
+  font-size: 18px;
+  line-height: 28px;
+}
+.text-medium {
+  font-size: 16px;
+  line-height: 24px;
+}
+.text-small {
+  font-size: 14px;
+  line-height: 20px;
+}
+.text-xs {
+  font-size: 12px;
+  line-height: 18px;
+}
+.caption {
+  font-size: 12px;
+  line-height: 14px;
+}
+.overline {
+  font-size: 10px;
+  line-height: 12px;
+}
+.font-weight-400 {
+  font-weight: 400;
+}
+.font-weight-500 {
+  font-weight: 500;
+}
+.font-weight-700 {
+  font-weight: 700;
 }
 </style>

@@ -11,8 +11,8 @@
         <v-img class="card-image" :src="cards.attributes.imageUrl"></v-img>
       </div>
       <div
-        v-if="cards.attributes.status == 'New'"
-        class="mt-3 pa-1"
+        v-if="cards.attributes.tag == 'New Deal'"
+        class="mt-3 pa-2"
         :style="{
           background: '#FDDF59',
           width: 'max-content',
@@ -22,11 +22,11 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.attributes.status }}
+        {{ cards.attributes.tag }}
       </div>
       <div
-        v-else-if="cards.attributes.status == 'Hot'"
-        class="mt-3 pa-1"
+        v-else-if="cards.attributes.tag == 'Hot'"
+        class="mt-3 pa-2"
         :style="{
           background: '#f65970',
           width: 'max-content',
@@ -36,11 +36,11 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.attributes.status }}
+        {{ cards.attributes.tag }}
       </div>
       <div
         v-else
-        class="mt-3 pa-1"
+        class="mt-3 pa-2"
         :style="{
           background: '#CBCBCB',
           width: 'max-content',
@@ -50,19 +50,19 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.attributes.status }}
+        {{ cards.attributes.tag }}
       </div>
     </div>
-    <div
-      class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
-    >
-      <div>
-        <v-img class="card-icon" :src="cards.attributes.iconUrl" />
-      </div>
+    <div class="mt-3 font-weight-bold text-left">
       <span class="mt-3"> {{ cards.attributes.shortDescription }} </span>
     </div>
-    <div class="mt-3 text-left">HSD: 31 Oct 2022</div>
-    <div class="mt-3 text-left">Notice: lorem ipsum</div>
+    <div class="mt-3 text-left d-flex column-gap-10">
+      <div>
+        <v-img class="card-icon" src="@/assets/redeem/card/baemin-icon.webp" />
+        <!-- <v-img class="card-icon" :src="cards.attributes.iconUrl" /> -->
+      </div>
+      <span> HSD: 31 Oct 2022 </span>
+    </div>
   </v-card>
 </template>
 
@@ -83,7 +83,7 @@ export default {
 }
 .card-image {
   border-radius: 8px;
-  height: 200px;
+  height: 160px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

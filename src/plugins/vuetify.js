@@ -38,7 +38,7 @@ export default new Vuetify({
         black: "#000000",
         white: "#F5F5F5",
         violet: "#5E6BE9",
-        yellow: "#FFF001",
+        yellow: "#F9E283",
         amber: "#FFCD00",
         orange: "#FF9A00",
         deeporange: "#FF5500",

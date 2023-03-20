@@ -18,8 +18,8 @@
           ></v-img>
         </div>
         <div
-          v-if="userStore.detailCard.status == 'Expired'"
-          class="mt-3 pa-1 px-3 status"
+          v-if="userStore.detailCard.tag == 'Expired'"
+          class="mt-3 pa-1 px-3 tag"
           :style="{
             background: '#FDDF59',
             width: 'max-content',
@@ -29,11 +29,11 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.detailCard.status }}
+          {{ userStore.detailCard.tag }}
         </div>
         <div
-          v-else-if="userStore.detailCard.status == 'Hot'"
-          class="mt-3 pa-1 px-3 status"
+          v-else-if="userStore.detailCard.tag == 'Hot'"
+          class="mt-3 pa-1 px-3 tag"
           :style="{
             background: '#f65970',
             width: 'max-content',
@@ -43,11 +43,11 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.detailCard.status }}
+          {{ userStore.detailCard.tag }}
         </div>
         <div
           v-else
-          class="mt-3 pa-1 px-3 status"
+          class="mt-3 pa-1 px-3 tag"
           :style="{
             background: '#FDDF59',
             width: 'max-content',
@@ -57,14 +57,18 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.detailCard.status }}
+          {{ userStore.detailCard.tag }}
         </div>
       </div>
       <div
         class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
       >
         <div>
-          <v-img class="drawer-icon" :src="userStore.detailCard.iconUrl" />
+          <v-img
+            class="card-icon"
+            src="@/assets/redeem/card/baemin-icon.webp"
+          />
+          <!-- <v-img class="drawer-icon" :src="userStore.detailCard.iconUrl" /> -->
         </div>
         <span class="mt-3"> {{ userStore.detailCard.title }} </span>
       </div>
@@ -97,7 +101,6 @@
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </div> -->
-    <div>id: {{ userStore.voucherId }}</div>
     <v-btn
       class="d-flex mx-auto unpurchased drawer-btn"
       elevation="2"
@@ -157,7 +160,7 @@ export default {
   background-repeat: no-repeat;
   z-index: 99;
 }
-.status {
+.tag {
   z-index: 99;
 }
 .drawer-icon {

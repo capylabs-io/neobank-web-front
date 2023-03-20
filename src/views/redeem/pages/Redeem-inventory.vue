@@ -2,35 +2,22 @@
   <div class="d-flex flex-column">
     <div class="right-container mx-auto pa-6 full-height">
       <div class="d-flex justify-space-between button-filter">
-        <div class="d-flex column-gap-10">
-          <v-btn
-            class="clothes active"
-            elevation="3"
-            rounded
-            text
-            @click="clothesTab()"
-          >
+        <div class="d-flex column-gap-10 left-filter-group pa-1">
+          <v-btn class="clothes active" rounded text @click="clothesTab()">
             Clothes
           </v-btn>
-          <v-btn
-            class="voucher"
-            elevation="3"
-            rounded
-            text
-            @click="voucherTab()"
-          >
+          <v-btn class="voucher" rounded text @click="voucherTab()">
             Voucher
           </v-btn>
         </div>
-        <div class="d-flex column-gap-10">
-          <v-btn elevation="3" rounded text> A-Z </v-btn>
-          <v-btn class="d-flex" elevation="3" rounded text>
-            <span> Price </span>
-            <v-icon>mdi-arrow-up</v-icon>
-          </v-btn>
-          <v-btn elevation="3" text>
-            <span> Price </span> <v-icon>mdi-arrow-down</v-icon>
-          </v-btn>
+        <div class="">
+          <v-select
+            class="button-filter"
+            :items="sort"
+            label="Sort By"
+            outlined
+            background-color="white"
+          ></v-select>
         </div>
       </div>
       <div class="full-width mt-6 card-container">
@@ -119,10 +106,15 @@ export default {
 }
 
 .active {
-  background: #5752e3;
-  color: white;
+  background: #f5f8ff;
+  color: #2970ff;
 }
 .pagination {
   z-index: 97;
+}
+.left-filter-group {
+  background-color: white;
+  height: max-content;
+  border-radius: 12px;
 }
 </style>

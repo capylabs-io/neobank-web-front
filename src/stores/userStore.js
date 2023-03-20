@@ -18,10 +18,11 @@ export const userStore = defineStore(
     const jwt = ref("");
     const rememberMe = ref(false);
     const isShowPass = ref(false);
-    const sortBy = ref("");
+    const sortBy = ref("asc");
     const username = ref("");
     const password = ref("");
     const voucherId = ref("");
+    const ivenVoucherQr = ref("");
     const bearerToken = ref(
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3MDUwOTA1LCJleHAiOjE2Nzk2NDI5MDV9.gCEGMkbCLUiaymG7PPoGsS5OstagMUR6GRFvmrP8VC8"
     );
@@ -33,7 +34,7 @@ export const userStore = defineStore(
       password: "",
     });
 
-    const cardData = ref({
+    const ivenCardData = ref({
       image: null,
       icon: null,
       price: "",
@@ -95,7 +96,6 @@ export const userStore = defineStore(
           snackbar.commonError(`Error occurred! Please try again later!`);
           return;
         }
-        snackbar.success("Fetch successfully!");
         this.voucherData = res.data.data;
         this.pagination = res.data.meta.pagination;
         this.voucherDataId = this.voucherData.map((index) => index.id);
@@ -120,8 +120,8 @@ export const userStore = defineStore(
           snackbar.commonError(`Error occurred! Please try again later!`);
           return;
         }
-        snackbar.success("Voucher Purchased successfully!");
         console.log("purchase", res.data);
+        snackbar.success("Voucher Purchased successfully!");
         this.$router.push({
           params: "vn",
           name: "Redeem",
@@ -139,8 +139,7 @@ export const userStore = defineStore(
           snackbar.commonError(`Error occurred! Please try again later!`);
           return;
         }
-        snackbar.success("Voucher Purchased successfully!");
-        this.userVoucher = res.data.map((index) => index.voucher);
+        this.userVoucher = res.data.map((index) => index);
         this.userVoucherId = res.data.map((index) => index.voucher.id);
         console.log("userVoucher", userVoucher);
         console.log("userVoucherId", userVoucherId);
@@ -218,7 +217,7 @@ export const userStore = defineStore(
       totalVoucherPage,
       //states
       drawer,
-      cardData,
+      ivenCardData,
       index,
       drawerDetail,
       detailCard,
@@ -243,6 +242,7 @@ export const userStore = defineStore(
       voucherPage,
       vouchersPerPage,
       sortBy,
+      ivenVoucherQr,
       //action
       signIn,
       logout,

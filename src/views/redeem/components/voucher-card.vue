@@ -16,8 +16,40 @@
         ></v-img>
       </div>
       <div
-        v-if="cards.attributes.status == 'New'"
-        class="mt-3 pa-1 px-3"
+        v-if="cards.attributes.tag == 'New Deal'"
+        class="mt-3 pa-1 px-3 white--text"
+        :style="{
+          background: '#1890FF',
+          width: 'max-content',
+          height: 'max-content',
+          position: 'absolute',
+          'border-bottom-right-radius': '8px',
+          'border-top-right-radius': '8px',
+          'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+        }"
+      >
+        {{ cards.attributes.tag }}
+      </div>
+      <div
+        v-else-if="cards.attributes.tag == 'Hot'"
+        class="mt-3 pa-1 px-3 white--text"
+        :style="{
+          background: '#EC1D1D',
+          width: 'max-content',
+          height: 'max-content',
+          position: 'absolute',
+          'border-bottom-right-radius': '8px',
+          'border-top-right-radius': '8px',
+          'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+        }"
+      >
+        {{ cards.attributes.tag }}
+      </div>
+      <div
+        v-else-if="
+          cards.attributes.purchasedQuantity == cards.attributes.totalQuantity
+        "
+        class="mt-3 pa-1 px-3 white--text"
         :style="{
           background: '#FDDF59',
           width: 'max-content',
@@ -25,113 +57,104 @@
           position: 'absolute',
           'border-bottom-right-radius': '8px',
           'border-top-right-radius': '8px',
+          'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
         }"
       >
-        {{ cards.attributes.status }}
-      </div>
-      <div
-        v-else-if="cards.attributes.status == 'Hot'"
-        class="mt-3 pa-1 px-3"
-        :style="{
-          background: '#f65970',
-          width: 'max-content',
-          height: 'max-content',
-          position: 'absolute',
-          'border-bottom-right-radius': '8px',
-          'border-top-right-radius': '8px',
-        }"
-      >
-        {{ cards.attributes.status }}
+        Out of stock
       </div>
       <div
         v-else
-        class="mt-3 pa-1 px-3"
+        class="mt-3 pa-1 px-3 white--text"
         :style="{
-          background: '#CBCBCB',
+          background: '#A9A9A9',
           width: 'max-content',
           height: 'max-content',
           position: 'absolute',
           'border-bottom-right-radius': '8px',
           'border-top-right-radius': '8px',
+          'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
         }"
       >
-        {{ cards.attributes.status }}
+        {{ cards.attributes.tag }}
       </div>
     </div>
 
     <v-hover v-slot="{ hover }">
-      <div
-        class="d-flex mt-3 font-weight-bold align-center justify-center column-gap-10"
-      >
-        <div>
-          <v-img class="card-icon" :src="cards.attributes.iconUrl" />
-        </div>
-        <div class="d-inline-block text-truncate voucher-title">
+      <div class="mt-3 font-weight-bold text-center text-truncate">
+        <div class="d-inline-block voucher-title">
           {{ cards.attributes.title }}
         </div>
         <tooltip v-if="hover" class="tooltip" :cards="cards" />
       </div>
     </v-hover>
 
-    <v-btn
-      v-if="cards.attributes.status == 'Expired'"
-      class="d-flex column-gap-10 mx-auto mt-3 expired"
-      elevation="2"
-      rounded
-      text
-      disabled
-      color="expired"
+    <div
+      class="d-flex mt-3 font-weight-bold align-center justify-center full-width column-gap-10"
     >
       <div>
-        <span
-          class="font-weight-bold pr-2"
-          :style="{ 'font-size': '18px', color: '#AFAFAF' }"
-        >
-          {{ cards.attributes.price }}</span
-        >
+        <!-- <v-img class="card-icon" :src="cards.attributes.iconUrl" /> -->
+        <v-img class="card-icon" src="@/assets/redeem/card/baemin-icon.webp" />
       </div>
-      <div>
-        <v-img
-          :style="{ 'border-radius': '40px' }"
-          :src="require(`@/assets/redeem/coin.webp`)"
-        />
-      </div>
-    </v-btn>
-    <v-btn
-      v-else-if="purchased"
-      class="d-flex column-gap-10 mx-auto mt-3 purchased"
-      elevation="2"
-      rounded
-      text
-    >
-      <v-icon color="success"> mdi-check </v-icon>
-      <div>
-        <span class="font-weight-bold text-capitalize pl-2">Purchased</span>
-      </div>
-    </v-btn>
-    <v-btn
-      v-else
-      class="d-flex column-gap-10 mx-auto mt-3 unpurchased"
-      elevation="2"
-      rounded
-      text
-      @click="Click"
-    >
-      <div>
-        <span
-          class="white--text font-weight-bold pr-2"
-          :style="{ 'font-size': '18px' }"
-        >
-          {{ cards.attributes.price }}</span
-        >
-      </div>
-      <div>
-        <v-img
-          :style="{ 'border-radius': '40px' }"
-          :src="require(`@/assets/redeem/coin.webp`)"
-        />
-      </div>
-    </v-btn>
+      <v-btn
+        v-if="cards.attributes.tag == 'Expired'"
+        class="d-flex column-gap-10 px-10 expired"
+        elevation="2"
+        rounded
+        text
+        disabled
+        color="expired"
+      >
+        <div>
+          <span
+            class="font-weight-bold pr-2"
+            :style="{ 'font-size': '18px', color: '#AFAFAF' }"
+          >
+            {{ cards.attributes.price }}</span
+          >
+        </div>
+        <div>
+          <v-img
+            :style="{ 'border-radius': '40px' }"
+            :src="require(`@/assets/redeem/coin.webp`)"
+          />
+        </div>
+      </v-btn>
+      <v-btn
+        v-else-if="purchased"
+        class="d-flex column-gap-10 px-10 purchased"
+        elevation="2"
+        rounded
+        text
+      >
+        <v-icon color="success"> mdi-check </v-icon>
+        <div>
+          <span class="font-weight-bold text-capitalize pl-2">Purchased</span>
+        </div>
+      </v-btn>
+      <v-btn
+        v-else
+        class="d-flex column-gap-10 px-10 unpurchased"
+        elevation="2"
+        rounded
+        text
+        @click="Click"
+      >
+        <div>
+          <span
+            class="white--text font-weight-bold pr-2"
+            :style="{ 'font-size': '18px' }"
+          >
+            {{ cards.attributes.price }}</span
+          >
+        </div>
+        <div>
+          <v-img
+            :style="{ 'border-radius': '40px' }"
+            :src="require(`@/assets/redeem/coin.webp`)"
+          />
+        </div>
+      </v-btn>
+    </div>
   </v-card>
 </template>
 
@@ -159,12 +182,10 @@ export default {
   },
   methods: {
     Click() {
-      if (this.userStore.userData.token > this.cards.attributes.price) {
-        this.userStore.drawerDetail = !this.userStore.drawerDetail;
-        this.userStore.setDetailStoreCard(this.cards);
-        // this.userStore.detailCard = this.cards;
-        this.userStore.voucherId = this.id;
-      }
+      this.userStore.drawerDetail = !this.userStore.drawerDetail;
+      this.userStore.setDetailStoreCard(this.cards);
+      // this.userStore.detailCard = this.cards;
+      this.userStore.voucherId = this.id;
     },
   },
 };
@@ -191,7 +212,6 @@ export default {
   position: absolute;
   width: 400px;
   top: 7%;
-  margin-left: 100px;
   z-index: 99;
 }
 

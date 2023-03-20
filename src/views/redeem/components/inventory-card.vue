@@ -2,10 +2,14 @@
   <v-card elevation="2" rounded="8" class="pa-3 inventory-card">
     <div class="card-image d-flex flex-column">
       <div class="full-width">
-        <v-img class="card-image" height="140px" :src="cards.imageUrl"></v-img>
+        <v-img
+          class="card-image"
+          height="140px"
+          :src="cards.voucher.imageUrl"
+        ></v-img>
       </div>
       <div
-        v-if="cards.status == 'Expired'"
+        v-if="cards.voucher.tag == 'New Deal'"
         class="mt-3 pa-1 px-3"
         :style="{
           background: '#FDDF59',
@@ -16,10 +20,10 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.status }}
+        {{ cards.voucher.tag }}
       </div>
       <div
-        v-else-if="cards.status == 'Hot'"
+        v-else-if="cards.voucher.tag == 'Hot'"
         class="mt-3 pa-1 px-3"
         :style="{
           background: '#f65970',
@@ -30,13 +34,13 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.status }}
+        {{ cards.voucher.tag }}
       </div>
       <div
         v-else
         class="mt-3 pa-1 px-3"
         :style="{
-          background: '#4c99eb',
+          background: '#CBCBCB',
           width: 'max-content',
           height: 'max-content',
           position: 'absolute',
@@ -44,30 +48,34 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.status }}
+        {{ cards.voucher.tag }}
       </div>
     </div>
     <div
-      class="d-flex mt-6 column-gap-10 font-weight-bold align-center justify-center"
+      class="mt-6 font-weight-bold align-center justify-center text-truncate"
     >
-      <div>
-        <v-img class="card-icon" :src="cards.iconUrl" />
-      </div>
-      <div class="d-inline-block text-truncate voucher-title">
-        {{ cards.title }}
+      <div class="voucher-title">
+        {{ cards.voucher.title }}
       </div>
     </div>
-    <v-btn
-      class="d-flex column-gap-10 mx-auto mt-3 mt-5 unpurchased"
-      elevation="2"
-      rounded
-      text
-      @click.stop="openClick"
+    <div
+      class="d-flex font-weight-bold justify-center mt-3 column-gap-10 full-width"
     >
       <div>
-        <span class="white--text font-weight-bold text-capitalize">Open</span>
+        <v-img class="card-icon" :src="cards.voucher.iconUrl" />
       </div>
-    </v-btn>
+      <v-btn
+        class="unpurchased px-10"
+        elevation="2"
+        rounded
+        text
+        @click.stop="openClick"
+      >
+        <div>
+          <span class="white--text font-weight-bold text-capitalize">Open</span>
+        </div>
+      </v-btn>
+    </div>
   </v-card>
 </template>
 
@@ -88,7 +96,8 @@ export default {
   methods: {
     openClick() {
       this.userStore.drawer = !this.userStore.drawer;
-      this.userStore.cardData = this.cards;
+      this.userStore.ivenCardData = this.cards.voucher;
+      this.userStore.ivenVoucherQr = this.cards.qrCodeUrl;
     },
   },
 };

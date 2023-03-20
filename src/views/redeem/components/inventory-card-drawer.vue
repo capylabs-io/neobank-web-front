@@ -14,11 +14,11 @@
         <div class="full-width">
           <v-img
             class="drawer-image"
-            :src="userStore.cardData.imageUrl"
+            :src="userStore.ivenCardData.imageUrl"
           ></v-img>
         </div>
         <div
-          v-if="userStore.cardData.status == 'Expired'"
+          v-if="userStore.ivenCardData.tag == 'New Deal'"
           class="mt-3 pa-1 px-3"
           :style="{
             background: '#FDDF59',
@@ -29,10 +29,10 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.cardData.status }}
+          {{ userStore.ivenCardData.tag }}
         </div>
         <div
-          v-else-if="userStore.cardData.status == 'Hot'"
+          v-else-if="userStore.ivenCardData.tag == 'Hot'"
           class="mt-3 pa-1 px-3"
           :style="{
             background: '#f65970',
@@ -43,7 +43,7 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.cardData.status }}
+          {{ userStore.ivenCardData.tag }}
         </div>
         <div
           v-else
@@ -57,34 +57,24 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.cardData.status }}
+          {{ userStore.ivenCardData.tag }}
         </div>
       </div>
       <div
         class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
       >
         <div>
-          <v-img class="drawer-icon" :src="userStore.cardData.iconUrl" />
+          <v-img class="drawer-icon" :src="userStore.ivenCardData.iconUrl" />
         </div>
-        <span class="mt-3"> {{ userStore.cardData.title }} </span>
+        <span class="mt-3"> {{ userStore.ivenCardData.title }} </span>
       </div>
       <div class="mt-3 text-left draw-text">
-        {{ userStore.cardData.shortDescription }}
-        {{ userStore.cardData.fullDescription }}
+        {{ userStore.ivenCardData.fullDescription }}
       </div>
     </v-card>
-    <v-btn
-      class="d-flex column-gap-10 mx-auto unpurchased drawer-btn"
-      elevation="2"
-      rounded
-      text
-    >
-      <div>
-        <span class="white--text font-weight-bold pr-2 text-capitalize"
-          >Redeem Now</span
-        >
-      </div>
-    </v-btn>
+    <div class="qr-img mx-auto mt-3">
+      <v-img class="" :src="userStore.ivenVoucherQr" />
+    </div>
   </v-navigation-drawer>
 </template>
 
@@ -104,7 +94,7 @@ export default {
   left: 0;
   top: 0;
   border-radius: 8px;
-  height: 240px;
+  height: 200px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -116,7 +106,7 @@ export default {
 }
 
 .draw-text {
-  height: 400px;
+  height: max-content;
   overflow-y: auto;
 }
 .col-gap-10 {
@@ -139,12 +129,12 @@ export default {
   z-index: 99;
 }
 
-.drawer-btn {
+.qr-img {
   position: sticky;
-  bottom: 0;
+  bottom: -10;
   right: 0;
-  width: 100%;
-  margin-top: 20px;
+  width: 200px;
+  height: 200px;
 }
 .unpurchased {
   background: #5752e3;

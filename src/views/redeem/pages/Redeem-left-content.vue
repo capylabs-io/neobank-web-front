@@ -1,92 +1,62 @@
 <template>
   <div class="d-flex flex-column justify-space-between full-height">
     <div class="d-flex flex-column">
-    <div
-      v-if="!userStore.jwt"
-      class="d-flex flex-column align-center justify-center left-first pa-6"
-    >
-      <div>
-        <v-img
-          :style="{ 'border-radius': '10px' }"
-          class
-          :src="require(`@/assets/redeem/user-profile.webp`)"
-        />
-      </div>
-      <div class="mt-3">
-        <span class="font-weight-bold">Tung69 #291090</span>
-      </div>
-      <div class="subtitle-2">
-        <span>tung.bro.bro69@gmail.com</span>
-      </div>
       <div
-        class="d-flex left-profile-section align-center font-weight-bold mt-3"
+        class="d-flex flex-column align-center justify-center left-first pa-6"
       >
-        <span :style="{ 'font-size': '18px' }">1000</span>
         <div>
           <v-img
-            :style="{ 'border-radius': '40px' }"
-            :src="require(`@/assets/redeem/coin.webp`)"
+            :style="{ 'border-radius': '10px' }"
+            class
+            :src="require(`@/assets/redeem/user-profile.webp`)"
           />
         </div>
-      </div>
-    </div>
-    <div
-      v-else
-      class="d-flex flex-column align-center justify-center left-first pa-6"
-    >
-      <div>
-        <v-img
-          :style="{ 'border-radius': '10px' }"
-          class
-          :src="require(`@/assets/redeem/user-profile.webp`)"
-        />
-      </div>
-      <div class="mt-3  ">
-        <span class="font-weight-bold"
-          >{{ userStore.userData.username }} #291090</span
+        <div class="mt-3">
+          <span class="font-weight-bold"
+            >{{ userStore.userData.username }} #291090</span
+          >
+        </div>
+        <div class="subtitle-2">
+          <span>{{ userStore.userData.email }}</span>
+        </div>
+        <div
+          class="d-flex left-profile-section align-center font-weight-bold mt-3 pa-2"
         >
-      </div>
-      <div class="subtitle-2">
-        <span>{{ userStore.userData.email }}</span>
-      </div>
-      <div
-        class="d-flex left-profile-section align-center font-weight-bold mt-3 pa-2"
-      >
-        <span :style="{ 'font-size': '18px' }">{{
-          userStore.userData.token
-        }}</span>
-        <div>
-          <v-img
-            :style="{ 'border-radius': '40px' }"
-            :src="require(`@/assets/redeem/coin.webp`)"
-          />
+          <span :style="{ 'font-size': '18px' }">{{
+            userStore.userData.token
+          }}</span>
+          <div>
+            <v-img
+              :style="{ 'border-radius': '40px' }"
+              :src="require(`@/assets/redeem/coin.webp`)"
+            />
+          </div>
         </div>
       </div>
-    </div>
-    <v-divider></v-divider>
-    <div class="d-flex flex-column justify-center left-second pa-6">
-      <!-- TODO: Change to v-list -->
-      <div @click="storeClick()">
-        <div class="pa-2 content d-flex store active cursor-pointer">
+      <v-divider></v-divider>
+      <div class="d-flex flex-column justify-center left-second pa-6">
+        <!-- TODO: Change to v-list -->
+        <div @click="storeClick()">
+          <div class="pa-2 content d-flex store active cursor-pointer">
             <v-icon class="mr-2">mdi-store </v-icon>
-          <span>Redeem store</span>
+            <span>Redeem store</span>
+          </div>
         </div>
-      </div>
-      <div class="mt-2" @click="inventoryClick()">
-        <div class="pa-2 content d-flex inventory cursor-pointer">
+        <div class="mt-2" @click="inventoryClick()">
+          <div class="pa-2 content d-flex inventory cursor-pointer">
             <v-icon class="mr-2"> mdi-treasure-chest</v-icon>
-          <span>Inventory</span>
+            <span>Inventory</span>
+          </div>
         </div>
-      </div>
-      <div class="mt-2" @click="accountClick()">
-        <div class="pa-2 content d-flex setting cursor-pointer">
+        <div class="mt-2" @click="accountClick()">
+          <div class="pa-2 content d-flex setting cursor-pointer">
             <v-icon class="mr-2"> mdi-account-box</v-icon>
-          <span>Account setting</span>
+            <span>Account setting</span>
+          </div>
         </div>
       </div>
+      <v-divider></v-divider>
     </div>
-    <v-divider></v-divider>
-  </div>
     <div class="d-flex flex-column align-left justify-end left-third pa-6">
       <v-btn class="" @click="signout()" text>
         <div class="mr-2">
@@ -146,7 +116,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .column-gap-10 {
   column-gap: 10px;
 }

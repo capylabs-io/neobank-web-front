@@ -11,7 +11,7 @@
       <div class="right">
         <right-content
           v-if="userStore.index == 1"
-          :voucher="userStore.slicedVoucherStore"
+          :voucher="userStore.filterVoucherStore"
           :userVoucher="userStore.userVoucherList"
         />
         <inventory-content v-else-if="userStore.index == 2" />
