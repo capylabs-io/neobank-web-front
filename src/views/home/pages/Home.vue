@@ -69,12 +69,14 @@ export default {
 
       if (this.userStore.scrollY >= 1105) {
         introduction.style.position = "relative";
-        introduction.style.animation = " zoom-in-zoom-out 3s ease-out";
-        container.style.animation = " zoom-out-zoom-in 3s ease-out";
+        introduction.style.animation = " zoom-in-zoom-out 2s ease-out";
+        container.style.animation = " zoom-out-zoom-in 2s ease-out";
         // introduction.style.top = "40vh";
         // introduction.style.left = "auto";
       } else {
         introduction.style.position = "fixed";
+        container.style.animation = " zoom-in-zoom-out 2s ease-out";
+        introduction.style.animation = " zoom-out-zoom-in 2s ease-out";
         // introduction.style.top = "45%";
         // introduction.style.left = "15%";
       }
@@ -141,7 +143,7 @@ export default {
     opacity: 0;
   }
   50% {
-    transform: scale(1.25, 1.25);
+    transform: scale(1.1, 1.1);
     opacity: 0.5;
   }
   100% {
@@ -151,11 +153,11 @@ export default {
 }
 @keyframes zoom-in-zoom-out {
   0% {
-    transform: scale(1.5, 1.5);
+    transform: scale(1.15, 1.15);
     opacity: 1;
   }
   50% {
-    transform: scale(1.25, 1.25);
+    transform: scale(1.1, 1.1);
     opacity: 0.5;
   }
   100% {

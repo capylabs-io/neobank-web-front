@@ -22,7 +22,10 @@
       <div class="text-center white--text text-xl-h2 font-weight-bold">
         Welcome to VParadise
       </div>
-      <div class="text-center white--text text-md-h6">
+      <div
+        class="text-center white--text text-md-h6"
+        :style="{ width: '60%' }"
+      >
         Journey into the future of banking with VParadise, a harmony between
         technologies and banking
       </div>
