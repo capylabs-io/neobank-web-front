@@ -18,9 +18,9 @@
             </div>
             <v-icon>mdi-chevron-down</v-icon>
           </v-card> -->
-          <div class="text-left">SORT BY: {{ userStore.sortBy }}</div>
+          <div class="text-left">SORT BY: {{ voucherStore.sortBy }}</div>
           <v-select
-            v-model="userStore.sortBy"
+            v-model="voucherStore.sortBy"
             class="filter mt-2"
             :items="sort"
             item-text="name"
@@ -65,8 +65,8 @@
     </div>
     <div class="pagination">
       <v-pagination
-        v-model="userStore.voucherPage"
-        :length="userStore.totalVoucherPage"
+        v-model="voucherStore.voucherPage"
+        :length="voucherStore.totalVoucherPage"
         light
         circle
         color="#5752e3"
@@ -79,6 +79,7 @@
 import voucherCard from "@/views/redeem/components/voucher-card.vue";
 import clothesCard from "@/views/redeem/components/clothes-card.vue";
 import { userStore } from "@/stores/userStore";
+import { voucherStore } from "@/stores/voucherStore";
 import { mapStores } from "pinia";
 export default {
   props: ["voucher", "userVoucher"],
@@ -88,6 +89,7 @@ export default {
   },
   computed: {
     ...mapStores(userStore),
+    ...mapStores(voucherStore),
   },
   mounted() {
     console.log("voucher", this.voucher);

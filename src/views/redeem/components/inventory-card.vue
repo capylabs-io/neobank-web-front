@@ -62,7 +62,8 @@
       class="d-flex font-weight-bold justify-center mt-3 column-gap-10 full-width"
     >
       <div>
-        <v-img class="card-icon" :src="cards.voucher.iconUrl" />
+        <!-- <v-img class="card-icon" :src="cards.voucher.iconUrl" /> -->
+        <v-img class="card-icon" src="@/assets/redeem/card/baemin-icon.webp" />
       </div>
       <v-btn
         class="unpurchased px-10"
@@ -82,9 +83,11 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "../../../stores/userStore";
+import { voucherStore } from "../../../stores/voucherStore";
 export default {
   computed: {
     ...mapStores(userStore),
+    ...mapStores(voucherStore),
   },
   props: ["cards"],
   data() {
@@ -95,9 +98,9 @@ export default {
   },
   methods: {
     openClick() {
-      this.userStore.drawer = !this.userStore.drawer;
-      this.userStore.ivenCardData = this.cards.voucher;
-      this.userStore.ivenVoucherQr = this.cards.qrCodeUrl;
+      this.voucherStore.drawer = !this.voucherStore.drawer;
+      this.voucherStore.ivenCardData = this.cards.voucher;
+      this.voucherStore.ivenVoucherQr = this.cards.qrCodeUrl;
     },
   },
 };

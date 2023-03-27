@@ -30,16 +30,6 @@
       >
         <div class="text-capitalize">REDEEM</div>
       </router-link>
-
-      <!-- <router-link
-        to="/"
-        class="white--text text-decoration-none align-self-center"
-      >
-        <div class="text-none text-uppercase">SME</div>
-      </router-link> -->
-      <!-- <v-btn text icon>
-        <v-icon color="green">mdi-magnify</v-icon>
-      </v-btn> -->
     </div>
 
     <!-- <div v-else class="d-flex align-center justify-space-between">

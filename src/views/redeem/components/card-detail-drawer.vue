@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-model="userStore.drawerDetail"
+    v-model="voucherStore.drawerDetail"
     absolute
     temporary
     right
@@ -14,11 +14,11 @@
         <div class="full-width">
           <v-img
             class="drawer-image"
-            :src="userStore.detailCard.imageUrl"
+            :src="voucherStore.detailCard.imageUrl"
           ></v-img>
         </div>
         <div
-          v-if="userStore.detailCard.tag == 'Expired'"
+          v-if="voucherStore.detailCard.tag == 'Expired'"
           class="mt-3 pa-1 px-3 tag"
           :style="{
             background: '#FDDF59',
@@ -29,10 +29,10 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.detailCard.tag }}
+          {{ voucherStore.detailCard.tag }}
         </div>
         <div
-          v-else-if="userStore.detailCard.tag == 'Hot'"
+          v-else-if="voucherStore.detailCard.tag == 'Hot'"
           class="mt-3 pa-1 px-3 tag"
           :style="{
             background: '#f65970',
@@ -43,7 +43,7 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.detailCard.tag }}
+          {{ voucherStore.detailCard.tag }}
         </div>
         <div
           v-else
@@ -57,7 +57,7 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.detailCard.tag }}
+          {{ voucherStore.detailCard.tag }}
         </div>
       </div>
       <div
@@ -68,17 +68,17 @@
             class="card-icon"
             src="@/assets/redeem/card/baemin-icon.webp"
           />
-          <!-- <v-img class="drawer-icon" :src="userStore.detailCard.iconUrl" /> -->
+          <!-- <v-img class="drawer-icon" :src="voucherStore.detailCard.iconUrl" /> -->
         </div>
-        <span class="mt-3"> {{ userStore.detailCard.title }} </span>
+        <span class="mt-3"> {{ voucherStore.detailCard.title }} </span>
       </div>
       <div class="mt-3 text-left draw-text">
-        {{ userStore.detailCard.shortDescription }}
-        {{ userStore.detailCard.fullDescription }}
+        {{ voucherStore.detailCard.shortDescription }}
+        {{ voucherStore.detailCard.fullDescription }}
       </div>
     </v-card>
     <!-- <div class="d-flex col-gap-10 align-center amount-container">
-      <v-btn v-if="userStore.detailCard.attributes.quantity == 0" icon disabled>
+      <v-btn v-if="voucherStore.detailCard.attributes.quantity == 0" icon disabled>
         <v-icon>mdi-minus</v-icon>
       </v-btn>
       <v-btn v-else icon @click="decrease">
@@ -86,11 +86,11 @@
       </v-btn>
       <div class="">
         <v-input class="number">
-          {{ userStore.detailCard.attributes.quantity }}
+          {{ voucherStore.detailCard.attributes.quantity }}
         </v-input>
       </div>
       <v-btn
-        v-if="userStore.detailCard.attributes.quantity == 10"
+        v-if="voucherStore.detailCard.attributes.quantity == 10"
         disabled
         icon
         @click="increase"
@@ -120,9 +120,11 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "../../../stores/userStore";
+import { voucherStore } from "../../../stores/voucherStore";
 export default {
   computed: {
     ...mapStores(userStore),
+    ...mapStores(voucherStore),
   },
   data() {
     return {
@@ -131,18 +133,18 @@ export default {
   },
   methods: {
     increase() {
-      var number = this.userStore.detailCard.attributes.quantity;
+      var number = this.voucherStore.detailCard.attributes.quantity;
       number++;
-      this.userStore.detailCard.attributes.quantity = number + "";
+      this.voucherStore.detailCard.attributes.quantity = number + "";
     },
     decrease() {
-      var number = this.userStore.detailCard.attributes.quantity;
+      var number = this.voucherStore.detailCard.attributes.quantity;
       number--;
-      this.userStore.detailCard.attributes.quantity = number + "";
+      this.voucherStore.detailCard.attributes.quantity = number + "";
     },
     buy() {
-      this.userStore.drawerDetail = !this.userStore.drawerDetail;
-      this.userStore.cfDialog = true;
+      this.voucherStore.drawerDetail = !this.voucherStore.drawerDetail;
+      this.voucherStore.cfDialog = true;
     },
   },
 };

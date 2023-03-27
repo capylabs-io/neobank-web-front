@@ -1,13 +1,13 @@
 <template>
   <v-app>
-    <app-navbar v-if="userStore.pageIndex == 1" />
-    <page-navbar v-else-if="userStore.pageIndex == 2" />
+    <app-navbar v-if="voucherStore.pageIndex == 1" />
+    <page-navbar v-else-if="voucherStore.pageIndex == 2" />
     <div v-else />
     <v-main>
       <SnackBar />
       <router-view :key="$route.fullPath" />
     </v-main>
-    <app-footer v-if="userStore.pageIndex == 1" />
+    <app-footer v-if="voucherStore.pageIndex == 1" />
   </v-app>
 </template>
 <script>
@@ -16,6 +16,7 @@ import HomeNavigationBar from "./components/NavigationBar.vue";
 import PageNavigationBar from "./components/NavigationBarPage.vue";
 import { mapStores } from "pinia";
 import { userStore } from "../src/stores/userStore";
+import { voucherStore } from "../src/stores/voucherStore";
 import SnackBar from "@/components/snack-bar/snack-bar.vue";
 export default {
   components: {
@@ -26,6 +27,7 @@ export default {
   },
   computed: {
     ...mapStores(userStore),
+    ...mapStores(voucherStore),
   },
   created() {},
   data() {

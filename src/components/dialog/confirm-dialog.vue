@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="userStore.cfDialog" width="600px">
+  <v-dialog v-model="voucherStore.cfDialog" width="600px">
     <v-card>
       <v-card-title>
         <span class="text-h5">Do you want to purchase this voucher?</span>
@@ -10,7 +10,7 @@
         <v-btn
           color="green-darken-1"
           variant="text"
-          @click="userStore.cfDialog = false"
+          @click="voucherStore.cfDialog = false"
         >
           No
         </v-btn>
@@ -22,15 +22,15 @@
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "../../stores/userStore";
+import { voucherStore } from "../../stores/voucherStore";
 export default {
   computed: {
-    ...mapStores(userStore),
+    ...mapStores(voucherStore),
   },
   methods: {
     buy() {
-      this.userStore.cfDialog = false;
-      this.userStore.purchaseVoucher();
+      this.voucherStore.cfDialog = false;
+      this.voucherStore.purchaseVoucher();
       this.$router.push("/vn/redeem");
     },
   },

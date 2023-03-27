@@ -71,9 +71,11 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "../../../stores/userStore";
+import { voucherStore } from "../../../stores/voucherStore";
 export default {
   computed: {
     ...mapStores(userStore),
+    ...mapStores(voucherStore),
   },
   mounted() {
     this.carousel();
@@ -83,7 +85,7 @@ export default {
       const store = document.querySelector(".store");
       const inventory = document.querySelector(".inventory");
       const setting = document.querySelector(".setting");
-      this.userStore.index = 2;
+      this.voucherStore.index = 2;
       store.classList.remove("active");
       inventory.classList.add("active");
       setting.classList.remove("active");
@@ -92,7 +94,7 @@ export default {
       const store = document.querySelector(".store");
       const inventory = document.querySelector(".inventory");
       const setting = document.querySelector(".setting");
-      this.userStore.index = 1;
+      this.voucherStore.index = 1;
       store.classList.add("active");
       inventory.classList.remove("active");
       setting.classList.remove("active");
@@ -101,7 +103,7 @@ export default {
       const store = document.querySelector(".store");
       const inventory = document.querySelector(".inventory");
       const setting = document.querySelector(".setting");
-      this.userStore.index = 3;
+      this.voucherStore.index = 3;
       store.classList.remove("active");
       inventory.classList.remove("active");
       setting.classList.add("active");

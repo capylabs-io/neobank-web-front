@@ -10,11 +10,11 @@
       </div>
       <div class="right">
         <right-content
-          v-if="userStore.index == 1"
-          :voucher="userStore.filterVoucherStore"
-          :userVoucher="userStore.userVoucherList"
+          v-if="voucherStore.index == 1"
+          :voucher="voucherStore.filterVoucherStore"
+          :userVoucher="voucherStore.userVoucherList"
         />
-        <inventory-content v-else-if="userStore.index == 2" />
+        <inventory-content v-else-if="voucherStore.index == 2" />
         <accountSetting v-else />
       </div>
     </div>
@@ -31,6 +31,7 @@ import inventoryDrawer from "@/views/redeem/components/inventory-card-drawer.vue
 import confirmDialog from "@/components/dialog/confirm-dialog.vue";
 
 import { mapStores } from "pinia";
+import { voucherStore } from "../../../stores/voucherStore";
 import { userStore } from "../../../stores/userStore";
 
 export default {
@@ -44,6 +45,7 @@ export default {
     confirmDialog: confirmDialog,
   },
   computed: {
+    ...mapStores(voucherStore),
     ...mapStores(userStore),
   },
   mounted() {
@@ -51,11 +53,12 @@ export default {
       this.$router.push("/vn/login");
     }
     this.change();
-    this.userStore.fetchUserVoucher();
-    this.userStore.fetchVoucher();
+    this.voucherStore.bearerToken = JSON.parse(sessionStorage.getItem("user"));
+    this.voucherStore.fetchUserVoucher();
+    this.voucherStore.fetchVoucher();
     setTimeout(() => {
-      this.userStore.checkIncludes();
-      console.log("dataFilter:", this.userStore.filterVoucherStore);
+      this.voucherStore.checkIncludes();
+      console.log("dataFilter:", this.voucherStore.filterVoucherStore);
     }, 1500);
   },
   data() {
@@ -65,7 +68,7 @@ export default {
   },
   methods: {
     change() {
-      this.userStore.pageIndex = 2;
+      this.voucherStore.pageIndex = 2;
     },
   },
 };

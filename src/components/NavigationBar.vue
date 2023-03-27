@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex nav-bar">
     <div
-      v-if="userStore.scrollY < 1100"
+      v-if="voucherStore.scrollY < 1100"
       class="d-flex gap-24 DMSans black--text nav-container justify-center align-center mx-auto pa-7"
     >
       <v-img
@@ -83,12 +83,14 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "../stores/userStore";
+import { voucherStore } from "../stores/voucherStore";
 export default {
   data() {
     return {};
   },
   computed: {
     ...mapStores(userStore),
+    ...mapStores(voucherStore),
   },
 };
 </script>

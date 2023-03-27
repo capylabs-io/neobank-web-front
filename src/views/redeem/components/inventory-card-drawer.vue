@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-model="userStore.drawer"
+    v-model="voucherStore.drawer"
     absolute
     temporary
     right
@@ -14,11 +14,11 @@
         <div class="full-width">
           <v-img
             class="drawer-image"
-            :src="userStore.ivenCardData.imageUrl"
+            :src="voucherStore.ivenCardData.imageUrl"
           ></v-img>
         </div>
         <div
-          v-if="userStore.ivenCardData.tag == 'New Deal'"
+          v-if="voucherStore.ivenCardData.tag == 'New Deal'"
           class="mt-3 pa-1 px-3"
           :style="{
             background: '#FDDF59',
@@ -29,10 +29,10 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.ivenCardData.tag }}
+          {{ voucherStore.ivenCardData.tag }}
         </div>
         <div
-          v-else-if="userStore.ivenCardData.tag == 'Hot'"
+          v-else-if="voucherStore.ivenCardData.tag == 'Hot'"
           class="mt-3 pa-1 px-3"
           :style="{
             background: '#f65970',
@@ -43,7 +43,7 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.ivenCardData.tag }}
+          {{ voucherStore.ivenCardData.tag }}
         </div>
         <div
           v-else
@@ -57,23 +57,23 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ userStore.ivenCardData.tag }}
+          {{ voucherStore.ivenCardData.tag }}
         </div>
       </div>
       <div
         class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
       >
         <div>
-          <v-img class="drawer-icon" :src="userStore.ivenCardData.iconUrl" />
+          <v-img class="drawer-icon" :src="voucherStore.ivenCardData.iconUrl" />
         </div>
-        <span class="mt-3"> {{ userStore.ivenCardData.title }} </span>
+        <span class="mt-3"> {{ voucherStore.ivenCardData.title }} </span>
       </div>
       <div class="mt-3 text-left draw-text">
-        {{ userStore.ivenCardData.fullDescription }}
+        {{ voucherStore.ivenCardData.fullDescription }}
       </div>
     </v-card>
     <div class="qr-img mx-auto mt-3">
-      <v-img class="" :src="userStore.ivenVoucherQr" />
+      <v-img class="" :src="voucherStore.ivenVoucherQr" />
     </div>
   </v-navigation-drawer>
 </template>
@@ -81,9 +81,11 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "../../../stores/userStore";
+import { voucherStore } from "../../../stores/voucherStore";
 export default {
   computed: {
     ...mapStores(userStore),
+    ...mapStores(voucherStore),
   },
 };
 </script>

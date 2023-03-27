@@ -1,7 +1,7 @@
 <template>
   <div class="home mx-auto">
     <div
-      v-if="windowWidth > 1280 || userStore.scrollY < 1070"
+      v-if="windowWidth > 1280 || voucherStore.scrollY < 1070"
       class="doorway tag"
       :style="{
         backgroundImage: 'url(' + require(`@/assets/home/door.webp`) + ')',
@@ -10,7 +10,6 @@
 
     <introduction />
     <div class="container DMSans mx-auto d-flex flex-column">
-      <!-- <intro /> -->
       <firstsection />
       <secondSection />
       <thirdSection />
@@ -21,11 +20,11 @@
 <script>
 import firstSectionVue from "../components/first-section.vue";
 import introductionVue from "../components/introduction.vue";
-// import intro from "../components/intro-doorway.vue";
 import secondsection from "../components/second-section.vue";
 import thirdSectionVue from "../components/third-section.vue";
 import { mapStores } from "pinia";
 import { userStore } from "../../../stores/userStore";
+import { voucherStore } from "../../../stores/voucherStore";
 
 export default {
   name: "HomeView",
@@ -34,10 +33,10 @@ export default {
     firstsection: firstSectionVue,
     secondSection: secondsection,
     thirdSection: thirdSectionVue,
-    // intro: intro,
   },
   computed: {
     ...mapStores(userStore),
+    ...mapStores(voucherStore),
   },
   data() {
     return {
@@ -46,8 +45,7 @@ export default {
       windowWidth: window.innerWidth,
     };
   },
-  mounted: {},
-  created() {
+  mounted() {
     window.addEventListener("scroll", this.handleScroll);
     this.change();
   },
@@ -56,7 +54,7 @@ export default {
   },
   methods: {
     change() {
-      this.userStore.pageIndex = 1;
+      this.voucherStore.pageIndex = 1;
     },
     handleScroll() {
       const doorway = document.querySelector(".doorway");
@@ -64,10 +62,10 @@ export default {
       const container = document.querySelector(".container");
       const scrollY = window.scrollY;
       this.scrollValue = scrollY;
-      this.userStore.scrollY = scrollY;
+      this.voucherStore.scrollY = scrollY;
       console.log(scrollY);
 
-      if (this.userStore.scrollY >= 1105) {
+      if (this.voucherStore.scrollY >= 1105) {
         introduction.style.position = "relative";
         introduction.style.animation = " zoom-in-zoom-out 2s ease-out";
         container.style.animation = " zoom-out-zoom-in 2s ease-out";

@@ -94,6 +94,7 @@ import GoogleIcon from "@/components/svg/google.vue";
 import AppleIcon from "@/components/svg/apple.vue";
 import { mapStores } from "pinia";
 import { userStore } from "../../../stores/userStore";
+import { voucherStore } from "../../../stores/voucherStore";
 import { rules } from "@/plugins/rules";
 export default {
   components: {
@@ -106,6 +107,7 @@ export default {
   },
   computed: {
     ...mapStores(userStore),
+    ...mapStores(voucherStore),
   },
   data() {
     return {
@@ -121,7 +123,7 @@ export default {
       });
     },
     change() {
-      this.userStore.pageIndex = 3;
+      this.voucherStore.pageIndex = 3;
     },
     submitForm() {
       if (this.$refs.form.validate()) {

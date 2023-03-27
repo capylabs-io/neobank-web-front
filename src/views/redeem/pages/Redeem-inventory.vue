@@ -28,7 +28,7 @@
             md="3"
             sm="6"
             xs="12"
-            v-for="card in userStore.userVoucher"
+            v-for="card in voucherStore.userVoucher"
             :key="card.id"
           >
             <inventoryCard :id="card.id" :cards="card" />
@@ -45,6 +45,7 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
+import { voucherStore } from "@/stores/voucherStore";
 import inventoryCard from "@/views/redeem/components/inventory-card.vue";
 export default {
   components: {
@@ -56,6 +57,7 @@ export default {
   },
   computed: {
     ...mapStores(userStore),
+    ...mapStores(voucherStore),
   },
   watch: {
     group() {

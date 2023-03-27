@@ -161,6 +161,7 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "../../../stores/userStore";
+import { voucherStore } from "../../../stores/voucherStore";
 import tooltip from "@/views/redeem/components/card-tooltip.vue";
 export default {
   components: {
@@ -169,6 +170,7 @@ export default {
   props: ["cards", "id"],
   computed: {
     ...mapStores(userStore),
+    ...mapStores(voucherStore),
   },
   data() {
     return {
@@ -178,14 +180,13 @@ export default {
     };
   },
   mounted() {
-    this.purchased = this.userStore.voucherPurchased.includes(this.id);
+    this.purchased = this.voucherStore.voucherPurchased.includes(this.id);
   },
   methods: {
     Click() {
-      this.userStore.drawerDetail = !this.userStore.drawerDetail;
-      this.userStore.setDetailStoreCard(this.cards);
-      // this.userStore.detailCard = this.cards;
-      this.userStore.voucherId = this.id;
+      this.voucherStore.drawerDetail = !this.voucherStore.drawerDetail;
+      this.voucherStore.setDetailStoreCard(this.cards);
+      this.voucherStore.voucherId = this.id;
     },
   },
 };
