@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex nav-bar">
     <div
-      v-if="voucherStore.scrollY < 1100"
+      v-if="homeStore.scrollY < 1100 && homeStore.scrollY > 90"
       class="d-flex gap-24 DMSans black--text nav-container justify-center align-center mx-auto pa-7"
     >
       <v-img
@@ -40,7 +40,7 @@
     </div>
 
     <div
-      v-else
+      v-else-if="homeStore.scrollY > 90"
       class="d-flex gap-24 DMSans black--text nav-container-white justify-center align-center mx-auto pa-7"
     >
       <v-img
@@ -83,14 +83,14 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "../stores/userStore";
-import { voucherStore } from "../stores/voucherStore";
+import { homeStore } from "@/views/home/store/homeStore";
 export default {
   data() {
     return {};
   },
   computed: {
     ...mapStores(userStore),
-    ...mapStores(voucherStore),
+    ...mapStores(homeStore),
   },
 };
 </script>

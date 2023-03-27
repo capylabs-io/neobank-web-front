@@ -1,7 +1,7 @@
 <template>
   <div class="home mx-auto">
     <div
-      v-if="windowWidth > 1280 || voucherStore.scrollY < 1070"
+      v-if="windowWidth > 1280 || homeStore.scrollY < 1070"
       class="doorway tag"
       :style="{
         backgroundImage: 'url(' + require(`@/assets/home/door.webp`) + ')',
@@ -23,7 +23,7 @@ import introductionVue from "../components/introduction.vue";
 import secondsection from "../components/second-section.vue";
 import thirdSectionVue from "../components/third-section.vue";
 import { mapStores } from "pinia";
-import { userStore } from "../../../stores/userStore";
+import { homeStore } from "@/views/home/store/homeStore";
 import { voucherStore } from "../../../stores/voucherStore";
 
 export default {
@@ -35,8 +35,8 @@ export default {
     thirdSection: thirdSectionVue,
   },
   computed: {
-    ...mapStores(userStore),
     ...mapStores(voucherStore),
+    ...mapStores(homeStore),
   },
   data() {
     return {
@@ -62,10 +62,10 @@ export default {
       const container = document.querySelector(".container");
       const scrollY = window.scrollY;
       this.scrollValue = scrollY;
-      this.voucherStore.scrollY = scrollY;
+      this.homeStore.scrollY = scrollY;
       console.log(scrollY);
 
-      if (this.voucherStore.scrollY >= 1105) {
+      if (this.homeStore.scrollY >= 1105) {
         introduction.style.position = "relative";
         introduction.style.animation = " zoom-in-zoom-out 2s ease-out";
         container.style.animation = " zoom-out-zoom-in 2s ease-out";

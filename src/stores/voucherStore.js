@@ -11,7 +11,6 @@ export const voucherStore = defineStore("voucher", () => {
   const pageIndex = ref(1);
   const index = ref(1);
   const cfDialog = ref(false);
-  const scrollY = ref(1);
   const sortBy = ref("asc");
   const voucherId = ref("");
   const ivenVoucherQr = ref("");
