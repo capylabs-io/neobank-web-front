@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "",
-    redirect: `/${i18n.locale}`,
+    redirect: `/${i18n.locale}/home`,
   },
   {
     path: "/:lang",
@@ -17,7 +17,7 @@ const routes = [
     },
     children: [
       {
-        path: "",
+        path: "home",
         name: "home",
         component: Home,
       },

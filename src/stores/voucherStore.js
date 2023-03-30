@@ -8,15 +8,20 @@ export const voucherStore = defineStore("voucher", () => {
   const snackbar = snackBarController(); //store
   const drawer = ref(false);
   const drawerDetail = ref(false);
+  const cfDialog = ref(false);
+  const profileEdit = ref(false);
+  const changePassword = ref(false);
+
   const pageIndex = ref(1);
   const index = ref(1);
-  const cfDialog = ref(false);
-  const sortBy = ref("asc");
+  const voucherPage = ref(1);
+  const vouchersPerPage = ref(10);
+
+  const sortBy = ref("");
   const voucherId = ref("");
   const ivenVoucherQr = ref("");
+
   const bearerToken = ref({});
-  const vouchersPerPage = ref(10);
-  const voucherPage = ref(1);
   const ivenCardData = ref({});
   const voucherData = ref([]);
   const voucherDataId = ref([]);
@@ -162,6 +167,8 @@ export const voucherStore = defineStore("voucher", () => {
     vouchersPerPage,
     sortBy,
     ivenVoucherQr,
+    changePassword,
+    profileEdit,
     //action
     fetchVoucher,
     fetchUserVoucher,

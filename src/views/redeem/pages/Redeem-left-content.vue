@@ -23,9 +23,9 @@
           class="d-flex left-profile-section align-center font-weight-bold mt-3 pa-2"
         >
           <span :style="{ 'font-size': '18px' }">{{
-            userStore.userData.token
+            userStore.userData.userMetadata.token
           }}</span>
-          <div>
+          <div class="ml-2">
             <v-img
               :style="{ 'border-radius': '40px' }"
               :src="require(`@/assets/redeem/coin.webp`)"

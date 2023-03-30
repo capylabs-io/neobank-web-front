@@ -14,12 +14,12 @@
         <div class="full-width">
           <v-img
             class="drawer-image"
-            :src="voucherStore.detailCard.imageUrl"
+            :src="voucherStore.detailCard.thumbnailUrl"
           ></v-img>
         </div>
         <div
-          v-if="voucherStore.detailCard.tag == 'Expired'"
-          class="mt-3 pa-1 px-3 tag"
+          v-if="voucherStore.detailCard.status == 'Expired'"
+          class="mt-3 pa-1 px-3 status"
           :style="{
             background: '#FDDF59',
             width: 'max-content',
@@ -29,11 +29,11 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ voucherStore.detailCard.tag }}
+          {{ voucherStore.detailCard.status }}
         </div>
         <div
-          v-else-if="voucherStore.detailCard.tag == 'Hot'"
-          class="mt-3 pa-1 px-3 tag"
+          v-else-if="voucherStore.detailCard.status == 'Hot'"
+          class="mt-3 pa-1 px-3 status"
           :style="{
             background: '#f65970',
             width: 'max-content',
@@ -43,11 +43,11 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ voucherStore.detailCard.tag }}
+          {{ voucherStore.detailCard.status }}
         </div>
         <div
           v-else
-          class="mt-3 pa-1 px-3 tag"
+          class="mt-3 pa-1 px-3 status"
           :style="{
             background: '#FDDF59',
             width: 'max-content',
@@ -57,7 +57,7 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ voucherStore.detailCard.tag }}
+          {{ voucherStore.detailCard.status }}
         </div>
       </div>
       <div
@@ -65,8 +65,10 @@
       >
         <div>
           <v-img
-            class="card-icon"
-            src="@/assets/redeem/card/baemin-icon.webp"
+            class="drawer-icon"
+            :src="
+              voucherStore.detailCard.campaignCategory.data.attributes.iconUrl
+            "
           />
           <!-- <v-img class="drawer-icon" :src="voucherStore.detailCard.iconUrl" /> -->
         </div>
@@ -162,7 +164,7 @@ export default {
   background-repeat: no-repeat;
   z-index: 99;
 }
-.tag {
+.status {
   z-index: 99;
 }
 .drawer-icon {

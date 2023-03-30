@@ -1,7 +1,7 @@
 <template>
   <v-card elevation="2" rounded="8" class="pa-3">
     <v-skeleton-loader
-      v-if="!cards.attributes.imageUrl"
+      v-if="!cards.attributes.thumbnailUrl"
       color="lighten-4"
       class="pa-3 card-image mx-auto"
       type="image"
@@ -12,11 +12,11 @@
         <v-img
           class="card-image"
           height="140px"
-          :src="cards.attributes.imageUrl"
+          :src="cards.attributes.thumbnailUrl"
         ></v-img>
       </div>
       <div
-        v-if="cards.attributes.tag == 'New Deal'"
+        v-if="cards.attributes.status == 'New Deal'"
         class="mt-3 pa-1 px-3 white--text"
         :style="{
           background: '#1890FF',
@@ -28,10 +28,10 @@
           'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
         }"
       >
-        {{ cards.attributes.tag }}
+        {{ cards.attributes.status }}
       </div>
       <div
-        v-else-if="cards.attributes.tag == 'Hot'"
+        v-else-if="cards.attributes.status == 'Hot'"
         class="mt-3 pa-1 px-3 white--text"
         :style="{
           background: '#EC1D1D',
@@ -43,7 +43,7 @@
           'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
         }"
       >
-        {{ cards.attributes.tag }}
+        {{ cards.attributes.status }}
       </div>
       <div
         v-else-if="
@@ -75,7 +75,7 @@
           'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
         }"
       >
-        {{ cards.attributes.tag }}
+        {{ cards.attributes.status }}
       </div>
     </div>
 
@@ -89,15 +89,20 @@
     </v-hover>
 
     <div
-      class="d-flex mt-3 font-weight-bold align-center justify-center full-width column-gap-10"
+      class="d-flex mt-3 font-weight-bold align-center justify-center column-gap-10"
     >
       <div>
-        <!-- <v-img class="card-icon" :src="cards.attributes.iconUrl" /> -->
-        <v-img class="card-icon" src="@/assets/redeem/card/baemin-icon.webp" />
+        <v-img
+          class="card-icon"
+          :src="
+            cards.attributes.campaignCategory.data.attributes.iconUrl
+          "
+        />
+        <!-- <v-img class="card-icon" src="@/assets/redeem/card/baemin-icon.webp" /> -->
       </div>
       <v-btn
-        v-if="cards.attributes.tag == 'Expired'"
-        class="d-flex column-gap-10 px-10 expired"
+        v-if="cards.attributes.status == 'Expired'"
+        class="d-flex column-gap-10 expired"
         elevation="2"
         rounded
         text
@@ -121,7 +126,7 @@
       </v-btn>
       <v-btn
         v-else-if="purchased"
-        class="d-flex column-gap-10 px-10 purchased"
+        class="d-flex column-gap-10 purchased"
         elevation="2"
         rounded
         text
@@ -133,7 +138,7 @@
       </v-btn>
       <v-btn
         v-else
-        class="d-flex column-gap-10 px-10 unpurchased"
+        class="d-flex column-gap-10 unpurchased"
         elevation="2"
         rounded
         text
@@ -202,8 +207,8 @@ export default {
 }
 .card-icon {
   border-radius: 100px;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
 }
 
 .column-gap-10 {
@@ -217,19 +222,26 @@ export default {
 }
 
 .v-card {
-  border-radius: 8px;
+  border-radius: 12px;
   animation: fadeleft 1s ease-in-out;
+  width: max-content;
+}
+.v-card:hover {
+  border: 2px solid var(--v-blue-base);
 }
 
 .unpurchased {
-  background: #5752e3;
+  width: calc(100% - 45px);
+  background: var(--v-blue-base);
   padding: 4px, 16px, 4px, 16px;
 }
 .expired {
+  width: calc(100% - 45px);
   padding: 4px, 16px, 4px, 16px;
 }
 
 .purchased {
+  width: calc(100% - 45px);
   background: #00ff2926;
   color: #22c33c;
   padding: 4px, 16px, 4px, 16px;

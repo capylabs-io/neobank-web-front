@@ -8,10 +8,10 @@
   >
     <div class="card-image d-flex flex-column">
       <div class="full-width">
-        <v-img class="card-image" :src="cards.attributes.imageUrl"></v-img>
+        <v-img class="card-image" :src="cards.attributes.thumbnailUrl"></v-img>
       </div>
       <div
-        v-if="cards.attributes.tag == 'New Deal'"
+        v-if="cards.attributes.status == 'New Deal'"
         class="mt-3 pa-2"
         :style="{
           background: '#FDDF59',
@@ -22,10 +22,10 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.attributes.tag }}
+        {{ cards.attributes.status }}
       </div>
       <div
-        v-else-if="cards.attributes.tag == 'Hot'"
+        v-else-if="cards.attributes.status == 'Hot'"
         class="mt-3 pa-2"
         :style="{
           background: '#f65970',
@@ -36,7 +36,7 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.attributes.tag }}
+        {{ cards.attributes.status }}
       </div>
       <div
         v-else
@@ -50,7 +50,7 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.attributes.tag }}
+        {{ cards.attributes.status }}
       </div>
     </div>
     <div class="mt-3 font-weight-bold text-left">
@@ -58,7 +58,10 @@
     </div>
     <div class="mt-3 text-left d-flex column-gap-10">
       <div>
-        <v-img class="card-icon" src="@/assets/redeem/card/baemin-icon.webp" />
+        <v-img
+          class="card-icon"
+          :src="cards.attributes.campaignCategory.data.attributes.iconUrl"
+        />
         <!-- <v-img class="card-icon" :src="cards.attributes.iconUrl" /> -->
       </div>
       <span> HSD: 31 Oct 2022 </span>

@@ -59,15 +59,15 @@ export const User = {
 };
 export const Voucher = {
   fetchVouchers: (token) =>
-    axios.get("vouchers?pagination[limit]=-1", {
+    axios.get("campaigns?populate=campaignCategory", {
       headers: {
         Authorization: "Bearer " + token,
       },
     }),
   purchaseVouchers: (id, token) =>
     axios.post(
-      `vouchers/${id}/purchase`,
-      {},
+      `user/vouchers`,
+      { campaignId: id },
       {
         headers: {
           Authorization: "Bearer " + token,

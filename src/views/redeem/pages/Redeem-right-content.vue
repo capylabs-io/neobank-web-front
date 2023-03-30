@@ -10,22 +10,19 @@
             Voucher
           </v-btn>
         </div>
-        <div class="right-filter-group pa-2">
-          <!-- <v-card class="d-flex text-left px-3 right-filter-group">
-            <div class="d-flex flex-column">
-              <span class="overline">SORT BY</span>
-              <span class="text-small">--Select One--</span>
-            </div>
-            <v-icon>mdi-chevron-down</v-icon>
-          </v-card> -->
-          <div class="text-left">SORT BY: {{ voucherStore.sortBy }}</div>
+        <div class="right-filter-group">
           <v-select
+            class="btn-customize"
             v-model="voucherStore.sortBy"
-            class="filter mt-2"
+            label="SortBy"
             :items="sort"
             item-text="name"
-            label="---Select One---"
-            outlined
+            :menu-props="{ maxHeight: '400' }"
+            solo
+            dense
+            flat
+            hide-details
+            persistent-hint
           ></v-select>
         </div>
       </div>
@@ -34,7 +31,7 @@
         <v-row>
           <v-col
             cols="12"
-            xl="3"
+            xl="2"
             md="3"
             sm="6"
             xs="12"
@@ -204,8 +201,12 @@ export default {
 }
 .right-filter-group {
   width: max-content;
-  background-color: white;
-  border-radius: 12px;
+}
+.btn-customize {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e3e8ef;
+  height: max-content;
 }
 .v-select {
   padding: 0;

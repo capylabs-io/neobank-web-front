@@ -116,8 +116,8 @@ export default {
 }
 .card-icon {
   border-radius: 100px;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
 }
 
 .column-gap-10 {
@@ -137,10 +137,12 @@ export default {
 }
 
 .unpurchased {
-  background: #5752e3;
+  width: calc(100% - 45px);
+  background: var(--v-blue-base);
   padding: 4px, 16px, 4px, 16px;
 }
 .expired {
+  width: calc(100% - 45px);
   padding: 4px, 16px, 4px, 16px;
 }
 

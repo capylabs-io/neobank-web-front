@@ -8,7 +8,7 @@
     <div class="mt-3 font-weight-bold">Valentine Chocolate backpack</div>
     <v-btn
       v-if="status.index == 1"
-      class="d-flex column-gap-10 mx-auto mt-3 unpurchased"
+      class="d-flex column-gap-10 mx-auto mt-3 unpurchased full-width"
       elevation="2"
       rounded
       text
@@ -29,7 +29,7 @@
     </v-btn>
     <v-btn
       v-else
-      class="d-flex column-gap-10 mx-auto mt-3 purchased"
+      class="d-flex column-gap-10 mx-auto mt-3 purchased full-width"
       elevation="2"
       rounded
       text
@@ -72,7 +72,7 @@ export default {
 }
 
 .unpurchased {
-  background: #5752e3;
+  background: var(--v-blue-base);
   padding: 4px, 16px, 4px, 16px;
 }
 .purchased {

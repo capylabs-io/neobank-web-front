@@ -1,101 +1,53 @@
 <template>
   <div class="account-setting d-flex flex-column align-center mx-auto pa-6">
-    <v-card class="card-content">
-      <v-card-title class="">
-        <div class="text-lg greyblack--text font-weight-medium text-uppercase">
-          Account setting
-        </div>
-      </v-card-title>
-      <v-divider />
-      <v-list>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-subtitle class="text-left">
-              Name
-            </v-list-item-subtitle>
-            <v-list-item-content>{{
-              userStore.userData.username
-            }}</v-list-item-content>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-subtitle class="text-left">
-              BANK ACCOUNT
-            </v-list-item-subtitle>
-            <v-list-item-content>4932104954890</v-list-item-content>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-subtitle class="d-flex col-gap-15 align-center">
-              <div>EMAIL</div>
-              <div
-                class="cursor-pointer"
-                @click="userStore.changePersonalInfoEdit()"
-              >
-                <!-- <v-icon
-                  class="mr-2"
-                  color="violet"
-                >
-                  mdi-square-edit-outline
-                </v-icon> -->
-              </div>
-            </v-list-item-subtitle>
-            <v-list-item-content>
-              {{ userStore.userData.email }}
-            </v-list-item-content>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-subtitle class="d-flex col-gap-15 align-center">
-              <div>PHONE</div>
-              <div
-                class="cursor-pointer"
-                @click="userStore.changePersonalInfoEdit()"
-              >
-                <!-- <v-icon
-                  class="mr-2"
-                  color="violet"
-                >
-                  mdi-square-edit-outline
-                </v-icon> -->
-              </div>
-            </v-list-item-subtitle>
-            <v-list-item-content>(+84)-456453522</v-list-item-content>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-subtitle class="d-flex col-gap-15 align-center">
-              <div>PASSWORD</div>
-              <div
-                class="cursor-pointer"
-                @click="userStore.changePersonalInfoEdit()"
-              >
-                <!-- <dv-icon
-                  class="mr-2"
-                  color="violet"
-                >
-                  dmdi-square-edit-outline
-                </dv-icon> -->
-              </div>
-            </v-list-item-subtitle>
-            <v-list-item-content>**********</v-list-item-content>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+    <v-card flat class="form-detail full-width pa-5">
+      <v-row>
+        <v-col cols="5">
+          <div class="user-logo">
+            <v-img class :src="require(`@/assets/profile-logo.webp`)" />
+          </div>
+          <div class="d-flex mt-sm-3">
+            <div
+              class="text-xl text-left"
+              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
+            >
+              Bank account number
+            </div>
+            <v-text-field
+              v-model="userStore.userData.userMetadata.bankAccount"
+              height="36px"
+              type="text"
+              class="pa-0 ml-10 btn-customize"
+              placeholder="3129120934"
+              solo
+              readonly
+              dense
+              hide-details
+              flat
+            />
+          </div>
+        </v-col>
+      </v-row>
     </v-card>
+    <informationEdit />
+    <passwordChange />
   </div>
 </template>
 
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "../../../stores/userStore";
+import { voucherStore } from "@/stores/voucherStore";
+import informationEdit from "@/views/redeem/components/account-setting/information-edit.vue";
+import passwordChange from "@/views/redeem/components/account-setting/password-change.vue";
 export default {
+  components: {
+    informationEdit: informationEdit,
+    passwordChange: passwordChange,
+  },
   computed: {
     ...mapStores(userStore),
+    ...mapStores(voucherStore),
   },
 };
 </script>
@@ -111,18 +63,11 @@ export default {
   border-radius: 12px;
   animation: fadeleft 1s ease-in-out;
 }
-.border-raidus-top {
-  border-radius: 12px 12px 0 0;
-}
-.border-raidus-bottom {
-  border-radius: 0 0 12px 12px;
-}
+
 .text-sub {
   color: rgba(0, 0, 0, 0.6);
 }
-.col-gap-15 {
-  column-gap: 15px;
-}
+
 @keyframes fadeleft {
   0% {
     opacity: 0;
@@ -131,5 +76,28 @@ export default {
   100% {
     opacity: 1;
   }
+}
+.form-detail {
+  background-color: white;
+  height: max-content !important;
+  border: 1px solid #e3e8ef;
+}
+
+.v-card {
+  border-radius: 12px !important;
+}
+.user-logo {
+  height: 39px;
+  width: 100px;
+}
+.user-image {
+  height: 79px;
+  width: 64px;
+}
+.btn-customize {
+  width: 300px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e3e8ef;
 }
 </style>

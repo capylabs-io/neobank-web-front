@@ -10,13 +10,19 @@
             Voucher
           </v-btn>
         </div>
-        <div class="">
+        <div class="right-filter-group">
           <v-select
-            class="button-filter"
+            class="btn-customize"
+            v-model="voucherStore.sortBy"
+            label="SortBy"
             :items="sort"
-            label="Sort By"
-            outlined
-            background-color="white"
+            item-text="name"
+            :menu-props="{ maxHeight: '400' }"
+            solo
+            dense
+            flat
+            hide-details
+            persistent-hint
           ></v-select>
         </div>
       </div>
@@ -24,7 +30,7 @@
         <v-row>
           <v-col
             cols="12"
-            xl="3"
+            xl="2"
             md="3"
             sm="6"
             xs="12"
@@ -118,5 +124,15 @@ export default {
   background-color: white;
   height: max-content;
   border-radius: 12px;
+}
+
+.right-filter-group {
+  width: max-content;
+}
+.btn-customize {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e3e8ef;
+  height: max-content;
 }
 </style>
