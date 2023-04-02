@@ -8,10 +8,10 @@
   >
     <div class="card-image d-flex flex-column">
       <div class="full-width">
-        <v-img class="card-image" :src="cards.attributes.thumbnailUrl"></v-img>
+        <v-img class="card-image" :src="cards.thumbnailUrl"></v-img>
       </div>
       <div
-        v-if="cards.attributes.status == 'New Deal'"
+        v-if="cards.status == 'New Deal'"
         class="mt-3 pa-2"
         :style="{
           background: '#FDDF59',
@@ -22,10 +22,10 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.attributes.status }}
+        {{ cards.status }}
       </div>
       <div
-        v-else-if="cards.attributes.status == 'Hot'"
+        v-else-if="cards.status == 'Hot'"
         class="mt-3 pa-2"
         :style="{
           background: '#f65970',
@@ -36,7 +36,7 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.attributes.status }}
+        {{ cards.status }}
       </div>
       <div
         v-else
@@ -50,19 +50,16 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.attributes.status }}
+        {{ cards.status }}
       </div>
     </div>
     <div class="mt-3 font-weight-bold text-left">
-      <span class="mt-3"> {{ cards.attributes.shortDescription }} </span>
+      <span class="mt-3"> {{ cards.shortDescription }} </span>
     </div>
     <div class="mt-3 text-left d-flex column-gap-10">
       <div>
-        <v-img
-          class="card-icon"
-          :src="cards.attributes.campaignCategory.data.attributes.iconUrl"
-        />
-        <!-- <v-img class="card-icon" :src="cards.attributes.iconUrl" /> -->
+        <v-img class="card-icon" :src="cards.campaignCategory.iconUrl" />
+        <!-- <v-img class="card-icon" :src="cards.iconUrl" /> -->
       </div>
       <span> HSD: 31 Oct 2022 </span>
     </div>

@@ -50,7 +50,7 @@ export default {
   },
   mounted() {
     if (!this.userStore.jwt) {
-      this.$router.push("/vn/login");
+      this.$router.push("/login");
     }
     this.change();
     this.voucherStore.bearerToken = JSON.parse(sessionStorage.getItem("user"));

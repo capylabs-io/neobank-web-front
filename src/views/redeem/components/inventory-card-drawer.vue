@@ -14,11 +14,11 @@
         <div class="full-width">
           <v-img
             class="drawer-image"
-            :src="voucherStore.ivenCardData.imageUrl"
+            :src="voucherStore.ivenCardData.thumbnailUrl"
           ></v-img>
         </div>
         <div
-          v-if="voucherStore.ivenCardData.tag == 'New Deal'"
+          v-if="voucherStore.ivenCardData.status == 'New Deal'"
           class="mt-3 pa-1 px-3"
           :style="{
             background: '#FDDF59',
@@ -29,10 +29,10 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ voucherStore.ivenCardData.tag }}
+          {{ voucherStore.ivenCardData.status }}
         </div>
         <div
-          v-else-if="voucherStore.ivenCardData.tag == 'Hot'"
+          v-else-if="voucherStore.ivenCardData.status == 'Hot'"
           class="mt-3 pa-1 px-3"
           :style="{
             background: '#f65970',
@@ -43,7 +43,7 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ voucherStore.ivenCardData.tag }}
+          {{ voucherStore.ivenCardData.status }}
         </div>
         <div
           v-else
@@ -57,7 +57,7 @@
             'border-top-right-radius': '8px',
           }"
         >
-          {{ voucherStore.ivenCardData.tag }}
+          {{ voucherStore.ivenCardData.status }}
         </div>
       </div>
       <div
@@ -72,7 +72,7 @@
         {{ voucherStore.ivenCardData.fullDescription }}
       </div>
     </v-card>
-    <div class="qr-img mx-auto mt-3">
+    <div class="qr-img mx-auto mt-3 justify-space-between">
       <v-img class="" :src="voucherStore.ivenVoucherQr" />
     </div>
   </v-navigation-drawer>

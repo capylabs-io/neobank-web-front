@@ -38,23 +38,59 @@ export const Auth = {
     axios.post("auth/forgot-password", {
       email,
     }),
+  changePassword: (currentPassword, newPassword, confirmNewPassword, token) =>
+    axios.post(
+      "auth/change-password",
+      {
+        currentPassword: currentPassword,
+        password: newPassword,
+        passwordConfirmation: confirmNewPassword,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    ),
   resetPassword: (resetPasswordData) =>
     axios.post("auth/reset-password", resetPasswordData),
 };
 
 export const User = {
   ...APIHelper(USER_API),
-  changePassword: (currentPassword, newPassword, confirmNewPassword) =>
-    axios.post("users/change-password", {
-      currentPassword,
-      newPassword,
-      confirmNewPassword,
-    }),
-  updateUserInfo: (model) => axios.put("users/edit/", model),
+
+  // updateUserInfo: (model) => axios.put("users/edit/", model),
+  updateUserInfo: (avatarUrl, data, token) =>
+    axios.put(
+      `/users/` + data.id,
+      {
+        avatarUrl: avatarUrl,
+        userMetadata: {
+          firstName: data.userMetadata.firstName,
+          lastName: data.userMetadata.lastName,
+          phoneNumber: data.userMetadata.phoneNumber,
+        },
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    ),
   updateUserEmail: (email, password) =>
     axios.post("users/edit-email", {
       newEmail: email,
       password,
+    }),
+  // uploadFile(file, token) {
+  //   console.log(file);
+  // },
+  uploadFile: (file, token) =>
+    axios.post("upload", file, {
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "multipart/form-data",
+      },
     }),
 };
 export const Voucher = {
@@ -74,12 +110,15 @@ export const Voucher = {
         },
       }
     ),
-  fetchUserVouchers: (token) =>
-    axios.get("user-vouchers", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    }),
+  fetchUserVouchers: (id, token) =>
+    axios.get(
+      `vouchers?populate[0]=user&populate[1]=campaign&filters[user][id]=` + id,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    ),
 };
 
 export default {

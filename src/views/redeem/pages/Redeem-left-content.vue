@@ -19,7 +19,7 @@
         <div class="subtitle-2">
           <span>{{ userStore.userData.email }}</span>
         </div>
-        <div
+        <!-- <div
           class="d-flex left-profile-section align-center font-weight-bold mt-3 pa-2"
         >
           <span :style="{ 'font-size': '18px' }">{{
@@ -31,7 +31,7 @@
               :src="require(`@/assets/redeem/coin.webp`)"
             />
           </div>
-        </div>
+        </div> -->
       </div>
       <v-divider></v-divider>
       <div class="d-flex flex-column justify-center left-second pa-6">
@@ -110,7 +110,7 @@ export default {
     },
     signout() {
       this.userStore.logout();
-      this.$router.push("/vn/login");
+      this.$router.push("/login");
     },
     carousel() {},
   },

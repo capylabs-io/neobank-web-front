@@ -31,7 +31,7 @@ export default {
     buy() {
       this.voucherStore.cfDialog = false;
       this.voucherStore.purchaseVoucher();
-      this.$router.push("/vn/redeem");
+      this.$router.push("/Home");
     },
   },
 };

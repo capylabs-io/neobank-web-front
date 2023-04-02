@@ -1,9 +1,11 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { Auth, Voucher } from "@/plugins/api.js";
+import { userStore } from "./userStore";
 import { snackBarController } from "@/components/snack-bar/snack-bar-controller.js";
 import { loadingController } from "@/components/global-loading/global-loading-controller.js";
 export const voucherStore = defineStore("voucher", () => {
+  const user = userStore();
   const loading = loadingController(); //store
   const snackbar = snackBarController(); //store
   const drawer = ref(false);
@@ -23,12 +25,14 @@ export const voucherStore = defineStore("voucher", () => {
 
   const bearerToken = ref({});
   const ivenCardData = ref({});
+  const accountEditData = ref({});
   const voucherData = ref([]);
+  const detailCard = ref({});
+
   const voucherDataId = ref([]);
   const userVoucher = ref([]);
   const userVoucherId = ref([]);
   const voucherPurchased = ref([]);
-  const detailCard = ref({});
 
   async function fetchVoucher() {
     try {
@@ -38,8 +42,7 @@ export const voucherStore = defineStore("voucher", () => {
         snackbar.commonError(`Error occurred! Please try again later!`);
         return;
       }
-      this.voucherData = res.data.data;
-      this.pagination = res.data.meta.pagination;
+      this.voucherData = res.data;
       this.voucherDataId = this.voucherData.map((index) => index.id);
       console.log("storeVoucher", voucherData);
       console.log("storeVoucherid", voucherDataId);
@@ -53,7 +56,7 @@ export const voucherStore = defineStore("voucher", () => {
       loading.increaseRequest();
       const res = await Voucher.purchaseVouchers(
         this.voucherId,
-        this.bearerToken
+        this.bearerToken.jwt
       );
       if (!res) {
         snackbar.commonError(`Error occurred! Please try again later!`);
@@ -61,10 +64,6 @@ export const voucherStore = defineStore("voucher", () => {
       }
       console.log("purchase", res.data);
       snackbar.success("Voucher Purchased successfully!");
-      this.$router.push({
-        params: "vn",
-        name: "Redeem",
-      });
     } catch (error) {
       console.error(`Error: ${error}`);
       snackbar.commonError(error);
@@ -73,13 +72,18 @@ export const voucherStore = defineStore("voucher", () => {
   async function fetchUserVoucher() {
     try {
       loading.increaseRequest();
-      const res = await Voucher.fetchUserVouchers(this.bearerToken.jwt);
+      const res = await Voucher.fetchUserVouchers(
+        user.userData.id,
+        this.bearerToken.jwt
+      );
       if (!res) {
         snackbar.commonError(`Error occurred! Please try again later!`);
         return;
       }
-      this.userVoucher = res.data.map((index) => index);
-      this.userVoucherId = res.data.map((index) => index.voucher.id);
+      this.userVoucher = res.data.data.map((index) => index.attributes);
+      this.userVoucherId = res.data.data.map(
+        (index) => index.attributes.campaign.data.id
+      );
       console.log("userVoucher", userVoucher);
       console.log("userVoucherId", userVoucherId);
     } catch (error) {
@@ -87,8 +91,11 @@ export const voucherStore = defineStore("voucher", () => {
       snackbar.commonError(error);
     }
   }
+  function changeVoucherFilter(sortBy){
+    this.sortBy = sortBy;
+  }
   function setDetailStoreCard(cards) {
-    this.detailCard = cards.attributes;
+    this.detailCard = cards;
   }
 
   function checkIncludes() {
@@ -121,23 +128,15 @@ export const voucherStore = defineStore("voucher", () => {
   const filterVoucherStore = computed(() => {
     let filterVoucherStore = [];
     if ((sortBy.value = "asc")) {
-      filterVoucherStore = voucherData.value.sort(
-        (a, b) => b.attributes.title - a.attributes.title
-      );
+      filterVoucherStore= voucherData.value.sort((a, b) => a.title.localeCompare(b.title));
     } else if ((sortBy.value = "desc")) {
-      filterVoucherStore = voucherData.value.sort(
-        (a, b) => a.attributes.title - b.attributes.title
-      );
+      filterVoucherStore= voucherData.value.sort((a, b) => b.title.localeCompare(a.title));
     } else if ((sortBy.value = "priceUp")) {
-      filterVoucherStore = voucherData.value.sort(
-        (a, b) => a.attributes.price - b.attributes.price
-      );
+      filterVoucherStore= voucherData.value.sort((a, b) => a.price - b.price);
     } else if ((sortBy.value = "priceDown")) {
-      filterVoucherStore = voucherData.value.sort(
-        (a, b) => b.attributes.price - a.attributes.price
-      );
+      filterVoucherStore= voucherData.value.sort((a, b) => b.price - a.price);
     } else {
-      filterVoucherStore = voucherData.value.sort((a, b) => b.id - a.id);
+      filterVoucherStore= voucherData.value.sort((a, b) => b.id - a.id);
     }
     return filterVoucherStore;
   });
@@ -147,6 +146,7 @@ export const voucherStore = defineStore("voucher", () => {
     slicedVoucherStore,
     filterVoucherStore,
     totalVoucherPage,
+
     //states
     drawer,
     ivenCardData,
@@ -169,12 +169,15 @@ export const voucherStore = defineStore("voucher", () => {
     ivenVoucherQr,
     changePassword,
     profileEdit,
+    accountEditData,
+
     //action
     fetchVoucher,
     fetchUserVoucher,
     purchaseVoucher,
     checkIncludes,
     setDetailStoreCard,
+    changeVoucherFilter
   };
 });
 /* eslint-enable */

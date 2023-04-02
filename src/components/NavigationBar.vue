@@ -9,21 +9,21 @@
         :src="require(`@/assets/home/web-logo.webp`)"
       />
       <router-link
-        to="/"
+        to="/home"
         class="white--text text-decoration-none align-self-center"
         active-class="active"
       >
         <div class="text-none text-uppercase nav-link">HOME</div>
       </router-link>
       <router-link
-        to="/vn/home"
+        to="/home"
         class="white--text text-decoration-none align-self-center"
         active-class="active"
       >
         <div class="text-none text-uppercase nav-link">WORLD</div>
       </router-link>
       <router-link
-        to="/vn/redeem"
+        to="/redeem"
         class="white--text text-decoration-none align-self-center"
         active-class="active"
       >
@@ -31,7 +31,7 @@
       </router-link>
       <router-link
         v-if="!userStore.jwt"
-        to="/vn/login"
+        to="/login"
         class="white--text text-decoration-none align-self-center"
         active-class="active"
       >
@@ -55,14 +55,14 @@
         <div class="text-none text-uppercase nav-link">HOME</div>
       </router-link>
       <router-link
-        to="/vn/home"
+        to="/home"
         class="black--text text-decoration-none align-self-center"
         active-class="active"
       >
         <div class="text-none text-uppercase nav-link">WORLD</div>
       </router-link>
       <router-link
-        to="/vn/redeem"
+        to="/redeem"
         class="black--text text-decoration-none align-self-center"
         active-class="active"
       >
@@ -70,7 +70,7 @@
       </router-link>
       <router-link
         v-if="!userStore.jwt"
-        to="/vn/login"
+        to="/login"
         class="black--text text-decoration-none align-self-center"
         active-class="active"
       >

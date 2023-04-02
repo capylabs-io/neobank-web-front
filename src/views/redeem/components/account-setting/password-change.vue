@@ -2,62 +2,110 @@
   <v-card flat class="form-detail mt-sm-3 full-width pa-5">
     <v-row>
       <v-col cols="5">
-        <div class="d-flex mt-sm-3">
-          <div
-            class="text-xl text-left"
-            :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
-          >
-            Current Password
+        <v-form @submit.prevent="changeYourPassword" id="change-password-form">
+          <div class="d-flex mt-sm-3">
+            <div
+              class="text-xl text-left"
+              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
+            >
+              Current Password
+            </div>
+            <v-text-field
+              v-if="!voucherStore.changePassword"
+              height="36px"
+              type="password"
+              class="pa-0 ml-10 btn-customize"
+              placeholder=""
+              solo
+              dense
+              readonly
+              hide-details
+              flat
+            />
+            <v-text-field
+              v-else
+              v-model="userStore.currentPassword"
+              height="36px"
+              :append-icon="userStore.isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="userStore.isShowPass ? 'text' : 'password'"
+              @click:append="userStore.isShowPass = !userStore.isShowPass"
+              class="pa-0 ml-10 btn-customize"
+              placeholder=""
+              outlined
+              dense
+              hide-details
+              flat
+            />
           </div>
-          <v-text-field
-            height="36px"
-            type="password"
-            class="pa-0 ml-10 btn-customize"
-            placeholder=""
-            solo
-            dense
-            hide-details
-            flat
-          />
-        </div>
 
-        <div class="d-flex mt-sm-3">
-          <div
-            class="text-xl text-left"
-            :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
-          >
-            New password
+          <div class="d-flex mt-sm-3">
+            <div
+              class="text-xl text-left"
+              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
+            >
+              New password
+            </div>
+            <v-text-field
+              v-if="!voucherStore.changePassword"
+              height="36px"
+              type="password"
+              class="pa-0 ml-10 btn-customize"
+              placeholder=""
+              solo
+              dense
+              hide-details
+              flat
+            />
+            <v-text-field
+              v-else
+              height="36px"
+              v-model="userStore.newPassword"
+              class="pa-0 ml-10 btn-customize"
+              placeholder=""
+              outlined
+              :append-icon="userStore.isShowpPass ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="userStore.isShowpPass ? 'text' : 'password'"
+              @click:append="userStore.isShowpPass = !userStore.isShowpPass"
+              dense
+              hide-details
+              flat
+            />
           </div>
-          <v-text-field
-            height="36px"
-            type="password"
-            class="pa-0 ml-10 btn-customize"
-            placeholder=""
-            solo
-            dense
-            hide-details
-            flat
-          />
-        </div>
 
-        <div class="d-flex mt-sm-3">
-          <div
-            class="text-xl text-left"
-            :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
-          >
-            Re-enter new password
+          <div class="d-flex mt-sm-3">
+            <div
+              class="text-xl text-left"
+              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
+            >
+              Re-enter new password
+            </div>
+            <v-text-field
+              v-if="!voucherStore.changePassword"
+              height="36px"
+              type="password"
+              class="pa-0 ml-10 btn-customize"
+              placeholder=""
+              solo
+              dense
+              hide-details
+              flat
+            />
+            <v-text-field
+              v-else
+              height="36px"
+              class="pa-0 ml-10 btn-customize"
+              v-model="userStore.confirmNewPassword"
+              placeholder=""
+              outlined
+              :append-icon="userStore.isShowcPass ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="userStore.isShowcPass ? 'text' : 'password'"
+              @click:append="userStore.isShowcPass = !userStore.isShowcPass"
+              dense
+              hide-details
+              flat
+            />
           </div>
-          <v-text-field
-            height="36px"
-            type="password"
-            class="pa-0 ml-10 btn-customize"
-            placeholder=""
-            solo
-            dense
-            hide-details
-            flat
-          />
-        </div>
+        </v-form>
       </v-col>
     </v-row>
     <v-divider class="mt-sm-3" />
@@ -91,7 +139,8 @@
           :style="{ backgroundColor: 'var(--v-blue-base)' }"
           color="white"
           variant="text"
-          @click="voucherStore.step = 2"
+          type="submit"
+          form="change-password-form"
           text
         >
           Save
@@ -109,6 +158,14 @@ export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(voucherStore),
+  },
+  methods: {
+    changeYourPassword() {
+      this.userStore.changePassword();
+      this.voucherStore.changePassword = false;
+      this.userStore.logout();
+      this.$router.push("/login");
+    },
   },
 };
 </script>

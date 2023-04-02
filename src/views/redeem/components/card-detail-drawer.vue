@@ -66,11 +66,8 @@
         <div>
           <v-img
             class="drawer-icon"
-            :src="
-              voucherStore.detailCard.campaignCategory.data.attributes.iconUrl
-            "
+            :src="voucherStore.detailCard.campaignCategory.iconUrl"
           />
-          <!-- <v-img class="drawer-icon" :src="voucherStore.detailCard.iconUrl" /> -->
         </div>
         <span class="mt-3"> {{ voucherStore.detailCard.title }} </span>
       </div>

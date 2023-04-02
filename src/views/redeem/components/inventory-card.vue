@@ -5,11 +5,11 @@
         <v-img
           class="card-image"
           height="140px"
-          :src="cards.voucher.imageUrl"
+          :src="cards.campaign.data.attributes.thumbnailUrl"
         ></v-img>
       </div>
       <div
-        v-if="cards.voucher.tag == 'New Deal'"
+        v-if="cards.campaign.data.attributes.status == 'New Deal'"
         class="mt-3 pa-1 px-3"
         :style="{
           background: '#FDDF59',
@@ -20,10 +20,10 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.voucher.tag }}
+        {{ cards.campaign.data.attributes.status }}
       </div>
       <div
-        v-else-if="cards.voucher.tag == 'Hot'"
+        v-else-if="cards.campaign.data.attributes.status == 'Hot'"
         class="mt-3 pa-1 px-3"
         :style="{
           background: '#f65970',
@@ -34,7 +34,7 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.voucher.tag }}
+        {{ cards.campaign.data.attributes.status }}
       </div>
       <div
         v-else
@@ -48,21 +48,21 @@
           'border-top-right-radius': '8px',
         }"
       >
-        {{ cards.voucher.tag }}
+        {{ cards.campaign.data.attributes.status }}
       </div>
     </div>
     <div
       class="mt-6 font-weight-bold align-center justify-center text-truncate"
     >
       <div class="voucher-title">
-        {{ cards.voucher.title }}
+        {{ cards.campaign.data.attributes.title }}
       </div>
     </div>
     <div
       class="d-flex font-weight-bold justify-center mt-3 column-gap-10 full-width"
     >
       <div>
-        <!-- <v-img class="card-icon" :src="cards.voucher.iconUrl" /> -->
+        <!-- <v-img class="card-icon" :src="cards.campaign.data.attributes.iconUrl" /> -->
         <v-img class="card-icon" src="@/assets/redeem/card/baemin-icon.webp" />
       </div>
       <v-btn
@@ -99,7 +99,7 @@ export default {
   methods: {
     openClick() {
       this.voucherStore.drawer = !this.voucherStore.drawer;
-      this.voucherStore.ivenCardData = this.cards.voucher;
+      this.voucherStore.ivenCardData = this.cards.campaign.data.attributes;
       this.voucherStore.ivenVoucherQr = this.cards.qrCodeUrl;
     },
   },

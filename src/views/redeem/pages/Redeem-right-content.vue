@@ -13,11 +13,11 @@
         <div class="right-filter-group">
           <v-select
             class="btn-customize"
-            v-model="voucherStore.sortBy"
             label="SortBy"
-            :items="sort"
             item-text="name"
+            :items="sort"
             :menu-props="{ maxHeight: '400' }"
+            @change="voucherStore.changeVoucherFilter($event)"
             solo
             dense
             flat
@@ -35,7 +35,7 @@
             md="3"
             sm="6"
             xs="12"
-            v-for="card in voucher"
+            v-for="card in voucherStore.filterVoucherStore"
             :key="card.id"
           >
             <voucherCard :id="card.id" :cards="card" />
@@ -77,7 +77,8 @@ import voucherCard from "@/views/redeem/components/voucher-card.vue";
 import clothesCard from "@/views/redeem/components/clothes-card.vue";
 import { userStore } from "@/stores/userStore";
 import { voucherStore } from "@/stores/voucherStore";
-import { mapStores } from "pinia";
+import { mapStores, storeToRefs } from "pinia";
+
 export default {
   props: ["voucher", "userVoucher"],
   components: {

@@ -2,14 +2,14 @@
   <div class="d-flex flex-column">
     <div class="right-container mx-auto pa-6 full-height">
       <div class="d-flex justify-space-between button-filter">
-        <div class="d-flex column-gap-10 left-filter-group pa-1">
+        <!-- <div class="d-flex column-gap-10 left-filter-group pa-1">
           <v-btn class="clothes active" rounded text @click="clothesTab()">
             Clothes
           </v-btn>
           <v-btn class="voucher" rounded text @click="voucherTab()">
             Voucher
           </v-btn>
-        </div>
+        </div> -->
         <div class="right-filter-group">
           <v-select
             class="btn-customize"

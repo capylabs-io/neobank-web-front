@@ -8,166 +8,181 @@
             :src="require(`@/assets/profile-pic.webp`)"
           />
         </div>
-
-        <div class="d-flex mt-sm-1">
-          <div
-            class="text-xl text-left"
-            :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
-          >
-            Avatar
+        <v-form @submit.prevent="editAccount" id="check-edit-form" ref="form">
+          <div class="d-flex mt-sm-1">
+            <div
+              class="text-xl text-left"
+              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
+            >
+              Avatar
+            </div>
+            <v-file-input
+              v-if="!voucherStore.profileEdit"
+              class="pa-0 ml-10"
+              height="36px"
+              disabled
+              append-outer-icon="mdi-upload"
+              prepend-icon=""
+              hide-details
+              flat
+              outlined
+            >
+            </v-file-input>
+            <v-file-input
+              v-else
+              v-model="userStore.file"
+              accept="image/png, image/jpeg, image/bmp,image/webp"
+              ref="myfile"
+              class="pa-0 ml-10"
+              height="36px"
+              @change="onFileChanged($event)"
+              append-outer-icon="mdi-upload"
+              prepend-icon=""
+              hide-details
+              flat
+              outlined
+            ></v-file-input>
+            <v-btn
+              v-if="voucherStore.profileEdit"
+              class="text-capitalize ml-2"
+              :style="{ backgroundColor: 'var(--v-blue-base)' }"
+              color="white"
+              variant="text"
+              @click="upload()"
+              text
+            >
+              Save
+            </v-btn>
           </div>
-          <v-file-input
-            v-if="!voucherStore.profileEdit"
-            class="pa-0 ml-10"
-            height="36px"
-            disabled
-            append-outer-icon="mdi-upload"
-            prepend-icon=""
-            hide-details
-            flat
-            outlined
-          >
-          </v-file-input>
-          <v-file-input
-            v-else
-            class="pa-0 ml-10"
-            height="36px"
-            append-outer-icon="mdi-upload"
-            prepend-icon=""
-            hide-details
-            flat
-            outlined
-          ></v-file-input>
-        </div>
 
-        <div class="d-flex mt-sm-3">
-          <div
-            class="text-xl text-left"
-            :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
-          >
-            First name
+          <div class="d-flex mt-sm-3">
+            <div
+              class="text-xl text-left"
+              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
+            >
+              First name
+            </div>
+            <v-text-field
+              v-if="!voucherStore.profileEdit"
+              v-model="userStore.userData.userMetadata.firstName"
+              height="36px"
+              type="text"
+              class="pa-0 ml-10 btn-customize"
+              placeholder="Avatar.jpg"
+              solo
+              readonly
+              dense
+              hide-details
+              flat
+            />
+            <v-text-field
+              v-else
+              v-model="userStore.userData.userMetadata.firstName"
+              height="36px"
+              type="text"
+              class="pa-0 ml-10 btn-customize"
+              placeholder="Avatar.jpg"
+              outlined
+              dense
+              hide-details
+              flat
+            />
           </div>
-          <v-text-field
-            v-if="!voucherStore.profileEdit"
-            v-model="userStore.userData.userMetadata.firstName"
-            height="36px"
-            type="text"
-            class="pa-0 ml-10 btn-customize"
-            placeholder="Avatar.jpg"
-            solo
-            readonly
-            dense
-            hide-details
-            flat
-          />
-          <v-text-field
-            v-else
-            v-model="userStore.userData.userMetadata.firstName"
-            height="36px"
-            type="text"
-            class="pa-0 ml-10 btn-customize"
-            placeholder="Avatar.jpg"
-            outlined
-            dense
-            hide-details
-            flat
-          />
-        </div>
+          <div class="d-flex mt-sm-3">
+            <div
+              class="text-xl text-left"
+              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
+            >
+              Last name
+            </div>
+            <v-text-field
+              v-if="!voucherStore.profileEdit"
+              v-model="userStore.userData.userMetadata.lastName"
+              height="36px"
+              type="text"
+              class="pa-0 ml-10 btn-customize"
+              placeholder="Avatar.jpg"
+              solo
+              readonly
+              dense
+              hide-details
+              flat
+            />
+            <v-text-field
+              v-else
+              v-model="userStore.userData.userMetadata.lastName"
+              height="36px"
+              type="text"
+              class="pa-0 ml-10 btn-customize"
+              placeholder="Avatar.jpg"
+              outlined
+              dense
+              hide-details
+              flat
+            />
+          </div>
 
-        <div class="d-flex mt-sm-3">
-          <div
-            class="text-xl text-left"
-            :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
-          >
-            Last name
+          <div class="d-flex mt-sm-3">
+            <div
+              class="text-xl text-left"
+              :style="{
+                fontSize: '15px',
+                fontWeight: 700,
+                width: '170px',
+                height: '40px',
+              }"
+            >
+              Email
+            </div>
+            <v-text-field
+              v-model="userStore.userData.email"
+              height="36px"
+              type="text"
+              class="pa-0 ml-10 btn-customize"
+              placeholder="Avatar.jpg"
+              solo
+              background-color="secondary"
+              readonly
+              dense
+              hide-details
+              flat
+            />
           </div>
-          <v-text-field
-            v-if="!voucherStore.profileEdit"
-            v-model="userStore.userData.userMetadata.lastName"
-            height="36px"
-            type="text"
-            class="pa-0 ml-10 btn-customize"
-            placeholder="Avatar.jpg"
-            solo
-            readonly
-            dense
-            hide-details
-            flat
-          />
-          <v-text-field
-            v-else
-            v-model="userStore.userData.userMetadata.lastName"
-            height="36px"
-            type="text"
-            class="pa-0 ml-10 btn-customize"
-            placeholder="Avatar.jpg"
-            outlined
-            dense
-            hide-details
-            flat
-          />
-        </div>
 
-        <div class="d-flex mt-sm-3">
-          <div
-            class="text-xl text-left"
-            :style="{
-              fontSize: '15px',
-              fontWeight: 700,
-              width: '170px',
-              height: '40px',
-            }"
-          >
-            Email
+          <div class="d-flex mt-sm-3">
+            <div
+              class="text-xl text-left"
+              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
+            >
+              Telephone
+            </div>
+            <v-text-field
+              v-if="!voucherStore.profileEdit"
+              v-model="userStore.userData.userMetadata.phoneNumber"
+              height="36px"
+              type="text"
+              class="pa-0 ml-10 btn-customize"
+              placeholder="Avatar.jpg"
+              solo
+              readonly
+              dense
+              hide-details
+              flat
+            />
+            <v-text-field
+              v-else
+              v-model="userStore.userData.userMetadata.phoneNumber"
+              height="36px"
+              type="text"
+              class="pa-0 ml-10 btn-customize"
+              placeholder="Avatar.jpg"
+              outlined
+              dense
+              hide-details
+              flat
+            />
           </div>
-          <v-text-field
-            v-model="userStore.userData.email"
-            height="36px"
-            type="text"
-            class="pa-0 ml-10 btn-customize"
-            placeholder="Avatar.jpg"
-            solo
-            background-color="secondary"
-            readonly
-            dense
-            hide-details
-            flat
-          />
-        </div>
-
-        <div class="d-flex mt-sm-3">
-          <div
-            class="text-xl text-left"
-            :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
-          >
-            Telephone
-          </div>
-          <v-text-field
-            v-if="!voucherStore.profileEdit"
-            v-model="userStore.userData.userMetadata.phoneNumber"
-            height="36px"
-            type="text"
-            class="pa-0 ml-10 btn-customize"
-            placeholder="Avatar.jpg"
-            solo
-            readonly
-            dense
-            hide-details
-            flat
-          />
-          <v-text-field
-            v-else
-            v-model="userStore.userData.userMetadata.phoneNumber"
-            height="36px"
-            type="text"
-            class="pa-0 ml-10 btn-customize"
-            placeholder="Avatar.jpg"
-            outlined
-            dense
-            hide-details
-            flat
-          />
-        </div>
+        </v-form>
       </v-col>
     </v-row>
     <v-divider class="mt-sm-3" />
@@ -201,6 +216,8 @@
           :style="{ backgroundColor: 'var(--v-blue-base)' }"
           color="white"
           variant="text"
+          type="submit"
+          form="check-edit-form"
           text
         >
           Save
@@ -218,6 +235,22 @@ export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(voucherStore),
+  },
+  methods: {
+    onFileChanged(data) {
+      this.userStore.file = data;
+      console.log("file", data);
+    },
+    upload() {
+      this.userStore.uploadFile();
+      // console.log("file", this.userStore.file);
+    },
+    editAccount() {
+      this.userStore.updateAccountSetting();
+      this.voucherStore.profileEdit = false;
+      // this.userStore.logout();
+      // this.$router.push("/redeem");
+    },
   },
 };
 </script>

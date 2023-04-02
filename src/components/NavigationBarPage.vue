@@ -1,8 +1,6 @@
 <template>
   <div class="nav-bar d-flex justify-space-between">
-    <div
-      class="d-flex gap-24 DMSans black--text align-center pa-7"
-    >
+    <div class="d-flex gap-24 DMSans black--text align-center pa-7">
       <div>
         <v-img
           class="nav-logo align-self-center"
@@ -10,21 +8,21 @@
         />
       </div>
       <router-link
-        to="/vn/home"
+        to="/home"
         class="text-decoration-none align-self-center"
         active-class="active"
       >
         <div class="text-capitalize">HOME</div>
       </router-link>
       <router-link
-        to="/vn/home"
+        to="/world"
         class="text-decoration-none align-self-center"
         active-class="active"
       >
         <div class="text-capitalize">WORLD</div>
       </router-link>
       <router-link
-        to="/vn/redeem"
+        to="/redeem"
         class="text-decoration-none align-self-center"
         active-class="active"
       >
@@ -63,7 +61,7 @@
             <div class="text-capitalize active">WORLD</div>
           </router-link>
           <router-link
-            to="/vn/redeem"
+            to="/redeem"
             class="black--text text-decoration-none align-self-center"
             active-class="active"
           >
@@ -113,7 +111,7 @@
         </v-list-item>
         <v-list-item>
           <router-link
-            to="/vn/redeem"
+            to="/redeem"
             class="black--text text-decoration-none align-self-center"
           >
             <div class="text-capitalize active">
@@ -123,7 +121,7 @@
         </v-list-item>
         <v-list-item>
           <router-link
-            to="/vn/login"
+            to="/login"
             class="black--text text-decoration-none align-self-center"
             @click="signout"
           >
@@ -161,10 +159,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-a{
+a {
   color: black !important;
 }
-.active{
+.active {
   color: var(--v-primary-base) !important;
 }
 .nav-bar {

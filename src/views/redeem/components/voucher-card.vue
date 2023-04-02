@@ -1,7 +1,7 @@
 <template>
   <v-card elevation="2" rounded="8" class="pa-3">
     <v-skeleton-loader
-      v-if="!cards.attributes.thumbnailUrl"
+      v-if="!cards.thumbnailUrl"
       color="lighten-4"
       class="pa-3 card-image mx-auto"
       type="image"
@@ -12,11 +12,11 @@
         <v-img
           class="card-image"
           height="140px"
-          :src="cards.attributes.thumbnailUrl"
+          :src="cards.thumbnailUrl"
         ></v-img>
       </div>
       <div
-        v-if="cards.attributes.status == 'New Deal'"
+        v-if="cards.status == 'New Deal'"
         class="mt-3 pa-1 px-3 white--text"
         :style="{
           background: '#1890FF',
@@ -28,10 +28,10 @@
           'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
         }"
       >
-        {{ cards.attributes.status }}
+        {{ cards.status }}
       </div>
       <div
-        v-else-if="cards.attributes.status == 'Hot'"
+        v-else-if="cards.status == 'Hot'"
         class="mt-3 pa-1 px-3 white--text"
         :style="{
           background: '#EC1D1D',
@@ -43,12 +43,10 @@
           'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
         }"
       >
-        {{ cards.attributes.status }}
+        {{ cards.status }}
       </div>
       <div
-        v-else-if="
-          cards.attributes.purchasedQuantity == cards.attributes.totalQuantity
-        "
+        v-else-if="cards.purchasedQuantity == cards.totalQuantity"
         class="mt-3 pa-1 px-3 white--text"
         :style="{
           background: '#FDDF59',
@@ -75,14 +73,14 @@
           'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
         }"
       >
-        {{ cards.attributes.status }}
+        {{ cards.status }}
       </div>
     </div>
 
     <v-hover v-slot="{ hover }">
       <div class="mt-3 font-weight-bold text-center text-truncate">
         <div class="d-inline-block voucher-title">
-          {{ cards.attributes.title }}
+          {{ cards.title }}
         </div>
         <tooltip v-if="hover" class="tooltip" :cards="cards" />
       </div>
@@ -92,16 +90,11 @@
       class="d-flex mt-3 font-weight-bold align-center justify-center column-gap-10"
     >
       <div>
-        <v-img
-          class="card-icon"
-          :src="
-            cards.attributes.campaignCategory.data.attributes.iconUrl
-          "
-        />
+        <v-img class="card-icon" :src="cards.campaignCategory.iconUrl" />
         <!-- <v-img class="card-icon" src="@/assets/redeem/card/baemin-icon.webp" /> -->
       </div>
       <v-btn
-        v-if="cards.attributes.status == 'Expired'"
+        v-if="cards.status == 'Expired'"
         class="d-flex column-gap-10 expired"
         elevation="2"
         rounded
@@ -114,7 +107,7 @@
             class="font-weight-bold pr-2"
             :style="{ 'font-size': '18px', color: '#AFAFAF' }"
           >
-            {{ cards.attributes.price }}</span
+            {{ cards.price }}</span
           >
         </div>
         <div>
@@ -149,7 +142,7 @@
             class="white--text font-weight-bold pr-2"
             :style="{ 'font-size': '18px' }"
           >
-            {{ cards.attributes.price }}</span
+            {{ cards.price }}</span
           >
         </div>
         <div>
