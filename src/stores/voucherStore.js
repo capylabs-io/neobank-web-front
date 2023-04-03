@@ -39,7 +39,7 @@ export const voucherStore = defineStore("voucher", () => {
       loading.increaseRequest();
       const res = await Voucher.fetchVouchers(this.bearerToken.jwt);
       if (!res) {
-        snackbar.commonError(`Error occurred! Please try again later!`);
+        snackbar.error(`Error occurred! Please try again later!`);
         return;
       }
       this.voucherData = res.data;
@@ -59,7 +59,7 @@ export const voucherStore = defineStore("voucher", () => {
         this.bearerToken.jwt
       );
       if (!res) {
-        snackbar.commonError(`Error occurred! Please try again later!`);
+        snackbar.error(`Error occurred! Please try again later!`);
         return;
       }
       console.log("purchase", res.data);
@@ -77,7 +77,7 @@ export const voucherStore = defineStore("voucher", () => {
         this.bearerToken.jwt
       );
       if (!res) {
-        snackbar.commonError(`Error occurred! Please try again later!`);
+        snackbar.error(`Error occurred! Please try again later!`);
         return;
       }
       this.userVoucher = res.data.data.map((index) => index.attributes);
@@ -91,8 +91,10 @@ export const voucherStore = defineStore("voucher", () => {
       snackbar.commonError(error);
     }
   }
-  function changeVoucherFilter(sortBy){
+  function changeVoucherFilter(sortBy) {
     this.sortBy = sortBy;
+    console.log("sortBy", this.sortBy);
+    console.log("sortedCampaign", this.sortedCampaign);
   }
   function setDetailStoreCard(cards) {
     this.detailCard = cards;
@@ -125,18 +127,36 @@ export const voucherStore = defineStore("voucher", () => {
         Math.floor(filterVoucherStore.value.length / vouchersPerPage.value) + 1
       );
   });
+  function sortedCampaign() {
+    const filterVoucherStore = voucherData.value;
+    if ((sortBy.value = "asc")) {
+      return filterVoucherStore.sort((a, b) => a.title - b.title);
+    } else if ((sortBy.value = "desc")) {
+      return filterVoucherStore.sort((a, b) => b.title.localeCompare(a.title));
+    } else if ((sortBy.value = "priceUp")) {
+      return filterVoucherStore.sort((a, b) => a.price - b.price);
+    } else if ((sortBy.value = "priceDown")) {
+      return filterVoucherStore.sort((a, b) => b.price - a.price);
+    } else {
+      return filterVoucherStore.sort((a, b) => b.id - a.id);
+    }
+  }
   const filterVoucherStore = computed(() => {
     let filterVoucherStore = [];
     if ((sortBy.value = "asc")) {
-      filterVoucherStore= voucherData.value.sort((a, b) => a.title.localeCompare(b.title));
+      filterVoucherStore = voucherData.value.sort((a, b) =>
+        a.title.localeCompare(b.title)
+      );
     } else if ((sortBy.value = "desc")) {
-      filterVoucherStore= voucherData.value.sort((a, b) => b.title.localeCompare(a.title));
+      filterVoucherStore = voucherData.value.sort((a, b) =>
+        b.title.localeCompare(a.title)
+      );
     } else if ((sortBy.value = "priceUp")) {
-      filterVoucherStore= voucherData.value.sort((a, b) => a.price - b.price);
+      filterVoucherStore = voucherData.value.sort((a, b) => a.price - b.price);
     } else if ((sortBy.value = "priceDown")) {
-      filterVoucherStore= voucherData.value.sort((a, b) => b.price - a.price);
+      filterVoucherStore = voucherData.value.sort((a, b) => b.price - a.price);
     } else {
-      filterVoucherStore= voucherData.value.sort((a, b) => b.id - a.id);
+      filterVoucherStore = voucherData.value.sort((a, b) => b.id - a.id);
     }
     return filterVoucherStore;
   });
@@ -177,7 +197,8 @@ export const voucherStore = defineStore("voucher", () => {
     purchaseVoucher,
     checkIncludes,
     setDetailStoreCard,
-    changeVoucherFilter
+    changeVoucherFilter,
+    sortedCampaign,
   };
 });
 /* eslint-enable */

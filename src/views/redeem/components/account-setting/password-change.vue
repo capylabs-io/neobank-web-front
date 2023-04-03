@@ -29,11 +29,10 @@
               :append-icon="userStore.isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
               :type="userStore.isShowPass ? 'text' : 'password'"
               @click:append="userStore.isShowPass = !userStore.isShowPass"
-              class="pa-0 ml-10 btn-customize"
+              class="pa-0 ml-10"
               placeholder=""
               outlined
               dense
-              hide-details
               flat
             />
           </div>
@@ -60,14 +59,13 @@
               v-else
               height="36px"
               v-model="userStore.newPassword"
-              class="pa-0 ml-10 btn-customize"
+              class="pa-0 ml-10"
               placeholder=""
               outlined
               :append-icon="userStore.isShowpPass ? 'mdi-eye' : 'mdi-eye-off'"
               :type="userStore.isShowpPass ? 'text' : 'password'"
               @click:append="userStore.isShowpPass = !userStore.isShowpPass"
               dense
-              hide-details
               flat
             />
           </div>
@@ -93,15 +91,15 @@
             <v-text-field
               v-else
               height="36px"
-              class="pa-0 ml-10 btn-customize"
+              class="pa-0 ml-10"
               v-model="userStore.confirmNewPassword"
               placeholder=""
               outlined
+              :rules="[passwordConfirmationRule]"
               :append-icon="userStore.isShowcPass ? 'mdi-eye' : 'mdi-eye-off'"
               :type="userStore.isShowcPass ? 'text' : 'password'"
               @click:append="userStore.isShowcPass = !userStore.isShowcPass"
               dense
-              hide-details
               flat
             />
           </div>
@@ -158,6 +156,11 @@ export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(voucherStore),
+    passwordConfirmationRule() {
+      return () =>
+        this.userStore.newPassword === this.userStore.confirmNewPassword ||
+        "Password must match";
+    },
   },
   methods: {
     changeYourPassword() {

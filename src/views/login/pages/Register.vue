@@ -4,19 +4,29 @@
     <div class="sign-in-content ma-auto d-flex flex-column">
       <!-- <div class="sign-in-form ma-auto pa-12"> -->
       <div class="btn-back pa-0 cursor-pointer mr-auto mb-3">
-        <router-link to="/" class="white--text text-decoration-none">
+        <router-link to="/login" class="white--text text-decoration-none">
           <v-icon small color="white"> mdi-arrow-left </v-icon>
           <span class="ml-2 text-capitalize">Go Back</span>
         </router-link>
       </div>
       <v-form ref="form" lazy-validation class="sign-in-form pa-4 pa-sm-8">
         <div class="text-center font-weight-bold">
-          <span :style="{ 'font-size': '30px' }"> Login</span>
+          <span :style="{ 'font-size': '30px' }"> Sign Up</span>
         </div>
         <div class="text-xl mt-sm-4 mt-2 text-left">Email</div>
         <v-text-field
+          v-model="userStore.email"
+          :rules="rules.email"
+          type="text"
+          background-color="cream"
+          class="mt-2"
+          solo
+          dense
+        />
+        <div class="text-xl mt-sm-4 mt-2 text-left">Username</div>
+        <v-text-field
           v-model="userStore.username"
-          :rules="rules.checkIdentifier"
+          :rules="rules.required"
           type="text"
           background-color="cream"
           class="mt-2"
@@ -35,32 +45,36 @@
           background-color="cream"
           class="mt-2"
         />
+        <div class="text-xl text-left mt-sm-4">Re-enter password</div>
+        <v-text-field
+          v-model="userStore.cfpassword"
+          :append-icon="userStore.isShowcPass ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="userStore.isShowcPass ? 'text' : 'password'"
+          :rules="[passwordConfirmationRule]"
+          @click:append="userStore.isShowcPass = !userStore.isShowcPass"
+          solo
+          dense
+          background-color="cream"
+          class="mt-2"
+        />
         <div>
-          <v-checkbox class="text-lg" hide-details="true" label="Remember me" />
+          <v-checkbox
+            v-model="userStore.rememberMe"
+            class="text-lg"
+            hide-details="true"
+            label="Accept Terms and Services"
+          />
         </div>
 
-        <div class="text-center mt-5">
+        <div class="text-center mt-6">
           <v-btn
             color="#5E6BE9"
             class="py-5 px-10 btn-submit white--text font-weight-bold"
             @click="submitForm"
           >
-            Let's go <v-icon class="ml-2">mdi-arrow-right</v-icon>
+            Create account
           </v-btn>
         </div>
-        <router-link to="" class="text-decoration-none text-center black--text">
-          <div class="text-capitalize text-md cursor-pointer mt-4">
-            Forgot Password
-          </div>
-        </router-link>
-        <router-link
-          to="/register"
-          class="text-decoration-none text-center black--text"
-        >
-          <div class="text-capitalize text-md cursor-pointer mt-1">
-            Create New Account
-          </div>
-        </router-link>
       </v-form>
       <!-- </div> -->
     </div>
@@ -83,7 +97,11 @@ export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(voucherStore),
-    
+    passwordConfirmationRule() {
+      return () =>
+        this.userStore.password === this.userStore.cfpassword ||
+        "Password must match";
+    },
   },
   data() {
     return {
@@ -103,7 +121,7 @@ export default {
     },
     submitForm() {
       if (this.$refs.form.validate()) {
-        this.userStore.signIn();
+        this.userStore.register();
       }
     },
   },
@@ -136,7 +154,6 @@ export default {
   width: max-content;
   height: max-content;
   z-index: 101;
-
   .sign-in-form {
     width: 465px;
     height: fit-content;

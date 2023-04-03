@@ -18,7 +18,7 @@
               height="36px"
               type="text"
               class="pa-0 ml-10 btn-customize"
-              placeholder="3129120934"
+              placeholder=""
               solo
               readonly
               dense

@@ -10,7 +10,7 @@
             Voucher
           </v-btn>
         </div> -->
-        <div class="right-filter-group">
+        <!-- <div class="right-filter-group">
           <v-select
             class="btn-customize"
             v-model="voucherStore.sortBy"
@@ -24,7 +24,7 @@
             hide-details
             persistent-hint
           ></v-select>
-        </div>
+        </div> -->
       </div>
       <div class="full-width mt-6 card-container">
         <v-row>
@@ -105,7 +105,7 @@ export default {
   }
 }
 .right-container {
-  max-width: 1500px;
+  width: 1500px;
 }
 .card-container {
   height: 600px;

@@ -13,13 +13,16 @@
         </div>
         <div class="mt-3">
           <span class="font-weight-bold"
-            >{{ userStore.userData.username }} #291090</span
+            >{{ userStore.userData.username }} #{{
+              userStore.userData.id
+            }}</span
           >
         </div>
         <div class="subtitle-2">
           <span>{{ userStore.userData.email }}</span>
         </div>
-        <!-- <div
+        <div
+          v-if="userStore.userData.userMetadata.token"
           class="d-flex left-profile-section align-center font-weight-bold mt-3 pa-2"
         >
           <span :style="{ 'font-size': '18px' }">{{
@@ -31,7 +34,7 @@
               :src="require(`@/assets/redeem/coin.webp`)"
             />
           </div>
-        </div> -->
+        </div>
       </div>
       <v-divider></v-divider>
       <div class="d-flex flex-column justify-center left-second pa-6">

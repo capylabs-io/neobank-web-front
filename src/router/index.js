@@ -23,6 +23,11 @@ const routes = [
     name: "Login",
     component: () => import("../views/login/pages/Login.vue"),
   },
+  {
+    path: "/register",
+    name: "Register",
+    component: () => import("../views/login/pages/Register.vue"),
+  },
   // {
   //   path: "/:lang",
   //   component: {

@@ -64,10 +64,10 @@
         class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
       >
         <div>
-          <v-img
+          <!-- <v-img
             class="drawer-icon"
             :src="voucherStore.detailCard.campaignCategory.iconUrl"
-          />
+          /> -->
         </div>
         <span class="mt-3"> {{ voucherStore.detailCard.title }} </span>
       </div>

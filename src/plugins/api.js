@@ -77,6 +77,26 @@ export const User = {
         },
       }
     ),
+  updateMetaData: (id, token) =>
+    axios.put(
+      `/users/` + id,
+      {
+        avatarUrl: "",
+        userMetadata: {
+          outfit: {},
+          firstName: "",
+          lastName: "",
+          phoneNumber: "",
+          bankAccount: "",
+          token: 1000,
+        },
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    ),
   updateUserEmail: (email, password) =>
     axios.post("users/edit-email", {
       newEmail: email,
@@ -95,7 +115,7 @@ export const User = {
 };
 export const Voucher = {
   fetchVouchers: (token) =>
-    axios.get("campaigns?populate=campaignCategory", {
+    axios.get("user/campaigns", {
       headers: {
         Authorization: "Bearer " + token,
       },

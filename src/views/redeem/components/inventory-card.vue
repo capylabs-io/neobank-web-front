@@ -8,48 +8,6 @@
           :src="cards.campaign.data.attributes.thumbnailUrl"
         ></v-img>
       </div>
-      <div
-        v-if="cards.campaign.data.attributes.status == 'New Deal'"
-        class="mt-3 pa-1 px-3"
-        :style="{
-          background: '#FDDF59',
-          width: 'max-content',
-          height: 'max-content',
-          position: 'absolute',
-          'border-bottom-right-radius': '8px',
-          'border-top-right-radius': '8px',
-        }"
-      >
-        {{ cards.campaign.data.attributes.status }}
-      </div>
-      <div
-        v-else-if="cards.campaign.data.attributes.status == 'Hot'"
-        class="mt-3 pa-1 px-3"
-        :style="{
-          background: '#f65970',
-          width: 'max-content',
-          height: 'max-content',
-          position: 'absolute',
-          'border-bottom-right-radius': '8px',
-          'border-top-right-radius': '8px',
-        }"
-      >
-        {{ cards.campaign.data.attributes.status }}
-      </div>
-      <div
-        v-else
-        class="mt-3 pa-1 px-3"
-        :style="{
-          background: '#CBCBCB',
-          width: 'max-content',
-          height: 'max-content',
-          position: 'absolute',
-          'border-bottom-right-radius': '8px',
-          'border-top-right-radius': '8px',
-        }"
-      >
-        {{ cards.campaign.data.attributes.status }}
-      </div>
     </div>
     <div
       class="mt-6 font-weight-bold align-center justify-center text-truncate"

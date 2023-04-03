@@ -179,7 +179,7 @@ export default {
   }
 }
 .right-container {
-  max-width: 1500px;
+  width: 1500px;
 }
 .card-container {
   height: max-content;

@@ -9,20 +9,25 @@ export const userStore = defineStore(
   () => {
     const loading = loadingController(); //store
     const snackbar = snackBarController(); //store
-    const jwt = ref("");
     const rememberMe = ref(false);
     const isShowPass = ref(false);
     const isShowcPass = ref(false);
     const isShowpPass = ref(false);
+
+    const jwt = ref("");
     const username = ref("");
+    const email = ref("");
     const password = ref("");
-    const file = ref(null);
-    const avatarUrl = ref([]);
+    const cfpassword = ref("");
     const avatar = ref("");
     const currentPassword = ref("");
     const newPassword = ref("");
     const confirmNewPassword = ref("");
+
+    const avatarUrl = ref([]);
     const userData = ref({});
+
+    const file = ref(null);
 
     async function signIn() {
       try {
@@ -32,7 +37,7 @@ export const userStore = defineStore(
           password: this.password,
         });
         if (!res) {
-          snackbar.commonError(`Error occurred! Please try again later!`);
+          snackbar.error(`Error occurred! Login Failed`);
           return;
         }
         snackbar.success("Login successfully!");
@@ -49,25 +54,35 @@ export const userStore = defineStore(
         snackbar.commonError(error);
       }
     }
-    async function changePassword() {
+    async function register() {
       try {
-        loading.increaseRequest();
-        const res = await Auth.changePassword(
-          this.currentPassword,
-          this.newPassword,
-          this.confirmNewPassword,
-          this.jwt
-        );
-        if (!res) {
-          snackbar.commonError(`Error occurred! Please try again later!`);
-          return;
+        if (this.rememberMe) {
+          loading.increaseRequest();
+          const res = await Auth.register({
+            email: this.email,
+            username: this.username,
+            password: this.password,
+          });
+          if (!res) {
+            snackbar.error(`Error occurred! Login Failed`);
+            return;
+          }
+          snackbar.success("Register successfully!");
+          this.jwt = res.data.jwt;
+          this.userData = res.data.user;
+          this.updateMetaData(res.data.user.id);
+          this.router.push({
+            name: "Login",
+          });
+        } else {
+          snackbar.error(`Would you follow our Terms and Services `);
         }
-        snackbar.success("Password has been Changed!");
       } catch (error) {
         console.error(`Error: ${error}`);
         snackbar.commonError(error);
       }
     }
+
     async function updateAccountSetting() {
       try {
         loading.increaseRequest();
@@ -88,6 +103,20 @@ export const userStore = defineStore(
         snackbar.commonError(error);
       }
     }
+    async function updateMetaData(id) {
+      try {
+        loading.increaseRequest();
+        const res = await User.updateMetaData(id, this.jwt);
+        if (!res) {
+          snackbar.commonError(`Error occurred! Please try again later!`);
+          return;
+        }
+      } catch (error) {
+        console.error(`Error: ${error}`);
+        snackbar.commonError(error);
+      }
+    }
+
     async function uploadFile() {
       if (this.file) {
         const formData = new FormData();
@@ -97,7 +126,9 @@ export const userStore = defineStore(
           loading.increaseRequest();
           const res = await User.uploadFile(formData, this.jwt);
           if (!res) {
-            snackbar.commonError(`Error occurred! Please try again later!`);
+            snackbar.error(
+              `Error occurred when upload file! Please try again later!`
+            );
             return;
           }
           this.avatarUrl = res.data.map((index) => index.url);
@@ -108,9 +139,32 @@ export const userStore = defineStore(
         }
       }
     }
+    async function changePassword() {
+      try {
+        loading.increaseRequest();
+        const res = await Auth.changePassword(
+          this.currentPassword,
+          this.newPassword,
+          this.confirmNewPassword,
+          this.jwt
+        );
+        if (!res) {
+          snackbar.error(`Error occurred! Please try again later!`);
+          return;
+        }
+        snackbar.success("Password has been Changed!");
+      } catch (error) {
+        console.error(`Error: ${error}`);
+        snackbar.commonError(error);
+      }
+    }
     function logout() {
       jwt.value = "";
       userData.value = "";
+    }
+    function isEditEnable() {
+      if (this.username && this.password) return false;
+      return true;
     }
     const isConnected = computed(() => jwt);
 
@@ -132,12 +186,17 @@ export const userStore = defineStore(
       isShowpPass,
       avatarUrl,
       avatar,
+      email,
+      cfpassword,
       //action
+      register,
       signIn,
       logout,
       updateAccountSetting,
       uploadFile,
+      updateMetaData,
       changePassword,
+      isEditEnable,
     };
   },
   {

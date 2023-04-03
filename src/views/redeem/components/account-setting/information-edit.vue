@@ -80,11 +80,10 @@
               v-model="userStore.userData.userMetadata.firstName"
               height="36px"
               type="text"
-              class="pa-0 ml-10 btn-customize"
+              class="pa-0 ml-10"
               placeholder="Avatar.jpg"
               outlined
               dense
-              hide-details
               flat
             />
           </div>
@@ -113,11 +112,10 @@
               v-model="userStore.userData.userMetadata.lastName"
               height="36px"
               type="text"
-              class="pa-0 ml-10 btn-customize"
+              class="pa-0 ml-10"
               placeholder="Avatar.jpg"
               outlined
               dense
-              hide-details
               flat
             />
           </div>
@@ -174,11 +172,10 @@
               v-model="userStore.userData.userMetadata.phoneNumber"
               height="36px"
               type="text"
-              class="pa-0 ml-10 btn-customize"
+              class="pa-0 ml-10"
               placeholder="Avatar.jpg"
               outlined
               dense
-              hide-details
               flat
             />
           </div>
