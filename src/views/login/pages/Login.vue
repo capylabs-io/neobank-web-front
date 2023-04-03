@@ -15,7 +15,7 @@
         </div>
         <div class="text-xl mt-sm-4 mt-2 text-left">Email</div>
         <v-text-field
-          v-model="userStore.username"
+          v-model="userStore.email"
           :rules="rules.checkIdentifier"
           type="text"
           background-color="cream"
@@ -28,7 +28,7 @@
           v-model="userStore.password"
           :append-icon="userStore.isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
           :type="userStore.isShowPass ? 'text' : 'password'"
-          :rules="rules.password"
+          :rules="rules.required"
           @click:append="userStore.isShowPass = !userStore.isShowPass"
           solo
           dense

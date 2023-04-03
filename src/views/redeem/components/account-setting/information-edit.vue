@@ -68,7 +68,7 @@
               height="36px"
               type="text"
               class="pa-0 ml-10 btn-customize"
-              placeholder="Avatar.jpg"
+              placeholder=""
               solo
               readonly
               dense
@@ -81,7 +81,7 @@
               height="36px"
               type="text"
               class="pa-0 ml-10"
-              placeholder="Avatar.jpg"
+              placeholder=""
               outlined
               dense
               flat
@@ -100,7 +100,7 @@
               height="36px"
               type="text"
               class="pa-0 ml-10 btn-customize"
-              placeholder="Avatar.jpg"
+              placeholder=""
               solo
               readonly
               dense
@@ -113,7 +113,7 @@
               height="36px"
               type="text"
               class="pa-0 ml-10"
-              placeholder="Avatar.jpg"
+              placeholder=""
               outlined
               dense
               flat
@@ -137,7 +137,7 @@
               height="36px"
               type="text"
               class="pa-0 ml-10 btn-customize"
-              placeholder="Avatar.jpg"
+              placeholder=""
               solo
               background-color="secondary"
               readonly
@@ -160,7 +160,7 @@
               height="36px"
               type="text"
               class="pa-0 ml-10 btn-customize"
-              placeholder="Avatar.jpg"
+              placeholder=""
               solo
               readonly
               dense
@@ -173,7 +173,7 @@
               height="36px"
               type="text"
               class="pa-0 ml-10"
-              placeholder="Avatar.jpg"
+              placeholder=""
               outlined
               dense
               flat

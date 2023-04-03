@@ -33,7 +33,7 @@ export const userStore = defineStore(
       try {
         loading.increaseRequest();
         const res = await Auth.signIn({
-          identifier: this.username,
+          identifier: this.email,
           password: this.password,
         });
         if (!res) {

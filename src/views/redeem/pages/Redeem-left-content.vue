@@ -4,7 +4,14 @@
       <div
         class="d-flex flex-column align-center justify-center left-first pa-6"
       >
-        <div>
+        <div v-if="userStore.userData.avatarUrl">
+          <v-img
+            :style="{ 'border-radius': '10px' }"
+            class
+            :src="userStore.userData.avatarUrl"
+          />
+        </div>
+        <div v-else>
           <v-img
             :style="{ 'border-radius': '10px' }"
             class

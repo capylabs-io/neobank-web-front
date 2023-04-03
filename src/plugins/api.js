@@ -81,7 +81,7 @@ export const User = {
     axios.put(
       `/users/` + id,
       {
-        avatarUrl: "",
+        avatarUrl: "https://neobank-strapi.s3.amazonaws.com/default-avatar.png",
         userMetadata: {
           outfit: {},
           firstName: "",

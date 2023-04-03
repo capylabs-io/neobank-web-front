@@ -31,6 +31,7 @@ export default {
     buy() {
       this.voucherStore.cfDialog = false;
       this.voucherStore.purchaseVoucher();
+      this.voucherStore.fetchVoucher();
       this.voucherStore.fetchUserVoucher();
       this.$router.push("/Redeem");
     },
