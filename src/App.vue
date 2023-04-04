@@ -1,29 +1,32 @@
 <template>
   <v-app>
-    <app-navbar v-if="voucherStore.pageIndex == 1" />
+    <!-- <app-navbar v-if="voucherStore.pageIndex == 1" /> -->
+    <NavBarLanding v-if="voucherStore.pageIndex == 1" />
     <page-navbar v-else-if="voucherStore.pageIndex == 2" />
     <div v-else />
     <v-main>
       <SnackBar />
       <router-view :key="$route.fullPath" />
     </v-main>
-    <app-footer v-if="voucherStore.pageIndex == 1" />
+    <!-- <app-footer v-if="voucherStore.pageIndex == 1" /> -->
   </v-app>
 </template>
 <script>
 import FooterVue from "./components/Footer.vue";
+import NavBarLanding from "@/views/home/components/landing/landing-nav-bar.vue";
 import HomeNavigationBar from "./components/NavigationBar.vue";
 import PageNavigationBar from "./components/NavigationBarPage.vue";
 import { mapStores } from "pinia";
-import { userStore } from "../src/stores/userStore";
-import { voucherStore } from "../src/stores/voucherStore";
+import { userStore } from "@/stores/userStore";
+import { voucherStore } from "@/stores/voucherStore";
 import { inventoryStore } from "@/stores/inventoryStore";
 import SnackBar from "@/components/snack-bar/snack-bar.vue";
 export default {
   components: {
-    "app-navbar": HomeNavigationBar,
+    // "app-navbar": HomeNavigationBar,
     "page-navbar": PageNavigationBar,
-    "app-footer": FooterVue,
+    // "app-footer": FooterVue,
+    NavBarLanding: NavBarLanding,
     SnackBar,
   },
   computed: {
@@ -32,7 +35,9 @@ export default {
     ...mapStores(inventoryStore),
   },
   async created() {
-    await this.inventoryStore.fetchUserVoucher();
+    if (this.userStore.jwt) {
+      await this.inventoryStore.fetchUserVoucher();
+    }
   },
   data() {
     return {
@@ -78,66 +83,132 @@ nav {
 .cursor-pointer {
   cursor: pointer !important;
 }
-.display-xxl {
-  font-size: 72px;
-  line-height: 90px;
+.neutral30-border {
+  border: 1px solid var(--v-neutral30-base) !important;
 }
-.display-xl {
-  font-size: 60px;
-  line-height: 72px;
+.border-radius-24 {
+  border-radius: 24px !important;
 }
-.display-large {
-  font-size: 48px;
-  line-height: 60px;
+.border-radius-16 {
+  border-radius: 16px !important;
 }
-.display-medium {
-  font-size: 36px;
-  line-height: 44px;
+.border-radius-12 {
+  border-radius: 12px !important;
 }
-.display-small {
-  font-size: 30px;
-  line-height: 38px;
+.border-radius-8 {
+  border-radius: 8px !important;
 }
-.display-xs {
-  font-size: 24px;
-  line-height: 36px;
+.border-radius-6 {
+  border-radius: 6px !important;
 }
-
-.text-xl {
-  font-size: 20px;
-  line-height: 32px;
+.border-radius-4 {
+  border-radius: 4px !important;
 }
-.text-large {
-  font-size: 18px;
-  line-height: 28px;
+.gap-4 {
+  gap: 4px;
 }
-.text-medium {
-  font-size: 16px;
-  line-height: 24px;
+.gap-8 {
+  gap: 8px;
 }
-.text-small {
+.gap-16 {
+  gap: 16px;
+}
+.full-width {
+  width: 100% !important;
+}
+.full-height {
+  height: 100% !important;
+}
+.cursor-pointer {
+  cursor: pointer !important;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.text-btn {
+  font-style: normal;
+  font-weight: 500 !important;
   font-size: 14px;
   line-height: 20px;
 }
+.text-overline-1 {
+  font-size: 10px !important;
+  line-height: 12px !important;
+}
+.text-caption {
+  font-size: 12px !important;
+  line-height: 14px !important;
+}
 .text-xs {
-  font-size: 12px;
-  line-height: 18px;
+  font-size: 12px !important;
+  line-height: 18px !important;
 }
-.caption {
-  font-size: 12px;
-  line-height: 14px;
+.text-sm {
+  font-size: 14px !important;
+  line-height: 20px !important;
 }
-.overline {
-  font-size: 10px;
-  line-height: 12px;
+.text-md {
+  font-size: 16px !important;
+  line-height: 24px !important;
 }
+.text-lg {
+  font-size: 18px !important;
+  line-height: 28px !important;
+}
+.text-xl {
+  font-size: 20px !important;
+  line-height: 32px !important;
+}
+.text-dp-xs {
+  font-size: 24px !important;
+  line-height: 36px !important;
+}
+.text-dp-sm {
+  font-size: 30px !important;
+  line-height: 38px !important;
+}
+.text-dp-md {
+  font-size: 36px !important;
+  line-height: 44px !important;
+  letter-spacing: -2% !important;
+}
+.text-dp-lg {
+  font-size: 48px !important;
+  line-height: 60px !important;
+  letter-spacing: -2% !important;
+}
+.text-dp-xl {
+  font-size: 60px !important;
+  line-height: 72px !important;
+  letter-spacing: -2% !important;
+}
+.text-dp-xxl {
+  font-size: 72px !important;
+  line-height: 90px !important;
+  letter-spacing: -2% !important;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 8px var(--v-gray13-base);
+  background-color: transparent !important;
+}
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent !important;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 8px var(--v-gray13-base);
+  background-color: var(--v-primary-base);
+}
+
 .font-weight-400 {
-  font-weight: 400;
+  font-weight: 400 !important;
 }
 .font-weight-500 {
-  font-weight: 500;
+  font-weight: 500 !important;
 }
 .font-weight-700 {
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 </style>

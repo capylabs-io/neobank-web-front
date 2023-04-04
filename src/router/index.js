@@ -1,17 +1,23 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/home/pages/Home.vue";
-import i18n from "@/i18n";
+
+// import i18n from "@/i18n";
 Vue.use(VueRouter);
 const routes = [
   {
     path: "",
     redirect: `/home`,
   },
+  // {
+  //   path: "/home",
+  //   name: "home",
+  //   component: Home,
+  // },
   {
     path: "/home",
     name: "home",
-    component: Home,
+    component: () => import("../views/home/pages/Landing-page.vue"),
   },
   {
     path: "/redeem",
