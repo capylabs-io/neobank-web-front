@@ -29,7 +29,7 @@
           <span>{{ userStore.userData.email }}</span>
         </div>
         <div
-          v-if="userStore.userData.userMetadata.token"
+          v-if="userStore.userData.userMetadata.token && userStore.jwt"
           class="d-flex left-profile-section align-center font-weight-bold mt-3 pa-2"
         >
           <span :style="{ 'font-size': '18px' }">{{
