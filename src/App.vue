@@ -17,6 +17,7 @@ import PageNavigationBar from "./components/NavigationBarPage.vue";
 import { mapStores } from "pinia";
 import { userStore } from "../src/stores/userStore";
 import { voucherStore } from "../src/stores/voucherStore";
+import { inventoryStore } from "@/stores/inventoryStore";
 import SnackBar from "@/components/snack-bar/snack-bar.vue";
 export default {
   components: {
@@ -28,8 +29,11 @@ export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(voucherStore),
+    ...mapStores(inventoryStore),
   },
-  created() {},
+  async created() {
+    await this.inventoryStore.fetchUserVoucher();
+  },
   data() {
     return {
       index: 2,

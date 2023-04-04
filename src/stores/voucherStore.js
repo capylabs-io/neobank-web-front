@@ -23,17 +23,13 @@ export const voucherStore = defineStore("voucher", () => {
 
   const sortBy = ref("");
   const voucherId = ref("");
-  const ivenVoucherQr = ref("");
 
   const bearerToken = ref({});
-  const ivenCardData = ref({});
   const accountEditData = ref({});
   const voucherData = ref([]);
   const detailCard = ref({});
 
   const voucherDataId = ref([]);
-  const userVoucher = ref([]);
-  const userVoucherId = ref([]);
   const voucherPurchased = ref([]);
 
   async function fetchVoucher() {
@@ -71,28 +67,7 @@ export const voucherStore = defineStore("voucher", () => {
       snackbar.commonError(error);
     }
   }
-  async function fetchUserVoucher() {
-    try {
-      loading.increaseRequest();
-      const res = await Voucher.fetchUserVouchers(
-        user.userData.id,
-        this.bearerToken.jwt
-      );
-      if (!res) {
-        snackbar.error(`Error occurred! Please try again later!`);
-        return;
-      }
-      this.userVoucher = res.data.data.map((index) => index.attributes);
-      this.userVoucherId = res.data.data.map(
-        (index) => index.attributes.campaign.data.id
-      );
-      console.log("userVoucher", userVoucher);
-      console.log("userVoucherId", userVoucherId);
-    } catch (error) {
-      console.error(`Error: ${error}`);
-      snackbar.commonError(error);
-    }
-  }
+  
   function changeVoucherFilter(sortBy) {
     this.sortBy = sortBy;
     console.log("sortBy", this.sortBy);
@@ -171,7 +146,6 @@ export const voucherStore = defineStore("voucher", () => {
 
     //states
     drawer,
-    ivenCardData,
     index,
     drawerDetail,
     detailCard,
@@ -181,20 +155,16 @@ export const voucherStore = defineStore("voucher", () => {
     cfDialog,
     voucherId,
     scrollY,
-    userVoucher,
-    userVoucherId,
     voucherDataId,
     voucherPurchased,
     voucherPage,
     vouchersPerPage,
     sortBy,
-    ivenVoucherQr,
     changePassword,
     profileEdit,
     accountEditData,
     //action
     fetchVoucher,
-    fetchUserVoucher,
     purchaseVoucher,
     checkIncludes,
     setDetailStoreCard,

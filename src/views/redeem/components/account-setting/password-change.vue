@@ -28,6 +28,7 @@
               height="36px"
               :append-icon="userStore.isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
               :type="userStore.isShowPass ? 'text' : 'password'"
+              :rules="rules.password"
               @click:append="userStore.isShowPass = !userStore.isShowPass"
               class="pa-0 ml-10"
               placeholder=""
@@ -64,6 +65,7 @@
               outlined
               :append-icon="userStore.isShowpPass ? 'mdi-eye' : 'mdi-eye-off'"
               :type="userStore.isShowpPass ? 'text' : 'password'"
+              :rules="rules.password"
               @click:append="userStore.isShowpPass = !userStore.isShowpPass"
               dense
               flat
@@ -149,6 +151,7 @@
 </template>
 
 <script>
+import { rules } from "@/plugins/rules";
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
 import { voucherStore } from "@/stores/voucherStore";
@@ -161,6 +164,11 @@ export default {
         this.userStore.newPassword === this.userStore.confirmNewPassword ||
         "Password must match";
     },
+  },
+  data() {
+    return {
+      rules: rules,
+    };
   },
   methods: {
     changeYourPassword() {

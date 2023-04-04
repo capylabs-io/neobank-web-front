@@ -28,7 +28,7 @@
           v-model="userStore.password"
           :append-icon="userStore.isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
           :type="userStore.isShowPass ? 'text' : 'password'"
-          :rules="rules.required"
+          :rules="rules.password"
           @click:append="userStore.isShowPass = !userStore.isShowPass"
           solo
           dense

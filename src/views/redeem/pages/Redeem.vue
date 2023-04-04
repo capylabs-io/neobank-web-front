@@ -53,13 +53,16 @@ export default {
   async created() {
     if (!this.userStore.jwt) {
       this.$router.push("/login");
+    } else {
+      this.change();
+      this.voucherStore.bearerToken = JSON.parse(
+        sessionStorage.getItem("user")
+      );
+      await this.userStore.fetchUserMetadata();
+      await this.inventoryStore.fetchUserVoucher();
+      await this.voucherStore.fetchVoucher();
+      await this.voucherStore.checkIncludes();
     }
-    this.change();
-    this.voucherStore.bearerToken = JSON.parse(sessionStorage.getItem("user"));
-    await this.userStore.fetchUserMetadata();
-    await this.inventoryStore.fetchUserVoucher();
-    await this.voucherStore.fetchVoucher();
-    await this.voucherStore.checkIncludes();
   },
   data() {
     return {

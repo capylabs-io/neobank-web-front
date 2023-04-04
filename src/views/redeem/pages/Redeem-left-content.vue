@@ -42,6 +42,7 @@
             />
           </div>
         </div>
+        <div v-else></div>
       </div>
       <v-divider></v-divider>
       <div class="d-flex flex-column justify-center left-second pa-6">

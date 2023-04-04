@@ -14,12 +14,10 @@ export const inventoryStore = defineStore("inventory", () => {
   const userVoucherPerPage = ref(10);
 
   const sortBy = ref("");
-  const voucherId = ref("");
   const ivenVoucherQr = ref("");
 
   const bearerToken = ref({});
   const ivenCardData = ref({});
-  const accountEditData = ref({});
 
   const userVoucher = ref([]);
   const userVoucherId = ref([]);

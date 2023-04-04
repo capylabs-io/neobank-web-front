@@ -45,11 +45,12 @@ export default {
       windowWidth: window.innerWidth,
     };
   },
-  mounted() {
+  created() {
     window.addEventListener("scroll", this.handleScroll);
     this.change();
   },
-  unmounted() {
+  // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
+  beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
