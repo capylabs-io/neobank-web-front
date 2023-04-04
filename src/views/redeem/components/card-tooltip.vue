@@ -12,7 +12,37 @@
       </div>
       <div
         v-if="cards.status == 'New Deal'"
-        class="mt-3 pa-2"
+        class="mt-3 pa-1 px-3 white--text"
+        :style="{
+          background: '#1890FF',
+          width: 'max-content',
+          height: 'max-content',
+          position: 'absolute',
+          'border-bottom-right-radius': '8px',
+          'border-top-right-radius': '8px',
+          'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+        }"
+      >
+        New Deal
+      </div>
+      <div
+        v-else-if="cards.status == 'hot'"
+        class="mt-3 pa-1 px-3 white--text"
+        :style="{
+          background: '#EC1D1D',
+          width: 'max-content',
+          height: 'max-content',
+          position: 'absolute',
+          'border-bottom-right-radius': '8px',
+          'border-top-right-radius': '8px',
+          'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+        }"
+      >
+        Hot
+      </div>
+      <div
+        v-else-if="cards.purchasedQuantity == cards.totalQuantity"
+        class="mt-3 pa-1 px-3 white--text"
         :style="{
           background: '#FDDF59',
           width: 'max-content',
@@ -20,37 +50,40 @@
           position: 'absolute',
           'border-bottom-right-radius': '8px',
           'border-top-right-radius': '8px',
+          'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
         }"
       >
-        {{ cards.status }}
+        Out of stock
       </div>
       <div
-        v-else-if="cards.status == 'Hot'"
-        class="mt-3 pa-2"
+        v-else-if="cards.status == 'active'"
+        class="mt-3 pa-1 px-3 white--text"
         :style="{
-          background: '#f65970',
+          background: '#53B06C',
           width: 'max-content',
           height: 'max-content',
           position: 'absolute',
           'border-bottom-right-radius': '8px',
           'border-top-right-radius': '8px',
+          'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
         }"
       >
-        {{ cards.status }}
+        Active
       </div>
       <div
         v-else
-        class="mt-3 pa-2"
+        class="mt-3 pa-1 px-3 white--text"
         :style="{
-          background: '#CBCBCB',
+          background: '#A9A9A9',
           width: 'max-content',
           height: 'max-content',
           position: 'absolute',
           'border-bottom-right-radius': '8px',
           'border-top-right-radius': '8px',
+          'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
         }"
       >
-        {{ cards.status }}
+        Expired
       </div>
     </div>
     <div class="mt-3 font-weight-bold text-left">

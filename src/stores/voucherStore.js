@@ -2,10 +2,12 @@ import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { Auth, Voucher } from "@/plugins/api.js";
 import { userStore } from "./userStore";
+import { inventoryStore } from "./inventoryStore";
 import { snackBarController } from "@/components/snack-bar/snack-bar-controller.js";
 import { loadingController } from "@/components/global-loading/global-loading-controller.js";
 export const voucherStore = defineStore("voucher", () => {
   const user = userStore();
+  const inventory = inventoryStore();
   const loading = loadingController(); //store
   const snackbar = snackBarController(); //store
   const drawer = ref(false);
@@ -101,9 +103,9 @@ export const voucherStore = defineStore("voucher", () => {
   }
 
   function checkIncludes() {
-    if (this.voucherDataId && this.userVoucherId) {
+    if (this.voucherDataId && inventory.userVoucherId) {
       this.voucherPurchased = this.voucherDataId.filter((data) =>
-        this.userVoucherId.includes(data)
+        inventory.userVoucherId.includes(data)
       );
     }
     console.log("Purchased voucher", voucherPurchased);
@@ -190,7 +192,6 @@ export const voucherStore = defineStore("voucher", () => {
     changePassword,
     profileEdit,
     accountEditData,
-
     //action
     fetchVoucher,
     fetchUserVoucher,

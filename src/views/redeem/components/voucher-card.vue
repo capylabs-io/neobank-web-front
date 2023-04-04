@@ -28,10 +28,10 @@
           'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
         }"
       >
-        {{ cards.status }}
+        New Deal
       </div>
       <div
-        v-else-if="cards.status == 'Hot'"
+        v-else-if="cards.status == 'hot'"
         class="mt-3 pa-1 px-3 white--text"
         :style="{
           background: '#EC1D1D',
@@ -43,7 +43,7 @@
           'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
         }"
       >
-        {{ cards.status }}
+        Hot
       </div>
       <div
         v-else-if="cards.purchasedQuantity == cards.totalQuantity"
@@ -61,6 +61,21 @@
         Out of stock
       </div>
       <div
+        v-else-if="cards.status == 'active'"
+        class="mt-3 pa-1 px-3 white--text"
+        :style="{
+          background: '#53B06C',
+          width: 'max-content',
+          height: 'max-content',
+          position: 'absolute',
+          'border-bottom-right-radius': '8px',
+          'border-top-right-radius': '8px',
+          'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+        }"
+      >
+        Active
+      </div>
+      <div
         v-else
         class="mt-3 pa-1 px-3 white--text"
         :style="{
@@ -73,7 +88,7 @@
           'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
         }"
       >
-        {{ cards.status }}
+        Expired
       </div>
     </div>
 
@@ -90,9 +105,18 @@
       class="d-flex mt-3 font-weight-bold align-center justify-center column-gap-10"
     >
       <div>
-        <v-img class="card-icon" :src="cards.campaignCategory.iconUrl" />
-        <!-- <v-img class="card-icon" src="@/assets/redeem/card/baemin-icon.webp" /> -->
+        <v-img
+          v-if="cards.campaignCategory.iconUrl"
+          class="card-icon"
+          :src="cards.campaignCategory.iconUrl"
+        />
+        <v-img
+          v-else
+          class="card-icon"
+          src="@/assets/redeem/card/baemin-icon.webp"
+        />
       </div>
+
       <v-btn
         v-if="cards.status == 'Expired'"
         class="d-flex column-gap-10 expired"
@@ -118,7 +142,7 @@
         </div>
       </v-btn>
       <v-btn
-        v-else-if="purchased"
+        v-else-if="isPurchased"
         class="d-flex column-gap-10 purchased"
         elevation="2"
         rounded
@@ -135,7 +159,7 @@
         elevation="2"
         rounded
         text
-        @click="Click"
+        @click="buyClicked()"
       >
         <div>
           <span
@@ -158,33 +182,34 @@
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "../../../stores/userStore";
-import { voucherStore } from "../../../stores/voucherStore";
+import { userStore } from "@/stores/userStore";
+import { voucherStore } from "@/stores/voucherStore";
+import { inventoryStore } from "@/stores/inventoryStore";
 import tooltip from "@/views/redeem/components/card-tooltip.vue";
 export default {
   components: {
     tooltip: tooltip,
   },
-  props: ["cards", "id"],
+  props: ["cards", "id", "isPurchased"],
   computed: {
     ...mapStores(userStore),
     ...mapStores(voucherStore),
+    ...mapStores(inventoryStore),
   },
   data() {
     return {
       index: 1,
       loading: true,
-      purchased: true,
     };
   },
-  mounted() {
-    this.purchased = this.voucherStore.voucherPurchased.includes(this.id);
-  },
   methods: {
-    Click() {
+    buyClicked() {
+      // if (this.userStore.userData.userMetadata.token < this.cards.price) {
       this.voucherStore.drawerDetail = !this.voucherStore.drawerDetail;
       this.voucherStore.setDetailStoreCard(this.cards);
       this.voucherStore.voucherId = this.id;
+      // } else {
+      // }
     },
   },
 };

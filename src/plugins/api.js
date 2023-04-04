@@ -3,7 +3,6 @@ import utils from "@/plugins/utils";
 
 // axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT;
 axios.defaults.baseURL = "https://neobank-dev-api.capylabs.io/api/";
-
 const USER_API = "/users/";
 
 const APIHelper = (api) => ({
@@ -60,12 +59,15 @@ export const User = {
   ...APIHelper(USER_API),
 
   // updateUserInfo: (model) => axios.put("users/edit/", model),
-  updateUserInfo: (avatarUrl, data, token) =>
+  updateUserInfo: (userToken, avatarUrl, data, token) =>
     axios.put(
       `/users/` + data.id,
       {
         avatarUrl: avatarUrl,
         userMetadata: {
+          outfit: {},
+          bankAccount: "",
+          token: userToken,
           firstName: data.userMetadata.firstName,
           lastName: data.userMetadata.lastName,
           phoneNumber: data.userMetadata.phoneNumber,
@@ -84,11 +86,11 @@ export const User = {
         avatarUrl: "https://neobank-strapi.s3.amazonaws.com/default-avatar.png",
         userMetadata: {
           outfit: {},
+          bankAccount: "",
+          token: 0,
           firstName: "",
           lastName: "",
           phoneNumber: "",
-          bankAccount: "",
-          token: 1000,
         },
       },
       {
@@ -102,9 +104,13 @@ export const User = {
       newEmail: email,
       password,
     }),
-  // uploadFile(file, token) {
-  //   console.log(file);
-  // },
+  getUserMetadata: (token) =>
+    axios.get("users/me", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }),
+
   uploadFile: (file, token) =>
     axios.post("upload", file, {
       headers: {
@@ -132,7 +138,8 @@ export const Voucher = {
     ),
   fetchUserVouchers: (id, token) =>
     axios.get(
-      `vouchers?populate[0]=user&populate[1]=campaign&filters[user][id]=` + id,
+      `vouchers?populate[0]=user&populate[1]=campaign&populate[2]=campaignCategory&filters[user][id]=` +
+        id,
       {
         headers: {
           Authorization: "Bearer " + token,

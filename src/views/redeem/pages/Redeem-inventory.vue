@@ -34,7 +34,7 @@
             md="3"
             sm="6"
             xs="12"
-            v-for="card in voucherStore.userVoucher"
+            v-for="card in inventoryStore.filterUserVouchers"
             :key="card.id"
           >
             <inventoryCard :id="card.id" :cards="card" />
@@ -43,7 +43,13 @@
       </div>
     </div>
     <div class="pagination">
-      <v-pagination :length="3" light circle color="#5752e3" />
+      <v-pagination
+        v-model="inventoryStore.userVoucherPage"
+        :length="inventoryStore.totalUserVoucherPerPage"
+        light
+        circle
+        color="#5752e3"
+      />
     </div>
   </div>
 </template>
@@ -52,6 +58,7 @@
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
 import { voucherStore } from "@/stores/voucherStore";
+import { inventoryStore } from "@/stores/inventoryStore";
 import inventoryCard from "@/views/redeem/components/inventory-card.vue";
 export default {
   components: {
@@ -64,6 +71,7 @@ export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(voucherStore),
+    ...mapStores(inventoryStore),
   },
   watch: {
     group() {

@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-model="voucherStore.drawer"
+    v-model="inventoryStore.drawer"
     absolute
     temporary
     right
@@ -14,78 +14,36 @@
         <div class="full-width">
           <v-img
             class="drawer-image"
-            :src="voucherStore.ivenCardData.thumbnailUrl"
+            :src="inventoryStore.ivenCardData.thumbnailUrl"
           ></v-img>
-        </div>
-        <div
-          v-if="voucherStore.ivenCardData.status == 'New Deal'"
-          class="mt-3 pa-1 px-3"
-          :style="{
-            background: '#FDDF59',
-            width: 'max-content',
-            height: 'max-content',
-            position: 'absolute',
-            'border-bottom-right-radius': '8px',
-            'border-top-right-radius': '8px',
-          }"
-        >
-          {{ voucherStore.ivenCardData.status }}
-        </div>
-        <div
-          v-else-if="voucherStore.ivenCardData.status == 'Hot'"
-          class="mt-3 pa-1 px-3"
-          :style="{
-            background: '#f65970',
-            width: 'max-content',
-            height: 'max-content',
-            position: 'absolute',
-            'border-bottom-right-radius': '8px',
-            'border-top-right-radius': '8px',
-          }"
-        >
-          {{ voucherStore.ivenCardData.status }}
-        </div>
-        <div
-          v-else
-          class="mt-3 pa-1 px-3"
-          :style="{
-            background: '#4c99eb',
-            width: 'max-content',
-            height: 'max-content',
-            position: 'absolute',
-            'border-bottom-right-radius': '8px',
-            'border-top-right-radius': '8px',
-          }"
-        >
-          {{ voucherStore.ivenCardData.status }}
         </div>
       </div>
       <div
         class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
       >
         <div>
-          <v-img class="drawer-icon" :src="voucherStore.ivenCardData.iconUrl" />
+          <v-img class="drawer-icon" :src="inventoryStore.ivenCardData.iconUrl" />
         </div>
-        <span class="mt-3"> {{ voucherStore.ivenCardData.title }} </span>
+        <span class="mt-3"> {{ inventoryStore.ivenCardData.title }} </span>
       </div>
       <div class="mt-3 text-left draw-text">
-        {{ voucherStore.ivenCardData.fullDescription }}
+        {{ inventoryStore.ivenCardData.fullDescription }}
       </div>
     </v-card>
     <div class="qr-img mx-auto mt-3 justify-space-between">
-      <v-img class="" :src="voucherStore.ivenVoucherQr" />
+      <v-img class="" :src="inventoryStore.ivenVoucherQr" />
     </div>
   </v-navigation-drawer>
 </template>
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "../../../stores/userStore";
-import { voucherStore } from "../../../stores/voucherStore";
+import { userStore } from "@/stores/userStore";
+import { inventoryStore } from "@/stores/inventoryStore";
 export default {
   computed: {
     ...mapStores(userStore),
-    ...mapStores(voucherStore),
+    ...mapStores(inventoryStore),
   },
 };
 </script>

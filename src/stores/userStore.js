@@ -54,6 +54,7 @@ export const userStore = defineStore(
         snackbar.commonError(error);
       }
     }
+
     async function register() {
       try {
         if (this.rememberMe) {
@@ -82,27 +83,76 @@ export const userStore = defineStore(
         snackbar.commonError(error);
       }
     }
-
+    // async function uploadFile() {
+    //   if (this.file) {
+    //     const formData = new FormData();
+    //     formData.append("files", this.file);
+    //     console.log("callapi", formData);
+    //     try {
+    //       loading.increaseRequest();
+    //       const res = await User.uploadFile(formData, this.jwt);
+    //       if (!res) {
+    //         snackbar.error(
+    //           `Error occurred when upload file! Please try again later!`
+    //         );
+    //         return;
+    //       }
+    //       this.avatarUrl = res.data.map((index) => index.url);
+    //       snackbar.success("Upload Image successfully!");
+    //     } catch (error) {
+    //       console.error(`Error: ${error}`);
+    //       snackbar.commonError(error);
+    //     }
+    //   }
+    // }
     async function updateAccountSetting() {
+      if (this.file) {
+        try {
+          loading.increaseRequest();
+          const formData = new FormData();
+          formData.append("files", this.file);
+          console.log("callapi", formData);
+          const filedata = await User.uploadFile(formData, this.jwt);
+          this.avatarUrl = filedata.data.map((index) => index.url);
+          if (!this.avatarUrl) {
+            snackbar.error(`Error occurred Upload File! Please try again later!`);
+          } else {
+            const res = await User.updateUserInfo(
+              this.userData.userMetadata.token,
+              this.avatarUrl[0],
+              this.userData,
+              this.jwt
+            );
+            if (!res) {
+              snackbar.error(`Error occurred Update! Please try again later!`);
+              return;
+            }
+            this.userData = res.data;
+            this.avatar = res.data.avatarUrl;
+            snackbar.success("Update successfully!");
+          }
+        } catch (error) {
+          console.error(`Error: ${error}`);
+          snackbar.commonError(error);
+        }
+      }
+    }
+
+    async function fetchUserMetadata() {
       try {
         loading.increaseRequest();
-        const res = await User.updateUserInfo(
-          this.avatarUrl[0],
-          this.userData,
-          this.jwt
-        );
+        const res = await User.getUserMetadata(this.jwt);
         if (!res) {
-          snackbar.commonError(`Error occurred! Please try again later!`);
+          snackbar.error(`Error occurred! Please try again later!`);
           return;
         }
         this.userData = res.data;
-        this.avatar = res.data.avatarUrl;
-        snackbar.success("Update successfully!");
       } catch (error) {
         console.error(`Error: ${error}`);
         snackbar.commonError(error);
       }
     }
+
     async function updateMetaData(id) {
       try {
         loading.increaseRequest();
@@ -117,28 +167,6 @@ export const userStore = defineStore(
       }
     }
 
-    async function uploadFile() {
-      if (this.file) {
-        const formData = new FormData();
-        formData.append("files", this.file);
-        console.log("callapi", formData);
-        try {
-          loading.increaseRequest();
-          const res = await User.uploadFile(formData, this.jwt);
-          if (!res) {
-            snackbar.error(
-              `Error occurred when upload file! Please try again later!`
-            );
-            return;
-          }
-          this.avatarUrl = res.data.map((index) => index.url);
-          snackbar.success("Upload Image successfully!");
-        } catch (error) {
-          console.error(`Error: ${error}`);
-          snackbar.commonError(error);
-        }
-      }
-    }
     async function changePassword() {
       try {
         loading.increaseRequest();
@@ -193,10 +221,10 @@ export const userStore = defineStore(
       signIn,
       logout,
       updateAccountSetting,
-      uploadFile,
       updateMetaData,
       changePassword,
       isEditEnable,
+      fetchUserMetadata,
     };
   },
   {

@@ -4,7 +4,7 @@
       <div
         class="d-flex flex-column align-center justify-center left-first pa-6"
       >
-        <div v-if="userStore.userData.avatarUrl">
+        <div v-if="userStore.userData.avatarUrl" class="user-img">
           <v-img
             :style="{ 'border-radius': '10px' }"
             class
@@ -166,5 +166,9 @@ export default {
 }
 .card-icon {
   border-radius: 100px;
+}
+.user-img {
+  width: 128px;
+  height: 128px;
 }
 </style>

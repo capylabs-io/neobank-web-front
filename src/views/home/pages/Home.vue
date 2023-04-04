@@ -69,14 +69,10 @@ export default {
         introduction.style.position = "relative";
         introduction.style.animation = " zoom-in-zoom-out 2s ease-out";
         container.style.animation = " zoom-out-zoom-in 2s ease-out";
-        // introduction.style.top = "40vh";
-        // introduction.style.left = "auto";
       } else {
         introduction.style.position = "fixed";
         container.style.animation = " zoom-in-zoom-out 2s ease-out";
         introduction.style.animation = " zoom-out-zoom-in 2s ease-out";
-        // introduction.style.top = "45%";
-        // introduction.style.left = "15%";
       }
       doorway.style.backgroundSize = 100 + scrollY / 7 + "%";
       doorway.style.opacity = 1 + scrollY / 6 + "";

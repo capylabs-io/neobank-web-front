@@ -31,8 +31,9 @@ import inventoryDrawer from "@/views/redeem/components/inventory-card-drawer.vue
 import confirmDialog from "@/components/dialog/confirm-dialog.vue";
 
 import { mapStores } from "pinia";
-import { voucherStore } from "../../../stores/voucherStore";
-import { userStore } from "../../../stores/userStore";
+import { inventoryStore } from "@/stores/inventoryStore";
+import { voucherStore } from "@/stores/voucherStore";
+import { userStore } from "@/stores/userStore";
 
 export default {
   components: {
@@ -47,19 +48,18 @@ export default {
   computed: {
     ...mapStores(voucherStore),
     ...mapStores(userStore),
+    ...mapStores(inventoryStore),
   },
-  mounted() {
+  async created() {
     if (!this.userStore.jwt) {
       this.$router.push("/login");
     }
     this.change();
     this.voucherStore.bearerToken = JSON.parse(sessionStorage.getItem("user"));
-    this.voucherStore.fetchUserVoucher();
-    this.voucherStore.fetchVoucher();
-    setTimeout(() => {
-      this.voucherStore.checkIncludes();
-      console.log("dataFilter:", this.voucherStore.filterVoucherStore);
-    }, 1500);
+    await this.userStore.fetchUserMetadata();
+    await this.inventoryStore.fetchUserVoucher();
+    await this.voucherStore.fetchVoucher();
+    await this.voucherStore.checkIncludes();
   },
   data() {
     return {

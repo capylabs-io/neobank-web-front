@@ -18,8 +18,41 @@
           ></v-img>
         </div>
         <div
-          v-if="voucherStore.detailCard.status == 'Expired'"
-          class="mt-3 pa-1 px-3 status"
+          v-if="voucherStore.detailCard.status == 'New Deal'"
+          class="mt-3 pa-1 px-3 white--text"
+          :style="{
+            background: '#1890FF',
+            width: 'max-content',
+            height: 'max-content',
+            position: 'absolute',
+            'border-bottom-right-radius': '8px',
+            'border-top-right-radius': '8px',
+            'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+          }"
+        >
+          New Deal
+        </div>
+        <div
+          v-else-if="voucherStore.detailCard.status == 'hot'"
+          class="mt-3 pa-1 px-3 white--text"
+          :style="{
+            background: '#EC1D1D',
+            width: 'max-content',
+            height: 'max-content',
+            position: 'absolute',
+            'border-bottom-right-radius': '8px',
+            'border-top-right-radius': '8px',
+            'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+          }"
+        >
+          Hot
+        </div>
+        <div
+          v-else-if="
+            voucherStore.detailCard.purchasedQuantity ==
+            voucherStore.detailCard.totalQuantity
+          "
+          class="mt-3 pa-1 px-3 white--text"
           :style="{
             background: '#FDDF59',
             width: 'max-content',
@@ -27,48 +60,51 @@
             position: 'absolute',
             'border-bottom-right-radius': '8px',
             'border-top-right-radius': '8px',
+            'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
           }"
         >
-          {{ voucherStore.detailCard.status }}
+          Out of stock
         </div>
         <div
-          v-else-if="voucherStore.detailCard.status == 'Hot'"
-          class="mt-3 pa-1 px-3 status"
+          v-else-if="voucherStore.detailCard.status == 'active'"
+          class="mt-3 pa-1 px-3 white--text"
           :style="{
-            background: '#f65970',
+            background: '#53B06C',
             width: 'max-content',
             height: 'max-content',
             position: 'absolute',
             'border-bottom-right-radius': '8px',
             'border-top-right-radius': '8px',
+            'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
           }"
         >
-          {{ voucherStore.detailCard.status }}
+          Active
         </div>
         <div
           v-else
-          class="mt-3 pa-1 px-3 status"
+          class="mt-3 pa-1 px-3 white--text"
           :style="{
-            background: '#FDDF59',
+            background: '#A9A9A9',
             width: 'max-content',
             height: 'max-content',
             position: 'absolute',
             'border-bottom-right-radius': '8px',
             'border-top-right-radius': '8px',
+            'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
           }"
         >
-          {{ voucherStore.detailCard.status }}
+          Expired
         </div>
       </div>
       <div
         class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
       >
-        <div>
-          <!-- <v-img
+        <!-- <div>
+          <v-img
             class="drawer-icon"
             :src="voucherStore.detailCard.campaignCategory.iconUrl"
-          /> -->
-        </div>
+          />
+        </div> -->
         <span class="mt-3"> {{ voucherStore.detailCard.title }} </span>
       </div>
       <div class="mt-3 text-left draw-text">

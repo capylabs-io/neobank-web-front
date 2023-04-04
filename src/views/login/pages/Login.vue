@@ -48,11 +48,11 @@
             Let's go <v-icon class="ml-2">mdi-arrow-right</v-icon>
           </v-btn>
         </div>
-        <router-link to="" class="text-decoration-none text-center black--text">
+        <!-- <router-link to="" class="text-decoration-none text-center black--text">
           <div class="text-capitalize text-md cursor-pointer mt-4">
             Forgot Password
           </div>
-        </router-link>
+        </router-link> -->
         <router-link
           to="/register"
           class="text-decoration-none text-center black--text"
@@ -68,9 +68,6 @@
 </template>
 
 <script>
-import FacebookIcon from "@/components/svg/facebook.vue";
-import GoogleIcon from "@/components/svg/google.vue";
-import AppleIcon from "@/components/svg/apple.vue";
 import { mapStores } from "pinia";
 import { userStore } from "../../../stores/userStore";
 import { voucherStore } from "../../../stores/voucherStore";
@@ -83,7 +80,6 @@ export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(voucherStore),
-    
   },
   data() {
     return {

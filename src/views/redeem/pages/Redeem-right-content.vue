@@ -38,7 +38,11 @@
             v-for="card in voucherStore.filterVoucherStore"
             :key="card.id"
           >
-            <voucherCard :id="card.id" :cards="card" />
+            <voucherCard
+              :id="card.id"
+              :isPurchased="voucherStore.voucherPurchased.includes(card.id)"
+              :cards="card"
+            />
           </v-col>
         </v-row>
       </div>
@@ -77,7 +81,7 @@ import voucherCard from "@/views/redeem/components/voucher-card.vue";
 import clothesCard from "@/views/redeem/components/clothes-card.vue";
 import { userStore } from "@/stores/userStore";
 import { voucherStore } from "@/stores/voucherStore";
-import { mapStores, storeToRefs } from "pinia";
+import { mapStores } from "pinia";
 
 export default {
   props: ["voucher", "userVoucher"],
@@ -94,7 +98,6 @@ export default {
   },
   data() {
     return {
-      // sort: ["Name(A-Z)", "Name(Z-A)", "Price Up", "Price Down"],
       sort: [
         {
           value: "asc",
@@ -128,6 +131,7 @@ export default {
       index: 1,
     };
   },
+  async created() {},
   methods: {
     clothesTab() {
       this.index = 1;

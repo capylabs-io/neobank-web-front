@@ -22,18 +22,22 @@
 
 <script>
 import { mapStores } from "pinia";
-import { voucherStore } from "../../stores/voucherStore";
+import { voucherStore } from "@/stores/voucherStore";
+import { userStore } from "@/stores/userStore";
 export default {
   computed: {
     ...mapStores(voucherStore),
+    ...mapStores(userStore),
   },
+
   methods: {
-    buy() {
+    async buy() {
       this.voucherStore.cfDialog = false;
-      this.voucherStore.purchaseVoucher();
-      this.voucherStore.fetchVoucher();
-      this.voucherStore.fetchUserVoucher();
-      this.$router.push("/Redeem");
+      await this.voucherStore.purchaseVoucher();
+      await this.userStore.fetchUserMetadata();
+      await this.voucherStore.fetchUserVoucher();
+      await this.voucherStore.fetchVoucher();
+      window.location.reload();
     },
   },
 };

@@ -2,10 +2,16 @@
   <v-card flat class="form-detail mt-sm-3 full-width pa-5">
     <v-row>
       <v-col cols="5">
-        <div class="user-image">
+        <div class="user-image" v-if="!userStore.userData.avatarUrl">
           <v-img
             :style="{ 'border-radius': '100px' }"
             :src="require(`@/assets/profile-pic.webp`)"
+          />
+        </div>
+        <div class="user-image" v-else>
+          <v-img
+            :style="{ 'border-radius': '100px' }"
+            :src="userStore.userData.avatarUrl"
           />
         </div>
         <v-form @submit.prevent="editAccount" id="check-edit-form" ref="form">
@@ -42,7 +48,7 @@
               flat
               outlined
             ></v-file-input>
-            <v-btn
+            <!-- <v-btn
               v-if="voucherStore.profileEdit"
               class="text-capitalize ml-2"
               :style="{ backgroundColor: 'var(--v-blue-base)' }"
@@ -52,7 +58,7 @@
               text
             >
               Save
-            </v-btn>
+            </v-btn> -->
           </div>
 
           <div class="d-flex mt-sm-3">
@@ -238,15 +244,11 @@ export default {
       this.userStore.file = data;
       console.log("file", data);
     },
-    upload() {
-      this.userStore.uploadFile();
-      // console.log("file", this.userStore.file);
-    },
+
     editAccount() {
       this.userStore.updateAccountSetting();
       this.voucherStore.profileEdit = false;
-      // this.userStore.logout();
-      // this.$router.push("/redeem");
+      // window.location.reload();
     },
   },
 };
