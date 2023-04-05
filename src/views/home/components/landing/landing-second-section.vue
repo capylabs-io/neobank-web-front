@@ -16,11 +16,11 @@
             <div
               class="mt-8 d-flex flex-column justify-center align-center white--text"
             >
-              <span class="text-dp-xs font-weight-500">Lorem ipsum</span>
+              <span class="text-dp-xs font-weight-500">3D Immersive World</span>
               <span class="text-md font-weight-400 mt-2"
-                >Lorem ipsum dolor sit amet consectetur. Ut egestas aliquet enim
-                cursus turpis odio blandit hendrerit. Eget nunc integer faucibus
-                purus</span
+                >An open virtual world that allow customers to freely explore
+                and interact with not just the NPC but also other
+                customers</span
               >
             </div>
           </v-card>
@@ -31,11 +31,11 @@
             <div
               class="mt-8 d-flex flex-column justify-center align-center white--text"
             >
-              <span class="text-dp-xs font-weight-500">Lorem ipsum</span>
+              <span class="text-dp-xs font-weight-500">Real-life Rewards</span>
               <span class="text-md font-weight-400 mt-2"
-                >Lorem ipsum dolor sit amet consectetur. Ut egestas aliquet enim
-                cursus turpis odio blandit hendrerit. Eget nunc integer faucibus
-                purus</span
+                >VParadise is an omni channel that allows Vietinbank’s customers
+                to gain and manage benefits not from just the bank but also its
+                partners</span
               >
             </div>
           </v-card>
@@ -46,11 +46,13 @@
             <div
               class="mt-8 d-flex flex-column justify-center align-center white--text"
             >
-              <span class="text-dp-xs font-weight-500">Lorem ipsum</span>
+              <span class="text-dp-xs font-weight-500"
+                >Professional & Supportive</span
+              >
               <span class="text-md font-weight-400 mt-2"
-                >Lorem ipsum dolor sit amet consectetur. Ut egestas aliquet enim
-                cursus turpis odio blandit hendrerit. Eget nunc integer faucibus
-                purus</span
+                >While being build as an open world, VParadise aim is to provide
+                customers with fundamental banking services anytime,
+                anywhere</span
               >
             </div>
           </v-card>

@@ -85,7 +85,7 @@ export default {
         introduction.style.position = "fixed";
         doorway.style.display = "block";
         container.style.opacity = "0.1";
-        container.style.animation = " zoom-in-zoom-out 1s ease-out";
+        container.style.animation = " zoom-in-zoom-out 0.7s ease-out";
         introduction.style.animation = " zoom-out-zoom-in 2s ease-out";
         doorway.style.zIndex = "4";
       }

@@ -7,22 +7,68 @@
     </div>
     <div class="content">
       <v-expansion-panels>
-        <v-expansion-panel
-          v-for="(item, i) in 5"
-          :key="i"
-          class="mt-4 expansion-panel"
-        >
-          <v-expansion-panel-header class="neutral40--text text-lg">
+        <v-expansion-panel class="mt-4 expansion-panel">
+          <v-expansion-panel-header class="white--text text-lg font-weight-700">
             How does VParadise work?
             <template v-slot:actions>
               <v-icon color="neutral40"> mdi-plus </v-icon>
             </template>
           </v-expansion-panel-header>
           <v-expansion-panel-content class="neutral40--text text-lg text-left">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            VParadise is a platform that will provide specific access to each of
+            its users depend on their roles. The whole system is to keep this
+            virtual world function and thrive for customers to ennjoy
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel class="mt-4 expansion-panel">
+          <v-expansion-panel-header class="white--text text-lg font-weight-700">
+            How can I register to participate in VParadise?
+            <template v-slot:actions>
+              <v-icon color="neutral40"> mdi-plus </v-icon>
+            </template>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content class="neutral40--text text-lg text-left">
+            It’s quite simple. Simply go to our website and look for Sign-Up,
+            fill in necessary information and leave the rest for us
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel class="mt-4 expansion-panel">
+          <v-expansion-panel-header class="white--text text-lg font-weight-700">
+            How can I register as Partners in VParadise?
+            <template v-slot:actions>
+              <v-icon color="neutral40"> mdi-plus </v-icon>
+            </template>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content class="neutral40--text text-lg text-left">
+            Contact to the Customer Support of VietinBank that is in charge of
+            VParadise. From there, you will be shown how to become a partner in
+            this world
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+
+        <v-expansion-panel class="mt-4 expansion-panel">
+          <v-expansion-panel-header class="white--text text-lg font-weight-700">
+            Does rewards in VParadise have value in real life?
+            <template v-slot:actions>
+              <v-icon color="neutral40"> mdi-plus </v-icon>
+            </template>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content class="neutral40--text text-lg text-left">
+            Yes. VParadise in-game currency can be exchange on the market for
+            Vouchers that can be used in real life or you can purchase items for
+            your character in-game
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel class="mt-4 expansion-panel">
+          <v-expansion-panel-header class="white--text text-lg font-weight-700">
+            Is VParadise free to particpate?
+            <template v-slot:actions>
+              <v-icon color="neutral40"> mdi-plus </v-icon>
+            </template>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content class="neutral40--text text-lg text-left">
+            Yes, it’s completely free to become a part of VParadise. We welcome
+            all of you who want to learn more about VietinBank and our partners
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
