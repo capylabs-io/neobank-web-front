@@ -80,6 +80,7 @@
             type="submit"
             form="check-edit-bank-account"
             text
+            :disabled="!userStore.userData.userMetadata.bankAccount"
           >
             Save
           </v-btn>

@@ -213,7 +213,7 @@ export const userStore = defineStore(
       this.password = "";
     }
     function isEditEnable() {
-      if (this.username && this.password) return false;
+      if (this.email && this.password) return false;
       return true;
     }
     const isConnected = computed(() => jwt);

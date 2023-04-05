@@ -142,6 +142,11 @@
           type="submit"
           form="change-password-form"
           text
+          :disabled="
+            !userStore.currentPassword ||
+            !userStore.confirmNewPassword ||
+            !userStore.newPassword
+          "
         >
           Save
         </v-btn>

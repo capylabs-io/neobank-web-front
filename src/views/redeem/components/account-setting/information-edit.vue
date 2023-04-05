@@ -231,6 +231,13 @@
           type="submit"
           form="check-edit-form"
           text
+          :disabled="
+            !userStore.file ||
+            !userStore.userData.userMetadata.firstName ||
+            !userStore.userData.userMetadata.lastName ||
+            !userStore.userData.email ||
+            !userStore.userData.userMetadata.phoneNumber
+          "
         >
           Save
         </v-btn>

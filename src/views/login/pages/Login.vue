@@ -44,15 +44,12 @@
             color="#5E6BE9"
             class="py-5 px-10 btn-submit white--text font-weight-bold"
             @click="submitForm"
+            :disabled="!userStore.password || !userStore.email"
           >
             Let's go <v-icon class="ml-2">mdi-arrow-right</v-icon>
           </v-btn>
         </div>
-        <!-- <router-link to="" class="text-decoration-none text-center black--text">
-          <div class="text-capitalize text-md cursor-pointer mt-4">
-            Forgot Password
-          </div>
-        </router-link> -->
+
         <router-link
           to="/register"
           class="text-decoration-none text-center black--text"
@@ -64,7 +61,6 @@
           </div>
         </router-link>
       </v-form>
-      <!-- </div> -->
     </div>
   </div>
 </template>

@@ -71,6 +71,12 @@
             color="#5E6BE9"
             class="py-5 px-10 btn-submit white--text font-weight-bold"
             @click="submitForm"
+            :disabled="
+              !userStore.password ||
+              !userStore.email ||
+              !userStore.username ||
+              !userStore.cfpassword
+            "
           >
             Create account
           </v-btn>
