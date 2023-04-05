@@ -2,164 +2,140 @@
   <v-navigation-drawer
     v-model="voucherStore.drawerDetail"
     absolute
-    temporary
     right
     hide-overlay
+    temporary
     width="480px"
-    color="white"
-    class="drawer d-flex flex-column"
   >
-    <v-card class="drawer-card" flat>
-      <div class="drawer-image d-flex flex-column">
-        <div class="full-width">
-          <v-img
-            class="drawer-image"
-            :src="voucherStore.detailCard.thumbnailUrl"
-          ></v-img>
-        </div>
-        <div
-          v-if="voucherStore.detailCard.status == 'New Deal'"
-          class="mt-3 pa-1 px-3 white--text"
-          :style="{
-            background: '#1890FF',
-            width: 'max-content',
-            height: 'max-content',
-            position: 'absolute',
-            'border-bottom-right-radius': '8px',
-            'border-top-right-radius': '8px',
-            'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
-          }"
-        >
-          New Deal
-        </div>
-        <div
-          v-else-if="voucherStore.detailCard.status == 'hot'"
-          class="mt-3 pa-1 px-3 white--text"
-          :style="{
-            background: '#EC1D1D',
-            width: 'max-content',
-            height: 'max-content',
-            position: 'absolute',
-            'border-bottom-right-radius': '8px',
-            'border-top-right-radius': '8px',
-            'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
-          }"
-        >
-          Hot
-        </div>
-        <div
-          v-else-if="
-            voucherStore.detailCard.purchasedQuantity ==
-            voucherStore.detailCard.totalQuantity
-          "
-          class="mt-3 pa-1 px-3 white--text"
-          :style="{
-            background: '#FDDF59',
-            width: 'max-content',
-            height: 'max-content',
-            position: 'absolute',
-            'border-bottom-right-radius': '8px',
-            'border-top-right-radius': '8px',
-            'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
-          }"
-        >
-          Out of stock
-        </div>
-        <div
-          v-else-if="voucherStore.detailCard.status == 'active'"
-          class="mt-3 pa-1 px-3 white--text"
-          :style="{
-            background: '#53B06C',
-            width: 'max-content',
-            height: 'max-content',
-            position: 'absolute',
-            'border-bottom-right-radius': '8px',
-            'border-top-right-radius': '8px',
-            'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
-          }"
-        >
-          Active
-        </div>
-        <div
-          v-else
-          class="mt-3 pa-1 px-3 white--text"
-          :style="{
-            background: '#A9A9A9',
-            width: 'max-content',
-            height: 'max-content',
-            position: 'absolute',
-            'border-bottom-right-radius': '8px',
-            'border-top-right-radius': '8px',
-            'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
-          }"
-        >
-          Expired
-        </div>
-      </div>
-      <div
-        class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
-      >
-        <!-- <div>
-          <v-img
-            class="drawer-icon"
-            :src="voucherStore.detailCard.campaignCategory.iconUrl"
-          />
-        </div> -->
-        <span class="mt-3"> {{ voucherStore.detailCard.title }} </span>
-      </div>
-      <div class="mt-3 text-left draw-text">
-        {{ voucherStore.detailCard.shortDescription }}
-        {{ voucherStore.detailCard.fullDescription }}
-      </div>
-    </v-card>
-    <!-- <div class="d-flex col-gap-10 align-center amount-container">
-      <v-btn v-if="voucherStore.detailCard.attributes.quantity == 0" icon disabled>
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-btn v-else icon @click="decrease">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <div class="">
-        <v-input class="number">
-          {{ voucherStore.detailCard.attributes.quantity }}
-        </v-input>
-      </div>
-      <v-btn
-        v-if="voucherStore.detailCard.attributes.quantity == 10"
-        disabled
-        icon
-        @click="increase"
-      >
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-      <v-btn v-else icon @click="increase">
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-    </div> -->
-    <v-btn
-      class="d-flex mx-auto unpurchased drawer-btn"
-      elevation="2"
-      rounded
-      text
-      @click="buy"
+    <div
+      class="white-bg overflow-hidden full-height pa-6 d-flex flex-column justify-space-between"
     >
       <div>
-        <span class="white--text font-weight-bold pr-2 text-capitalize"
-          >Buy Now
-        </span>
+        <div class="d-flex flex-column">
+          <div class="neutral30-border border-radius-16 overflow-hidden">
+            <v-img :src="voucherStore.detailCard.thumbnailUrl"></v-img>
+          </div>
+          <div
+            v-if="voucherStore.detailCard.status == 'newDeal'"
+            class="mt-3 pa-1 px-3 white--text"
+            :style="{
+              background: '#1890FF',
+              width: 'max-content',
+              height: 'max-content',
+              position: 'absolute',
+              'border-bottom-right-radius': '8px',
+              'border-top-right-radius': '8px',
+              'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+            }"
+          >
+            New Deal
+          </div>
+          <div
+            v-else-if="voucherStore.detailCard.status == 'hot'"
+            class="mt-3 pa-1 px-3 white--text"
+            :style="{
+              background: '#EC1D1D',
+              width: 'max-content',
+              height: 'max-content',
+              position: 'absolute',
+              'border-bottom-right-radius': '8px',
+              'border-top-right-radius': '8px',
+              'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+            }"
+          >
+            Hot
+          </div>
+          <div
+            v-else-if="
+              voucherStore.detailCard.purchasedQuantity ==
+              voucherStore.detailCard.totalQuantity
+            "
+            class="mt-3 pa-1 px-3 white--text"
+            :style="{
+              background: '#FDDF59',
+              width: 'max-content',
+              height: 'max-content',
+              position: 'absolute',
+              'border-bottom-right-radius': '8px',
+              'border-top-right-radius': '8px',
+              'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+            }"
+          >
+            Out of stock
+          </div>
+          <div
+            v-else-if="voucherStore.detailCard.status == 'active'"
+            class="mt-3 pa-1 px-3 white--text"
+            :style="{
+              background: '#53B06C',
+              width: 'max-content',
+              height: 'max-content',
+              position: 'absolute',
+              'border-bottom-right-radius': '8px',
+              'border-top-right-radius': '8px',
+              'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+            }"
+          >
+            Active
+          </div>
+          <div
+            v-else
+            class="mt-3 pa-1 px-3 white--text"
+            :style="{
+              background: '#A9A9A9',
+              width: 'max-content',
+              height: 'max-content',
+              position: 'absolute',
+              'border-bottom-right-radius': '8px',
+              'border-top-right-radius': '8px',
+              'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+            }"
+          >
+            Expired
+          </div>
+        </div>
+        <div class="mt-6 font-weight-bold text-center">
+          <v-img class="drawer-icon mx-auto" :src="categoryIcon" />
+          <div class="text-lg mt-3">{{ voucherStore.detailCard.title }}</div>
+        </div>
+        <div class="mt-3 text-left">
+          {{ voucherStore.detailCard.fullDescription }}
+        </div>
       </div>
-    </v-btn>
+      <div class="text-center">
+        <v-btn
+          class="text-none text-btn px-12"
+          color="primary"
+          @click="buy"
+          large
+          rounded
+          depressed
+        >
+          Buy Now
+        </v-btn>
+      </div>
+    </div>
   </v-navigation-drawer>
 </template>
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "../../../stores/userStore";
-import { voucherStore } from "../../../stores/voucherStore";
+import { userStore } from "@/stores/userStore";
+import { voucherStore } from "@/stores/voucherStore";
+import { inventoryStore } from "@/stores/inventoryStore";
+import { get } from "lodash";
 export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(voucherStore),
+    ...mapStores(inventoryStore),
+    categoryIcon() {
+      return get(
+        this.voucherStore,
+        "detailCard.campaignCategory.iconUrl",
+        require("@/assets/views/category/category-icon-example.png")
+      );
+    },
   },
   data() {
     return {
@@ -178,8 +154,29 @@ export default {
       this.voucherStore.detailCard.attributes.quantity = number + "";
     },
     buy() {
-      this.voucherStore.drawerDetail = !this.voucherStore.drawerDetail;
-      this.voucherStore.cfDialog = true;
+      this.$dialog.confirm({
+        title: "Confirm Purchase Voucher",
+        topContent:
+          "Are you sure you want to purchase this voucher? This action cannot be undone!",
+        okText: "Confirm",
+        cancelText: "Cancel",
+        done: async () => {
+          try {
+            this.$loading.show();
+            this.voucherStore.voucherId = this.voucherStore.detailCard.id;
+            await this.voucherStore.purchaseVoucher();
+            await this.inventoryStore.fetchUserVoucher();
+            await this.userStore.fetchUserMetadata();
+            await this.voucherStore.fetchVoucher();
+            this.voucherStore.drawerDetail = false;
+            window.location.reload();
+          } catch (error) {
+            this.$alert.error("Error occured! Error: " + error);
+          } finally {
+            this.$loading.hide();
+          }
+        },
+      });
     },
   },
 };

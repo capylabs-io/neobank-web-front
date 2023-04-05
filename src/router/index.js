@@ -6,7 +6,7 @@ import Home from "../views/home/pages/Home.vue";
 Vue.use(VueRouter);
 const routes = [
   {
-    path: "",
+    path: "/",
     redirect: `/home`,
   },
   // {
@@ -20,9 +20,26 @@ const routes = [
     component: () => import("../views/home/pages/Landing-page.vue"),
   },
   {
-    path: "/redeem",
-    name: "Redeem",
-    component: () => import("../views/redeem/pages/Redeem.vue"),
+    path: "/account",
+    name: "Account",
+    component: () => import("../views/redeem/pages/UserLayout.vue"),
+    children: [
+      {
+        path: "/inventory",
+        name: "Inventory",
+        component: () => import("../views/redeem/pages/Redeem-inventory.vue"),
+      },
+      {
+        path: "/account-setting",
+        name: "Account Setting",
+        component: () => import("../views/redeem/pages/account-setting.vue"),
+      },
+      {
+        path: "/store",
+        name: "Store",
+        component: () => import("../views/redeem/pages/StorePage.vue"),
+      },
+    ],
   },
   {
     path: "/login",

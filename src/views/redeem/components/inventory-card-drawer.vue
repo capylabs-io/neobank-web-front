@@ -2,14 +2,12 @@
   <v-navigation-drawer
     v-model="inventoryStore.drawer"
     absolute
-    temporary
     right
     hide-overlay
+    temporary
     width="480px"
-    color="white"
-    class="drawer d-flex flex-column"
   >
-    <v-card class="drawer-card" flat>
+    <div class="white-bg overflow-hidden full-height pa-6 d-flex flex-column">
       <div class="drawer-image d-flex flex-column">
         <div class="full-width">
           <v-img
@@ -18,20 +16,23 @@
           ></v-img>
         </div>
       </div>
-      <div
-        class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
-      >
+      <div class="mt-6 font-weight-bold text-center">
+        <v-img class="drawer-icon mx-auto" :src="categoryIcon" />
+      </div>
+      <div class="mt-3 font-weight-bold text-center text-lg">
         <!-- <div>
           <v-img class="drawer-icon" :src="inventoryStore.ivenCardData.iconUrl" />
         </div> -->
         <span class="mt-3"> {{ inventoryStore.ivenCardData.title }} </span>
       </div>
+
       <div class="mt-3 text-left draw-text">
         {{ inventoryStore.ivenCardData.fullDescription }}
       </div>
-    </v-card>
-    <div class="qr-img mx-auto mt-3 justify-space-between">
-      <v-img class="" :src="inventoryStore.ivenVoucherQr" />
+      <v-spacer></v-spacer>
+      <div class="qr-img mx-auto mt-3 justify-space-between">
+        <v-img class="" :src="inventoryStore.ivenVoucherQr" />
+      </div>
     </div>
   </v-navigation-drawer>
 </template>
@@ -40,10 +41,18 @@
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
 import { inventoryStore } from "@/stores/inventoryStore";
+import { get } from "lodash";
 export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(inventoryStore),
+    categoryIcon() {
+      return get(
+        this.inventoryStore,
+        "ivenCardData.iconUrl",
+        require("@/assets/views/category/category-icon-example.png")
+      );
+    },
   },
 };
 </script>
@@ -59,7 +68,6 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   border: 1px var(--v-neutral30-base) solid;
-
 }
 .drawer-icon {
   border-radius: 100px;

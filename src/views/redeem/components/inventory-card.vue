@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="2" rounded="8" class="pa-3 inventory-card">
+  <v-card class="neutral30-border border-radius-16 pa-4 inventory-card" flat>
     <div class="card-image d-flex flex-column">
       <div class="full-width">
         <v-img
@@ -10,7 +10,7 @@
       </div>
     </div>
     <div
-      class="mt-6 font-weight-bold align-center justify-center text-truncate"
+      class="mt-6 font-weight-bold align-center justify-center text-center text-truncate"
     >
       <div class="voucher-title">
         {{ cards.campaign.data.attributes.title }}
@@ -27,9 +27,7 @@
         <!-- <v-img class="card-icon" src="@/assets/redeem/card/baemin-icon.webp" /> -->
       </div>
       <v-btn
-        class="unpurchased px-10"
-        elevation="2"
-        rounded
+        class="border-radius-8 unpurchased px-10"
         text
         @click.stop="openClick"
       >
@@ -61,7 +59,7 @@ export default {
   },
   methods: {
     openClick() {
-      this.inventoryStore.drawer = !this.inventoryStore.drawer;
+      this.inventoryStore.drawer = true;
       this.inventoryStore.ivenCardData = this.cards.campaign.data.attributes;
       this.inventoryStore.ivenVoucherQr = this.cards.qrCodeUrl;
     },
