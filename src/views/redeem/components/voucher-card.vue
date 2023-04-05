@@ -118,7 +118,10 @@
       </div>
 
       <v-btn
-        v-if="cards.status == 'expired'"
+        v-if="
+          cards.status == 'expired' ||
+          cards.purchasedQuantity == cards.totalQuantity
+        "
         class="d-flex column-gap-10 expired"
         elevation="2"
         rounded
@@ -230,6 +233,7 @@ export default {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  border: 1px var(--v-neutral30-base) solid;
 }
 .card-icon {
   border-radius: 100px;

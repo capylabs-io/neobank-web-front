@@ -196,6 +196,7 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   z-index: 99;
+  border: 1px var(--v-neutral30-base) solid;
 }
 .status {
   z-index: 99;

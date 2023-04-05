@@ -14,7 +14,7 @@
             <div class="d-flex mt-sm-3">
               <div
                 class="text-left text-md font-weight-700"
-                :style="{ width: '175px' }"
+                :style="{ width: '185px' }"
               >
                 Bank account number
               </div>

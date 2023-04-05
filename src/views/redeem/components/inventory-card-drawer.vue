@@ -58,6 +58,8 @@ export default {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  border: 1px var(--v-neutral30-base) solid;
+
 }
 .drawer-icon {
   border-radius: 100px;

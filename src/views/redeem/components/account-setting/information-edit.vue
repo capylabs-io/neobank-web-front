@@ -18,7 +18,7 @@
           <div class="d-flex mt-sm-1">
             <div
               class="text-left text-md font-weight-700"
-              :style="{ width: '175px' }"
+              :style="{ width: '185px' }"
             >
               Avatar
             </div>
@@ -64,7 +64,7 @@
           <div class="d-flex mt-sm-3">
             <div
               class="text-left text-md font-weight-700"
-              :style="{ width: '175px' }"
+              :style="{ width: '185px' }"
             >
               First name
             </div>
@@ -96,7 +96,7 @@
           <div class="d-flex mt-sm-3">
             <div
               class="text-left text-md font-weight-700"
-              :style="{ width: '175px' }"
+              :style="{ width: '185px' }"
             >
               Last name
             </div>
@@ -129,7 +129,7 @@
           <div class="d-flex mt-sm-3">
             <div
               class="text-left text-md font-weight-700"
-              :style="{ width: '175px' }"
+              :style="{ width: '185px' }"
             >
               Email
             </div>
@@ -165,7 +165,7 @@
           <div class="d-flex mt-sm-3">
             <div
               class="text-left text-md font-weight-700"
-              :style="{ width: '175px' }"
+              :style="{ width: '185px' }"
             >
               Telephone
             </div>

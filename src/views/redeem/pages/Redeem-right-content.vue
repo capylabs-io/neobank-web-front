@@ -3,11 +3,11 @@
     <div class="right-container mx-auto pa-6 full-height">
       <div class="d-flex justify-space-between button-filter">
         <div class="d-flex column-gap-10 left-filter-group pa-1">
-          <v-btn class="clothes active" rounded text @click="clothesTab()">
-            Clothes
-          </v-btn>
-          <v-btn class="voucher" rounded text @click="voucherTab()">
+          <v-btn class="voucher active" rounded text @click="voucherTab()">
             Voucher
+          </v-btn>
+          <v-btn class="clothes" rounded text @click="clothesTab()">
+            In-game Items
           </v-btn>
         </div>
         <div class="right-filter-group">
@@ -26,7 +26,7 @@
           ></v-select>
         </div>
       </div>
-      <div v-if="index == 2" class="full-width mt-6 card-container">
+      <div v-if="index == 1" class="full-width mt-6 card-container">
         <!-- TODO: use vue-responsive-components to make right container responsive better -->
         <v-row>
           <v-col
@@ -47,7 +47,7 @@
         </v-row>
       </div>
 
-      <div v-else class="mt-6 full-width">
+      <div v-if="index == 2" class="mt-6 full-width">
         <v-row>
           <!-- TODO: use vue-responsive-components to make right container responsive better -->
           <v-col
@@ -134,14 +134,14 @@ export default {
   async created() {},
   methods: {
     clothesTab() {
-      this.index = 1;
+      this.index = 2;
       const clothes = document.querySelector(".clothes");
       const voucher = document.querySelector(".voucher");
       clothes.classList.add("active");
       voucher.classList.remove("active");
     },
     voucherTab() {
-      this.index = 2;
+      this.index = 1;
       const clothes = document.querySelector(".clothes");
       const voucher = document.querySelector(".voucher");
       clothes.classList.remove("active");

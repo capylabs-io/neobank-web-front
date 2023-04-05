@@ -76,6 +76,7 @@ export default {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  border: 1px var(--v-neutral30-base) solid;
 }
 .card-icon {
   border-radius: 100px;
