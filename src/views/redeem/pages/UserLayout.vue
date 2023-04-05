@@ -30,7 +30,7 @@ export default {
     } else {
       this.voucherStore.pageIndex = 2;
       this.voucherStore.bearerToken = JSON.parse(
-        sessionStorage.getItem("user")
+        localStorage.getItem("user")
       );
       await this.userStore.fetchUserMetadata();
       // await this.inventoryStore.fetchUserVoucher();

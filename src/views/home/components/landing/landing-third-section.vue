@@ -74,7 +74,7 @@
       </v-expansion-panels>
     </div>
     <div class="d-flex flex-column justify-center align-center question">
-      <div class="text-md neutral40--text">
+      <div class="text-md neutral40--text text-center">
         Still have questions?
         <br />Get in touch with our team
       </div>

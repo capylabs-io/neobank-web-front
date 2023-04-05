@@ -9,7 +9,7 @@
       Say hello to a new metaverse wolrd.
     </div>
     <v-card
-      class="d-flex mx-auto col-gap-28 justify-center align-center card pa-8"
+      class="d-flex mx-auto col-gap-28 justify-center align-center section-card pa-8"
     >
       <div
         class="right d-flex flex-column justify-center align-center row-gap-25"
@@ -72,7 +72,7 @@ export default {
     padding-bottom: 50px;
   }
 }
-.card {
+.section-card {
   margin-top: 64px;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 16px;
