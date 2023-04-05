@@ -204,12 +204,19 @@ export default {
   },
   methods: {
     buyClicked() {
-      if (this.userStore.userData.userMetadata.token >= this.cards.price) {
+      if (
+        this.userStore.userData.userMetadata.token >= this.cards.price &&
+        this.cards.purchasedQuantity == this.cards.totalQuantity
+      ) {
+        this.voucherStore.checkPurchased(`Campaign Out of Stock`);
+      } else if (
+        this.userStore.userData.userMetadata.token >= this.cards.price
+      ) {
         this.voucherStore.drawerDetail = !this.voucherStore.drawerDetail;
         this.voucherStore.setDetailStoreCard(this.cards);
         this.voucherStore.voucherId = this.id;
       } else {
-        this.voucherStore.checkPurchased();
+        this.voucherStore.checkPurchased(`You dont have enough Token To buy`);
       }
     },
   },

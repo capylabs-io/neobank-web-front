@@ -76,8 +76,8 @@ export const voucherStore = defineStore("voucher", () => {
   function setDetailStoreCard(cards) {
     this.detailCard = cards;
   }
-  function checkPurchased() {
-    return snackbar.error(`You dont have enough Token To buy`);
+  function checkPurchased(message) {
+    return snackbar.error(message);
   }
 
   function checkIncludes() {
