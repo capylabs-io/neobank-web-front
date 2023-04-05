@@ -46,9 +46,7 @@ export const userStore = defineStore(
         if (!this.rememberMe) {
           this.password = "";
         }
-        this.router.push({
-          name: "home",
-        });
+        this.router.push("/account/store");
       } catch (error) {
         console.error(`Error: ${error}`);
         snackbar.commonError(error);
@@ -72,9 +70,7 @@ export const userStore = defineStore(
           this.jwt = res.data.jwt;
           this.userData = res.data.user;
           this.updateMetaData(res.data.user.id);
-          this.router.push({
-            name: "Login",
-          });
+          this.router.push("/login");
         } else {
           snackbar.error(`Would you follow our Terms and Services `);
         }
@@ -115,9 +111,7 @@ export const userStore = defineStore(
           const filedata = await User.uploadFile(formData, this.jwt);
           this.avatarUrl = filedata.data.map((index) => index.url);
           if (!this.avatarUrl) {
-            snackbar.error(
-              `Error occurred Upload File! Please try again later!`
-            );
+            snackbar.error(`Error occurred Upload File! Please try again later!`);
           } else {
             const res = await User.updateUserInfo(
               this.userData.userMetadata.token,
@@ -253,12 +247,8 @@ export const userStore = defineStore(
   {
     persist: [
       {
-        paths: ["password", "rememberMe", "username"],
+        paths: ["password", "rememberMe", "username", "userData", "jwt"],
         storage: localStorage,
-      },
-      {
-        paths: ["userData", "jwt"],
-        storage: sessionStorage,
       },
     ],
   }

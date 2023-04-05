@@ -35,9 +35,9 @@ export default {
     ...mapStores(inventoryStore),
   },
   async created() {
-    if (this.userStore.jwt) {
-      await this.inventoryStore.fetchUserVoucher();
-    }
+    // if (this.userStore.jwt) {
+    //   await this.inventoryStore.fetchUserVoucher();
+    // }
   },
   data() {
     return {
@@ -50,12 +50,15 @@ export default {
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans&family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap");
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.v-application,
+body {
+  font-family: "DM Sans", sans-serif !important;
+  font-weight: 400;
+  color: var(--v-neutral100-base) !important;
+}
+
+.theme--light.v-list-item--active::before {
+  opacity: 0 !important;
 }
 
 .DMSans {
@@ -72,6 +75,16 @@ nav {
       color: #42b983;
     }
   }
+}
+
+.primary-bg {
+  background: var(--v-primary-base) !important;
+}
+.neutral10-bg {
+  background: var(--v-neutral10-base) !important;
+}
+.white-bg {
+  background: white !important;
 }
 
 .full-width {
@@ -127,7 +140,7 @@ nav {
 }
 .text-btn {
   font-style: normal;
-  font-weight: 500 !important;
+  font-weight: 700 !important;
   font-size: 14px;
   line-height: 20px;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-bar d-flex justify-space-between">
+  <v-app-bar class="white-bg nav-bar" elevation="1" app clipped-left>
     <div class="d-flex gap-24 DMSans black--text align-center pa-7">
       <div>
         <v-img
@@ -29,29 +29,18 @@
         <div class="text-capitalize">REDEEM</div>
       </router-link>
     </div>
-  </div>
+  </v-app-bar>
 </template>
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "../stores/userStore";
+import { userStore } from "@/stores/userStore";
+
 export default {
   computed: {
     ...mapStores(userStore),
   },
   created() {},
-  methods: {
-    isMobile() {
-      if (window.innerWidth <= 599) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    signout() {
-      this.userStore.logout;
-    },
-  },
 };
 </script>
 
@@ -71,7 +60,7 @@ a {
   height: 80px;
   font-size: 16px;
   font-weight: bold;
-  z-index: 100;
+  z-index: 1000;
   box-shadow: 0px 1px 3px 0px #1219261a;
 }
 .nav-logo {

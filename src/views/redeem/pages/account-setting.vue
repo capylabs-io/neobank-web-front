@@ -1,91 +1,84 @@
 <template>
-  <div class="account-setting d-flex flex-column align-center mx-auto pa-6">
-    <v-card flat class="form-detail full-width pa-5">
-      <v-row>
-        <v-col cols="5">
-          <div class="user-logo">
-            <v-img class :src="require(`@/assets/profile-logo.webp`)" />
-          </div>
-          <v-form
-            @submit.prevent="updateBankAccount"
-            id="check-edit-bank-account"
-            ref="form"
-          >
-            <div class="d-flex mt-sm-3">
-              <div
-                class="text-left text-md font-weight-700"
-                :style="{ width: '185px' }"
-              >
-                Bank account number
-              </div>
+  <div class="account-setting d-flex flex-column align-center">
+    <v-card flat class="form-detail full-width pa-6">
+      <div class="user-logo">
+        <v-img class :src="require(`@/assets/profile-logo.webp`)" />
+      </div>
+      <v-form
+        @submit.prevent="updateBankAccount"
+        id="check-edit-bank-account"
+        ref="form"
+      >
+        <v-row class="mt-3">
+          <v-col cols="3">
+            <div class="text-left text-md font-weight-700 mt-2">
+              Bank account number
+            </div>
+          </v-col>
+          <v-col cols="4">
+            <div class="d-flex">
               <v-text-field
                 v-model="userStore.userData.userMetadata.bankAccount"
                 v-if="!voucherStore.bankAccountEdit"
+                background-color="neutral10"
                 height="36px"
                 type="text"
-                class="pa-0 ml-10 btn-customize"
-                placeholder=""
+                class="pa-0"
                 solo
+                filled
                 readonly
-                dense
-                hide-details
                 flat
+                dense
               />
               <v-text-field
                 v-model="userStore.userData.userMetadata.bankAccount"
                 v-else
                 height="36px"
                 type="text"
-                class="pa-0 ml-10"
-                placeholder=""
+                class="pa-0"
                 outlined
                 dense
                 flat
               />
             </div>
-          </v-form>
-        </v-col>
-      </v-row>
-      <v-divider class="mt-sm-3" />
-      <v-row class="mt-sm-1">
-        <v-col cols="1" v-if="!voucherStore.bankAccountEdit">
-          <v-btn
-            class="text-capitalize full-width"
-            :style="{ border: '1px solid #E3E8EF' }"
-            color="black"
-            variant="text"
-            @click="voucherStore.bankAccountEdit = true"
-            text
-          >
-            Edit
-          </v-btn>
-        </v-col>
-        <v-col cols="5" v-else class="d-flex">
+          </v-col>
+        </v-row>
+      </v-form>
+      <v-divider class="mb-6" />
+      <div class="d-flex gap-8">
+        <v-btn
+          class="text-capitalize text-btn"
+          variant="text"
+          @click="voucherStore.bankAccountEdit = true"
+          v-if="!voucherStore.bankAccountEdit"
+          outlined
+          depressed
+        >
+          Edit
+        </v-btn>
+        <div class="d-flex gap-8" v-else>
           <v-btn
             class="text-capitalize"
-            :style="{ border: '1px solid #E3E8EF' }"
-            color="black"
             variant="text"
             @click="voucherStore.bankAccountEdit = false"
-            text
+            outlined
+            depressed
           >
             Cancel
           </v-btn>
 
           <v-btn
-            class="ml-4 text-capitalize"
-            :style="{ backgroundColor: 'var(--v-blue-base)' }"
-            color="white"
-            variant="text"
+            class="text-capitalize"
             type="submit"
             form="check-edit-bank-account"
-            text
+            color="primary"
             :disabled="!userStore.userData.userMetadata.bankAccount"
+            depressed
           >
             Save
           </v-btn>
-        </v-col>
-      </v-row>
+        </div>
+      </div>
     </v-card>
     <informationEdit />
     <passwordChange />
@@ -117,9 +110,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.account-setting {
-  max-width: 1400px;
-}
 .card-content {
   width: 100%;
   background: #ffffff;

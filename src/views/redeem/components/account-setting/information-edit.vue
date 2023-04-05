@@ -1,248 +1,266 @@
 <template>
-  <v-card flat class="form-detail mt-sm-3 full-width pa-5">
-    <v-row>
-      <v-col cols="5">
-        <div class="user-image" v-if="!userStore.userData.avatarUrl">
-          <v-img
-            :style="{ 'border-radius': '100px' }"
-            :src="require(`@/assets/profile-pic.webp`)"
+  <v-card flat class="form-detail mt-4 full-width pa-6">
+    <v-form @submit.prevent="editAccount" id="check-edit-form" ref="form">
+      <div class="user-image" v-if="!userStore.userData.avatarUrl">
+        <v-img
+          :style="{ 'border-radius': '100px' }"
+          :src="require(`@/assets/profile-pic.webp`)"
+        />
+      </div>
+      <div class="user-image" v-else>
+        <v-img
+          :style="{ 'border-radius': '100px' }"
+          :src="userStore.userData.avatarUrl"
+        />
+      </div>
+
+      <v-row no-gutters>
+        <v-col cols="3"
+          ><div class="text-left text-md font-weight-700 mt-2">Avatar</div>
+        </v-col>
+        <v-col cols="4">
+          <v-file-input
+            v-if="!voucherStore.profileEdit"
+            class="pa-0"
+            height="36px"
+            disabled
+            prepend-icon=""
+            prepend-inner-icon="mdi-upload"
+            background-color="neutral10"
+            solo
+            dense
+            flat
+          >
+          </v-file-input>
+          <v-file-input
+            v-else
+            v-model="userStore.file"
+            accept="image/png, image/jpeg, image/bmp,image/webp"
+            ref="myfile"
+            class="pa-0"
+            height="36px"
+            @change="onFileChanged($event)"
+            prepend-icon=""
+            prepend-inner-icon="mdi-upload"
+            dense
+            flat
+            outlined
+          ></v-file-input>
+        </v-col>
+      </v-row>
+      <v-row no-gutters>
+        <v-col cols="3"
+          ><div class="text-left text-md font-weight-700 mt-2">First name</div>
+        </v-col>
+        <v-col cols="4">
+          <v-text-field
+            v-if="!voucherStore.profileEdit"
+            v-model="userStore.userData.userMetadata.firstName"
+            height="36px"
+            type="text"
+            class="pa-0"
+            placeholder=""
+            background-color="neutral10"
+            solo
+            readonly
+            dense
+            flat
           />
-        </div>
-        <div class="user-image" v-else>
-          <v-img
-            :style="{ 'border-radius': '100px' }"
-            :src="userStore.userData.avatarUrl"
+          <v-text-field
+            v-else
+            v-model="userStore.userData.userMetadata.firstName"
+            height="36px"
+            type="text"
+            class="pa-0"
+            placeholder=""
+            outlined
+            dense
+            flat
           />
-        </div>
-        <v-form @submit.prevent="editAccount" id="check-edit-form" ref="form">
-          <div class="d-flex mt-sm-1">
-            <div
-              class="text-left text-md font-weight-700"
-              :style="{ width: '185px' }"
-            >
-              Avatar
-            </div>
-            <v-file-input
-              v-if="!voucherStore.profileEdit"
-              class="pa-0 ml-10"
-              height="36px"
-              disabled
-              append-outer-icon="mdi-upload"
-              prepend-icon=""
-              hide-details
-              flat
-              outlined
-            >
-            </v-file-input>
-            <v-file-input
-              v-else
-              v-model="userStore.file"
-              accept="image/png, image/jpeg, image/bmp,image/webp"
-              ref="myfile"
-              class="pa-0 ml-10"
-              height="36px"
-              @change="onFileChanged($event)"
-              append-outer-icon="mdi-upload"
-              prepend-icon=""
-              hide-details
-              flat
-              outlined
-            ></v-file-input>
-            <!-- <v-btn
-              v-if="voucherStore.profileEdit"
-              class="text-capitalize ml-2"
-              :style="{ backgroundColor: 'var(--v-blue-base)' }"
-              color="white"
-              variant="text"
-              @click="upload()"
-              text
-            >
-              Save
-            </v-btn> -->
-          </div>
+        </v-col>
+      </v-row>
+      <v-row no-gutters>
+        <v-col cols="3"
+          ><div class="text-left text-md font-weight-700 mt-2">Last name</div>
+        </v-col>
+        <v-col cols="4">
+          <v-text-field
+            v-if="!voucherStore.profileEdit"
+            v-model="userStore.userData.userMetadata.lastName"
+            height="36px"
+            type="text"
+            class="pa-0"
+            placeholder=""
+            background-color="neutral10"
+            solo
+            readonly
+            dense
+            flat
+          />
+          <v-text-field
+            v-else
+            v-model="userStore.userData.userMetadata.lastName"
+            height="36px"
+            type="text"
+            class="pa-0"
+            placeholder=""
+            outlined
+            dense
+            flat
+          />
+        </v-col>
+      </v-row>
+      <v-row no-gutters>
+        <v-col cols="3"
+          ><div class="text-left text-md font-weight-700 mt-2">Email</div>
+        </v-col>
+        <v-col cols="4">
+          <v-text-field
+            v-if="!voucherStore.profileEdit"
+            v-model="userStore.userData.email"
+            height="36px"
+            type="text"
+            class="pa-0"
+            placeholder=""
+            background-color="neutral10"
+            solo
+            readonly
+            dense
+            flat
+          />
+          <v-text-field
+            v-else
+            v-model="userStore.userData.email"
+            height="36px"
+            type="text"
+            class="pa-0"
+            placeholder=""
+            outlined
+            dense
+            flat
+          />
+        </v-col>
+      </v-row>
+      <v-row no-gutters>
+        <v-col cols="3"
+          ><div class="text-left text-md font-weight-700 mt-2">Telephone</div>
+        </v-col>
+        <v-col cols="4">
+          <v-text-field
+            v-if="!voucherStore.profileEdit"
+            v-model="userStore.userData.userMetadata.phoneNumber"
+            height="36px"
+            type="text"
+            class="pa-0"
+            placeholder=""
+            background-color="neutral10"
+            solo
+            readonly
+            dense
+            flat
+          />
+          <v-text-field
+            v-else
+            v-model="userStore.userData.userMetadata.phoneNumber"
+            height="36px"
+            type="text"
+            class="pa-0"
+            placeholder=""
+            outlined
+            dense
+            flat
+          />
+        </v-col>
+      </v-row>
 
-          <div class="d-flex mt-sm-3">
-            <div
-              class="text-left text-md font-weight-700"
-              :style="{ width: '185px' }"
-            >
-              First name
-            </div>
-            <v-text-field
-              v-if="!voucherStore.profileEdit"
-              v-model="userStore.userData.userMetadata.firstName"
-              height="36px"
-              type="text"
-              class="pa-0 ml-10 btn-customize"
-              placeholder=""
-              solo
-              readonly
-              dense
-              hide-details
-              flat
-            />
-            <v-text-field
-              v-else
-              v-model="userStore.userData.userMetadata.firstName"
-              height="36px"
-              type="text"
-              class="pa-0 ml-10"
-              placeholder=""
-              outlined
-              dense
-              flat
-            />
-          </div>
-          <div class="d-flex mt-sm-3">
-            <div
-              class="text-left text-md font-weight-700"
-              :style="{ width: '185px' }"
-            >
-              Last name
-            </div>
-            <v-text-field
-              v-if="!voucherStore.profileEdit"
-              v-model="userStore.userData.userMetadata.lastName"
-              height="36px"
-              type="text"
-              class="pa-0 ml-10 btn-customize"
-              placeholder=""
-              solo
-              readonly
-              dense
-              hide-details
-              flat
-            />
-            <v-text-field
-              v-else
-              v-model="userStore.userData.userMetadata.lastName"
-              height="36px"
-              type="text"
-              class="pa-0 ml-10"
-              placeholder=""
-              outlined
-              dense
-              flat
-            />
-          </div>
-
-          <div class="d-flex mt-sm-3">
-            <div
-              class="text-left text-md font-weight-700"
-              :style="{ width: '185px' }"
-            >
-              Email
-            </div>
-            <v-text-field
-              v-model="userStore.userData.email"
-              v-if="!voucherStore.profileEdit"
-              height="36px"
-              type="text"
-              class="pa-0 ml-10 btn-customize"
-              placeholder=""
-              solo
-              background-color="secondary"
-              readonly
-              dense
-              hide-details
-              flat
-            />
-            <v-text-field
-              v-model="userStore.userData.email"
-              v-else
-              height="36px"
-              type="text"
-              class="pa-0 ml-10"
-              placeholder=""
-              background-color="secondary"
-              readonly
-              outlined
-              dense
-              flat
-            />
-          </div>
-
-          <div class="d-flex mt-sm-3">
-            <div
-              class="text-left text-md font-weight-700"
-              :style="{ width: '185px' }"
-            >
-              Telephone
-            </div>
-            <v-text-field
-              v-if="!voucherStore.profileEdit"
-              v-model="userStore.userData.userMetadata.phoneNumber"
-              height="36px"
-              type="text"
-              class="pa-0 ml-10 btn-customize"
-              placeholder=""
-              solo
-              readonly
-              dense
-              hide-details
-              flat
-            />
-            <v-text-field
-              v-else
-              v-model="userStore.userData.userMetadata.phoneNumber"
-              height="36px"
-              type="text"
-              class="pa-0 ml-10"
-              placeholder=""
-              outlined
-              dense
-              flat
-            />
-          </div>
-        </v-form>
-      </v-col>
-    </v-row>
-    <v-divider class="mt-sm-3" />
-    <v-row class="mt-sm-1">
-      <v-col cols="1" v-if="!voucherStore.profileEdit">
+      <v-divider class="mb-6" />
+      <div class="d-flex gap-8">
         <v-btn
-          class="text-capitalize full-width"
-          :style="{ border: '1px solid #E3E8EF' }"
-          color="black"
+          class="text-capitalize text-btn"
           variant="text"
           @click="voucherStore.profileEdit = true"
-          text
+          v-if="!voucherStore.profileEdit"
+          outlined
+          depressed
         >
           Edit
         </v-btn>
-      </v-col>
-      <v-col cols="5" v-else class="d-flex">
-        <v-btn
-          class="text-capitalize"
-          :style="{ border: '1px solid #E3E8EF' }"
-          color="black"
-          variant="text"
-          @click="voucherStore.profileEdit = false"
-          text
-        >
-          Cancel
-        </v-btn>
+        <div class="d-flex gap-8" v-else>
+          <v-btn
+            class="text-capitalize"
+            variant="text"
+            @click="voucherStore.profileEdit = false"
+            outlined
+            depressed
+          >
+            Cancel
+          </v-btn>
 
-        <v-btn
-          class="ml-4 text-capitalize"
-          :style="{ backgroundColor: 'var(--v-blue-base)' }"
-          color="white"
-          variant="text"
-          type="submit"
-          form="check-edit-form"
-          text
-          :disabled="
-            !userStore.file ||
-            !userStore.userData.userMetadata.firstName ||
-            !userStore.userData.userMetadata.lastName ||
-            !userStore.userData.email ||
-            !userStore.userData.userMetadata.phoneNumber
-          "
-        >
-          Save
-        </v-btn>
-      </v-col>
-    </v-row>
+          <v-btn
+            class="text-capitalize"
+            type="submit"
+            form="check-edit-bank-account"
+            color="primary"
+            :disabled="
+              !userStore.file ||
+              !userStore.userData.userMetadata.firstName ||
+              !userStore.userData.userMetadata.lastName ||
+              !userStore.userData.email ||
+              !userStore.userData.userMetadata.phoneNumber
+            "
+            depressed
+          >
+            Save
+          </v-btn>
+        </div>
+      </div>
+
+      <!-- <v-row class="mt-sm-1">
+        <v-col cols="1" v-if="!voucherStore.profileEdit">
+          <v-btn
+            class="text-capitalize full-width"
+            :style="{ border: '1px solid #E3E8EF' }"
+            color="black"
+            variant="text"
+            @click="voucherStore.profileEdit = true"
+            text
+          >
+            Edit
+          </v-btn>
+        </v-col>
+        <v-col cols="5" v-else class="d-flex">
+          <v-btn
+            class="text-capitalize"
+            :style="{ border: '1px solid #E3E8EF' }"
+            color="black"
+            variant="text"
+            @click="voucherStore.profileEdit = false"
+            text
+          >
+            Cancel
+          </v-btn>
+
+          <v-btn
+            class="ml-4 text-capitalize"
+            :style="{ backgroundColor: 'var(--v-blue-base)' }"
+            color="white"
+            variant="text"
+            type="submit"
+            form="check-edit-form"
+            text
+            :disabled="
+              !userStore.file ||
+              !userStore.userData.userMetadata.firstName ||
+              !userStore.userData.userMetadata.lastName ||
+              !userStore.userData.email ||
+              !userStore.userData.userMetadata.phoneNumber
+            "
+          >
+            Save
+          </v-btn>
+        </v-col>
+      </v-row> -->
+    </v-form>
   </v-card>
 </template>
 
