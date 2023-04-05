@@ -6,26 +6,83 @@
           <div class="user-logo">
             <v-img class :src="require(`@/assets/profile-logo.webp`)" />
           </div>
-          <div class="d-flex mt-sm-3">
-            <div
-              class="text-xl text-left"
-              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
-            >
-              Bank account number
+          <v-form
+            @submit.prevent="updateBankAccount"
+            id="check-edit-bank-account"
+            ref="form"
+          >
+            <div class="d-flex mt-sm-3">
+              <div
+                class="text-left text-md font-weight-700"
+                :style="{ width: '175px' }"
+              >
+                Bank account number
+              </div>
+              <v-text-field
+                v-model="userStore.userData.userMetadata.bankAccount"
+                v-if="!voucherStore.bankAccountEdit"
+                height="36px"
+                type="text"
+                class="pa-0 ml-10 btn-customize"
+                placeholder=""
+                solo
+                readonly
+                dense
+                hide-details
+                flat
+              />
+              <v-text-field
+                v-model="userStore.userData.userMetadata.bankAccount"
+                v-else
+                height="36px"
+                type="text"
+                class="pa-0 ml-10"
+                placeholder=""
+                outlined
+                dense
+                flat
+              />
             </div>
-            <v-text-field
-              v-model="userStore.userData.userMetadata.bankAccount"
-              height="36px"
-              type="text"
-              class="pa-0 ml-10 btn-customize"
-              placeholder=""
-              solo
-              readonly
-              dense
-              hide-details
-              flat
-            />
-          </div>
+          </v-form>
+        </v-col>
+      </v-row>
+      <v-divider class="mt-sm-3" />
+      <v-row class="mt-sm-1">
+        <v-col cols="1" v-if="!voucherStore.bankAccountEdit">
+          <v-btn
+            class="text-capitalize full-width"
+            :style="{ border: '1px solid #E3E8EF' }"
+            color="black"
+            variant="text"
+            @click="voucherStore.bankAccountEdit = true"
+            text
+          >
+            Edit
+          </v-btn>
+        </v-col>
+        <v-col cols="5" v-else class="d-flex">
+          <v-btn
+            class="text-capitalize"
+            :style="{ border: '1px solid #E3E8EF' }"
+            color="black"
+            variant="text"
+            @click="voucherStore.bankAccountEdit = false"
+            text
+          >
+            Cancel
+          </v-btn>
+
+          <v-btn
+            class="ml-4 text-capitalize"
+            :style="{ backgroundColor: 'var(--v-blue-base)' }"
+            color="white"
+            variant="text"
+            type="submit"
+            form="check-edit-bank-account"
+            text
+          >
+            Save
+          </v-btn>
         </v-col>
       </v-row>
     </v-card>
@@ -48,6 +105,12 @@ export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(voucherStore),
+  },
+  methods: {
+    updateBankAccount() {
+      this.userStore.updateBankAccount();
+      this.voucherStore.bankAccountEdit = false;
+    },
   },
 };
 </script>

@@ -14,6 +14,7 @@ export const voucherStore = defineStore("voucher", () => {
   const drawerDetail = ref(false);
   const cfDialog = ref(false);
   const profileEdit = ref(false);
+  const bankAccountEdit = ref(false);
   const changePassword = ref(false);
 
   const pageIndex = ref(1);
@@ -25,7 +26,6 @@ export const voucherStore = defineStore("voucher", () => {
   const voucherId = ref("");
 
   const bearerToken = ref({});
-  const accountEditData = ref({});
   const voucherData = ref([]);
   const detailCard = ref({});
 
@@ -67,7 +67,7 @@ export const voucherStore = defineStore("voucher", () => {
       snackbar.commonError(error);
     }
   }
-  
+
   function changeVoucherFilter(sortBy) {
     this.sortBy = sortBy;
     console.log("sortBy", this.sortBy);
@@ -75,6 +75,9 @@ export const voucherStore = defineStore("voucher", () => {
   }
   function setDetailStoreCard(cards) {
     this.detailCard = cards;
+  }
+  function checkPurchased() {
+    return snackbar.error(`You dont have enough Token To buy`);
   }
 
   function checkIncludes() {
@@ -85,7 +88,6 @@ export const voucherStore = defineStore("voucher", () => {
     }
     console.log("Purchased voucher", voucherPurchased);
   }
-
   const slicedVoucherStore = computed(() => {
     if (!filterVoucherStore.value) return [];
     return filterVoucherStore.value.slice(
@@ -162,9 +164,10 @@ export const voucherStore = defineStore("voucher", () => {
     sortBy,
     changePassword,
     profileEdit,
-    accountEditData,
+    bankAccountEdit,
     //action
     fetchVoucher,
+    checkPurchased,
     purchaseVoucher,
     checkIncludes,
     setDetailStoreCard,

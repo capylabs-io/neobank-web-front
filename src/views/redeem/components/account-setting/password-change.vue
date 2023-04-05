@@ -5,8 +5,8 @@
         <v-form @submit.prevent="changeYourPassword" id="change-password-form">
           <div class="d-flex mt-sm-3">
             <div
-              class="text-xl text-left"
-              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
+              class="text-left text-md font-weight-700"
+              :style="{ width: '175px' }"
             >
               Current Password
             </div>
@@ -40,8 +40,8 @@
 
           <div class="d-flex mt-sm-3">
             <div
-              class="text-xl text-left"
-              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
+              class="text-left text-md font-weight-700"
+              :style="{ width: '175px' }"
             >
               New password
             </div>
@@ -74,8 +74,8 @@
 
           <div class="d-flex mt-sm-3">
             <div
-              class="text-xl text-left"
-              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
+              class="text-left text-md font-weight-700"
+              :style="{ width: '175px' }"
             >
               Re-enter new password
             </div>

@@ -91,8 +91,12 @@ import { voucherStore } from "../../../stores/voucherStore";
 import { rules } from "@/plugins/rules";
 export default {
   components: {},
-  mounted() {
+  created() {
     this.change();
+    this.userStore.email = "";
+    this.userStore.password = "";
+    this.userStore.username = "";
+    this.userStore.cfpassword = "";
   },
   computed: {
     ...mapStores(userStore),

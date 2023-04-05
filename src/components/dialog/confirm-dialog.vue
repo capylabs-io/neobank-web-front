@@ -24,10 +24,12 @@
 import { mapStores } from "pinia";
 import { voucherStore } from "@/stores/voucherStore";
 import { userStore } from "@/stores/userStore";
+import { inventoryStore } from "@/stores/inventoryStore";
 export default {
   computed: {
     ...mapStores(voucherStore),
     ...mapStores(userStore),
+    ...mapStores(inventoryStore),
   },
 
   methods: {
@@ -35,7 +37,7 @@ export default {
       this.voucherStore.cfDialog = false;
       await this.voucherStore.purchaseVoucher();
       await this.userStore.fetchUserMetadata();
-      await this.voucherStore.fetchUserVoucher();
+      await this.inventoryStore.fetchUserVoucher();
       await this.voucherStore.fetchVoucher();
       window.location.reload();
     },

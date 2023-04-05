@@ -78,12 +78,14 @@ export default {
         introduction.style.position = "relative";
         doorway.style.zIndex = "1";
         doorway.style.display = "none";
-        introduction.style.animation = " zoom-in-zoom-out 2s ease-out";
+        container.style.opacity = "1";
+        introduction.style.animation = " zoom-in-zoom-out 0.7s ease-out";
         container.style.animation = " zoom-out-zoom-in 2s ease-out";
       } else {
         introduction.style.position = "fixed";
         doorway.style.display = "block";
-        container.style.animation = " zoom-in-zoom-out 2s ease-out";
+        container.style.opacity = "0.1";
+        container.style.animation = " zoom-in-zoom-out 1s ease-out";
         introduction.style.animation = " zoom-out-zoom-in 2s ease-out";
         doorway.style.zIndex = "4";
       }

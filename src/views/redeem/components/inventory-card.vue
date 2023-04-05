@@ -20,8 +20,11 @@
       class="d-flex font-weight-bold justify-center mt-3 column-gap-10 full-width"
     >
       <div>
-        <!-- <v-img class="card-icon" :src="cards.campaign.data.attributes.iconUrl" /> -->
-        <v-img class="card-icon" src="@/assets/redeem/card/baemin-icon.webp" />
+        <v-img
+          class="card-icon"
+          :src="cards.campaignCategory.data.attributes.iconUrl"
+        />
+        <!-- <v-img class="card-icon" src="@/assets/redeem/card/baemin-icon.webp" /> -->
       </div>
       <v-btn
         class="unpurchased px-10"

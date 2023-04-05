@@ -21,9 +21,9 @@
       <div
         class="d-flex flex-column mt-3 font-weight-bold align-center justify-center"
       >
-        <div>
+        <!-- <div>
           <v-img class="drawer-icon" :src="inventoryStore.ivenCardData.iconUrl" />
-        </div>
+        </div> -->
         <span class="mt-3"> {{ inventoryStore.ivenCardData.title }} </span>
       </div>
       <div class="mt-3 text-left draw-text">

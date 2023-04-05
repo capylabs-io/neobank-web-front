@@ -66,7 +66,7 @@ export const User = {
         avatarUrl: avatarUrl,
         userMetadata: {
           outfit: {},
-          bankAccount: "",
+          bankAccount: data.userMetadata.bankAccount,
           token: userToken,
           firstName: data.userMetadata.firstName,
           lastName: data.userMetadata.lastName,

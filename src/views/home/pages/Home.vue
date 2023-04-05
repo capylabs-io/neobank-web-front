@@ -68,12 +68,14 @@ export default {
 
       if (this.homeStore.scrollY >= 1105) {
         introduction.style.position = "relative";
-        introduction.style.animation = " zoom-in-zoom-out 2s ease-out";
-        container.style.animation = " zoom-out-zoom-in 2s ease-out";
+        // introduction.style.animation = " zoom-in-zoom-out 1s ease-out";
+        container.style.animation = " zoom-out-zoom-in 1s ease-out";
+        container.style.opacity = "1";
       } else {
         introduction.style.position = "fixed";
-        container.style.animation = " zoom-in-zoom-out 2s ease-out";
-        introduction.style.animation = " zoom-out-zoom-in 2s ease-out";
+        container.style.opacity = "0.5";
+        // container.style.animation = " zoom-in-zoom-out 1s ease-out";
+        introduction.style.animation = " zoom-out-zoom-in 0.1s ease-out";
       }
       doorway.style.backgroundSize = 100 + scrollY / 7 + "%";
       doorway.style.opacity = 1 + scrollY / 6 + "";

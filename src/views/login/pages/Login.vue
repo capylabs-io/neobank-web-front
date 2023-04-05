@@ -57,8 +57,10 @@
           to="/register"
           class="text-decoration-none text-center black--text"
         >
-          <div class="text-capitalize text-md cursor-pointer mt-1">
-            Create New Account
+          <div class="text-capitalize text-md cursor-pointer mt-5">
+            <span :style="{ 'text-decoration': ' underline' }">
+              Create New Account
+            </span>
           </div>
         </router-link>
       </v-form>
@@ -74,8 +76,10 @@ import { voucherStore } from "../../../stores/voucherStore";
 import { rules } from "@/plugins/rules";
 export default {
   components: {},
-  mounted() {
+  created() {
     this.change();
+    this.userStore.email = "";
+    this.userStore.password = "";
   },
   computed: {
     ...mapStores(userStore),

@@ -17,8 +17,8 @@
         <v-form @submit.prevent="editAccount" id="check-edit-form" ref="form">
           <div class="d-flex mt-sm-1">
             <div
-              class="text-xl text-left"
-              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
+              class="text-left text-md font-weight-700"
+              :style="{ width: '175px' }"
             >
               Avatar
             </div>
@@ -63,8 +63,8 @@
 
           <div class="d-flex mt-sm-3">
             <div
-              class="text-xl text-left"
-              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
+              class="text-left text-md font-weight-700"
+              :style="{ width: '175px' }"
             >
               First name
             </div>
@@ -95,8 +95,8 @@
           </div>
           <div class="d-flex mt-sm-3">
             <div
-              class="text-xl text-left"
-              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
+              class="text-left text-md font-weight-700"
+              :style="{ width: '175px' }"
             >
               Last name
             </div>
@@ -128,18 +128,14 @@
 
           <div class="d-flex mt-sm-3">
             <div
-              class="text-xl text-left"
-              :style="{
-                fontSize: '15px',
-                fontWeight: 700,
-                width: '170px',
-                height: '40px',
-              }"
+              class="text-left text-md font-weight-700"
+              :style="{ width: '175px' }"
             >
               Email
             </div>
             <v-text-field
               v-model="userStore.userData.email"
+              v-if="!voucherStore.profileEdit"
               height="36px"
               type="text"
               class="pa-0 ml-10 btn-customize"
@@ -151,12 +147,25 @@
               hide-details
               flat
             />
+            <v-text-field
+              v-model="userStore.userData.email"
+              v-else
+              height="36px"
+              type="text"
+              class="pa-0 ml-10"
+              placeholder=""
+              background-color="secondary"
+              readonly
+              outlined
+              dense
+              flat
+            />
           </div>
 
           <div class="d-flex mt-sm-3">
             <div
-              class="text-xl text-left"
-              :style="{ fontSize: '15px', fontWeight: 700, width: '170px' }"
+              class="text-left text-md font-weight-700"
+              :style="{ width: '175px' }"
             >
               Telephone
             </div>

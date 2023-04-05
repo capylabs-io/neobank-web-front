@@ -139,6 +139,25 @@ export const userStore = defineStore(
         }
       }
     }
+    async function updateBankAccount() {
+      try {
+        const res = await User.updateUserInfo(
+          this.userData.userMetadata.token,
+          this.userData.userMetadata.avatarUrl,
+          this.userData,
+          this.jwt
+        );
+        if (!res) {
+          snackbar.error(`Error occurred Update! Please try again later!`);
+          return;
+        }
+        this.userData = res.data;
+        snackbar.success("Update successfully!");
+      } catch (error) {
+        console.error(`Error: ${error}`);
+        snackbar.commonError(error);
+      }
+    }
 
     async function fetchUserMetadata() {
       try {
@@ -228,6 +247,7 @@ export const userStore = defineStore(
       changePassword,
       isEditEnable,
       fetchUserMetadata,
+      updateBankAccount,
     };
   },
   {

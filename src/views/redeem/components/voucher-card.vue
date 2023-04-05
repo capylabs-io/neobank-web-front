@@ -16,7 +16,7 @@
         ></v-img>
       </div>
       <div
-        v-if="cards.status == 'New Deal'"
+        v-if="cards.status == 'newDeal'"
         class="mt-3 pa-1 px-3 white--text"
         :style="{
           background: '#1890FF',
@@ -118,7 +118,7 @@
       </div>
 
       <v-btn
-        v-if="cards.status == 'Expired'"
+        v-if="cards.status == 'expired'"
         class="d-flex column-gap-10 expired"
         elevation="2"
         rounded
@@ -204,12 +204,13 @@ export default {
   },
   methods: {
     buyClicked() {
-      // if (this.userStore.userData.userMetadata.token < this.cards.price) {
-      this.voucherStore.drawerDetail = !this.voucherStore.drawerDetail;
-      this.voucherStore.setDetailStoreCard(this.cards);
-      this.voucherStore.voucherId = this.id;
-      // } else {
-      // }
+      if (this.userStore.userData.userMetadata.token >= this.cards.price) {
+        this.voucherStore.drawerDetail = !this.voucherStore.drawerDetail;
+        this.voucherStore.setDetailStoreCard(this.cards);
+        this.voucherStore.voucherId = this.id;
+      } else {
+        this.voucherStore.checkPurchased();
+      }
     },
   },
 };
