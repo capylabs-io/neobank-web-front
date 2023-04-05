@@ -5,6 +5,10 @@
     <page-navbar v-else-if="voucherStore.pageIndex == 2" />
     <div v-else />
     <v-main>
+      <Loading />
+      <PluginLoading />
+      <PluginSnackbar />
+      <PluginConfirmDialog />
       <SnackBar />
       <router-view :key="$route.fullPath" />
     </v-main>
@@ -27,7 +31,12 @@ export default {
     "page-navbar": PageNavigationBar,
     // "app-footer": FooterVue,
     NavBarLanding: NavBarLanding,
+    Loading: () => import("@/components/global-loading/global-loading.vue"),
     SnackBar,
+    PluginLoading: () => import("@/components/plugin/PluginLoading.vue"),
+    PluginSnackbar: () => import("@/components/plugin/PluginAlert.vue"),
+    PluginConfirmDialog: () =>
+      import("@/components/plugin/PluginConfirmDialog.vue"),
   },
   computed: {
     ...mapStores(userStore),
@@ -64,19 +73,6 @@ body {
 .DMSans {
   font-family: "DM Sans", sans-serif;
 }
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-
 .primary-bg {
   background: var(--v-primary-base) !important;
 }
@@ -136,7 +132,7 @@ nav {
   cursor: pointer !important;
 }
 .overflow-hidden {
-  overflow: hidden;
+  overflow: hidden !important;
 }
 .text-btn {
   font-style: normal;
@@ -223,5 +219,11 @@ nav {
 }
 .font-weight-700 {
   font-weight: 700 !important;
+}
+
+//Other
+.token-icon {
+  border: 1px solid black;
+  border-radius: 40px;
 }
 </style>

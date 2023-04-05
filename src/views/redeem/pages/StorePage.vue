@@ -1,6 +1,7 @@
 <template>
-  <div class="d-flex flex-column justify-space-between">
-    <div class="right-container mx-auto pa-6 full-height">
+  <div class="d-flex flex-column justify-space-between full-height">
+    <CardDetailDrawer />
+    <div class="full-height">
       <div class="d-flex justify-space-between button-filter">
         <div class="d-flex column-gap-10 left-filter-group pa-1">
           <v-btn class="voucher active" rounded text @click="voucherTab()">
@@ -31,17 +32,19 @@
         <v-row>
           <v-col
             cols="12"
-            xl="2"
-            md="3"
-            sm="6"
-            xs="12"
+            md="4"
             v-for="card in voucherStore.filterVoucherStore"
             :key="card.id"
           >
-            <voucherCard
+            <!-- <voucherCard
               :id="card.id"
               :isPurchased="voucherStore.voucherPurchased.includes(card.id)"
               :cards="card"
+            /> -->
+
+            <CampaignCard
+              :campaign="card"
+              :isPurchased="voucherStore.voucherPurchased.includes(card.id)"
             />
           </v-col>
         </v-row>
@@ -55,7 +58,6 @@
             xl="2"
             md="3"
             sm="6"
-            xs="12"
             v-for="card in clothesCards"
             :key="card.id"
           >
@@ -81,17 +83,21 @@ import voucherCard from "@/views/redeem/components/voucher-card.vue";
 import clothesCard from "@/views/redeem/components/clothes-card.vue";
 import { userStore } from "@/stores/userStore";
 import { voucherStore } from "@/stores/voucherStore";
+import { inventoryStore } from "@/stores/inventoryStore";
 import { mapStores } from "pinia";
 
 export default {
   props: ["voucher", "userVoucher"],
   components: {
-    voucherCard: voucherCard,
+    // voucherCard: voucherCard,
     clothesCard: clothesCard,
+    CampaignCard: () => import("../components/campaign-card.vue"),
+    CardDetailDrawer: () => import("../components/card-detail-drawer.vue"),
   },
   computed: {
     ...mapStores(userStore),
     ...mapStores(voucherStore),
+    ...mapStores(inventoryStore),
   },
   mounted() {
     console.log("voucher", this.voucher);
@@ -131,7 +137,11 @@ export default {
       index: 1,
     };
   },
-  async created() {},
+  async created() {
+    await this.voucherStore.fetchVoucher();
+    await this.inventoryStore.fetchUserVoucher();
+    await this.voucherStore.checkIncludes();
+  },
   methods: {
     clothesTab() {
       this.index = 2;

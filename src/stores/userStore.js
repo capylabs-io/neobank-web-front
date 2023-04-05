@@ -46,10 +46,12 @@ export const userStore = defineStore(
         if (!this.rememberMe) {
           this.password = "";
         }
-        this.router.push("/account/store");
+        this.router.push("/store");
       } catch (error) {
         console.error(`Error: ${error}`);
         snackbar.commonError(error);
+      } finally {
+        loading.decreaseRequest();
       }
     }
 
@@ -77,6 +79,8 @@ export const userStore = defineStore(
       } catch (error) {
         console.error(`Error: ${error}`);
         snackbar.commonError(error);
+      } finally {
+        loading.decreaseRequest();
       }
     }
     // async function uploadFile() {
@@ -130,6 +134,8 @@ export const userStore = defineStore(
         } catch (error) {
           console.error(`Error: ${error}`);
           snackbar.commonError(error);
+        } finally {
+          loading.decreaseRequest();
         }
       }
     }
@@ -150,6 +156,8 @@ export const userStore = defineStore(
       } catch (error) {
         console.error(`Error: ${error}`);
         snackbar.commonError(error);
+      } finally {
+        loading.decreaseRequest();
       }
     }
 
@@ -165,6 +173,8 @@ export const userStore = defineStore(
       } catch (error) {
         console.error(`Error: ${error}`);
         snackbar.commonError(error);
+      } finally {
+        loading.decreaseRequest();
       }
     }
 
@@ -179,6 +189,8 @@ export const userStore = defineStore(
       } catch (error) {
         console.error(`Error: ${error}`);
         snackbar.commonError(error);
+      } finally {
+        loading.decreaseRequest();
       }
     }
 
@@ -199,11 +211,13 @@ export const userStore = defineStore(
       } catch (error) {
         console.error(`Error: ${error}`);
         snackbar.commonError(error);
+      } finally {
+        loading.decreaseRequest();
       }
     }
     function logout() {
-      jwt.value = "";
-      userData.value = "";
+      this.jwt = "";
+      this.userData = {};
       this.password = "";
     }
     function isEditEnable() {

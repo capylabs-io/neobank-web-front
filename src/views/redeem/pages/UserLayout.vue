@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper full-height d-flex">
     <NavigationDrawer />
+    <BuyConfirmDialog />
     <div class="container mx-auto pa-10">
       <router-view></router-view>
     </div>
@@ -9,19 +10,33 @@
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "@/stores/userStore";
+import { inventoryStore } from "@/stores/inventoryStore";
 import { voucherStore } from "@/stores/voucherStore";
+import { userStore } from "@/stores/userStore";
 
 export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(voucherStore),
+    ...mapStores(inventoryStore),
   },
   components: {
     NavigationDrawer: () => import("../components/navigation-drawer.vue"),
+    BuyConfirmDialog: () => import("@/components/dialog/confirm-dialog.vue"),
   },
-  created() {
-    this.voucherStore.pageIndex = 2;
+  async created() {
+    if (!this.userStore.jwt) {
+      this.$router.push("/login");
+    } else {
+      this.voucherStore.pageIndex = 2;
+      this.voucherStore.bearerToken = JSON.parse(
+        sessionStorage.getItem("user")
+      );
+      await this.userStore.fetchUserMetadata();
+      // await this.inventoryStore.fetchUserVoucher();
+      // await this.voucherStore.fetchVoucher();
+      // await this.voucherStore.checkIncludes();
+    }
   },
 };
 </script>

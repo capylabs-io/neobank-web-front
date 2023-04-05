@@ -1,20 +1,25 @@
 <template>
-  <v-dialog v-model="voucherStore.cfDialog" width="600px">
+  <v-dialog v-model="voucherStore.cfDialog" width="420px">
     <v-card>
       <v-card-title>
-        <span class="text-h5">Do you want to purchase this voucher?</span>
+        <span class="text-lg font-weight-bold">Confirm Purchase Voucher</span>
       </v-card-title>
-      <v-card-text />
-      <v-card-actions>
+      <v-card-text>
+        <div>Do you want to purchase this voucher?</div>
+      </v-card-text>
+      <v-card-actions class="pb-4">
         <v-spacer />
         <v-btn
-          color="green-darken-1"
-          variant="text"
+          class="text-btn"
+          color="gray"
           @click="voucherStore.cfDialog = false"
+          depressed
         >
           No
         </v-btn>
-        <v-btn color="green-darken-1" variant="text" @click="buy"> Yes </v-btn>
+        <v-btn class="text-btn" color="primary" @click="buy" depressed>
+          Yes
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -25,6 +30,7 @@ import { mapStores } from "pinia";
 import { voucherStore } from "@/stores/voucherStore";
 import { userStore } from "@/stores/userStore";
 import { inventoryStore } from "@/stores/inventoryStore";
+
 export default {
   computed: {
     ...mapStores(voucherStore),
@@ -39,7 +45,6 @@ export default {
       await this.userStore.fetchUserMetadata();
       await this.inventoryStore.fetchUserVoucher();
       await this.voucherStore.fetchVoucher();
-      window.location.reload();
     },
   },
 };

@@ -1,16 +1,17 @@
 <template>
   <div class="d-flex flex-column">
-    <div class="right-container mx-auto pa-6 full-height">
-      <div class="d-flex justify-space-between button-filter">
-        <!-- <div class="d-flex column-gap-10 left-filter-group pa-1">
+    <InventoryDetailDrawer />
+    <div class="mx-auto full-height">
+      <!-- <div class="d-flex justify-space-between button-filter">
+        <div class="d-flex column-gap-10 left-filter-group pa-1">
           <v-btn class="clothes active" rounded text @click="clothesTab()">
             Clothes
           </v-btn>
           <v-btn class="voucher" rounded text @click="voucherTab()">
             Voucher
           </v-btn>
-        </div> -->
-        <!-- <div class="right-filter-group">
+        </div>
+        <div class="right-filter-group">
           <v-select
             class="btn-customize"
             v-model="voucherStore.sortBy"
@@ -24,9 +25,9 @@
             hide-details
             persistent-hint
           ></v-select>
-        </div> -->
-      </div>
-      <div class="full-width mt-6 card-container">
+        </div>
+      </div> -->
+      <div class="full-width card-container">
         <v-row>
           <v-col
             cols="12"
@@ -63,8 +64,12 @@ import inventoryCard from "@/views/redeem/components/inventory-card.vue";
 export default {
   components: {
     inventoryCard: inventoryCard,
+    InventoryDetailDrawer: () =>
+      import("../components/inventory-card-drawer.vue"),
   },
-
+  async created() {
+    await this.inventoryStore.fetchUserVoucher();
+  },
   data() {
     return {};
   },

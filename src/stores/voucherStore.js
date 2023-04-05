@@ -47,15 +47,14 @@ export const voucherStore = defineStore("voucher", () => {
     } catch (error) {
       console.error(`Error: ${error}`);
       snackbar.commonError(error);
+    } finally {
+      loading.decreaseRequest();
     }
   }
   async function purchaseVoucher() {
     try {
       loading.increaseRequest();
-      const res = await Voucher.purchaseVouchers(
-        this.voucherId,
-        this.bearerToken.jwt
-      );
+      const res = await Voucher.purchaseVouchers(this.voucherId, this.bearerToken.jwt);
       if (!res) {
         snackbar.error(`Error occurred! Please try again later!`);
         return;
@@ -65,6 +64,8 @@ export const voucherStore = defineStore("voucher", () => {
     } catch (error) {
       console.error(`Error: ${error}`);
       snackbar.commonError(error);
+    } finally {
+      loading.decreaseRequest();
     }
   }
 
@@ -82,9 +83,7 @@ export const voucherStore = defineStore("voucher", () => {
 
   function checkIncludes() {
     if (this.voucherDataId && inventory.userVoucherId) {
-      this.voucherPurchased = this.voucherDataId.filter((data) =>
-        inventory.userVoucherId.includes(data)
-      );
+      this.voucherPurchased = this.voucherDataId.filter((data) => inventory.userVoucherId.includes(data));
     }
     console.log("Purchased voucher", voucherPurchased);
   }
@@ -97,14 +96,10 @@ export const voucherStore = defineStore("voucher", () => {
   });
 
   const totalVoucherPage = computed(() => {
-    if (!filterVoucherStore.value || filterVoucherStore.value.length == 0)
-      return 1;
+    if (!filterVoucherStore.value || filterVoucherStore.value.length == 0) return 1;
     if (filterVoucherStore.value.length % vouchersPerPage.value == 0)
       return filterVoucherStore.value.length / vouchersPerPage.value;
-    else
-      return (
-        Math.floor(filterVoucherStore.value.length / vouchersPerPage.value) + 1
-      );
+    else return Math.floor(filterVoucherStore.value.length / vouchersPerPage.value) + 1;
   });
   function sortedCampaign() {
     const filterVoucherStore = voucherData.value;
@@ -123,13 +118,9 @@ export const voucherStore = defineStore("voucher", () => {
   const filterVoucherStore = computed(() => {
     let filterVoucherStore = [];
     if ((sortBy.value = "asc")) {
-      filterVoucherStore = voucherData.value.sort((a, b) =>
-        a.title.localeCompare(b.title)
-      );
+      filterVoucherStore = voucherData.value.sort((a, b) => a.title.localeCompare(b.title));
     } else if ((sortBy.value = "desc")) {
-      filterVoucherStore = voucherData.value.sort((a, b) =>
-        b.title.localeCompare(a.title)
-      );
+      filterVoucherStore = voucherData.value.sort((a, b) => b.title.localeCompare(a.title));
     } else if ((sortBy.value = "priceUp")) {
       filterVoucherStore = voucherData.value.sort((a, b) => a.price - b.price);
     } else if ((sortBy.value = "priceDown")) {

@@ -31,14 +31,14 @@ export const inventoryStore = defineStore("inventory", () => {
         return;
       }
       this.userVoucher = res.data.data.map((index) => index.attributes);
-      this.userVoucherId = res.data.data.map(
-        (index) => index.attributes.campaign.data.id
-      );
-      console.log("userVoucher", userVoucher);
-      console.log("userVoucherId", userVoucherId);
+      this.userVoucherId = res.data.data
+        .filter((campaign) => campaign.attributes.campaign.data)
+        .map((index) => index.attributes.campaign.data.id);
     } catch (error) {
       console.error(`Error: ${error}`);
       snackbar.commonError(error);
+    } finally {
+      loading.decreaseRequest();
     }
   }
   const slicedUserVoucher = computed(() => {
@@ -50,22 +50,15 @@ export const inventoryStore = defineStore("inventory", () => {
   });
 
   const totalUserVoucherPerPage = computed(() => {
-    if (!filterUserVouchers.value || filterUserVouchers.value.length == 0)
-      return 1;
+    if (!filterUserVouchers.value || filterUserVouchers.value.length == 0) return 1;
     if (filterUserVouchers.value.length % userVoucherPerPage.value == 0)
       return filterUserVouchers.value.length / userVoucherPerPage.value;
-    else
-      return (
-        Math.floor(filterUserVouchers.value.length / userVoucherPerPage.value) +
-        1
-      );
+    else return Math.floor(filterUserVouchers.value.length / userVoucherPerPage.value) + 1;
   });
   function sortedInventory() {
     const filterUserVouchers = userVoucher.value;
     if ((sortBy.value = "asc")) {
-      return filterUserVouchers.sort(
-        (a, b) => a.user.data.attributes.email - b.user.data.attributes.email
-      );
+      return filterUserVouchers.sort((a, b) => a.user.data.attributes.email - b.user.data.attributes.email);
     } else if ((sortBy.value = "desc")) {
       return filterUserVouchers.sort((a, b) =>
         b.user.data.attributes.email.localeCompare(a.user.data.attributes.email)
