@@ -1,15 +1,16 @@
 <template>
   <v-navigation-drawer
     v-model="voucherStore.drawerDetail"
-    absolute
+    fixed
     right
     hide-overlay
     temporary
     width="480px"
     class="drawer"
+    app
   >
     <div
-      class="white-bg overflow-hidden full-height pa-6 d-flex flex-column justify-space-between"
+      class="pa-6 drawer-container white-bg overflow-hidden full-height d-flex flex-column justify-space-between"
     >
       <div>
         <div class="d-flex flex-column">
@@ -21,7 +22,7 @@
           </div>
           <div
             v-if="voucherStore.detailCard.status == 'newDeal'"
-            class="mt-3 pa-1 px-3 white--text"
+            class="mt-3 pa-1 px-3 white--text status"
             :style="{
               background: '#1890FF',
               width: 'max-content',
@@ -36,7 +37,7 @@
           </div>
           <div
             v-else-if="voucherStore.detailCard.status == 'hot'"
-            class="mt-3 pa-1 px-3 white--text"
+            class="mt-3 pa-1 px-3 white--text status"
             :style="{
               background: '#EC1D1D',
               width: 'max-content',
@@ -54,7 +55,7 @@
               voucherStore.detailCard.purchasedQuantity ==
               voucherStore.detailCard.totalQuantity
             "
-            class="mt-3 pa-1 px-3 white--text"
+            class="mt-3 pa-1 px-3 white--text status"
             :style="{
               background: '#FDDF59',
               width: 'max-content',
@@ -69,7 +70,7 @@
           </div>
           <div
             v-else-if="voucherStore.detailCard.status == 'active'"
-            class="mt-3 pa-1 px-3 white--text"
+            class="mt-3 pa-1 px-3 white--text status"
             :style="{
               background: '#53B06C',
               width: 'max-content',
@@ -84,7 +85,7 @@
           </div>
           <div
             v-else
-            class="mt-3 pa-1 px-3 white--text"
+            class="mt-3 pa-1 px-3 white--text status"
             :style="{
               background: '#A9A9A9',
               width: 'max-content',
@@ -197,7 +198,7 @@ export default {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: 99;
+  z-index: 1;
   border: 1px var(--v-neutral30-base) solid;
 }
 .status {
@@ -228,6 +229,9 @@ export default {
 }
 .drawer {
   z-index: 99;
+}
+.drawer-container{
+  padding-top: 80px !important;
 }
 .amount-container {
   position: sticky;

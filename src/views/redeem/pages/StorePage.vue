@@ -33,7 +33,7 @@
           <v-col
             cols="12"
             md="4"
-            v-for="card in voucherStore.sortedCampaign()"
+            v-for="card in voucherStore.slicedVoucherStore"
             :key="card.id"
           >
             <!-- <voucherCard

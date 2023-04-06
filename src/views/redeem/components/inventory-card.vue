@@ -60,9 +60,7 @@ export default {
   methods: {
     openClick() {
       this.inventoryStore.drawer = true;
-      this.inventoryStore.ivenCardData = this.cards.campaign.data.attributes;
-      this.inventoryStore.invenVoucherIconUrl =
-        this.cards.campaignCategory.data.attributes.iconUrl;
+      this.inventoryStore.ivenCardData = this.cards;
       this.inventoryStore.ivenVoucherQr = this.cards.qrCodeUrl;
     },
   },

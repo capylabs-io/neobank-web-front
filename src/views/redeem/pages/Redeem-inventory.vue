@@ -1,7 +1,7 @@
 <template>
-  <div class="d-flex flex-column">
+  <div class="d-flex flex-column justify-space-between full-height">
     <InventoryDetailDrawer />
-    <div class="mx-auto full-height">
+    <div>
       <!-- <div class="d-flex justify-space-between button-filter">
         <div class="d-flex column-gap-10 left-filter-group pa-1">
           <v-btn class="clothes active" rounded text @click="clothesTab()">
@@ -27,7 +27,7 @@
           ></v-select>
         </div>
       </div> -->
-      <div class="full-width card-container">
+      <div class="">
         <v-row>
           <v-col
             cols="12"
@@ -35,7 +35,7 @@
             md="4"
             sm="6"
             xs="12"
-            v-for="card in inventoryStore.filterUserVouchers"
+            v-for="card in inventoryStore.slicedUserVoucher"
             :key="card.id"
           >
             <inventoryCard :id="card.id" :cards="card" />

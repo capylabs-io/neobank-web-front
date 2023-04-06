@@ -1,19 +1,21 @@
 <template>
   <v-navigation-drawer
     v-model="inventoryStore.drawer"
-    absolute
+    fixed
     right
     hide-overlay
     temporary
     width="480px"
     class="drawer"
   >
-    <div class="white-bg overflow-hidden full-height pa-6 d-flex flex-column">
+    <div
+      class="drawer-container white-bg overflow-hidden full-height pa-6 d-flex flex-column"
+    >
       <div class="drawer-image d-flex flex-column">
         <div class="full-width">
           <v-img
             class="drawer-image"
-            :src="inventoryStore.ivenCardData.thumbnailUrl"
+            :src="inventoryStore.ivenCardData.campaign.data.attributes.thumbnailUrl"
           ></v-img>
         </div>
       </div>
@@ -22,13 +24,13 @@
       </div>
       <div class="mt-3 font-weight-bold text-center text-lg">
         <!-- <div>
-          <v-img class="drawer-icon" :src="inventoryStore.ivenCardData.iconUrl" />
+          <v-img class="drawer-icon" :src="inventoryStore.ivenCardData.campaign.data.attributes.iconUrl" />
         </div> -->
-        <span class="mt-3"> {{ inventoryStore.ivenCardData.title }} </span>
+        <span class="mt-3"> {{ inventoryStore.ivenCardData.campaign.data.attributes.title }} </span>
       </div>
 
       <div class="mt-3 text-left draw-text">
-        {{ inventoryStore.ivenCardData.fullDescription }}
+        {{ inventoryStore.ivenCardData.campaign.data.attributes.fullDescription }}
       </div>
       <v-spacer></v-spacer>
       <div class="qr-img mx-auto mt-3 justify-space-between">
@@ -50,7 +52,7 @@ export default {
     categoryIcon() {
       return get(
         this.inventoryStore,
-        "ivenVoucherIconUrl",
+        "ivenCardData.campaignCategory.data.attributes.iconUrl",
         require("@/assets/views/category/category-icon-example.png")
       );
     },
@@ -103,6 +105,10 @@ export default {
   right: 0;
   width: 200px;
   height: 200px;
+}
+
+.drawer-container {
+  padding-top: 80px !important;
 }
 .unpurchased {
   background: #5752e3;
