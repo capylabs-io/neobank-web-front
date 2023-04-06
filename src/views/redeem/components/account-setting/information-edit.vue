@@ -199,7 +199,7 @@
           <v-btn
             class="text-capitalize"
             type="submit"
-            form="check-edit-bank-account"
+            form="check-edit-form"
             color="primary"
             :disabled="
               !userStore.file ||
@@ -280,8 +280,8 @@ export default {
     },
 
     editAccount() {
-      this.userStore.updateAccountSetting();
       this.voucherStore.profileEdit = false;
+      this.userStore.updateAccountSetting();
       // window.location.reload();
     },
   },

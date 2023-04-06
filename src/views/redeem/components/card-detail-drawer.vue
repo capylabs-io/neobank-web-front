@@ -6,6 +6,7 @@
     hide-overlay
     temporary
     width="480px"
+    class="drawer"
   >
     <div
       class="white-bg overflow-hidden full-height pa-6 d-flex flex-column justify-space-between"
@@ -13,7 +14,10 @@
       <div>
         <div class="d-flex flex-column">
           <div class="neutral30-border border-radius-16 overflow-hidden">
-            <v-img :src="voucherStore.detailCard.thumbnailUrl"></v-img>
+            <v-img
+              class="drawer-image"
+              :src="voucherStore.detailCard.thumbnailUrl"
+            ></v-img>
           </div>
           <div
             v-if="voucherStore.detailCard.status == 'newDeal'"
@@ -102,6 +106,7 @@
           {{ voucherStore.detailCard.fullDescription }}
         </div>
       </div>
+      <!-- <v-spacer></v-spacer> -->
       <div class="text-center">
         <v-btn
           class="text-none text-btn px-12"
@@ -222,9 +227,6 @@ export default {
   height: 30px;
 }
 .drawer {
-  background: white !important;
-  height: 100vh;
-  padding: 85px 20px;
   z-index: 99;
 }
 .amount-container {

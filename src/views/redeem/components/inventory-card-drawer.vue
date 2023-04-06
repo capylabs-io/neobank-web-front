@@ -6,6 +6,7 @@
     hide-overlay
     temporary
     width="480px"
+    class="drawer"
   >
     <div class="white-bg overflow-hidden full-height pa-6 d-flex flex-column">
       <div class="drawer-image d-flex flex-column">
@@ -49,7 +50,7 @@ export default {
     categoryIcon() {
       return get(
         this.inventoryStore,
-        "ivenCardData.iconUrl",
+        "ivenVoucherIconUrl",
         require("@/assets/views/category/category-icon-example.png")
       );
     },
@@ -93,9 +94,6 @@ export default {
   height: 30px;
 }
 .drawer {
-  background: white !important;
-  height: 100vh;
-  padding: 85px 20px;
   z-index: 99;
 }
 

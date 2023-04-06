@@ -83,28 +83,6 @@ export const userStore = defineStore(
         loading.decreaseRequest();
       }
     }
-    // async function uploadFile() {
-    //   if (this.file) {
-    //     const formData = new FormData();
-    //     formData.append("files", this.file);
-    //     console.log("callapi", formData);
-    //     try {
-    //       loading.increaseRequest();
-    //       const res = await User.uploadFile(formData, this.jwt);
-    //       if (!res) {
-    //         snackbar.error(
-    //           `Error occurred when upload file! Please try again later!`
-    //         );
-    //         return;
-    //       }
-    //       this.avatarUrl = res.data.map((index) => index.url);
-    //       snackbar.success("Upload Image successfully!");
-    //     } catch (error) {
-    //       console.error(`Error: ${error}`);
-    //       snackbar.commonError(error);
-    //     }
-    //   }
-    // }
     async function updateAccountSetting() {
       if (this.file) {
         try {
@@ -115,7 +93,9 @@ export const userStore = defineStore(
           const filedata = await User.uploadFile(formData, this.jwt);
           this.avatarUrl = filedata.data.map((index) => index.url);
           if (!this.avatarUrl) {
-            snackbar.error(`Error occurred Upload File! Please try again later!`);
+            snackbar.error(
+              `Error occurred Upload File! Please try again later!`
+            );
           } else {
             const res = await User.updateUserInfo(
               this.userData.userMetadata.token,
@@ -219,6 +199,9 @@ export const userStore = defineStore(
       this.jwt = "";
       this.userData = {};
       this.password = "";
+      this.currentPassword = "";
+      this.newPassword = "";
+      this.confirmNewPassword = "";
     }
     function isEditEnable() {
       if (this.email && this.password) return false;

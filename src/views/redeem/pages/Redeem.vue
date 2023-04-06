@@ -55,9 +55,7 @@ export default {
       this.$router.push("/login");
     } else {
       this.change();
-      this.voucherStore.bearerToken = JSON.parse(
-        sessionStorage.getItem("user")
-      );
+      this.voucherStore.bearerToken = JSON.parse(localStorage.getItem("user"));
       await this.userStore.fetchUserMetadata();
       await this.inventoryStore.fetchUserVoucher();
       await this.voucherStore.fetchVoucher();

@@ -54,7 +54,10 @@ export const voucherStore = defineStore("voucher", () => {
   async function purchaseVoucher() {
     try {
       loading.increaseRequest();
-      const res = await Voucher.purchaseVouchers(this.voucherId, this.bearerToken.jwt);
+      const res = await Voucher.purchaseVouchers(
+        this.voucherId,
+        this.bearerToken.jwt
+      );
       if (!res) {
         snackbar.error(`Error occurred! Please try again later!`);
         return;
@@ -83,7 +86,9 @@ export const voucherStore = defineStore("voucher", () => {
 
   function checkIncludes() {
     if (this.voucherDataId && inventory.userVoucherId) {
-      this.voucherPurchased = this.voucherDataId.filter((data) => inventory.userVoucherId.includes(data));
+      this.voucherPurchased = this.voucherDataId.filter((data) =>
+        inventory.userVoucherId.includes(data)
+      );
     }
     console.log("Purchased voucher", voucherPurchased);
   }
@@ -96,37 +101,68 @@ export const voucherStore = defineStore("voucher", () => {
   });
 
   const totalVoucherPage = computed(() => {
-    if (!filterVoucherStore.value || filterVoucherStore.value.length == 0) return 1;
+    if (!filterVoucherStore.value || filterVoucherStore.value.length == 0)
+      return 1;
     if (filterVoucherStore.value.length % vouchersPerPage.value == 0)
       return filterVoucherStore.value.length / vouchersPerPage.value;
-    else return Math.floor(filterVoucherStore.value.length / vouchersPerPage.value) + 1;
+    else
+      return (
+        Math.floor(filterVoucherStore.value.length / vouchersPerPage.value) + 1
+      );
   });
+  
   function sortedCampaign() {
-    const filterVoucherStore = voucherData.value;
-    if ((sortBy.value = "asc")) {
-      return filterVoucherStore.sort((a, b) => a.title - b.title);
-    } else if ((sortBy.value = "desc")) {
-      return filterVoucherStore.sort((a, b) => b.title.localeCompare(a.title));
-    } else if ((sortBy.value = "priceUp")) {
-      return filterVoucherStore.sort((a, b) => a.price - b.price);
-    } else if ((sortBy.value = "priceDown")) {
-      return filterVoucherStore.sort((a, b) => b.price - a.price);
-    } else {
-      return filterVoucherStore.sort((a, b) => b.id - a.id);
+    if (!this.voucherData || this.voucherData.length == 0) return [];
+    let sortedCampaigns = this.voucherData;
+    if (!this.sortBy) return sortedCampaigns;
+    switch (this.sortBy) {
+      default:
+      case "asc":
+        sortedCampaigns
+          .filter((voucher) => voucher.title)
+          .sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case "desc":
+        sortedCampaigns
+          .filter((voucher) => voucher.title)
+          .sort((a, b) => b.title.localeCompare(a.title));
+        break;
+      case "priceUp":
+        sortedCampaigns
+          .filter((voucher) => voucher.price)
+          .sort((a, b) => a.price - b.price);
+        break;
+      case "priceDown":
+        sortedCampaigns
+          .filter((voucher) => voucher.price)
+          .sort((a, b) => b.price - a.price);
+        break;
     }
+    return sortedCampaigns;
   }
+
   const filterVoucherStore = computed(() => {
     let filterVoucherStore = [];
     if ((sortBy.value = "asc")) {
-      filterVoucherStore = voucherData.value.sort((a, b) => a.title.localeCompare(b.title));
+      filterVoucherStore = voucherData.value
+        .filter((voucher) => voucher.title)
+        .sort((a, b) => a.title.localeCompare(b.title));
     } else if ((sortBy.value = "desc")) {
-      filterVoucherStore = voucherData.value.sort((a, b) => b.title.localeCompare(a.title));
+      filterVoucherStore = voucherData.value
+        .filter((voucher) => voucher.title)
+        .sort((a, b) => b.title.localeCompare(a.title));
     } else if ((sortBy.value = "priceUp")) {
-      filterVoucherStore = voucherData.value.sort((a, b) => a.price - b.price);
+      filterVoucherStore = voucherData.value.voucherData
+        .filter((voucher) => voucher.price)
+        .sort((a, b) => a.price - b.price);
     } else if ((sortBy.value = "priceDown")) {
-      filterVoucherStore = voucherData.value.sort((a, b) => b.price - a.price);
+      filterVoucherStore = voucherData.value
+        .filter((voucher) => voucher.price)
+        .sort((a, b) => b.price - a.price);
     } else {
-      filterVoucherStore = voucherData.value.sort((a, b) => b.id - a.id);
+      filterVoucherStore = voucherData.value.voucherData.value
+        .filter((voucher) => voucher.id)
+        .sort((a, b) => b.id - a.id);
     }
     return filterVoucherStore;
   });

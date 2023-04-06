@@ -12,7 +12,7 @@
         <span class="ml-2 text-md font-weight-700">VParadise</span>
       </div>
       <router-link
-        to="/Home"
+        to="/home"
         class="text-decoration-none align-self-center"
         active-class="active"
       >
@@ -26,7 +26,7 @@
         <div class="text-none text-uppercase nav-link">World</div>
       </router-link>
       <router-link
-        to="/redeem"
+        to="/store"
         class="text-decoration-none align-self-center"
         active-class="active"
       >

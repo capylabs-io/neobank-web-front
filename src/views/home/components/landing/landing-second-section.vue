@@ -11,10 +11,16 @@
     <div class="d-flex justify-center align-center">
       <v-row>
         <v-col cols="4">
-          <v-card class="pa-3"
-            ><div class="image-card full-width"></div>
+          <v-card class="pa-3 info-card"
+            ><div class="full-width">
+              <v-img
+                class="image-card"
+                :src="require(`@/assets/home/image1.webp`)"
+              >
+              </v-img>
+            </div>
             <div
-              class="mt-8 d-flex flex-column justify-center align-center white--text"
+              class="mt-8 d-flex flex-column justify-center align-center text-center white--text"
             >
               <span class="text-dp-xs font-weight-500">3D Immersive World</span>
               <span class="text-md font-weight-400 mt-2"
@@ -26,10 +32,16 @@
           </v-card>
         </v-col>
         <v-col cols="4">
-          <v-card class="pa-3"
-            ><div class="image-card full-width"></div>
+          <v-card class="pa-3 info-card"
+            ><div class="full-width">
+              <v-img
+                class="image-card"
+                :src="require(`@/assets/home/image2.webp`)"
+              >
+              </v-img>
+            </div>
             <div
-              class="mt-8 d-flex flex-column justify-center align-center white--text"
+              class="mt-8 d-flex flex-column justify-center align-center white--text text-center"
             >
               <span class="text-dp-xs font-weight-500">Real-life Rewards</span>
               <span class="text-md font-weight-400 mt-2"
@@ -41,10 +53,16 @@
           </v-card>
         </v-col>
         <v-col cols="4">
-          <v-card class="pa-3"
-            ><div class="image-card full-width"></div>
+          <v-card class="pa-3 info-card"
+            ><div class="full-width">
+              <v-img
+                class="image-card"
+                :src="require(`@/assets/home/image3.webp`)"
+              >
+              </v-img>
+            </div>
             <div
-              class="mt-8 d-flex flex-column justify-center align-center white--text"
+              class="mt-8 d-flex flex-column justify-center align-center white--text text-center"
             >
               <span class="text-dp-xs font-weight-500"
                 >Professional & Supportive</span
@@ -82,13 +100,15 @@ export default {
     padding-bottom: 50px;
   }
 }
+.info-card {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
 .v-card {
   width: 400px;
   height: 440px;
   margin-top: 64px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 .first-section-image {
   background-position: cover;
@@ -115,5 +135,6 @@ export default {
 .image-card {
   background: rgba(255, 255, 255, 0.1);
   height: 240px;
+  border-radius: 16px !important;
 }
 </style>

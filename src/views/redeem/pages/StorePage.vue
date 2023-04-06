@@ -33,7 +33,7 @@
           <v-col
             cols="12"
             md="4"
-            v-for="card in voucherStore.filterVoucherStore"
+            v-for="card in voucherStore.sortedCampaign()"
             :key="card.id"
           >
             <!-- <voucherCard
@@ -66,7 +66,7 @@
         </v-row>
       </div>
     </div>
-    <div class="pagination">
+    <div class="pagination mt-5">
       <v-pagination
         v-model="voucherStore.voucherPage"
         :length="voucherStore.totalVoucherPage"
@@ -99,8 +99,8 @@ export default {
     ...mapStores(voucherStore),
     ...mapStores(inventoryStore),
   },
-  mounted() {
-    console.log("voucher", this.voucher);
+  created() {
+    console.log("sortedCampaign", this.voucherStore.sortedCampaign());
   },
   data() {
     return {
@@ -207,7 +207,7 @@ export default {
   font-weight: bold;
 }
 .pagination {
-  z-index: 97;
+  z-index: 4;
 }
 .left-filter-group {
   background-color: white;
