@@ -132,7 +132,7 @@
           <v-btn
             class="text-capitalize"
             type="submit"
-            form="check-edit-bank-account"
+            form="change-password-form"
             color="primary"
             :disabled="
               !userStore.currentPassword ||

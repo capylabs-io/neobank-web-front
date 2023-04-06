@@ -33,7 +33,7 @@
           <v-col
             cols="12"
             md="4"
-            v-for="card in voucherStore.filterVoucherStore"
+            v-for="card in voucherStore.sortedCampaign()"
             :key="card.id"
           >
             <!-- <voucherCard
@@ -100,7 +100,7 @@ export default {
     ...mapStores(inventoryStore),
   },
   created() {
-    console.log("sortedCampaign", this.voucherStore.sortedCampaign);
+    console.log("sortedCampaign", this.voucherStore.sortedCampaign());
   },
   data() {
     return {

@@ -93,7 +93,9 @@ export const userStore = defineStore(
           const filedata = await User.uploadFile(formData, this.jwt);
           this.avatarUrl = filedata.data.map((index) => index.url);
           if (!this.avatarUrl) {
-            snackbar.error(`Error occurred Upload File! Please try again later!`);
+            snackbar.error(
+              `Error occurred Upload File! Please try again later!`
+            );
           } else {
             const res = await User.updateUserInfo(
               this.userData.userMetadata.token,
@@ -197,6 +199,9 @@ export const userStore = defineStore(
       this.jwt = "";
       this.userData = {};
       this.password = "";
+      this.currentPassword = "";
+      this.newPassword = "";
+      this.confirmNewPassword = "";
     }
     function isEditEnable() {
       if (this.email && this.password) return false;
