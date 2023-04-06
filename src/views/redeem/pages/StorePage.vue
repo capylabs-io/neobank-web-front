@@ -66,7 +66,7 @@
         </v-row>
       </div>
     </div>
-    <div class="pagination">
+    <div class="pagination mt-5">
       <v-pagination
         v-model="voucherStore.voucherPage"
         :length="voucherStore.totalVoucherPage"
@@ -207,7 +207,7 @@ export default {
   font-weight: bold;
 }
 .pagination {
-  z-index: 97;
+  z-index: 4;
 }
 .left-filter-group {
   background-color: white;

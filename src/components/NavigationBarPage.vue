@@ -22,7 +22,7 @@
         <div class="text-capitalize">WORLD</div>
       </router-link>
       <router-link
-        to="/redeem"
+        to="/inventory"
         class="text-decoration-none align-self-center"
         active-class="active"
       >

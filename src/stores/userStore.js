@@ -83,28 +83,6 @@ export const userStore = defineStore(
         loading.decreaseRequest();
       }
     }
-    // async function uploadFile() {
-    //   if (this.file) {
-    //     const formData = new FormData();
-    //     formData.append("files", this.file);
-    //     console.log("callapi", formData);
-    //     try {
-    //       loading.increaseRequest();
-    //       const res = await User.uploadFile(formData, this.jwt);
-    //       if (!res) {
-    //         snackbar.error(
-    //           `Error occurred when upload file! Please try again later!`
-    //         );
-    //         return;
-    //       }
-    //       this.avatarUrl = res.data.map((index) => index.url);
-    //       snackbar.success("Upload Image successfully!");
-    //     } catch (error) {
-    //       console.error(`Error: ${error}`);
-    //       snackbar.commonError(error);
-    //     }
-    //   }
-    // }
     async function updateAccountSetting() {
       if (this.file) {
         try {

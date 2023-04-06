@@ -12,7 +12,13 @@
       <v-row>
         <v-col cols="4">
           <v-card class="pa-3 info-card"
-            ><div class="image-card full-width"></div>
+            ><div class="full-width">
+              <v-img
+                class="image-card"
+                :src="require(`@/assets/home/image1.webp`)"
+              >
+              </v-img>
+            </div>
             <div
               class="mt-8 d-flex flex-column justify-center align-center text-center white--text"
             >
@@ -27,7 +33,13 @@
         </v-col>
         <v-col cols="4">
           <v-card class="pa-3 info-card"
-            ><div class="image-card full-width"></div>
+            ><div class="full-width">
+              <v-img
+                class="image-card"
+                :src="require(`@/assets/home/image2.webp`)"
+              >
+              </v-img>
+            </div>
             <div
               class="mt-8 d-flex flex-column justify-center align-center white--text text-center"
             >
@@ -42,7 +54,13 @@
         </v-col>
         <v-col cols="4">
           <v-card class="pa-3 info-card"
-            ><div class="image-card full-width"></div>
+            ><div class="full-width">
+              <v-img
+                class="image-card"
+                :src="require(`@/assets/home/image3.webp`)"
+              >
+              </v-img>
+            </div>
             <div
               class="mt-8 d-flex flex-column justify-center align-center white--text text-center"
             >
@@ -117,5 +135,6 @@ export default {
 .image-card {
   background: rgba(255, 255, 255, 0.1);
   height: 240px;
+  border-radius: 16px !important;
 }
 </style>

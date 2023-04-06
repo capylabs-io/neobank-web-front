@@ -15,6 +15,7 @@ export const inventoryStore = defineStore("inventory", () => {
 
   const sortBy = ref("");
   const ivenVoucherQr = ref("");
+  const invenVoucherIconUrl = ref("");
 
   const bearerToken = ref({});
   const ivenCardData = ref({});
@@ -50,15 +51,22 @@ export const inventoryStore = defineStore("inventory", () => {
   });
 
   const totalUserVoucherPerPage = computed(() => {
-    if (!filterUserVouchers.value || filterUserVouchers.value.length == 0) return 1;
+    if (!filterUserVouchers.value || filterUserVouchers.value.length == 0)
+      return 1;
     if (filterUserVouchers.value.length % userVoucherPerPage.value == 0)
       return filterUserVouchers.value.length / userVoucherPerPage.value;
-    else return Math.floor(filterUserVouchers.value.length / userVoucherPerPage.value) + 1;
+    else
+      return (
+        Math.floor(filterUserVouchers.value.length / userVoucherPerPage.value) +
+        1
+      );
   });
   function sortedInventory() {
     const filterUserVouchers = userVoucher.value;
     if ((sortBy.value = "asc")) {
-      return filterUserVouchers.sort((a, b) => a.user.data.attributes.email - b.user.data.attributes.email);
+      return filterUserVouchers.sort(
+        (a, b) => a.user.data.attributes.email - b.user.data.attributes.email
+      );
     } else if ((sortBy.value = "desc")) {
       return filterUserVouchers.sort((a, b) =>
         b.user.data.attributes.email.localeCompare(a.user.data.attributes.email)
@@ -103,6 +111,7 @@ export const inventoryStore = defineStore("inventory", () => {
     userVoucherPerPage,
     sortBy,
     ivenVoucherQr,
+    invenVoucherIconUrl,
 
     //action
     fetchUserVoucher,
