@@ -26,7 +26,7 @@
         <div class="text-none text-uppercase nav-link">World</div>
       </router-link>
       <router-link
-        to="/inventory"
+        to="/store"
         class="text-decoration-none align-self-center"
         active-class="active"
       >

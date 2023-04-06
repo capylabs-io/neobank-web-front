@@ -110,20 +110,37 @@ export const voucherStore = defineStore("voucher", () => {
         Math.floor(filterVoucherStore.value.length / vouchersPerPage.value) + 1
       );
   });
+  
   function sortedCampaign() {
-    const filterVoucherStore = voucherData.value;
-    if ((sortBy.value = "asc")) {
-      return filterVoucherStore.sort((a, b) => a.title - b.title);
-    } else if ((sortBy.value = "desc")) {
-      return filterVoucherStore.sort((a, b) => b.title.localeCompare(a.title));
-    } else if ((sortBy.value = "priceUp")) {
-      return filterVoucherStore.sort((a, b) => a.price - b.price);
-    } else if ((sortBy.value = "priceDown")) {
-      return filterVoucherStore.sort((a, b) => b.price - a.price);
-    } else {
-      return filterVoucherStore.sort((a, b) => b.id - a.id);
+    if (!this.voucherData || this.voucherData.length == 0) return [];
+    let sortedCampaigns = this.voucherData;
+    if (!this.sortBy) return sortedCampaigns;
+    switch (this.sortBy) {
+      default:
+      case "asc":
+        sortedCampaigns
+          .filter((voucher) => voucher.title)
+          .sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case "desc":
+        sortedCampaigns
+          .filter((voucher) => voucher.title)
+          .sort((a, b) => b.title.localeCompare(a.title));
+        break;
+      case "priceUp":
+        sortedCampaigns
+          .filter((voucher) => voucher.price)
+          .sort((a, b) => a.price - b.price);
+        break;
+      case "priceDown":
+        sortedCampaigns
+          .filter((voucher) => voucher.price)
+          .sort((a, b) => b.price - a.price);
+        break;
     }
+    return sortedCampaigns;
   }
+
   const filterVoucherStore = computed(() => {
     let filterVoucherStore = [];
     if ((sortBy.value = "asc")) {

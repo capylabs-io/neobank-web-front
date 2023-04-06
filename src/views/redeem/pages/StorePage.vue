@@ -99,8 +99,8 @@ export default {
     ...mapStores(voucherStore),
     ...mapStores(inventoryStore),
   },
-  mounted() {
-    console.log("voucher", this.voucher);
+  created() {
+    console.log("sortedCampaign", this.voucherStore.sortedCampaign);
   },
   data() {
     return {
