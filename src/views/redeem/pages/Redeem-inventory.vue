@@ -32,7 +32,7 @@
           <v-col
             cols="12"
             xl="2"
-            md="3"
+            md="4"
             sm="6"
             xs="12"
             v-for="card in inventoryStore.filterUserVouchers"
