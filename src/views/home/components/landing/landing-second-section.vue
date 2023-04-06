@@ -16,9 +16,7 @@
             <div
               class="mt-8 d-flex flex-column justify-center align-center text-center white--text"
             >
-              <span class="text-dp-xs font-weight-500"
-                >3D Immersive World</span
-              >
+              <span class="text-dp-xs font-weight-500">3D Immersive World</span>
               <span class="text-md font-weight-400 mt-2"
                 >An open virtual world that allow customers to freely explore
                 and interact with not just the NPC but also other
@@ -85,9 +83,9 @@ export default {
   }
 }
 .info-card {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 .v-card {
   width: 400px;
