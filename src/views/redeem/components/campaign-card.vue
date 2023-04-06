@@ -210,7 +210,7 @@ export default {
     showDetail() {
       this.voucherStore.drawerDetail = true;
       this.voucherStore.setDetailStoreCard(this.campaign);
-      this.voucherStore.voucherId = this.id;
+      this.voucherStore.voucherId = this.campaign.id;
     },
     buyClicked() {
       // if (
@@ -227,7 +227,7 @@ export default {
       // } else {
       //   this.voucherStore.checkPurchased(`You dont have enough Token To buy`);
       // }
-
+      this.voucherStore.voucherId = this.campaign.id;
       this.$dialog.confirm({
         title: "Confirm Purchase Voucher",
         topContent:
@@ -237,7 +237,7 @@ export default {
         done: async () => {
           try {
             this.$loading.show();
-            this.voucherStore.voucherId = this.voucherStore.detailCard.id;
+            // this.voucherStore.voucherId = this.voucherStore.detailCard.id;
             await this.voucherStore.purchaseVoucher();
             await this.inventoryStore.fetchUserVoucher();
             await this.userStore.fetchUserMetadata();

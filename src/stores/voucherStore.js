@@ -19,6 +19,7 @@ export const voucherStore = defineStore("voucher", () => {
 
   const pageIndex = ref(1);
   const index = ref(1);
+  
   const voucherPage = ref(1);
   const vouchersPerPage = ref(4);
 
