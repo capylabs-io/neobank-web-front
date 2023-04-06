@@ -6,11 +6,11 @@
     hide-overlay
     temporary
     width="480px"
-    class="drawer"
+    class="drawer pb-6"
     app
   >
     <div
-      class="pa-6 drawer-container white-bg overflow-hidden full-height d-flex flex-column justify-space-between"
+      class="pa-6 drawer-container white-bg full-height d-flex flex-column justify-space-between"
     >
       <div>
         <div class="d-flex flex-column">
@@ -18,97 +18,99 @@
             <v-img
               class="drawer-image"
               :src="voucherStore.detailCard.thumbnailUrl"
-            ></v-img>
-          </div>
-          <div
-            v-if="voucherStore.detailCard.status == 'newDeal'"
-            class="mt-3 pa-1 px-3 white--text status"
-            :style="{
-              background: '#1890FF',
-              width: 'max-content',
-              height: 'max-content',
-              position: 'absolute',
-              'border-bottom-right-radius': '8px',
-              'border-top-right-radius': '8px',
-              'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
-            }"
-          >
-            New Deal
-          </div>
-          <div
-            v-else-if="voucherStore.detailCard.status == 'hot'"
-            class="mt-3 pa-1 px-3 white--text status"
-            :style="{
-              background: '#EC1D1D',
-              width: 'max-content',
-              height: 'max-content',
-              position: 'absolute',
-              'border-bottom-right-radius': '8px',
-              'border-top-right-radius': '8px',
-              'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
-            }"
-          >
-            Hot
-          </div>
-          <div
-            v-else-if="
-              voucherStore.detailCard.purchasedQuantity ==
-              voucherStore.detailCard.totalQuantity
-            "
-            class="mt-3 pa-1 px-3 white--text status"
-            :style="{
-              background: '#FDDF59',
-              width: 'max-content',
-              height: 'max-content',
-              position: 'absolute',
-              'border-bottom-right-radius': '8px',
-              'border-top-right-radius': '8px',
-              'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
-            }"
-          >
-            Out of stock
-          </div>
-          <div
-            v-else-if="voucherStore.detailCard.status == 'active'"
-            class="mt-3 pa-1 px-3 white--text status"
-            :style="{
-              background: '#53B06C',
-              width: 'max-content',
-              height: 'max-content',
-              position: 'absolute',
-              'border-bottom-right-radius': '8px',
-              'border-top-right-radius': '8px',
-              'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
-            }"
-          >
-            Active
-          </div>
-          <div
-            v-else
-            class="mt-3 pa-1 px-3 white--text status"
-            :style="{
-              background: '#A9A9A9',
-              width: 'max-content',
-              height: 'max-content',
-              position: 'absolute',
-              'border-bottom-right-radius': '8px',
-              'border-top-right-radius': '8px',
-              'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
-            }"
-          >
-            Expired
+            >
+              <div
+                v-if="voucherStore.detailCard.status == 'newDeal'"
+                class="mt-3 pa-1 px-3 white--text status"
+                :style="{
+                  background: '#1890FF',
+                  width: 'max-content',
+                  height: 'max-content',
+                  position: 'absolute',
+                  'border-bottom-right-radius': '8px',
+                  'border-top-right-radius': '8px',
+                  'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+                }"
+              >
+                New Deal
+              </div>
+              <div
+                v-else-if="voucherStore.detailCard.status == 'hot'"
+                class="mt-3 pa-1 px-3 white--text status"
+                :style="{
+                  background: '#EC1D1D',
+                  width: 'max-content',
+                  height: 'max-content',
+                  position: 'absolute',
+                  'border-bottom-right-radius': '8px',
+                  'border-top-right-radius': '8px',
+                  'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+                }"
+              >
+                Hot
+              </div>
+              <div
+                v-else-if="
+                  voucherStore.detailCard.purchasedQuantity ==
+                  voucherStore.detailCard.totalQuantity
+                "
+                class="mt-3 pa-1 px-3 white--text status"
+                :style="{
+                  background: '#FDDF59',
+                  width: 'max-content',
+                  height: 'max-content',
+                  position: 'absolute',
+                  'border-bottom-right-radius': '8px',
+                  'border-top-right-radius': '8px',
+                  'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+                }"
+              >
+                Out of stock
+              </div>
+              <div
+                v-else-if="voucherStore.detailCard.status == 'active'"
+                class="mt-3 pa-1 px-3 white--text status"
+                :style="{
+                  background: '#53B06C',
+                  width: 'max-content',
+                  height: 'max-content',
+                  position: 'absolute',
+                  'border-bottom-right-radius': '8px',
+                  'border-top-right-radius': '8px',
+                  'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+                }"
+              >
+                Active
+              </div>
+              <div
+                v-else
+                class="mt-3 pa-1 px-3 white--text status"
+                :style="{
+                  background: '#A9A9A9',
+                  width: 'max-content',
+                  height: 'max-content',
+                  position: 'absolute',
+                  'border-bottom-right-radius': '8px',
+                  'border-top-right-radius': '8px',
+                  'box-shadow': '0px 1px 2px rgba(0, 0, 0, 0.4)',
+                }"
+              >
+                Expired
+              </div>
+            </v-img>
           </div>
         </div>
         <div class="mt-6 font-weight-bold text-center">
           <v-img class="drawer-icon mx-auto" :src="categoryIcon" />
           <div class="text-lg mt-3">{{ voucherStore.detailCard.title }}</div>
         </div>
-        <div class="mt-3 text-left">
-          {{ voucherStore.detailCard.fullDescription }}
-        </div>
+        <div
+          class="mt-3 text-left drawer-content flex-grow-1"
+          v-html="voucherStore.detailCard.fullDescription"
+        ></div>
       </div>
       <!-- <v-spacer></v-spacer> -->
-      <div class="text-center">
+      <!-- <div class="text-center">
         <v-btn
           class="text-none text-btn px-12"
           color="primary"
@@ -119,7 +121,7 @@
         >
           Buy Now
         </v-btn>
-      </div>
+      </div> -->
     </div>
   </v-navigation-drawer>
 </template>
@@ -201,6 +203,10 @@ export default {
   z-index: 1;
   border: 1px var(--v-neutral30-base) solid;
 }
+.drawer-content {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 .status {
   z-index: 99;
 }
@@ -230,7 +236,7 @@ export default {
 .drawer {
   z-index: 99;
 }
-.drawer-container{
+.drawer-container {
   padding-top: 80px !important;
 }
 .amount-container {

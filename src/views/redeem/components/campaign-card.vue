@@ -2,128 +2,139 @@
 <template>
   <v-hover v-slot="{ isHovering, props }">
     <v-card
-      class="campaign-card pa-3 border-radius-16 cursor-pointer"
+      class="campaign-card pa-3 border-radius-16 cursor-pointer full-height d-flex flex-column"
       :class="{ 'campaign-card-hover': isHovering }"
+      @click="showDetail"
       elevation="0"
       v-bind="props"
     >
       <div>
-        <v-img
-          class="campaign-card-img border-radius-8 elevation-1"
-          :src="campaign.thumbnailUrl"
-          cover
-        >
-          <div
-            class="card-status white--text font-weight-bold text-capitalize elevation-2 px-2"
-            :style="'background:' + getStatusColor"
+        <div>
+          <v-img
+            class="campaign-card-img border-radius-8 elevation-1"
+            :src="campaign.thumbnailUrl"
+            cover
           >
-            {{ getStatusTitle }}
-          </div>
-        </v-img>
-      </div>
-      <div class="mt-3">
-        <div class="textlg text-center text-capitalize font-weight-bold">
-          {{ campaign.title }}
+            <div
+              class="card-status white--text font-weight-bold text-capitalize elevation-2 px-2"
+              :style="'background:' + getStatusColor"
+            >
+              {{ getStatusTitle }}
+            </div>
+          </v-img>
         </div>
-      </div>
-      <div class="mt-2">
-        <div class="d-flex align-center">
-          <div class="text-sm neutral70--text">Quantity</div>
-          <v-spacer></v-spacer>
-          <div class="text-md font-weight-bold">
-            {{ campaign.purchasedQuantity || 0 }}/{{
-              campaign.totalQuantity || 0
-            }}
+        <div class="card-title mt-3 d-flex flex-column justify-center">
+          <div class="textlg text-center text-capitalize font-weight-bold">
+            {{ campaign.title }}
           </div>
         </div>
-        <v-progress-linear
-          class="mt-1"
-          color="primary40"
-          background-color="neutral30"
-          height="8"
-          :value="progress"
-          rounded
-        ></v-progress-linear>
       </div>
 
-      <v-row class="mt-1">
-        <v-col cols="12" md="6" xs="12">
+      <div class="flex-grow-1 mt-2">
+        <div>
           <div class="d-flex align-center">
-            <v-icon small> mdi-account-outline</v-icon>
-            <span class="neutral70--text text-sm ml-1">Publisher</span>
-          </div>
-          <div class="text-sm font-weight-bold">
-            {{ getPublisher }}
-          </div>
-        </v-col>
-        <v-col cols="12" md="6" xs="12">
-          <div class="d-flex align-center">
-            <span class="neutral70--text text-sm ml-1">Category</span>
-          </div>
-          <div class="d-flex align-center">
-            <v-img
-              max-width="16"
-              max-height="16"
-              :src="getCategoryIcon"
-              cover
-            ></v-img>
-            <div class="text-sm font-weight-bold ml-1">
-              {{ getCategoryName }}
+            <div class="text-sm neutral70--text">Quantity</div>
+            <v-spacer></v-spacer>
+            <div class="text-md font-weight-bold">
+              {{ campaign.purchasedQuantity || 0 }}/{{
+                campaign.totalQuantity || 0
+              }}
             </div>
           </div>
-        </v-col>
-      </v-row>
-      <v-row class="mt-0">
-        <v-col cols="12" md="6" xs="12">
-          <div class="d-flex align-center">
-            <v-icon small> mdi-calendar-outline</v-icon>
-            <span class="neutral70--text text-sm ml-1">Start date</span>
-          </div>
-          <div class="text-sm font-weight-bold">
-            {{ campaign.startDate | ddmmyyyy }}
-          </div>
-        </v-col>
-        <v-col cols="12" md="6" xs="12">
-          <div class="d-flex align-center">
-            <v-icon small> mdi-calendar-outline</v-icon>
-            <span class="neutral70--text text-sm ml-1">End date</span>
-          </div>
-          <div class="text-sm font-weight-bold">
-            {{ campaign.endDate | ddmmyyyy }}
-          </div>
-        </v-col>
-      </v-row>
-      <v-btn
-        class="d-flex align-center mt-6 justify-center mx-auto border-radius-6"
-        color="primary"
-        :disabled="
-          campaign.status == 'expired' ||
-          campaign.purchasedQuantity == campaign.totalQuantity
-        "
-        @click="buyClicked"
-        v-if="!isPurchased"
-        depressed
-      >
-        <v-img
-          class="token-icon"
-          max-height="15px"
-          max-width="15px"
-          :src="require(`@/assets/redeem/coin.webp`)"
-          contain
-        />
-        <div class="text-capitalize font-weight-bold text-md text-center ml-1">
-          {{ campaign.price || 0 }}
+          <v-progress-linear
+            class="mt-1"
+            color="primary40"
+            background-color="neutral30"
+            height="8"
+            :value="progress"
+            rounded
+          ></v-progress-linear>
         </div>
-      </v-btn>
-      <div class="text-center mt-6" v-else>
+        <v-row class="mt-1">
+          <v-col cols="12" md="6" xs="12">
+            <div class="d-flex align-center">
+              <v-icon small> mdi-account-outline</v-icon>
+              <span class="neutral70--text text-sm ml-1">Publisher</span>
+            </div>
+            <div class="text-sm font-weight-bold">
+              {{ getPublisher }}
+            </div>
+          </v-col>
+          <v-col cols="12" md="6" xs="12">
+            <div class="d-flex align-center">
+              <span class="neutral70--text text-sm ml-1">Category</span>
+            </div>
+            <div class="d-flex align-center">
+              <v-img
+                max-width="16"
+                max-height="16"
+                :src="getCategoryIcon"
+                cover
+              ></v-img>
+              <div class="text-sm font-weight-bold ml-1">
+                {{ getCategoryName }}
+              </div>
+            </div>
+          </v-col>
+        </v-row>
+        <v-row class="mt-0">
+          <v-col cols="12" md="6" xs="12">
+            <div class="d-flex align-center">
+              <v-icon small> mdi-calendar-outline</v-icon>
+              <span class="neutral70--text text-sm ml-1">Start date</span>
+            </div>
+            <div class="text-sm font-weight-bold">
+              {{ campaign.startDate | ddmmyyyy }}
+            </div>
+          </v-col>
+          <v-col cols="12" md="6" xs="12">
+            <div class="d-flex align-center">
+              <v-icon small> mdi-calendar-outline</v-icon>
+              <span class="neutral70--text text-sm ml-1">End date</span>
+            </div>
+            <div class="text-sm font-weight-bold">
+              {{ campaign.endDate | ddmmyyyy }}
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+
+      <div>
         <v-btn
-          class="text-none text-btn success--text border-radius-8"
-          color="green10"
+          class="d-flex align-center mt-6 justify-center mx-auto border-radius-6"
+          color="primary"
+          :disabled="
+            campaign.status == 'expired' ||
+            campaign.purchasedQuantity == campaign.totalQuantity ||
+            !canPurchase
+          "
+          @click.stop="buyClicked"
+          v-if="!isPurchased"
           depressed
         >
-          <v-icon class="mr-1" color="success">mdi-check</v-icon>
-          Purchased
+          <v-img
+            class="token-icon"
+            max-height="15px"
+            max-width="15px"
+            :src="require(`@/assets/redeem/coin.webp`)"
+            contain
+          />
+          <div
+            class="text-capitalize font-weight-bold text-md text-center ml-1"
+          >
+            {{ campaign.price || 0 }}
+          </div>
         </v-btn>
+        <div class="text-center mt-6" v-else>
+          <v-btn
+            class="text-none text-btn success--text border-radius-8"
+            color="green10"
+            depressed
+          >
+            <v-icon class="mr-1" color="success">mdi-check</v-icon>
+            Purchased
+          </v-btn>
+        </div>
       </div>
     </v-card>
   </v-hover>
@@ -135,6 +146,7 @@ import { get } from "lodash";
 import moment from "moment";
 import { userStore } from "@/stores/userStore";
 import { voucherStore } from "@/stores/voucherStore";
+import { inventoryStore } from "@/stores/inventoryStore";
 import { mapStores } from "pinia";
 
 export default {
@@ -151,6 +163,16 @@ export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(voucherStore),
+    ...mapStores(inventoryStore),
+    canPurchase() {
+      const currentPrice = get(this.campaign, "price", 0);
+      const currentToken = get(
+        this.userStore,
+        "userData.userMetadata.token",
+        0
+      );
+      return currentToken >= currentPrice;
+    },
     progress() {
       if (
         !this.campaign ||
@@ -185,21 +207,50 @@ export default {
     },
   },
   methods: {
+    showDetail() {
+      this.voucherStore.drawerDetail = true;
+      this.voucherStore.setDetailStoreCard(this.campaign);
+      this.voucherStore.voucherId = this.id;
+    },
     buyClicked() {
-      if (
-        this.userStore.userData.userMetadata.token >= this.campaign.price &&
-        this.campaign.purchasedQuantity == this.campaign.totalQuantity
-      ) {
-        this.voucherStore.checkPurchased(`Campaign Out of Stock`);
-      } else if (
-        this.userStore.userData.userMetadata.token >= this.campaign.price
-      ) {
-        this.voucherStore.drawerDetail = true;
-        this.voucherStore.setDetailStoreCard(this.campaign);
-        this.voucherStore.voucherId = this.id;
-      } else {
-        this.voucherStore.checkPurchased(`You dont have enough Token To buy`);
-      }
+      // if (
+      //   this.userStore.userData.userMetadata.token >= this.campaign.price &&
+      //   this.campaign.purchasedQuantity == this.campaign.totalQuantity
+      // ) {
+      //   this.voucherStore.checkPurchased(`Campaign Out of Stock`);
+      // } else if (
+      //   this.userStore.userData.userMetadata.token >= this.campaign.price
+      // ) {
+      //   this.voucherStore.drawerDetail = true;
+      //   this.voucherStore.setDetailStoreCard(this.campaign);
+      //   this.voucherStore.voucherId = this.id;
+      // } else {
+      //   this.voucherStore.checkPurchased(`You dont have enough Token To buy`);
+      // }
+
+      this.$dialog.confirm({
+        title: "Confirm Purchase Voucher",
+        topContent:
+          "Are you sure you want to purchase this voucher? This action cannot be undone!",
+        okText: "Confirm",
+        cancelText: "Cancel",
+        done: async () => {
+          try {
+            this.$loading.show();
+            this.voucherStore.voucherId = this.voucherStore.detailCard.id;
+            await this.voucherStore.purchaseVoucher();
+            await this.inventoryStore.fetchUserVoucher();
+            await this.userStore.fetchUserMetadata();
+            await this.voucherStore.fetchVoucher();
+            this.voucherStore.drawerDetail = false;
+            window.location.reload();
+          } catch (error) {
+            this.$alert.error("Error occured! Error: " + error);
+          } finally {
+            this.$loading.hide();
+          }
+        },
+      });
     },
   },
   data() {
@@ -209,6 +260,9 @@ export default {
 </script>
 
 <style scoped>
+.card-title {
+  min-height: 48px !important;
+}
 .campaign-card {
   border: 1px solid var(--v-neutral30-base);
 }

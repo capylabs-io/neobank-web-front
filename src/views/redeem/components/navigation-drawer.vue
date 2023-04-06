@@ -36,16 +36,9 @@
           <span>{{ userStore.userData.email }}</span>
         </div>
         <div
-          v-if="
-            userStore.userData &&
-            userStore.userData.userMetadata &&
-            userStore.userData.userMetadata.token >= 0
-          "
           class="d-flex left-profile-section align-center font-weight-bold mx-auto mt-2"
         >
-          <span class="text-dp-xs">{{
-            userStore.userData.userMetadata.token
-          }}</span>
+          <span class="text-dp-xs">{{ userToken }}</span>
           <div class="ml-2">
             <v-img
               :style="{ 'border-radius': '40px' }"
@@ -124,9 +117,13 @@
   <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
+import { get } from "lodash";
 export default {
   computed: {
     ...mapStores(userStore),
+    userToken() {
+      return get(this.userStore, "userData.userMetadata.token", 0);
+    },
   },
   methods: {
     onLogoutClicked() {
