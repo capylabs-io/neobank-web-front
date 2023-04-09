@@ -19,14 +19,12 @@
           <v-icon large color="white">mdi-rocket-launch</v-icon>
         </div>
         <div class="white--text text-dp-sm text-center font-weight-700">
-          What is VParadise?
+          Who is using VParadise?
         </div>
         <div class="text-left text-md white--text font-weight-400">
-          Simply put, VParadise is a bank. We are a community bank that does
-          many of the things other banks do. Like – lend money, manage your
-          deposits, offer online banking, and provide other financial services.
-          However, there are differences. We are rooted in community, bold
-          enough to try new things, and truly care about people.
+          VParadise was created to serve 3 mains users including: Customers,
+          Bank and their Partners. Each users will have different ways to
+          interact with the system and gain benefits from it
         </div>
         <div class="d-flex btn-group">
           <v-btn icon class="mr-3 arrow-btn" color="white"

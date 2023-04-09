@@ -8,6 +8,33 @@
       }"
     />
 
+    <div
+      v-if="windowWidth > 1280 || homeStore.scrollY < 1070"
+      class="introduction-content d-flex flex-column justify-center align-center row-gap-30 full-width"
+    >
+      <div
+        class="text-center white--text text-dp-xxl font-weight-700"
+        :style="{ width: '500px' }"
+      >
+        Welcome to VParadise
+      </div>
+      <div
+        class="text-center white--text text-dp-xs"
+        :style="{ width: '700px' }"
+      >
+        Journey into the future of banking with VParadise, a harmony between
+        technologies and banking
+      </div>
+      <v-btn
+        color="lightblue"
+        class="white--text pa-5"
+        href="https://neobank-game.capylabs.io/"
+      >
+        <div class="text-decoration-none text-sm">Discover now</div>
+        <v-icon color="white"> mdi-arrow-right-thin </v-icon>
+      </v-btn>
+    </div>
+    
     <introduction />
     <v-img class="redblur-image" :src="require(`@/assets/red-blur.webp`)">
     </v-img>
@@ -68,6 +95,7 @@ export default {
     handleScroll() {
       const doorway = document.querySelector(".doorway");
       const introduction = document.querySelector(".introduction");
+      const content = document.querySelector(".introduction-content");
       const container = document.querySelector(".container");
       const scrollY = window.scrollY;
       this.scrollValue = scrollY;
@@ -76,17 +104,23 @@ export default {
 
       if (this.homeStore.scrollY >= 1105) {
         introduction.style.position = "relative";
+        content.style.position = "absolute";
+        content.style.zIndex = "0";
         doorway.style.zIndex = "1";
         doorway.style.display = "none";
         container.style.opacity = "1";
         introduction.style.animation = " zoom-in-zoom-out 0.7s ease-out";
+        content.style.animation = " zoom-in-zoom-out 0.7s ease-out";
         container.style.animation = " zoom-out-zoom-in 2s ease-out";
       } else {
         introduction.style.position = "fixed";
+        content.style.position = "fixed";
+        content.style.zIndex = "4";
         doorway.style.display = "block";
         container.style.opacity = "0.1";
         container.style.animation = " zoom-in-zoom-out 0.1s ease-out";
         introduction.style.animation = " zoom-out-zoom-in 2s ease-out";
+        content.style.animation = " zoom-out-zoom-in 2s ease-out";
         doorway.style.zIndex = "4";
       }
       doorway.style.backgroundSize = 100 + scrollY / 7 + "%";
@@ -111,6 +145,11 @@ export default {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+.introduction-content {
+  position: fixed;
+  height: 100vh;
+  z-index: 4;
 }
 .container {
   @media (min-width: 1920px) {
@@ -197,5 +236,8 @@ export default {
   transform: matrix(-1, 0, 0, 1, 0, 0);
   top: 30%;
   right: -5%;
+}
+.row-gap-30 {
+  row-gap: 30px;
 }
 </style>

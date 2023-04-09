@@ -3,7 +3,7 @@
     class="d-flex flex-column firstSection mx-auto justify-center align-center"
   >
     <div class="white--text text-dp-lg text-center font-weight-700">
-      What is VParadise?
+      VParadise Features
     </div>
     <div class="neutral40--text text-xl text-center font-weight-400">
       Say hello to a new metaverse wolrd.

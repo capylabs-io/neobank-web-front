@@ -11,29 +11,6 @@
     data-aos-duration="11000"
     data-aos-easing="ease-in-out"
   >
-    <div
-      class="introduction-content d-flex flex-column justify-center align-center row-gap-30"
-      :style="{ width: '70%' }"
-      data-aos-delay="200"
-      data-aos-duration="11000"
-      data-aos-easing="ease-in-out"
-      data-aos="zoom-in"
-    >
-      <div
-        class="text-center white--text text-dp-xxl font-weight-700"
-        :style="{ width: '50%' }"
-      >
-        Welcome to VParadise
-      </div>
-      <div class="text-center white--text text-dp-xs" :style="{ width: '60%' }">
-        Journey into the future of banking with VParadise, a harmony between
-        technologies and banking
-      </div>
-      <v-btn color="lightblue" class="white--text pa-5">
-        <div class="text-decoration-none text-sm">Discover now</div>
-        <v-icon color="white"> mdi-arrow-right-thin </v-icon>
-      </v-btn>
-    </div>
   </div>
 </template>
 
@@ -86,12 +63,7 @@ export default {
   bottom: 0;
   right: 0;
 }
-/*
-.introduction-content {
-  position: fixed;
-  top: 45%;
-  left: 15%;
-}*/
+
 .content {
   position: relative;
   display: flex;
@@ -121,8 +93,6 @@ export default {
   height: 48px;
   border-radius: 40px;
 }
-.row-gap-30 {
-  row-gap: 30px;
-}
+
 </style>
 >
