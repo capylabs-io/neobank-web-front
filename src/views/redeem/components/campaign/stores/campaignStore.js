@@ -2,205 +2,139 @@ import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { Auth, Voucher } from "@/plugins/api.js";
 import { userStore } from "@/stores/userStore";
+import loading from "@/plugins/loading";
+import alert from "@/plugins/alert";
 import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
-import { snackBarController } from "@/components/snack-bar/snack-bar-controller.js";
-import { loadingController } from "@/components/global-loading/global-loading-controller.js";
-export const campaignStore = defineStore("campaign", () => {
-  const user = userStore();
-  const inventory = inventoryStore();
-  const loading = loadingController(); //store
-  const snackbar = snackBarController(); //store
-  const drawer = ref(false);
-  const drawerDetail = ref(false);
-  const cfDialog = ref(false);
-  const profileEdit = ref(false);
-  const bankAccountEdit = ref(false);
-  const changePassword = ref(false);
+export const campaignStore = defineStore("campaign", {
+  state: () => ({
+    drawer: false,
+    drawerDetail: false,
+    cfDialog: false,
+    profileEdit: false,
+    bankAccountEdit: false,
+    changePassword: false,
 
-  const pageIndex = ref(1);
-  const index = ref(1);
+    pageIndex: 1,
+    index: 1,
 
-  const voucherPage = ref(1);
-  const vouchersPerPage = ref(4);
+    voucherPage: 1,
+    vouchersPerPage: 4,
 
-  const sortBy = ref("");
-  const voucherId = ref("");
+    sortBy: "",
+    voucherId: "",
 
-  const bearerToken = ref({});
-  const voucherData = ref([]);
-  const detailCard = ref({});
+    bearerToken: {},
+    detailCard: {},
 
-  const voucherDataId = ref([]);
-  const voucherPurchased = ref([]);
-
-  async function fetchVoucher() {
-    try {
-      loading.increaseRequest();
-      const res = await Voucher.fetchVouchers(this.bearerToken.jwt);
-      if (!res) {
-        snackbar.error(`Error occurred! Please try again later!`);
-        return;
+    voucherData: [],
+    voucherDataId: [],
+    voucherPurchased: [],
+  }),
+  getters: {
+    slicedVoucherStore() {
+      if (!this.voucherData || this.voucherData.length == 0) return [];
+      return this.sortedCampaigns.slice(
+        (this.voucherPage - 1) * this.vouchersPerPage,
+        this.voucherPage * this.vouchersPerPage
+      );
+    },
+    sortedCampaigns() {
+      if (!this.voucherData || this.voucherData.length == 0) return [];
+      let sortedCampaigns = this.voucherData;
+      if (!this.sortBy) return sortedCampaigns;
+      switch (this.sortBy) {
+        default:
+        case "desc":
+          sortedCampaigns.sort((a, b) => a.title.localeCompare(b.title));
+          break;
+        case "desc":
+          sortedCampaigns.sort((a, b) => b.title.localeCompare(a.title));
+          break;
+        case "priceUp":
+          sortedCampaigns
+            .filter((voucher) => voucher.price)
+            .sort((a, b) => a.price - b.price);
+          break;
+        case "priceDown":
+          sortedCampaigns
+            .filter((voucher) => voucher.price)
+            .sort((a, b) => b.price - a.price);
+          break;
       }
-      this.voucherData = res.data;
-      this.voucherDataId = this.voucherData.map((index) => index.id);
-      console.log("storeVoucher", voucherData);
-      console.log("storeVoucherid", voucherDataId);
-    } catch (error) {
-      console.error(`Error: ${error}`);
-      snackbar.commonError(error);
-    } finally {
-      loading.decreaseRequest();
-    }
-  }
-  async function purchaseVoucher() {
-    try {
-      loading.increaseRequest();
-      const res = await Voucher.purchaseVouchers(
-        this.voucherId,
-        this.bearerToken.jwt
-      );
-      if (!res) {
-        snackbar.error(`Error occurred! Please try again later!`);
-        return;
+      return sortedCampaigns;
+    },
+    totalVoucherPage() {
+      if (!this.voucherData || this.sortedCampaigns.length == 0) return 1;
+      if (this.sortedCampaigns.length % this.vouchersPerPage == 0)
+        return this.sortedCampaigns.length / this.vouchersPerPage;
+      else
+        return (
+          Math.floor(this.sortedCampaigns.length / this.vouchersPerPage) + 1
+        );
+    },
+  },
+  actions: {
+    async fetchVoucher() {
+      try {
+        loading.show();
+        const res = await Voucher.fetchVouchers(this.bearerToken.jwt);
+        if (!res) {
+          alert.error(`Error occurred! Please try again later!`);
+          return;
+        }
+        this.voucherData = res.data;
+        this.voucherDataId = this.voucherData.map((index) => index.id);
+        console.log("storeVoucher", this.voucherData);
+        console.log("storeVoucherid", this.voucherDataId);
+      } catch (error) {
+        console.error(`Error: ${error}`);
+        alert.error(error);
+      } finally {
+        loading.hide();
       }
-      console.log("purchase", res.data);
-      snackbar.success("Voucher Purchased successfully!");
-    } catch (error) {
-      console.error(`Error: ${error}`);
-      snackbar.commonError(error);
-    } finally {
-      loading.decreaseRequest();
-    }
-  }
+    },
+    async purchaseVoucher() {
+      try {
+        loading.show();
+        const res = await Voucher.purchaseVouchers(
+          this.voucherId,
+          this.bearerToken.jwt
+        );
+        if (!res) {
+          alert.error(`Error occurred! Please try again later!`);
+          return;
+        }
+        console.log("purchase", res.data);
+        alert.success("Voucher Purchased successfully!");
+      } catch (error) {
+        console.error(`Error: ${error}`);
+        alert.error(error);
+      } finally {
+        loading.hide();
+      }
+    },
 
-  function changeVoucherFilter(sortBy) {
-    this.sortBy = sortBy;
-    console.log("sortBy", this.sortBy);
-    console.log("sortedCampaign", this.sortedCampaign);
-  }
-  function setDetailStoreCard(cards) {
-    this.detailCard = cards;
-  }
-  function checkPurchased(message) {
-    return snackbar.error(message);
-  }
+    changeVoucherFilter(sortBy) {
+      this.sortBy = sortBy;
+      console.log("sortBy", this.sortBy);
+      console.log("sortedCampaign", this.sortedCampaign);
+    },
+    setDetailStoreCard(cards) {
+      this.detailCard = cards;
+    },
+    checkPurchased(message) {
+      return alert.error(message);
+    },
 
-  function checkIncludes() {
-    if (this.voucherDataId && inventory.userVoucherId) {
-      this.voucherPurchased = this.voucherDataId.filter((data) =>
-        inventory.userVoucherId.includes(data)
-      );
-    }
-    console.log("Purchased voucher", voucherPurchased);
-  }
-  const slicedVoucherStore = computed(() => {
-    if (!filterVoucherStore.value) return [];
-    return filterVoucherStore.value.slice(
-      (voucherPage.value - 1) * vouchersPerPage.value,
-      voucherPage.value * vouchersPerPage.value
-    );
-  });
-
-  const totalVoucherPage = computed(() => {
-    if (!filterVoucherStore.value || filterVoucherStore.value.length == 0)
-      return 1;
-    if (filterVoucherStore.value.length % vouchersPerPage.value == 0)
-      return filterVoucherStore.value.length / vouchersPerPage.value;
-    else
-      return (
-        Math.floor(filterVoucherStore.value.length / vouchersPerPage.value) + 1
-      );
-  });
-
-  function sortedCampaign() {
-    if (!this.voucherData || this.voucherData.length == 0) return [];
-    let sortedCampaigns = this.voucherData;
-    if (!this.sortBy) return sortedCampaigns;
-    switch (this.sortBy) {
-      default:
-      case "asc":
-        sortedCampaigns
-          .filter((voucher) => voucher.title)
-          .sort((a, b) => a.title.localeCompare(b.title));
-        break;
-      case "desc":
-        sortedCampaigns
-          .filter((voucher) => voucher.title)
-          .sort((a, b) => b.title.localeCompare(a.title));
-        break;
-      case "priceUp":
-        sortedCampaigns
-          .filter((voucher) => voucher.price)
-          .sort((a, b) => a.price - b.price);
-        break;
-      case "priceDown":
-        sortedCampaigns
-          .filter((voucher) => voucher.price)
-          .sort((a, b) => b.price - a.price);
-        break;
-    }
-    return sortedCampaigns;
-  }
-
-  const filterVoucherStore = computed(() => {
-    let filterVoucherStore = [];
-    if ((sortBy.value = "asc")) {
-      filterVoucherStore = voucherData.value
-        .filter((voucher) => voucher.title)
-        .sort((a, b) => a.title.localeCompare(b.title));
-    } else if ((sortBy.value = "desc")) {
-      filterVoucherStore = voucherData.value
-        .filter((voucher) => voucher.title)
-        .sort((a, b) => b.title.localeCompare(a.title));
-    } else if ((sortBy.value = "priceUp")) {
-      filterVoucherStore = voucherData.value.voucherData
-        .filter((voucher) => voucher.price)
-        .sort((a, b) => a.price - b.price);
-    } else if ((sortBy.value = "priceDown")) {
-      filterVoucherStore = voucherData.value
-        .filter((voucher) => voucher.price)
-        .sort((a, b) => b.price - a.price);
-    } else {
-      filterVoucherStore = voucherData.value.voucherData.value
-        .filter((voucher) => voucher.id)
-        .sort((a, b) => b.id - a.id);
-    }
-    return filterVoucherStore;
-  });
-
-  return {
-    //computed
-    slicedVoucherStore,
-    filterVoucherStore,
-    totalVoucherPage,
-
-    //states
-    drawer,
-    index,
-    drawerDetail,
-    detailCard,
-    pageIndex,
-    bearerToken,
-    voucherData,
-    cfDialog,
-    voucherId,
-    scrollY,
-    voucherDataId,
-    voucherPurchased,
-    voucherPage,
-    vouchersPerPage,
-    sortBy,
-    changePassword,
-    profileEdit,
-    bankAccountEdit,
-    //action
-    fetchVoucher,
-    checkPurchased,
-    purchaseVoucher,
-    checkIncludes,
-    setDetailStoreCard,
-    changeVoucherFilter,
-    sortedCampaign,
-  };
+    checkIncludes() {
+      const inventory = inventoryStore();
+      if (this.voucherDataId && inventory.userVoucherId) {
+        this.voucherPurchased = this.voucherDataId.filter((data) =>
+          inventory.userVoucherId.includes(data)
+        );
+      }
+      console.log("Purchased voucher", this.voucherPurchased);
+    },
+  },
 });
 /* eslint-enable */

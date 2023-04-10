@@ -34,7 +34,7 @@
             cols="12"
             md="3"
             v-for="card in campaignStore.slicedVoucherStore"
-            :key="card.id"
+            :key="card.id"  
           >
             <CampaignCard
               :campaign="card"

@@ -1,53 +1,37 @@
 <template>
-  <v-dialog
-    v-model="dialog.state"
-    max-width="400px"
-  >
+  <v-dialog v-model="dialog.state" max-width="360px">
     <v-card class="pa-6">
-      <v-card-title class="pa-0 title--text card-title mb-6">
+      <v-card-title class="pa-0 title--text card-title mb-4">
         {{ dialog.title }}<v-spacer />
       </v-card-title>
       <v-card-text
-        class="card-content mx-auto pa-0"
+        class="card-content mx-auto pa-0 mb-5"
         style="max-width: 450px"
       >
         <div
           name="top-content"
           style="white-space: pre-line"
-          class="mb-4"
           v-html="dialog.topContent"
         />
-        <div
-          name="mid-content"
-          class="mb-4"
-          v-html="dialog.midContent"
-        />
-        <div
-          name="bottom-content"
-          class="mb-6"
-          v-html="dialog.botContent"
-        />
+        <div name="mid-content" class="mt-2" v-html="dialog.midContent" />
+        <div name="bottom-content" class="mt-2" v-html="dialog.botContent" />
       </v-card-text>
-      <v-card-actions class="justify-space-between pa-0">
+      <v-card-actions class="pa-0">
         <v-btn
           v-show="!dialog.hideCancel"
-          small
           color="primary"
           class="px-6 btn text-none"
-          large
           outlined
           dense
           @click="cancel"
         >
           {{ dialog.cancelText }}
         </v-btn>
-        <v-spacer />
+        <v-spacer></v-spacer>
         <v-btn
           v-show="!dialog.hideOk"
-          small
           color="primary"
-          class="px-6 btn text-none elevation-0"
-          large
+          class="px-6 btn text-none elevation-0 ml-4"
           dense
           @click="done"
         >

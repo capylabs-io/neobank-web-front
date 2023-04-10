@@ -33,9 +33,6 @@ export default {
         localStorage.getItem("user")
       );
       await this.userStore.fetchUserMetadata();
-      // await this.inventoryStore.fetchUserVoucher();
-      // await this.campaignStore.fetchVoucher();
-      // await this.campaignStore.checkIncludes();
     }
   },
 };

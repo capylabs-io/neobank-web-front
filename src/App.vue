@@ -1,38 +1,27 @@
 <template>
   <v-app>
-    <!-- <app-navbar v-if="campaignStore.pageIndex == 1" /> -->
     <NavBarLanding v-if="campaignStore.pageIndex == 1" />
     <page-navbar v-else-if="campaignStore.pageIndex == 2" />
     <div v-else />
     <v-main>
-      <Loading />
       <PluginLoading />
       <PluginSnackbar />
       <PluginConfirmDialog />
-      <SnackBar />
       <router-view :key="$route.fullPath" />
     </v-main>
-    <!-- <app-footer v-if="campaignStore.pageIndex == 1" /> -->
   </v-app>
 </template>
 <script>
-import FooterVue from "./components/Footer.vue";
 import NavBarLanding from "@/views/home/components/landing/landing-nav-bar.vue";
-import HomeNavigationBar from "./components/NavigationBar.vue";
 import PageNavigationBar from "./components/NavigationBarPage.vue";
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
 import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
 import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
-import SnackBar from "@/components/snack-bar/snack-bar.vue";
 export default {
   components: {
-    // "app-navbar": HomeNavigationBar,
     "page-navbar": PageNavigationBar,
-    // "app-footer": FooterVue,
     NavBarLanding: NavBarLanding,
-    Loading: () => import("@/components/global-loading/global-loading.vue"),
-    SnackBar,
     PluginLoading: () => import("@/components/plugin/PluginLoading.vue"),
     PluginSnackbar: () => import("@/components/plugin/PluginAlert.vue"),
     PluginConfirmDialog: () =>

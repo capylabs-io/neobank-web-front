@@ -1,22 +1,31 @@
 <template>
   <v-snackbar
     :value="alert.show"
-    :color="color"
     :timeout="timeout"
-    top
-    class="plugin__alert"
+    class="plugin__alert border-radius-16"
+    max-width="400px"
     @input="close"
+    top
+    light
   >
-    <v-icon class="mr-3 mt-n1">
-      {{ icon }}
-    </v-icon>
-    <span
-      class="text-h6"
-      v-html="alert.message"
-    />
-    <!-- <v-btn icon @click="close">
-      <v-icon>mdi-close</v-icon>
-    </v-btn> -->
+    <div class="d-flex align-center">
+      <div class="alert-icon">
+        <v-img :src="icon"></v-img>
+      </div>
+      <div class="ml-6 flex-grow-1">
+        <div class="font-weight-bold text-md">{{ alert.title }}</div>
+        <div
+          class="text-md neutral70--text"
+          v-html="alert.message"
+          v-if="alert.message"
+        ></div>
+      </div>
+      <div class="align-self-start">
+        <v-btn icon @click="close">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </div>
+    </div>
   </v-snackbar>
 </template>
 
@@ -29,11 +38,17 @@ export default {
   },
   computed: {
     icon() {
-      return {
-        error: "mdi-alert",
-        success: "mdi-checkbox-marked-circle",
-        warning: "mdi-alert",
-      }[this.alert.type];
+      switch (this.alert.type) {
+        case "error":
+          return require("@/assets/components/snackbar/Alert.png");
+        case "success":
+          return require("@/assets/components/snackbar/Success.png");
+        case "info":
+        default:
+          return require("@/assets/components/snackbar/Success.png");
+        case "warning":
+          return require("@/assets/components/snackbar/Warning.png");
+      }
     },
     color() {
       return {
@@ -64,5 +79,12 @@ export default {
   .v-snack__content {
     padding: 16px;
   }
+}
+</style>
+
+<style scoped>
+.alert-icon {
+  width: 40px;
+  height: 40px;
 }
 </style>
