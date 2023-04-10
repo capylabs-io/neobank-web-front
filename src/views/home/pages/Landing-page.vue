@@ -58,7 +58,7 @@ import secondsection from "../components/landing/landing-second-section.vue";
 import thirdSectionVue from "../components/landing/landing-third-section.vue";
 import { mapStores } from "pinia";
 import { homeStore } from "@/views/home/store/homeStore";
-import { voucherStore } from "../../../stores/voucherStore";
+import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
 
 export default {
   name: "HomeView",
@@ -70,7 +70,7 @@ export default {
     FooterLanding: FooterLanding,
   },
   computed: {
-    ...mapStores(voucherStore),
+    ...mapStores(campaignStore),
     ...mapStores(homeStore),
   },
   data() {
@@ -90,7 +90,7 @@ export default {
   },
   methods: {
     change() {
-      this.voucherStore.pageIndex = 1;
+      this.campaignStore.pageIndex = 1;
     },
     handleScroll() {
       const doorway = document.querySelector(".doorway");

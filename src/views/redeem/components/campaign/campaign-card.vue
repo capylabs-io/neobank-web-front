@@ -145,8 +145,8 @@ import CampaignHelper from "@/helpers/campaign-helper";
 import { get } from "lodash";
 import moment from "moment";
 import { userStore } from "@/stores/userStore";
-import { voucherStore } from "@/stores/voucherStore";
-import { inventoryStore } from "@/stores/inventoryStore";
+import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
+import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
 import { mapStores } from "pinia";
 
 export default {
@@ -162,7 +162,7 @@ export default {
   },
   computed: {
     ...mapStores(userStore),
-    ...mapStores(voucherStore),
+    ...mapStores(campaignStore),
     ...mapStores(inventoryStore),
     canPurchase() {
       const currentPrice = get(this.campaign, "price", 0);
@@ -208,26 +208,26 @@ export default {
   },
   methods: {
     showDetail() {
-      this.voucherStore.drawerDetail = true;
-      this.voucherStore.setDetailStoreCard(this.campaign);
-      this.voucherStore.voucherId = this.campaign.id;
+      this.campaignStore.drawerDetail = true;
+      this.campaignStore.setDetailStoreCard(this.campaign);
+      this.campaignStore.voucherId = this.campaign.id;
     },
     buyClicked() {
       // if (
       //   this.userStore.userData.userMetadata.token >= this.campaign.price &&
       //   this.campaign.purchasedQuantity == this.campaign.totalQuantity
       // ) {
-      //   this.voucherStore.checkPurchased(`Campaign Out of Stock`);
+      //   this.campaignStore.checkPurchased(`Campaign Out of Stock`);
       // } else if (
       //   this.userStore.userData.userMetadata.token >= this.campaign.price
       // ) {
-      //   this.voucherStore.drawerDetail = true;
-      //   this.voucherStore.setDetailStoreCard(this.campaign);
-      //   this.voucherStore.voucherId = this.id;
+      //   this.campaignStore.drawerDetail = true;
+      //   this.campaignStore.setDetailStoreCard(this.campaign);
+      //   this.campaignStore.voucherId = this.id;
       // } else {
-      //   this.voucherStore.checkPurchased(`You dont have enough Token To buy`);
+      //   this.campaignStore.checkPurchased(`You dont have enough Token To buy`);
       // }
-      this.voucherStore.voucherId = this.campaign.id;
+      this.campaignStore.voucherId = this.campaign.id;
       this.$dialog.confirm({
         title: "Confirm Purchase Voucher",
         topContent:
@@ -237,12 +237,12 @@ export default {
         done: async () => {
           try {
             this.$loading.show();
-            // this.voucherStore.voucherId = this.voucherStore.detailCard.id;
-            await this.voucherStore.purchaseVoucher();
+            // this.campaignStore.voucherId = this.campaignStore.detailCard.id;
+            await this.campaignStore.purchaseVoucher();
             await this.inventoryStore.fetchUserVoucher();
             await this.userStore.fetchUserMetadata();
-            await this.voucherStore.fetchVoucher();
-            this.voucherStore.drawerDetail = false;
+            await this.campaignStore.fetchVoucher();
+            this.campaignStore.drawerDetail = false;
             window.location.reload();
           } catch (error) {
             this.$alert.error("Error occured! Error: " + error);

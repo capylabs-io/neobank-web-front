@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-model="voucherStore.drawerDetail"
+    v-model="campaignStore.drawerDetail"
     fixed
     right
     hide-overlay
@@ -17,10 +17,10 @@
           <div class="neutral30-border border-radius-16 overflow-hidden">
             <v-img
               class="drawer-image"
-              :src="voucherStore.detailCard.thumbnailUrl"
+              :src="campaignStore.detailCard.thumbnailUrl"
             >
               <div
-                v-if="voucherStore.detailCard.status == 'newDeal'"
+                v-if="campaignStore.detailCard.status == 'newDeal'"
                 class="mt-3 pa-1 px-3 white--text status"
                 :style="{
                   background: '#1890FF',
@@ -35,7 +35,7 @@
                 New Deal
               </div>
               <div
-                v-else-if="voucherStore.detailCard.status == 'hot'"
+                v-else-if="campaignStore.detailCard.status == 'hot'"
                 class="mt-3 pa-1 px-3 white--text status"
                 :style="{
                   background: '#EC1D1D',
@@ -51,8 +51,8 @@
               </div>
               <div
                 v-else-if="
-                  voucherStore.detailCard.purchasedQuantity ==
-                  voucherStore.detailCard.totalQuantity
+                  campaignStore.detailCard.purchasedQuantity ==
+                  campaignStore.detailCard.totalQuantity
                 "
                 class="mt-3 pa-1 px-3 white--text status"
                 :style="{
@@ -68,7 +68,7 @@
                 Out of stock
               </div>
               <div
-                v-else-if="voucherStore.detailCard.status == 'active'"
+                v-else-if="campaignStore.detailCard.status == 'active'"
                 class="mt-3 pa-1 px-3 white--text status"
                 :style="{
                   background: '#53B06C',
@@ -102,11 +102,11 @@
         </div>
         <div class="mt-6 font-weight-bold text-center">
           <v-img class="drawer-icon mx-auto" :src="categoryIcon" />
-          <div class="text-lg mt-3">{{ voucherStore.detailCard.title }}</div>
+          <div class="text-lg mt-3">{{ campaignStore.detailCard.title }}</div>
         </div>
         <div
           class="mt-3 text-left drawer-content flex-grow-1"
-          v-html="voucherStore.detailCard.fullDescription"
+          v-html="campaignStore.detailCard.fullDescription"
         ></div>
       </div>
       <!-- <v-spacer></v-spacer> -->
@@ -129,17 +129,17 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { voucherStore } from "@/stores/voucherStore";
-import { inventoryStore } from "@/stores/inventoryStore";
+import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
+import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
 import { get } from "lodash";
 export default {
   computed: {
     ...mapStores(userStore),
-    ...mapStores(voucherStore),
+    ...mapStores(campaignStore),
     ...mapStores(inventoryStore),
     categoryIcon() {
       return get(
-        this.voucherStore,
+        this.campaignStore,
         "detailCard.campaignCategory.iconUrl",
         require("@/assets/views/category/category-icon-example.png")
       );
@@ -152,14 +152,14 @@ export default {
   },
   methods: {
     increase() {
-      var number = this.voucherStore.detailCard.attributes.quantity;
+      var number = this.campaignStore.detailCard.attributes.quantity;
       number++;
-      this.voucherStore.detailCard.attributes.quantity = number + "";
+      this.campaignStore.detailCard.attributes.quantity = number + "";
     },
     decrease() {
-      var number = this.voucherStore.detailCard.attributes.quantity;
+      var number = this.campaignStore.detailCard.attributes.quantity;
       number--;
-      this.voucherStore.detailCard.attributes.quantity = number + "";
+      this.campaignStore.detailCard.attributes.quantity = number + "";
     },
     buy() {
       this.$dialog.confirm({
@@ -171,12 +171,12 @@ export default {
         done: async () => {
           try {
             this.$loading.show();
-            this.voucherStore.voucherId = this.voucherStore.detailCard.id;
-            await this.voucherStore.purchaseVoucher();
+            this.campaignStore.voucherId = this.campaignStore.detailCard.id;
+            await this.campaignStore.purchaseVoucher();
             await this.inventoryStore.fetchUserVoucher();
             await this.userStore.fetchUserMetadata();
-            await this.voucherStore.fetchVoucher();
-            this.voucherStore.drawerDetail = false;
+            await this.campaignStore.fetchVoucher();
+            this.campaignStore.drawerDetail = false;
             window.location.reload();
           } catch (error) {
             this.$alert.error("Error occured! Error: " + error);

@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { Voucher } from "@/plugins/api.js";
-import { userStore } from "./userStore";
+import { userStore } from "@/stores/userStore";
 import { snackBarController } from "@/components/snack-bar/snack-bar-controller.js";
 import { loadingController } from "@/components/global-loading/global-loading-controller.js";
 export const inventoryStore = defineStore("inventory", () => {
@@ -9,7 +9,6 @@ export const inventoryStore = defineStore("inventory", () => {
   const loading = loadingController(); //store
   const snackbar = snackBarController(); //store
   const drawer = ref(false);
-
   const userVoucherPage = ref(1);
   const userVoucherPerPage = ref(10);
 

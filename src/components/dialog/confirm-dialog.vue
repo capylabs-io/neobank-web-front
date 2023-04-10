@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="voucherStore.cfDialog" width="420px">
+  <v-dialog v-model="campaignStore.cfDialog" width="420px">
     <v-card>
       <v-card-title>
         <span class="text-lg font-weight-bold">Confirm Purchase Voucher</span>
@@ -12,7 +12,7 @@
         <v-btn
           class="text-btn"
           color="gray"
-          @click="voucherStore.cfDialog = false"
+          @click="campaignStore.cfDialog = false"
           depressed
         >
           No
@@ -27,24 +27,24 @@
 
 <script>
 import { mapStores } from "pinia";
-import { voucherStore } from "@/stores/voucherStore";
+import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
 import { userStore } from "@/stores/userStore";
-import { inventoryStore } from "@/stores/inventoryStore";
+import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
 
 export default {
   computed: {
-    ...mapStores(voucherStore),
+    ...mapStores(campaignStore),
     ...mapStores(userStore),
     ...mapStores(inventoryStore),
   },
 
   methods: {
     async buy() {
-      this.voucherStore.cfDialog = false;
-      await this.voucherStore.purchaseVoucher();
+      this.campaignStore.cfDialog = false;
+      await this.campaignStore.purchaseVoucher();
       await this.userStore.fetchUserMetadata();
       await this.inventoryStore.fetchUserVoucher();
-      await this.voucherStore.fetchVoucher();
+      await this.campaignStore.fetchVoucher();
     },
   },
 };

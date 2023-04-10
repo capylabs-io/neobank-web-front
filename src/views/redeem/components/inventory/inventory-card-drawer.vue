@@ -43,7 +43,7 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { inventoryStore } from "@/stores/inventoryStore";
+import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
 import { get } from "lodash";
 export default {
   computed: {

@@ -42,12 +42,12 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { voucherStore } from "@/stores/voucherStore";
-import { inventoryStore } from "@/stores/inventoryStore";
+import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
+import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
 export default {
   computed: {
     ...mapStores(userStore),
-    ...mapStores(voucherStore),
+    ...mapStores(campaignStore),
     ...mapStores(inventoryStore),
   },
   props: ["cards"],

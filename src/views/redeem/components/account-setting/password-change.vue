@@ -9,7 +9,7 @@
         </v-col>
         <v-col cols="4">
           <v-text-field
-            v-if="!voucherStore.changePassword"
+            v-if="!campaignStore.changePassword"
             height="36px"
             type="password"
             class="pa-0"
@@ -44,7 +44,7 @@
         </v-col>
         <v-col cols="4">
           <v-text-field
-            v-if="!voucherStore.changePassword"
+            v-if="!campaignStore.changePassword"
             height="36px"
             type="password"
             class="pa-0"
@@ -79,7 +79,7 @@
         </v-col>
         <v-col cols="4">
           <v-text-field
-            v-if="!voucherStore.changePassword"
+            v-if="!campaignStore.changePassword"
             height="36px"
             type="password"
             class="pa-0"
@@ -111,8 +111,8 @@
         <v-btn
           class="text-capitalize text-btn"
           variant="text"
-          @click="voucherStore.changePassword = true"
-          v-if="!voucherStore.changePassword"
+          @click="campaignStore.changePassword = true"
+          v-if="!campaignStore.changePassword"
           outlined
           depressed
         >
@@ -122,7 +122,7 @@
           <v-btn
             class="text-capitalize"
             variant="text"
-            @click="voucherStore.changePassword = false"
+            @click="campaignStore.changePassword = false"
             outlined
             depressed
           >
@@ -147,13 +147,13 @@
       </div>
 
       <!-- <v-row class="mt-sm-1">
-        <v-col cols="2" v-if="!voucherStore.changePassword">
+        <v-col cols="2" v-if="!campaignStore.changePassword">
           <v-btn
             class="text-capitalize full-width"
             :style="{ border: '1px solid #E3E8EF' }"
             color="black"
             variant="text"
-            @click="voucherStore.changePassword = true"
+            @click="campaignStore.changePassword = true"
             text
           >
             Change password
@@ -165,7 +165,7 @@
             :style="{ border: '1px solid #E3E8EF' }"
             color="black"
             variant="text"
-            @click="voucherStore.changePassword = false"
+            @click="campaignStore.changePassword = false"
             text
           >
             Cancel
@@ -197,11 +197,11 @@
 import { rules } from "@/plugins/rules";
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { voucherStore } from "@/stores/voucherStore";
+import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
 export default {
   computed: {
     ...mapStores(userStore),
-    ...mapStores(voucherStore),
+    ...mapStores(campaignStore),
     passwordConfirmationRule() {
       return () =>
         this.userStore.newPassword === this.userStore.confirmNewPassword ||
@@ -216,7 +216,7 @@ export default {
   methods: {
     changeYourPassword() {
       this.userStore.changePassword();
-      this.voucherStore.changePassword = false;
+      this.campaignStore.changePassword = false;
       this.userStore.logout();
       this.$router.push("/login");
     },

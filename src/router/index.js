@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/home/pages/Home.vue";
 
 // import i18n from "@/i18n";
 Vue.use(VueRouter);
@@ -27,17 +26,17 @@ const routes = [
       {
         path: "/inventory",
         name: "Inventory",
-        component: () => import("../views/redeem/pages/Redeem-inventory.vue"),
+        component: () => import("../views/redeem/pages/inventory/Redeem-inventory.vue"),
       },
       {
         path: "/account-setting",
         name: "Account Setting",
-        component: () => import("../views/redeem/pages/account-setting.vue"),
+        component: () => import("../views/redeem/pages/accountSetting/account-setting.vue"),
       },
       {
         path: "/store",
         name: "Store",
-        component: () => import("../views/redeem/pages/StorePage.vue"),
+        component: () => import("../views/redeem/pages/campaign/StorePage.vue"),
       },
     ],
   },

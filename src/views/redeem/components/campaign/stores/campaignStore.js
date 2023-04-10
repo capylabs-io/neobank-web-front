@@ -1,11 +1,11 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { Auth, Voucher } from "@/plugins/api.js";
-import { userStore } from "./userStore";
-import { inventoryStore } from "./inventoryStore";
+import { userStore } from "@/stores/userStore";
+import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
 import { snackBarController } from "@/components/snack-bar/snack-bar-controller.js";
 import { loadingController } from "@/components/global-loading/global-loading-controller.js";
-export const voucherStore = defineStore("voucher", () => {
+export const campaignStore = defineStore("campaign", () => {
   const user = userStore();
   const inventory = inventoryStore();
   const loading = loadingController(); //store
@@ -19,7 +19,7 @@ export const voucherStore = defineStore("voucher", () => {
 
   const pageIndex = ref(1);
   const index = ref(1);
-  
+
   const voucherPage = ref(1);
   const vouchersPerPage = ref(4);
 
@@ -111,7 +111,7 @@ export const voucherStore = defineStore("voucher", () => {
         Math.floor(filterVoucherStore.value.length / vouchersPerPage.value) + 1
       );
   });
-  
+
   function sortedCampaign() {
     if (!this.voucherData || this.voucherData.length == 0) return [];
     let sortedCampaigns = this.voucherData;

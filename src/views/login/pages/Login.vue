@@ -67,8 +67,8 @@
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "../../../stores/userStore";
-import { voucherStore } from "../../../stores/voucherStore";
+import { userStore } from "@/stores/userStore";
+import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
 import { rules } from "@/plugins/rules";
 export default {
   components: {},
@@ -79,7 +79,7 @@ export default {
   },
   computed: {
     ...mapStores(userStore),
-    ...mapStores(voucherStore),
+    ...mapStores(campaignStore),
   },
   data() {
     return {
@@ -95,7 +95,7 @@ export default {
       });
     },
     change() {
-      this.voucherStore.pageIndex = 3;
+      this.campaignStore.pageIndex = 3;
     },
     submitForm() {
       if (this.$refs.form.validate()) {

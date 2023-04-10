@@ -18,7 +18,7 @@
             item-text="name"
             :items="sort"
             :menu-props="{ maxHeight: '400' }"
-            @change="voucherStore.changeVoucherFilter($event)"
+            @change="campaignStore.changeVoucherFilter($event)"
             solo
             dense
             flat
@@ -33,18 +33,12 @@
           <v-col
             cols="12"
             md="3"
-            v-for="card in voucherStore.slicedVoucherStore"
+            v-for="card in campaignStore.slicedVoucherStore"
             :key="card.id"
           >
-            <!-- <voucherCard
-              :id="card.id"
-              :isPurchased="voucherStore.voucherPurchased.includes(card.id)"
-              :cards="card"
-            /> -->
-
             <CampaignCard
               :campaign="card"
-              :isPurchased="voucherStore.voucherPurchased.includes(card.id)"
+              :isPurchased="campaignStore.voucherPurchased.includes(card.id)"
             />
           </v-col>
         </v-row>
@@ -68,8 +62,8 @@
     </div>
     <div class="pagination mt-5">
       <v-pagination
-        v-model="voucherStore.voucherPage"
-        :length="voucherStore.totalVoucherPage"
+        v-model="campaignStore.voucherPage"
+        :length="campaignStore.totalVoucherPage"
         light
         circle
         color="#5752e3"
@@ -79,11 +73,10 @@
 </template>
 
 <script>
-import voucherCard from "@/views/redeem/components/voucher-card.vue";
-import clothesCard from "@/views/redeem/components/clothes-card.vue";
+import clothesCard from "@/views/redeem/components/campaign/clothes-card.vue";
 import { userStore } from "@/stores/userStore";
-import { voucherStore } from "@/stores/voucherStore";
-import { inventoryStore } from "@/stores/inventoryStore";
+import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
+import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
 import { mapStores } from "pinia";
 
 export default {
@@ -91,16 +84,16 @@ export default {
   components: {
     // voucherCard: voucherCard,
     clothesCard: clothesCard,
-    CampaignCard: () => import("../components/campaign-card.vue"),
-    CardDetailDrawer: () => import("../components/card-detail-drawer.vue"),
+    CampaignCard: () => import("../../components/campaign/campaign-card.vue"),
+    CardDetailDrawer: () => import("../../components/campaign/card-detail-drawer.vue"),
   },
   computed: {
     ...mapStores(userStore),
-    ...mapStores(voucherStore),
+    ...mapStores(campaignStore),
     ...mapStores(inventoryStore),
   },
   created() {
-    console.log("sortedCampaign", this.voucherStore.sortedCampaign());
+    console.log("sortedCampaign", this.campaignStore.sortedCampaign());
   },
   data() {
     return {
@@ -138,9 +131,9 @@ export default {
     };
   },
   async created() {
-    await this.voucherStore.fetchVoucher();
+    await this.campaignStore.fetchVoucher();
     await this.inventoryStore.fetchUserVoucher();
-    await this.voucherStore.checkIncludes();
+    await this.campaignStore.checkIncludes();
   },
   methods: {
     clothesTab() {

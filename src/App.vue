@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <!-- <app-navbar v-if="voucherStore.pageIndex == 1" /> -->
-    <NavBarLanding v-if="voucherStore.pageIndex == 1" />
-    <page-navbar v-else-if="voucherStore.pageIndex == 2" />
+    <!-- <app-navbar v-if="campaignStore.pageIndex == 1" /> -->
+    <NavBarLanding v-if="campaignStore.pageIndex == 1" />
+    <page-navbar v-else-if="campaignStore.pageIndex == 2" />
     <div v-else />
     <v-main>
       <Loading />
@@ -12,7 +12,7 @@
       <SnackBar />
       <router-view :key="$route.fullPath" />
     </v-main>
-    <!-- <app-footer v-if="voucherStore.pageIndex == 1" /> -->
+    <!-- <app-footer v-if="campaignStore.pageIndex == 1" /> -->
   </v-app>
 </template>
 <script>
@@ -22,8 +22,8 @@ import HomeNavigationBar from "./components/NavigationBar.vue";
 import PageNavigationBar from "./components/NavigationBarPage.vue";
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { voucherStore } from "@/stores/voucherStore";
-import { inventoryStore } from "@/stores/inventoryStore";
+import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
+import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
 import SnackBar from "@/components/snack-bar/snack-bar.vue";
 export default {
   components: {
@@ -40,7 +40,7 @@ export default {
   },
   computed: {
     ...mapStores(userStore),
-    ...mapStores(voucherStore),
+    ...mapStores(campaignStore),
     ...mapStores(inventoryStore),
   },
   async created() {

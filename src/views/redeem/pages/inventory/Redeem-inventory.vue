@@ -14,7 +14,7 @@
         <div class="right-filter-group">
           <v-select
             class="btn-customize"
-            v-model="voucherStore.sortBy"
+            v-model="campaignStore.sortBy"
             label="SortBy"
             :items="sort"
             item-text="name"
@@ -58,14 +58,14 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { voucherStore } from "@/stores/voucherStore";
-import { inventoryStore } from "@/stores/inventoryStore";
-import inventoryCard from "@/views/redeem/components/inventory-card.vue";
+import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
+import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
+import inventoryCard from "@/views/redeem/components/inventory/inventory-card.vue";
 export default {
   components: {
     inventoryCard: inventoryCard,
     InventoryDetailDrawer: () =>
-      import("../components/inventory-card-drawer.vue"),
+      import("../../components/inventory/inventory-card-drawer.vue"),
   },
   async created() {
     await this.inventoryStore.fetchUserVoucher();
@@ -75,7 +75,7 @@ export default {
   },
   computed: {
     ...mapStores(userStore),
-    ...mapStores(voucherStore),
+    ...mapStores(campaignStore),
     ...mapStores(inventoryStore),
   },
   watch: {

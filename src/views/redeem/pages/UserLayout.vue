@@ -10,14 +10,14 @@
 
 <script>
 import { mapStores } from "pinia";
-import { inventoryStore } from "@/stores/inventoryStore";
-import { voucherStore } from "@/stores/voucherStore";
+import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
+import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
 import { userStore } from "@/stores/userStore";
 
 export default {
   computed: {
     ...mapStores(userStore),
-    ...mapStores(voucherStore),
+    ...mapStores(campaignStore),
     ...mapStores(inventoryStore),
   },
   components: {
@@ -28,14 +28,14 @@ export default {
     if (!this.userStore.jwt) {
       this.$router.push("/login");
     } else {
-      this.voucherStore.pageIndex = 2;
-      this.voucherStore.bearerToken = JSON.parse(
+      this.campaignStore.pageIndex = 2;
+      this.campaignStore.bearerToken = JSON.parse(
         localStorage.getItem("user")
       );
       await this.userStore.fetchUserMetadata();
       // await this.inventoryStore.fetchUserVoucher();
-      // await this.voucherStore.fetchVoucher();
-      // await this.voucherStore.checkIncludes();
+      // await this.campaignStore.fetchVoucher();
+      // await this.campaignStore.checkIncludes();
     }
   },
 };
