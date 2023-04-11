@@ -2,6 +2,7 @@
   <div class="wrapper full-height d-flex">
     <NavigationDrawer />
     <BuyConfirmDialog />
+    <PurchasedCampaignNoti />
     <div class="container mx-auto pa-10">
       <router-view></router-view>
     </div>
@@ -23,15 +24,17 @@ export default {
   components: {
     NavigationDrawer: () => import("../components/navigation-drawer.vue"),
     BuyConfirmDialog: () => import("@/components/dialog/confirm-dialog.vue"),
+    PurchasedCampaignNoti: () =>
+      import(
+        "@/views/redeem/components/campaign/components/purchased-noti-dialog.vue"
+      ),
   },
   async created() {
     if (!this.userStore.jwt) {
       this.$router.push("/login");
     } else {
       this.campaignStore.pageIndex = 2;
-      this.campaignStore.bearerToken = JSON.parse(
-        localStorage.getItem("user")
-      );
+      this.campaignStore.bearerToken = JSON.parse(localStorage.getItem("user"));
       await this.userStore.fetchUserMetadata();
     }
   },

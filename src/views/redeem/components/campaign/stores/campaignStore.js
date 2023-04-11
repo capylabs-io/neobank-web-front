@@ -13,6 +13,7 @@ export const campaignStore = defineStore("campaign", {
     profileEdit: false,
     bankAccountEdit: false,
     changePassword: false,
+    purchaseCampaignNoti: false,
 
     pageIndex: 1,
     index: 1,
@@ -93,6 +94,7 @@ export const campaignStore = defineStore("campaign", {
         loading.hide();
       }
     },
+
     async purchaseVoucher() {
       try {
         loading.show();

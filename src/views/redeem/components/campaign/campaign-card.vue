@@ -24,7 +24,7 @@
           </v-img>
         </div>
         <div class="card-title mt-3 d-flex flex-column justify-center">
-          <div class="textlg text-center text-capitalize font-weight-bold">
+          <div class="text-lg text-center text-capitalize font-weight-bold">
             {{ campaign.title }}
           </div>
         </div>
@@ -227,6 +227,7 @@ export default {
       // } else {
       //   this.campaignStore.checkPurchased(`You dont have enough Token To buy`);
       // }
+      this.campaignStore.setDetailStoreCard(this.campaign);
       this.campaignStore.voucherId = this.campaign.id;
       this.$dialog.confirm({
         title: "Confirm Purchase Voucher",
@@ -237,13 +238,12 @@ export default {
         done: async () => {
           try {
             this.$loading.show();
-            // this.campaignStore.voucherId = this.campaignStore.detailCard.id;
             await this.campaignStore.purchaseVoucher();
+            await this.campaignStore.fetchVoucher();
             await this.inventoryStore.fetchUserVoucher();
             await this.userStore.fetchUserMetadata();
-            await this.campaignStore.fetchVoucher();
             this.campaignStore.drawerDetail = false;
-            window.location.reload();
+            this.campaignStore.purchaseCampaignNoti = true;
           } catch (error) {
             this.$alert.error("Error occured! Error: " + error);
           } finally {

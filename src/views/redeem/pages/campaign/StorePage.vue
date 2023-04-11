@@ -93,7 +93,6 @@ export default {
     ...mapStores(inventoryStore),
   },
   created() {
-    console.log("sortedCampaign", this.campaignStore.sortedCampaign());
   },
   data() {
     return {
