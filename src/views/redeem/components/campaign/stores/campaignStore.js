@@ -45,20 +45,32 @@ export const campaignStore = defineStore("campaign", {
       if (!this.sortBy) return sortedCampaigns;
       switch (this.sortBy) {
         default:
-        case "desc":
+        case "asc":
           sortedCampaigns.sort((a, b) => a.title.localeCompare(b.title));
           break;
         case "desc":
           sortedCampaigns.sort((a, b) => b.title.localeCompare(a.title));
           break;
+        case "newest":
+          sortedCampaigns.sort(
+            (a, b) =>
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+          break;
+        case "oldest":
+          sortedCampaigns.sort(
+            (a, b) =>
+              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+          );
+          break;
         case "priceUp":
           sortedCampaigns
-            .filter((voucher) => voucher.price)
+            // .filter((voucher) => voucher.price)
             .sort((a, b) => a.price - b.price);
           break;
         case "priceDown":
           sortedCampaigns
-            .filter((voucher) => voucher.price)
+            // .filter((voucher) => voucher.price)
             .sort((a, b) => b.price - a.price);
           break;
       }
@@ -76,9 +88,10 @@ export const campaignStore = defineStore("campaign", {
   },
   actions: {
     async fetchVoucher() {
+      const user = userStore();
       try {
         loading.show();
-        const res = await Voucher.fetchVouchers(this.bearerToken.jwt);
+        const res = await Voucher.fetchVouchers(user.jwt);
         if (!res) {
           alert.error(`Error occurred! Please try again later!`);
           return;
@@ -119,7 +132,7 @@ export const campaignStore = defineStore("campaign", {
     changeVoucherFilter(sortBy) {
       this.sortBy = sortBy;
       console.log("sortBy", this.sortBy);
-      console.log("sortedCampaign", this.sortedCampaign);
+      console.log("sortedCampaign", this.sortedCampaigns);
     },
     setDetailStoreCard(cards) {
       this.detailCard = cards;

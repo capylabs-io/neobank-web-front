@@ -28,7 +28,7 @@ export const userStore = defineStore("user", {
   }),
   getters: {
     isConnected() {
-      return this.jwt;
+      return !!this.userData && !!this.jwt;
     },
   },
   actions: {

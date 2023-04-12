@@ -3,12 +3,23 @@
     <CardDetailDrawer />
     <div class="full-height">
       <div class="d-flex justify-space-between button-filter">
-        <div class="d-flex column-gap-10 left-filter-group pa-1">
+        <div
+          class="d-flex column-gap-10 left-filter-group pa-1"
+          v-if="userStore.jwt"
+        >
           <v-btn class="voucher active" rounded text @click="voucherTab()">
             Voucher
           </v-btn>
           <v-btn class="clothes" rounded text @click="clothesTab()">
             In-game Items
+          </v-btn>
+        </div>
+        <div class="d-flex column-gap-10 left-filter-group pa-1" v-else>
+          <v-btn class="clothes active" rounded text @click="clothesTab()">
+            In-game Items
+          </v-btn>
+          <v-btn class="voucher" rounded text @click="voucherTab()" disabled>
+            Voucher
           </v-btn>
         </div>
         <div class="right-filter-group">
@@ -34,7 +45,7 @@
             cols="12"
             md="3"
             v-for="card in campaignStore.slicedVoucherStore"
-            :key="card.id"  
+            :key="card.id"
           >
             <CampaignCard
               :campaign="card"
@@ -85,15 +96,15 @@ export default {
     // voucherCard: voucherCard,
     clothesCard: clothesCard,
     CampaignCard: () => import("../../components/campaign/campaign-card.vue"),
-    CardDetailDrawer: () => import("../../components/campaign/card-detail-drawer.vue"),
+    CardDetailDrawer: () =>
+      import("../../components/campaign/card-detail-drawer.vue"),
   },
   computed: {
     ...mapStores(userStore),
     ...mapStores(campaignStore),
     ...mapStores(inventoryStore),
   },
-  created() {
-  },
+  created() {},
   data() {
     return {
       sort: [
@@ -107,11 +118,19 @@ export default {
         },
         {
           value: "priceUp",
-          name: "Price Up",
+          name: "Price-Up",
         },
         {
           value: "priceDown",
-          name: "Price Down",
+          name: "Price-Down",
+        },
+        {
+          value: "newest",
+          name: "Newest",
+        },
+        {
+          value: "oldest",
+          name: "Oldest",
         },
       ],
       clothesCards: [
@@ -126,10 +145,15 @@ export default {
         { index: 2 },
       ],
 
-      index: 1,
+      index: 0,
     };
   },
   async created() {
+    if (this.userStore.jwt) {
+      this.index = 1;
+    } else {
+      this.index = 2;
+    }
     await this.campaignStore.fetchVoucher();
     await this.inventoryStore.fetchUserVoucher();
     await this.campaignStore.checkIncludes();

@@ -13,24 +13,24 @@
     >
       <div class="drawer-image d-flex flex-column">
         <div class="full-width">
-          <v-img
+          <!-- <v-img
             class="drawer-image"
             :src="inventoryStore.ivenCardData.campaign.data.attributes.thumbnailUrl"
-          ></v-img>
+          ></v-img> -->
+          <v-img class="drawer-image" :src="categoryImage"></v-img>
         </div>
       </div>
       <div class="mt-6 font-weight-bold text-center">
         <v-img class="drawer-icon mx-auto" :src="categoryIcon" />
       </div>
       <div class="mt-3 font-weight-bold text-center text-lg">
-        <!-- <div>
-          <v-img class="drawer-icon" :src="inventoryStore.ivenCardData.campaign.data.attributes.iconUrl" />
-        </div> -->
-        <span class="mt-3"> {{ inventoryStore.ivenCardData.campaign.data.attributes.title }} </span>
+        <!-- <span class="mt-3"> {{ inventoryStore.ivenCardData.campaign.data.attributes.title }} </span> -->
+        <span class="mt-3"> {{ categoryTitle }} </span>
       </div>
 
       <div class="mt-3 text-left draw-text">
-        {{ inventoryStore.ivenCardData.campaign.data.attributes.fullDescription }}
+        <!-- {{ inventoryStore.ivenCardData.campaign.data.attributes.fullDescription }} -->
+        {{ categoryDescription }}
       </div>
       <v-spacer></v-spacer>
       <div class="qr-img mx-auto mt-3 justify-space-between">
@@ -54,6 +54,27 @@ export default {
         this.inventoryStore,
         "ivenCardData.campaignCategory.data.attributes.iconUrl",
         require("@/assets/views/category/category-icon-example.png")
+      );
+    },
+    categoryImage() {
+      return get(
+        this.inventoryStore,
+        "ivenCardData.campaign.data.attributes.thumbnailUrl",
+        require("@/assets/redeem/card/baemin-card.webp")
+      );
+    },
+    categoryTitle() {
+      return get(
+        this.inventoryStore,
+        "ivenCardData.campaign.data.attributes.title",
+        "title"
+      );
+    },
+    categoryDescription() {
+      return get(
+        this.inventoryStore,
+        "ivenCardData.campaign.data.attributes.fullDescription",
+        ""
       );
     },
   },

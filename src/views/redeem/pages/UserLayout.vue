@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper full-height d-flex">
-    <NavigationDrawer />
-    <BuyConfirmDialog />
-    <PurchasedCampaignNoti />
+    <NavigationDrawer v-if="userStore.jwt" />
+    <BuyConfirmDialog v-if="userStore.jwt" />
+    <PurchasedCampaignNoti v-if="userStore.jwt" />
     <div class="container mx-auto pa-10">
       <router-view></router-view>
     </div>
@@ -30,13 +30,14 @@ export default {
       ),
   },
   async created() {
-    if (!this.userStore.jwt) {
-      this.$router.push("/login");
-    } else {
-      this.campaignStore.pageIndex = 2;
-      this.campaignStore.bearerToken = JSON.parse(localStorage.getItem("user"));
-      await this.userStore.fetchUserMetadata();
-    }
+    this.campaignStore.pageIndex = 2;
+    this.campaignStore.bearerToken = JSON.parse(localStorage.getItem("user"));
+    await this.userStore.fetchUserMetadata();
+    // if (!this.userStore.jwt) {
+    //   this.$router.push("/login");
+    // } else {
+
+    // }
   },
 };
 </script>
