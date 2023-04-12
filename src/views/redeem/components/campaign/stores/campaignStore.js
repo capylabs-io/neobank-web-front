@@ -91,7 +91,7 @@ export const campaignStore = defineStore("campaign", {
       const user = userStore();
       try {
         loading.show();
-        const res = await Voucher.fetchVouchers(user.jwt);
+        const res = await Voucher.fetchVouchers();
         if (!res) {
           alert.error(`Error occurred! Please try again later!`);
           return;

@@ -120,11 +120,11 @@ export const User = {
     }),
 };
 export const Voucher = {
-  fetchVouchers: (token) =>
+  fetchVouchers: () =>
     axios.get("user/campaigns", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
+      // headers: {
+      //   Authorization: "Bearer " + token,
+      // },
     }),
   purchaseVouchers: (id, token) =>
     axios.post(

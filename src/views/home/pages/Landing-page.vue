@@ -109,8 +109,8 @@ export default {
         doorway.style.zIndex = "1";
         doorway.style.display = "none";
         container.style.opacity = "1";
-        introduction.style.animation = " zoom-in-zoom-out 0.7s ease-out";
-        content.style.animation = " zoom-in-zoom-out 0.7s ease-out";
+        introduction.style.animation = " zoom-in-zoom-out 0.1s ease-out";
+        content.style.animation = " zoom-in-zoom-out 0.1s ease-out";
         container.style.animation = " zoom-out-zoom-in 2s ease-out";
       } else {
         introduction.style.position = "fixed";

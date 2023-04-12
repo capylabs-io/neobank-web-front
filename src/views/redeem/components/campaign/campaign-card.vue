@@ -213,44 +213,48 @@ export default {
       this.campaignStore.voucherId = this.campaign.id;
     },
     buyClicked() {
-      // if (
-      //   this.userStore.userData.userMetadata.token >= this.campaign.price &&
-      //   this.campaign.purchasedQuantity == this.campaign.totalQuantity
-      // ) {
-      //   this.campaignStore.checkPurchased(`Campaign Out of Stock`);
-      // } else if (
-      //   this.userStore.userData.userMetadata.token >= this.campaign.price
-      // ) {
-      //   this.campaignStore.drawerDetail = true;
-      //   this.campaignStore.setDetailStoreCard(this.campaign);
-      //   this.campaignStore.voucherId = this.id;
-      // } else {
-      //   this.campaignStore.checkPurchased(`You dont have enough Token To buy`);
-      // }
-      this.campaignStore.setDetailStoreCard(this.campaign);
-      this.campaignStore.voucherId = this.campaign.id;
-      this.$dialog.confirm({
-        title: "Confirm Purchase Voucher",
-        topContent:
-          "Are you sure you want to purchase this voucher? This action cannot be undone!",
-        okText: "Confirm",
-        cancelText: "Cancel",
-        done: async () => {
-          try {
-            this.$loading.show();
-            await this.campaignStore.purchaseVoucher();
-            await this.campaignStore.fetchVoucher();
-            await this.inventoryStore.fetchUserVoucher();
-            await this.userStore.fetchUserMetadata();
-            this.campaignStore.drawerDetail = false;
-            this.campaignStore.purchaseCampaignNoti = true;
-          } catch (error) {
-            this.$alert.error("Error occured! Error: " + error);
-          } finally {
-            this.$loading.hide();
-          }
-        },
-      });
+      if (!this.userStore.jwt) {
+        this.$alert.error("You need to login to purchase Voucher!");
+      } else {
+        // if (
+        //   this.userStore.userData.userMetadata.token >= this.campaign.price &&
+        //   this.campaign.purchasedQuantity == this.campaign.totalQuantity
+        // ) {
+        //   this.campaignStore.checkPurchased(`Campaign Out of Stock`);
+        // } else if (
+        //   this.userStore.userData.userMetadata.token >= this.campaign.price
+        // ) {
+        //   this.campaignStore.drawerDetail = true;
+        //   this.campaignStore.setDetailStoreCard(this.campaign);
+        //   this.campaignStore.voucherId = this.id;
+        // } else {
+        //   this.campaignStore.checkPurchased(`You dont have enough Token To buy`);
+        // }
+        this.campaignStore.setDetailStoreCard(this.campaign);
+        this.campaignStore.voucherId = this.campaign.id;
+        this.$dialog.confirm({
+          title: "Confirm Purchase Voucher",
+          topContent:
+            "Are you sure you want to purchase this voucher? This action cannot be undone!",
+          okText: "Confirm",
+          cancelText: "Cancel",
+          done: async () => {
+            try {
+              this.$loading.show();
+              await this.campaignStore.purchaseVoucher();
+              await this.campaignStore.fetchVoucher();
+              await this.inventoryStore.fetchUserVoucher();
+              await this.userStore.fetchUserMetadata();
+              this.campaignStore.drawerDetail = false;
+              this.campaignStore.purchaseCampaignNoti = true;
+            } catch (error) {
+              this.$alert.error("Error occured! Error: " + error);
+            } finally {
+              this.$loading.hide();
+            }
+          },
+        });
+      }
     },
   },
   data() {

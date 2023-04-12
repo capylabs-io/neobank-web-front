@@ -102,7 +102,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const user = userStore();
   if (to.meta && to.meta.requiresAuth && !user.isConnected) {
-    alert.error("You have to login to accessing The Stores!");
+    alert.error("You have to login to accessing Your Inventory!");
     next("/store-unAuth");
   }
   next();
