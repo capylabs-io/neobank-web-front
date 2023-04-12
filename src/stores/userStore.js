@@ -8,6 +8,7 @@ import router from "@/router";
 export const userStore = defineStore("user", {
   state: () => ({
     rememberMe: false,
+    acceptTerm: false,
     isShowPass: false,
     isShowcPass: false,
     isShowpPass: false,
@@ -60,7 +61,7 @@ export const userStore = defineStore("user", {
 
     async register() {
       try {
-        if (this.rememberMe) {
+        if (this.acceptTerm) {
           loading.show();
           const res = await Auth.register({
             email: this.email,
@@ -198,7 +199,10 @@ export const userStore = defineStore("user", {
     },
     logout() {
       this.jwt = "";
-      this.userData = {};
+      if (!this.rememberMe) {
+        this.userData = {};
+        this.email = "";
+      }
       this.password = "";
       this.currentPassword = "";
       this.newPassword = "";

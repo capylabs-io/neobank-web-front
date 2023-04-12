@@ -59,7 +59,7 @@
         />
         <div>
           <v-checkbox
-            v-model="userStore.rememberMe"
+            v-model="userStore.acceptTerm"
             class="text-lg"
             hide-details="true"
             label="Accept Terms and Services"

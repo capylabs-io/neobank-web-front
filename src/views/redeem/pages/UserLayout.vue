@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper full-height d-flex">
-    <NavigationDrawer v-if="userStore.jwt" />
-    <BuyConfirmDialog v-if="userStore.jwt" />
-    <PurchasedCampaignNoti v-if="userStore.jwt" />
+    <NavigationDrawer  />
+    <BuyConfirmDialog  />
+    <PurchasedCampaignNoti  />
     <div class="container mx-auto pa-10">
       <router-view></router-view>
     </div>

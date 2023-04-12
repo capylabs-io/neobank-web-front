@@ -1,17 +1,15 @@
 <template>
   <div class="d-flex flex-column justify-space-between full-height">
-    <CardDetailDrawer />
     <div class="full-height">
       <div class="d-flex justify-space-between button-filter">
         <div class="d-flex column-gap-10 left-filter-group pa-1">
-          <v-btn class="voucher active" rounded text @click="voucherTab()">
-            Voucher
-          </v-btn>
-          <v-btn class="clothes" rounded text @click="clothesTab()">
+          <v-btn class="clothes active" rounded text @click="clothesTab()">
             In-game Items
           </v-btn>
+          <v-btn class="voucher" rounded text @click="voucherTab()" disabled>
+            Voucher
+          </v-btn>
         </div>
-
         <div class="right-filter-group">
           <v-select
             class="btn-customize"
@@ -28,22 +26,21 @@
           ></v-select>
         </div>
       </div>
-      <div v-if="index == 1" class="full-width mt-6 card-container">
-        <!-- TODO: use vue-responsive-components to make right container responsive better -->
-        <v-row>
-          <v-col
-            cols="12"
-            md="3"
-            v-for="card in campaignStore.slicedVoucherStore"
-            :key="card.id"
-          >
-            <CampaignCard
-              :campaign="card"
-              :isPurchased="campaignStore.voucherPurchased.includes(card.id)"
-            />
-          </v-col>
-        </v-row>
-      </div>
+      <!-- <div v-if="index == 1" class="full-width mt-6 card-container">
+          <v-row>
+            <v-col
+              cols="12"
+              md="3"
+              v-for="card in campaignStore.slicedVoucherStore"
+              :key="card.id"
+            >
+              <CampaignCard
+                :campaign="card"
+                :isPurchased="campaignStore.voucherPurchased.includes(card.id)"
+              />
+            </v-col>
+          </v-row>
+        </div> -->
 
       <div v-if="index == 2" class="mt-6 full-width">
         <v-row>
@@ -85,9 +82,9 @@ export default {
   components: {
     // voucherCard: voucherCard,
     clothesCard: clothesCard,
-    CampaignCard: () => import("../../components/campaign/campaign-card.vue"),
-    CardDetailDrawer: () =>
-      import("../../components/campaign/card-detail-drawer.vue"),
+    // CampaignCard: () => import("../../components/campaign/campaign-card.vue"),
+    // CardDetailDrawer: () =>
+    //   import("../../components/campaign/card-detail-drawer.vue"),
   },
   computed: {
     ...mapStores(userStore),
@@ -135,18 +132,18 @@ export default {
         { index: 2 },
       ],
 
-      index: 0,
+      index: 2,
     };
   },
   async created() {
-    if (this.userStore.jwt) {
-      this.index = 1;
-    } else {
-      this.index = 2;
-    }
-    await this.campaignStore.fetchVoucher();
-    await this.inventoryStore.fetchUserVoucher();
-    await this.campaignStore.checkIncludes();
+    // if (this.userStore.jwt) {
+    //   this.index = 1;
+    // } else {
+    //   this.index = 2;
+    // }
+    // await this.campaignStore.fetchVoucher();
+    // await this.inventoryStore.fetchUserVoucher();
+    // await this.campaignStore.checkIncludes();
   },
   methods: {
     clothesTab() {

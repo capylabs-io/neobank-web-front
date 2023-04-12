@@ -1,5 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import { userStore } from "@/stores/userStore";
+import alert from "@/plugins/alert";
 
 // import i18n from "@/i18n";
 Vue.use(VueRouter);
@@ -22,21 +24,48 @@ const routes = [
     path: "/account",
     name: "Account",
     component: () => import("../views/redeem/pages/UserLayout.vue"),
+    meta: {
+      requiresAuth: true,
+    },
     children: [
       {
         path: "/inventory",
         name: "Inventory",
-        component: () => import("../views/redeem/pages/inventory/Redeem-inventory.vue"),
+        component: () =>
+          import("../views/redeem/pages/inventory/Redeem-inventory.vue"),
+        meta: {
+          requiresAuth: true,
+        },
       },
       {
         path: "/account-setting",
         name: "Account Setting",
-        component: () => import("../views/redeem/pages/accountSetting/account-setting.vue"),
+        component: () =>
+          import("../views/redeem/pages/accountSetting/account-setting.vue"),
+        meta: {
+          requiresAuth: true,
+        },
       },
       {
         path: "/store",
         name: "Store",
         component: () => import("../views/redeem/pages/campaign/StorePage.vue"),
+        meta: {
+          requiresAuth: true,
+        },
+      },
+    ],
+  },
+  {
+    path: "/account-unAuth",
+    name: "Account Unauthor",
+    component: () => import("../views/redeem/pages/UserLayoutUnAuth.vue"),
+    children: [
+      {
+        path: "/store-unAuth",
+        name: "Store Unauthor",
+        component: () =>
+          import("../views/redeem/pages/campaign/StorePageUnAuth.vue"),
       },
     ],
   },
@@ -69,6 +98,14 @@ const router = new VueRouter({
   scrollBehavior() {
     return { x: 0, y: 0 };
   },
+});
+router.beforeEach((to, from, next) => {
+  const user = userStore();
+  if (to.meta && to.meta.requiresAuth && !user.isConnected) {
+    alert.error("You have to login to accessing The Stores!");
+    next("/store-unAuth");
+  }
+  next();
 });
 // router.beforeEach((to, from, next) => {
 //   // use the language from the routing param or default language

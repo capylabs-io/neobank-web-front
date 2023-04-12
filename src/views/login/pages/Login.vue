@@ -36,7 +36,12 @@
           class="mt-2"
         />
         <div>
-          <v-checkbox class="text-lg" hide-details="true" label="Remember me" />
+          <v-checkbox
+            class="text-lg"
+            hide-details="true"
+            label="Remember me"
+            v-model="userStore.rememberMe"
+          />
         </div>
 
         <div class="text-center mt-5">
