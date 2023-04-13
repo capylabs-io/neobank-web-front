@@ -1,9 +1,11 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import { Auth, Voucher } from "@/plugins/api.js";
+import { Auth, Category, Voucher } from "@/plugins/api.js";
 import { userStore } from "@/stores/userStore";
 import loading from "@/plugins/loading";
 import alert from "@/plugins/alert";
+import { get } from "lodash-es";
+
 export const campaignStore = defineStore("campaign", {
   state: () => ({
     drawer: false,
@@ -26,17 +28,67 @@ export const campaignStore = defineStore("campaign", {
     bearerToken: {},
     detailCard: {},
 
+    searchKey: "",
     voucherData: [],
     voucherDataId: [],
     voucherPurchased: [],
+
+    filterPartner: [],
+    filterCategory: [],
+    categories: [],
+    partners: [],
   }),
   getters: {
+    filters() {
+      return [
+        ...this.filterPartner.map((filter) => {
+          return {
+            filterName: filter.brandName,
+            filterType: "partner",
+            id: filter.id,
+          };
+        }),
+        ...this.filterCategory.map((filter) => {
+          return {
+            filterName: filter.name,
+            filterType: "category",
+            id: filter.id,
+          };
+        }),
+      ];
+    },
     slicedVoucherStore() {
       if (!this.voucherData || this.voucherData.length == 0) return [];
-      return this.sortedCampaigns.slice(
+      return this.filteredCampaigns.slice(
         (this.voucherPage - 1) * this.vouchersPerPage,
         this.voucherPage * this.vouchersPerPage
       );
+    },
+    filteredCampaigns() {
+      if (!this.voucherData || this.voucherData.length == 0) return [];
+      let filtered = this.sortedCampaigns;
+      if (this.searchKey)
+        filtered = filtered.filter((campaign) =>
+          campaign.title
+            .toLowerCase()
+            .includes(this.searchKey.trim().toLowerCase())
+        );
+      if (this.filterPartner && this.filterPartner.length > 0) {
+        const filterIds = this.filterPartner.map((filter) => filter.id);
+        filtered = filtered.filter(
+          (campaign) =>
+            campaign.partner && filterIds.includes(campaign.partner.id)
+        );
+      }
+      if (this.filterCategory && this.filterCategory.length > 0) {
+        const filterIds = this.filterCategory.map((filter) => filter.id);
+        filtered = filtered.filter(
+          (campaign) =>
+            campaign.campaignCategory &&
+            filterIds.includes(campaign.campaignCategory.id)
+        );
+      }
+      return filtered;
     },
     sortedCampaigns() {
       if (!this.voucherData || this.voucherData.length == 0) return [];
@@ -86,6 +138,63 @@ export const campaignStore = defineStore("campaign", {
     },
   },
   actions: {
+    removeFilter(removedFilter) {
+      if (!removedFilter) return;
+      if (removedFilter.filterType == "partner") {
+        const indexOfObject = this.filterPartner.findIndex((filter) => {
+          return removedFilter.id == filter.id;
+        });
+        this.filterPartner.splice(indexOfObject, 1);
+      } else if (removedFilter.filterType == "category") {
+        const indexOfObject = this.filterCategory.findIndex((filter) => {
+          return removedFilter.id == filter.id;
+        });
+        this.filterCategory.splice(indexOfObject, 1);
+      }
+    },
+    async fetchCategories() {
+      try {
+        loading.show();
+        const res = await Category.fetch();
+        if (!res) {
+          alert.error(
+            "Error occurred when fetching categories!",
+            "Please try again later!"
+          );
+          return;
+        }
+        const categories = get(res, "data.data", []);
+        if (!categories && categories.length == 0) return;
+        const mappedCategories = categories.map((category) => {
+          return {
+            id: category.id,
+            name: get(category, "attributes.name", "Category Name"),
+            icon: get(category, "attributes.iconUrl", ""),
+          };
+        });
+        this.categories = mappedCategories;
+      } catch (error) {
+        alert.error("Error occurred!", error.message);
+      } finally {
+        loading.hide();
+      }
+    },
+    // async fetchPartners() {
+    //   try {
+    //     loading.show();
+    //     const res = await Maintainer.fetchPartnerList();
+    //     if (!res) {
+    //       alert.error("Error occurred when fetching partners!", "Please try again later!");
+    //       return;
+    //     }
+    //     const partners = get(res, "data", []);
+    //     if (!partners && partners.length == 0) return;
+    //     this.partners = partners;
+    //   } catch (error) {
+    //   } finally {
+    //     loading.hide();
+    //   }
+    // },
     async fetchVoucher() {
       const user = userStore();
       try {
@@ -142,7 +251,7 @@ export const campaignStore = defineStore("campaign", {
       const user = userStore();
       if (this.voucherDataId && user.userVoucherId) {
         this.voucherPurchased = this.voucherDataId.filter((data) =>
-        user.userVoucherId.includes(data)
+          user.userVoucherId.includes(data)
         );
       }
       console.log("Purchased voucher", this.voucherPurchased);

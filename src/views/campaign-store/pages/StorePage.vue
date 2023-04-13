@@ -13,22 +13,108 @@
           </v-btn>
         </div>
 
-        <div class="right-filter-group">
+        <div class="right-filter-group gap-8 d-flex align-center">
+          <v-autocomplete
+            class="select border-radius-6"
+            placeholder="Filter by Partner"
+            v-model="campaignStore.filterPartner"
+            :items="campaignStore.partners"
+            item-text="brandName"
+            item-value="id"
+            multiple
+            return-object
+            flat
+            solo
+            dense
+            outlined
+            hide-details
+            clearable
+          >
+            <template v-slot:selection="{ item, index }">
+              <v-chip v-if="index === 0">
+                <span>{{ item.brandName }}</span>
+              </v-chip>
+              <span v-if="index === 1" class="grey--text text-caption">
+                (+{{ campaignStore.filterPartner.length - 1 }} others)
+              </span>
+            </template>
+          </v-autocomplete>
           <v-select
-            class="btn-customize"
+            v-model="campaignStore.filterCategory"
+            :items="campaignStore.categories"
+            item-text="name"
+            item-value="id"
+            class="select border-radius-6"
+            placeholder="Filter by Category"
+            return-object
+            multiple
+            flat
+            solo
+            dense
+            outlined
+            clearable
+            hide-details
+          >
+            <template v-slot:selection="{ item, index }">
+              <v-chip v-if="index === 0">
+                <span>{{ item.name }}</span>
+              </v-chip>
+              <span v-if="index === 1" class="grey--text text-caption">
+                (+{{ campaignStore.filterCategory.length - 1 }} others)
+              </span>
+            </template>
+          </v-select>
+
+          <v-select
+            class="select border-radius-6"
             label="SortBy"
             item-text="name"
             :items="sort"
             :menu-props="{ maxHeight: '400' }"
             @change="campaignStore.changeVoucherFilter($event)"
-            solo
-            dense
             flat
+            solo
+            outlined
+            dense
             hide-details
-            persistent-hint
+            clearable
           ></v-select>
         </div>
       </div>
+      <div class="d-flex align-center mt-4">
+        <div class="flex-grow-1 pr-4">
+          <div class="text-sm font-weight-bold">Applied Filter:</div>
+          <div
+            class="d-flex gap-4 mt-1"
+            v-if="campaignStore.filters.length > 0"
+          >
+            <v-chip
+              color="primary"
+              v-for="(filter, index) in campaignStore.filters"
+              :key="index"
+              @click:close="campaignStore.removeFilter(filter)"
+              label
+              close
+              >{{ filter.filterName }}
+            </v-chip>
+          </div>
+          <div class="mt-1" v-else>
+            <v-chip color="primary" label>All </v-chip>
+          </div>
+        </div>
+      </div>
+      <v-text-field
+        v-model="campaignStore.searchKey"
+        class="border-radius-6 search-select mt-4"
+        placeholder="Search By Name"
+        prepend-inner-icon="mdi-magnify"
+        flat
+        solo
+        outlined
+        dense
+        hide-details
+        clearable
+      ></v-text-field>
       <div v-if="index == 1" class="full-width mt-6 card-container">
         <!-- TODO: use vue-responsive-components to make right container responsive better -->
         <v-row>
@@ -140,6 +226,7 @@ export default {
   async created() {
     await this.campaignStore.fetchVoucher();
     await this.userStore.fetchUserVoucher();
+    await this.campaignStore.fetchCategories();
     if (this.userStore.isConnected) {
       await this.campaignStore.checkIncludes();
     }
@@ -220,10 +307,13 @@ export default {
   width: max-content;
 }
 .btn-customize {
-  background: white;
-  border-radius: 8px;
-  border: 1px solid #e3e8ef;
   height: max-content;
+}
+.select {
+  max-width: 250px;
+}
+.search-select {
+  max-width: 450px;
 }
 .v-select {
   padding: 0;
