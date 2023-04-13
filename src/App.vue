@@ -1,8 +1,7 @@
 <template>
   <v-app>
-    <NavBarLanding v-if="campaignStore.pageIndex == 1" />
-    <page-navbar v-else-if="campaignStore.pageIndex == 2" />
-    <div v-else />
+    <HomeNavigationBar v-if="isHome" />
+    <PageNavigationBar v-else-if="isUserPage" />
     <v-main>
       <PluginLoading />
       <PluginSnackbar />
@@ -16,12 +15,11 @@ import NavBarLanding from "@/views/home/components/landing/landing-nav-bar.vue";
 import PageNavigationBar from "./components/NavigationBarPage.vue";
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
-import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
+import { get } from "lodash";
 export default {
   components: {
-    "page-navbar": PageNavigationBar,
-    NavBarLanding: NavBarLanding,
+    PageNavigationBar: PageNavigationBar,
+    HomeNavigationBar: NavBarLanding,
     PluginLoading: () => import("@/components/plugin/PluginLoading.vue"),
     PluginSnackbar: () => import("@/components/plugin/PluginAlert.vue"),
     PluginConfirmDialog: () =>
@@ -29,8 +27,12 @@ export default {
   },
   computed: {
     ...mapStores(userStore),
-    ...mapStores(campaignStore),
-    ...mapStores(inventoryStore),
+    isHome() {
+      return get(this.$route, "meta.isHome", false);
+    },
+    isUserPage() {
+      return get(this.$route, "meta.isUserPage", false);
+    },
   },
   async created() {
     // if (this.userStore.jwt) {
@@ -39,7 +41,7 @@ export default {
   },
   data() {
     return {
-      index: 2,
+      index: 1,
     };
   },
 };

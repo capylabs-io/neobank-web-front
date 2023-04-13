@@ -19,7 +19,7 @@
             <div class="d-flex">
               <v-text-field
                 v-model="userStore.userData.userMetadata.bankAccount"
-                v-if="!campaignStore.bankAccountEdit"
+                v-if="!bankAccountEdit"
                 background-color="neutral10"
                 height="36px"
                 type="text"
@@ -49,8 +49,8 @@
         <v-btn
           class="text-capitalize text-btn"
           variant="text"
-          @click="campaignStore.bankAccountEdit = true"
-          v-if="!campaignStore.bankAccountEdit"
+          @click="bankAccountEdit = true"
+          v-if="!bankAccountEdit"
           outlined
           depressed
         >
@@ -60,7 +60,7 @@
           <v-btn
             class="text-capitalize"
             variant="text"
-            @click="campaignStore.bankAccountEdit = false"
+            @click="bankAccountEdit = false"
             outlined
             depressed
           >
@@ -88,9 +88,8 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
-import informationEdit from "@/views/redeem/components/account-setting/information-edit.vue";
-import passwordChange from "@/views/redeem/components/account-setting/password-change.vue";
+import informationEdit from "../components/information-edit.vue";
+import passwordChange from "../components/password-change.vue";
 export default {
   components: {
     informationEdit: informationEdit,
@@ -98,12 +97,15 @@ export default {
   },
   computed: {
     ...mapStores(userStore),
-    ...mapStores(campaignStore),
+  },
+  data() {
+    return {
+      bankAccountEdit: false,
+    };
   },
   methods: {
     updateBankAccount() {
       this.userStore.updateBankAccount();
-      this.campaignStore.bankAccountEdit = false;
     },
   },
 };

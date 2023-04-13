@@ -4,7 +4,7 @@ import { Auth, Voucher } from "@/plugins/api.js";
 import { userStore } from "@/stores/userStore";
 import loading from "@/plugins/loading";
 import alert from "@/plugins/alert";
-import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
+import { inventoryStore } from "@/views/inventory/stores/inventoryStore";
 export const campaignStore = defineStore("campaign", {
   state: () => ({
     drawer: false,
@@ -52,16 +52,10 @@ export const campaignStore = defineStore("campaign", {
           sortedCampaigns.sort((a, b) => b.title.localeCompare(a.title));
           break;
         case "newest":
-          sortedCampaigns.sort(
-            (a, b) =>
-              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          );
+          sortedCampaigns.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
           break;
         case "oldest":
-          sortedCampaigns.sort(
-            (a, b) =>
-              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-          );
+          sortedCampaigns.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
           break;
         case "priceUp":
           sortedCampaigns
@@ -80,10 +74,7 @@ export const campaignStore = defineStore("campaign", {
       if (!this.voucherData || this.sortedCampaigns.length == 0) return 1;
       if (this.sortedCampaigns.length % this.vouchersPerPage == 0)
         return this.sortedCampaigns.length / this.vouchersPerPage;
-      else
-        return (
-          Math.floor(this.sortedCampaigns.length / this.vouchersPerPage) + 1
-        );
+      else return Math.floor(this.sortedCampaigns.length / this.vouchersPerPage) + 1;
     },
   },
   actions: {
@@ -111,10 +102,7 @@ export const campaignStore = defineStore("campaign", {
     async purchaseVoucher() {
       try {
         loading.show();
-        const res = await Voucher.purchaseVouchers(
-          this.voucherId,
-          this.bearerToken.jwt
-        );
+        const res = await Voucher.purchaseVouchers(this.voucherId, this.bearerToken.jwt);
         if (!res) {
           alert.error(`Error occurred! Please try again later!`);
           return;
@@ -144,9 +132,7 @@ export const campaignStore = defineStore("campaign", {
     checkIncludes() {
       const inventory = inventoryStore();
       if (this.voucherDataId && inventory.userVoucherId) {
-        this.voucherPurchased = this.voucherDataId.filter((data) =>
-          inventory.userVoucherId.includes(data)
-        );
+        this.voucherPurchased = this.voucherDataId.filter((data) => inventory.userVoucherId.includes(data));
       }
       console.log("Purchased voucher", this.voucherPurchased);
     },

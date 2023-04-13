@@ -145,7 +145,7 @@ import CampaignHelper from "@/helpers/campaign-helper";
 import { get } from "lodash";
 import moment from "moment";
 import { userStore } from "@/stores/userStore";
-import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
+import { campaignStore } from "../stores/campaignStore";
 import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
 import { mapStores } from "pinia";
 

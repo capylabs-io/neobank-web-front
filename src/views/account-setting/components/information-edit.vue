@@ -20,7 +20,7 @@
         </v-col>
         <v-col cols="4">
           <v-file-input
-            v-if="!campaignStore.profileEdit"
+            v-if="!profileEdit"
             class="pa-0"
             height="36px"
             disabled
@@ -54,7 +54,7 @@
         </v-col>
         <v-col cols="4">
           <v-text-field
-            v-if="!campaignStore.profileEdit"
+            v-if="!profileEdit"
             v-model="userStore.userData.userMetadata.firstName"
             height="36px"
             type="text"
@@ -85,7 +85,7 @@
         </v-col>
         <v-col cols="4">
           <v-text-field
-            v-if="!campaignStore.profileEdit"
+            v-if="!profileEdit"
             v-model="userStore.userData.userMetadata.lastName"
             height="36px"
             type="text"
@@ -116,7 +116,7 @@
         </v-col>
         <v-col cols="4">
           <v-text-field
-            v-if="!campaignStore.profileEdit"
+            v-if="!profileEdit"
             v-model="userStore.userData.email"
             height="36px"
             type="text"
@@ -147,7 +147,7 @@
         </v-col>
         <v-col cols="4">
           <v-text-field
-            v-if="!campaignStore.profileEdit"
+            v-if="!profileEdit"
             v-model="userStore.userData.userMetadata.phoneNumber"
             height="36px"
             type="text"
@@ -178,8 +178,8 @@
         <v-btn
           class="text-capitalize text-btn"
           variant="text"
-          @click="campaignStore.profileEdit = true"
-          v-if="!campaignStore.profileEdit"
+          @click="profileEdit = true"
+          v-if="!profileEdit"
           outlined
           depressed
         >
@@ -189,7 +189,7 @@
           <v-btn
             class="text-capitalize"
             variant="text"
-            @click="campaignStore.profileEdit = false"
+            @click="profileEdit = false"
             outlined
             depressed
           >
@@ -214,52 +214,6 @@
           </v-btn>
         </div>
       </div>
-
-      <!-- <v-row class="mt-sm-1">
-        <v-col cols="1" v-if="!campaignStore.profileEdit">
-          <v-btn
-            class="text-capitalize full-width"
-            :style="{ border: '1px solid #E3E8EF' }"
-            color="black"
-            variant="text"
-            @click="campaignStore.profileEdit = true"
-            text
-          >
-            Edit
-          </v-btn>
-        </v-col>
-        <v-col cols="5" v-else class="d-flex">
-          <v-btn
-            class="text-capitalize"
-            :style="{ border: '1px solid #E3E8EF' }"
-            color="black"
-            variant="text"
-            @click="campaignStore.profileEdit = false"
-            text
-          >
-            Cancel
-          </v-btn>
-
-          <v-btn
-            class="ml-4 text-capitalize"
-            :style="{ backgroundColor: 'var(--v-blue-base)' }"
-            color="white"
-            variant="text"
-            type="submit"
-            form="check-edit-form"
-            text
-            :disabled="
-              !userStore.file ||
-              !userStore.userData.userMetadata.firstName ||
-              !userStore.userData.userMetadata.lastName ||
-              !userStore.userData.email ||
-              !userStore.userData.userMetadata.phoneNumber
-            "
-          >
-            Save
-          </v-btn>
-        </v-col>
-      </v-row> -->
     </v-form>
   </v-card>
 </template>
@@ -267,11 +221,14 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
 export default {
   computed: {
     ...mapStores(userStore),
-    ...mapStores(campaignStore),
+  },
+  data() {
+    return {
+      profileEdit: false,
+    };
   },
   methods: {
     onFileChanged(data) {
@@ -280,9 +237,7 @@ export default {
     },
 
     editAccount() {
-      this.campaignStore.profileEdit = false;
       this.userStore.updateAccountSetting();
-      // window.location.reload();
     },
   },
 };

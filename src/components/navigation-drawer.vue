@@ -106,8 +106,8 @@
           <div>Log Out</div>
         </v-btn>
         <v-divider></v-divider>
-        <div class="text-overline-1 neutral70--text mt-2">
-          v1.0.1 - Development
+        <div class="text-xs neutral70--text mt-2">
+          v{{ version }} - {{ environment }}
         </div>
       </div>
     </div>
@@ -123,6 +123,12 @@ export default {
     ...mapStores(userStore),
     userToken() {
       return get(this.userStore, "userData.userMetadata.token", 0);
+    },
+    version() {
+      return get(process.env, "VUE_APP_API_VERSION", "1.0.0");
+    },
+    environment() {
+      return get(process.env, "VUE_APP_ENV", "Development");
     },
   },
   methods: {

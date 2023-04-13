@@ -1,5 +1,6 @@
 <template>
   <div class="d-flex flex-column justify-space-between full-height">
+    <PurchasedCampaignNoti />
     <CardDetailDrawer />
     <div class="full-height">
       <div class="d-flex justify-space-between button-filter">
@@ -11,6 +12,7 @@
             In-game Items
           </v-btn>
         </div>
+
         <div class="right-filter-group">
           <v-select
             class="btn-customize"
@@ -28,6 +30,7 @@
         </div>
       </div>
       <div v-if="index == 1" class="full-width mt-6 card-container">
+        <!-- TODO: use vue-responsive-components to make right container responsive better -->
         <v-row>
           <v-col
             cols="12"
@@ -37,6 +40,7 @@
           >
             <CampaignCard
               :campaign="card"
+              :isPurchased="campaignStore.voucherPurchased.includes(card.id)"
             />
           </v-col>
         </v-row>
@@ -82,9 +86,10 @@ export default {
   components: {
     // voucherCard: voucherCard,
     clothesCard: clothesCard,
-    CampaignCard: () => import("../../components/campaign/campaign-card.vue"),
-    CardDetailDrawer: () =>
-      import("../../components/campaign/card-detail-drawer.vue"),
+    CampaignCard: () => import("../components/campaign-card.vue"),
+    CardDetailDrawer: () => import("../components/card-detail-drawer.vue"),
+    PurchasedCampaignNoti: () =>
+      import("../components/purchased-noti-dialog.vue"),
   },
   computed: {
     ...mapStores(userStore),
@@ -132,18 +137,18 @@ export default {
         { index: 2 },
       ],
 
-      index: 1,
+      index: 0,
     };
   },
   async created() {
-    // if (this.userStore.jwt) {
-    //   this.index = 1;
-    // } else {
-    //   this.index = 2;
-    // }
+    if (this.userStore.jwt) {
+      this.index = 1;
+    } else {
+      this.index = 2;
+    }
     await this.campaignStore.fetchVoucher();
-    // await this.inventoryStore.fetchUserVoucher();
-    // await this.campaignStore.checkIncludes();
+    await this.inventoryStore.fetchUserVoucher();
+    await this.campaignStore.checkIncludes();
   },
   methods: {
     clothesTab() {

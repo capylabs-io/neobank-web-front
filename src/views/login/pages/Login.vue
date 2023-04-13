@@ -26,10 +26,10 @@
         <div class="text-xl text-left mt-sm-4">Password</div>
         <v-text-field
           v-model="userStore.password"
-          :append-icon="userStore.isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
-          :type="userStore.isShowPass ? 'text' : 'password'"
+          :append-icon="isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="isShowPass ? 'text' : 'password'"
           :rules="rules.password"
-          @click:append="userStore.isShowPass = !userStore.isShowPass"
+          @click:append="isShowPass = !isShowPass"
           solo
           dense
           background-color="cream"
@@ -73,35 +73,24 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
 import { rules } from "@/plugins/rules";
 export default {
   components: {},
   created() {
-    this.change();
     this.userStore.email = "";
     this.userStore.password = "";
   },
   computed: {
     ...mapStores(userStore),
-    ...mapStores(campaignStore),
   },
   data() {
     return {
       rules: rules,
       isShow: true,
+      isShowPass: false,
     };
   },
   methods: {
-    gotoRouter(url) {
-      this.$router.push({
-        params: "vn",
-        name: url,
-      });
-    },
-    change() {
-      this.campaignStore.pageIndex = 3;
-    },
     submitForm() {
       if (this.$refs.form.validate()) {
         this.userStore.signIn();

@@ -9,7 +9,7 @@
         </v-col>
         <v-col cols="4">
           <v-text-field
-            v-if="!campaignStore.changePassword"
+            v-if="!changePassword"
             height="36px"
             type="password"
             class="pa-0"
@@ -24,10 +24,10 @@
             v-else
             v-model="userStore.currentPassword"
             height="36px"
-            :append-icon="userStore.isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="userStore.isShowPass ? 'text' : 'password'"
+            :append-icon="isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="isShowPass ? 'text' : 'password'"
             :rules="rules.password"
-            @click:append="userStore.isShowPass = !userStore.isShowPass"
+            @click:append="isShowPass = !isShowPass"
             class="pa-0"
             outlined
             dense
@@ -44,7 +44,7 @@
         </v-col>
         <v-col cols="4">
           <v-text-field
-            v-if="!campaignStore.changePassword"
+            v-if="!changePassword"
             height="36px"
             type="password"
             class="pa-0"
@@ -61,10 +61,10 @@
             class="pa-0"
             placeholder=""
             outlined
-            :append-icon="userStore.isShowpPass ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="userStore.isShowpPass ? 'text' : 'password'"
+            :append-icon="isShowpPass ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="isShowpPass ? 'text' : 'password'"
             :rules="rules.password"
-            @click:append="userStore.isShowpPass = !userStore.isShowpPass"
+            @click:append="isShowpPass = !isShowpPass"
             dense
             flat
           />
@@ -79,7 +79,7 @@
         </v-col>
         <v-col cols="4">
           <v-text-field
-            v-if="!campaignStore.changePassword"
+            v-if="!changePassword"
             height="36px"
             type="password"
             class="pa-0"
@@ -98,9 +98,9 @@
             placeholder=""
             outlined
             :rules="[passwordConfirmationRule]"
-            :append-icon="userStore.isShowcPass ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="userStore.isShowcPass ? 'text' : 'password'"
-            @click:append="userStore.isShowcPass = !userStore.isShowcPass"
+            :append-icon="isShowcPass ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="isShowcPass ? 'text' : 'password'"
+            @click:append="isShowcPass = !isShowcPass"
             dense
             flat
           />
@@ -111,8 +111,8 @@
         <v-btn
           class="text-capitalize text-btn"
           variant="text"
-          @click="campaignStore.changePassword = true"
-          v-if="!campaignStore.changePassword"
+          @click="changePassword = true"
+          v-if="!changePassword"
           outlined
           depressed
         >
@@ -122,7 +122,7 @@
           <v-btn
             class="text-capitalize"
             variant="text"
-            @click="campaignStore.changePassword = false"
+            @click="changePassword = false"
             outlined
             depressed
           >
@@ -145,50 +145,6 @@
           </v-btn>
         </div>
       </div>
-
-      <!-- <v-row class="mt-sm-1">
-        <v-col cols="2" v-if="!campaignStore.changePassword">
-          <v-btn
-            class="text-capitalize full-width"
-            :style="{ border: '1px solid #E3E8EF' }"
-            color="black"
-            variant="text"
-            @click="campaignStore.changePassword = true"
-            text
-          >
-            Change password
-          </v-btn>
-        </v-col>
-        <v-col cols="5" v-else class="d-flex">
-          <v-btn
-            class="text-capitalize"
-            :style="{ border: '1px solid #E3E8EF' }"
-            color="black"
-            variant="text"
-            @click="campaignStore.changePassword = false"
-            text
-          >
-            Cancel
-          </v-btn>
-
-          <v-btn
-            class="ml-4 text-capitalize"
-            :style="{ backgroundColor: 'var(--v-blue-base)' }"
-            color="white"
-            variant="text"
-            type="submit"
-            form="change-password-form"
-            text
-            :disabled="
-              !userStore.currentPassword ||
-              !userStore.confirmNewPassword ||
-              !userStore.newPassword
-            "
-          >
-            Save
-          </v-btn>
-        </v-col>
-      </v-row> -->
     </v-form>
   </v-card>
 </template>
@@ -197,11 +153,9 @@
 import { rules } from "@/plugins/rules";
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
 export default {
   computed: {
     ...mapStores(userStore),
-    ...mapStores(campaignStore),
     passwordConfirmationRule() {
       return () =>
         this.userStore.newPassword === this.userStore.confirmNewPassword ||
@@ -211,12 +165,15 @@ export default {
   data() {
     return {
       rules: rules,
+      isShowPass: false,
+      isShowcPass: false,
+      isShowpPass: false,
+      changePassword: false,
     };
   },
   methods: {
     changeYourPassword() {
       this.userStore.changePassword();
-      this.campaignStore.changePassword = false;
       this.userStore.logout();
       this.$router.push("/login");
     },

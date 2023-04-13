@@ -34,7 +34,7 @@
         <v-icon color="white"> mdi-arrow-right-thin </v-icon>
       </v-btn>
     </div>
-    
+
     <introduction />
     <v-img class="redblur-image" :src="require(`@/assets/red-blur.webp`)">
     </v-img>
@@ -58,7 +58,6 @@ import secondsection from "../components/landing/landing-second-section.vue";
 import thirdSectionVue from "../components/landing/landing-third-section.vue";
 import { mapStores } from "pinia";
 import { homeStore } from "@/views/home/store/homeStore";
-import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
 
 export default {
   name: "HomeView",
@@ -70,7 +69,6 @@ export default {
     FooterLanding: FooterLanding,
   },
   computed: {
-    ...mapStores(campaignStore),
     ...mapStores(homeStore),
   },
   data() {
@@ -89,9 +87,6 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
-    change() {
-      this.campaignStore.pageIndex = 1;
-    },
     handleScroll() {
       const doorway = document.querySelector(".doorway");
       const introduction = document.querySelector(".introduction");

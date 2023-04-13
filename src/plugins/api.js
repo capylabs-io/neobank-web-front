@@ -1,22 +1,18 @@
 import axios from "axios";
 import utils from "@/plugins/utils";
+import { get } from "lodash";
 
 // axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT;
-axios.defaults.baseURL = "https://neobank-dev-api.capylabs.io/api/";
+axios.defaults.baseURL = get(process.env, "VUE_APP_API_ENDPOINT", "https://neobank-dev-api.capylabs.io/api/");
 const USER_API = "/users/";
 
 const APIHelper = (api) => ({
-  search: (params, option) =>
-    axios.get(api, { params: utils.filterObject(params) }, option),
-  count: (params, option) =>
-    axios.get(api + "count", { params: utils.filterObject(params) }, option),
-  fetch: (params, option) =>
-    axios.get(api, { params: utils.filterObject(params) }, option),
+  search: (params, option) => axios.get(api, { params: utils.filterObject(params) }, option),
+  count: (params, option) => axios.get(api + "count", { params: utils.filterObject(params) }, option),
+  fetch: (params, option) => axios.get(api, { params: utils.filterObject(params) }, option),
   fetchOne: (id, option) => axios.get(api + id, option),
-  create: (params, options) =>
-    axios.post(api, utils.filterObject(params), options),
-  update: (id, params, option) =>
-    axios.put(api + id, utils.filterObject(params), option),
+  create: (params, options) => axios.post(api, utils.filterObject(params), options),
+  update: (id, params, option) => axios.put(api + id, utils.filterObject(params), option),
   remove: (id, option) => axios.delete(api + id, option),
 });
 export const APIRespository = APIHelper;
@@ -51,8 +47,7 @@ export const Auth = {
         },
       }
     ),
-  resetPassword: (resetPasswordData) =>
-    axios.post("auth/reset-password", resetPasswordData),
+  resetPassword: (resetPasswordData) => axios.post("auth/reset-password", resetPasswordData),
 };
 
 export const User = {
@@ -138,8 +133,7 @@ export const Voucher = {
     ),
   fetchUserVouchers: (id, token) =>
     axios.get(
-      `vouchers?populate[0]=user&populate[1]=campaign&populate[2]=campaignCategory&filters[user][id]=` +
-        id,
+      `vouchers?populate[0]=user&populate[1]=campaign&populate[2]=campaignCategory&filters[user][id]=` + id,
       {
         headers: {
           Authorization: "Bearer " + token,

@@ -19,53 +19,44 @@ const routes = [
     path: "/home",
     name: "home",
     component: () => import("../views/home/pages/Landing-page.vue"),
+    meta: {
+      isHome: true,
+    },
   },
   {
     path: "/account",
     name: "Account",
-    component: () => import("../views/redeem/pages/UserLayout.vue"),
+    component: () => import("../views/UserLayout.vue"),
     meta: {
       requiresAuth: true,
+      isUserPage: true,
     },
     children: [
-      {
-        path: "/inventory",
-        name: "Inventory",
-        component: () =>
-          import("../views/redeem/pages/inventory/Redeem-inventory.vue"),
-        meta: {
-          requiresAuth: true,
-        },
-      },
+      // {
+      //   path: "/inventory",
+      //   name: "Inventory",
+      //   component: () => import("../views/redeem/pages/inventory/Redeem-inventory.vue"),
+      //   meta: {
+      //     requiresAuth: true,
+      // isUserPage: true
+      //   },
+      // },
       {
         path: "/account-setting",
         name: "Account Setting",
-        component: () =>
-          import("../views/redeem/pages/accountSetting/account-setting.vue"),
+        component: () => import("../views/account-setting/pages/account-setting.vue"),
         meta: {
           requiresAuth: true,
+          isUserPage: true,
         },
       },
       {
         path: "/store",
         name: "Store",
-        component: () => import("../views/redeem/pages/campaign/StorePage.vue"),
+        component: () => import("../views/campaign-store/pages/StorePage.vue"),
         meta: {
-          requiresAuth: true,
+          isUserPage: true,
         },
-      },
-    ],
-  },
-  {
-    path: "/account-unAuth",
-    name: "Account Unauthor",
-    component: () => import("../views/redeem/pages/UserLayoutUnAuth.vue"),
-    children: [
-      {
-        path: "/store-unAuth",
-        name: "Store Unauthor",
-        component: () =>
-          import("../views/redeem/pages/campaign/StorePageUnAuth.vue"),
       },
     ],
   },
@@ -102,20 +93,10 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const user = userStore();
   if (to.meta && to.meta.requiresAuth && !user.isConnected) {
-    alert.error("You have to login to accessing Your Inventory!");
-    next("/store-unAuth");
+    alert.error("You have to login before accessing this page!");
+    next("/login");
   }
   next();
 });
-// router.beforeEach((to, from, next) => {
-//   // use the language from the routing param or default language
-//   let language = to.params.lang;
-//   if (!language) {
-//     language = "en";
-//   }
-//   // set the current language for i18n.
-//   i18n.locale = language;
-//   next();
-// });
 
 export default router;

@@ -9,9 +9,6 @@ export const userStore = defineStore("user", {
   state: () => ({
     rememberMe: false,
     acceptTerm: false,
-    isShowPass: false,
-    isShowcPass: false,
-    isShowpPass: false,
 
     jwt: "",
     username: "",
@@ -50,7 +47,7 @@ export const userStore = defineStore("user", {
         if (!this.rememberMe) {
           this.password = "";
         }
-        this.router.push("/store");
+        this.router.push("/inventory");
       } catch (error) {
         console.error(`Error: ${error}`);
         alert.error(error);
