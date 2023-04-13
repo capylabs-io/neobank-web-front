@@ -10,6 +10,7 @@ axios.defaults.baseURL = get(
 );
 const USER_API = "/users/";
 const CATEGORY_API = "/campaign-categories/";
+const PARTNER_API = "/user/partners";
 
 const APIHelper = (api) => ({
   search: (params, option) =>
@@ -62,6 +63,9 @@ export const Auth = {
 };
 export const Category = {
   ...APIHelper(CATEGORY_API),
+};
+export const Partner = {
+  ...APIHelper(PARTNER_API),
 };
 export const User = {
   ...APIHelper(USER_API),

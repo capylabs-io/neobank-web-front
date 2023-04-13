@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import { Auth, Category, Voucher } from "@/plugins/api.js";
+import { Auth, Category, Partner, Voucher } from "@/plugins/api.js";
 import { userStore } from "@/stores/userStore";
 import loading from "@/plugins/loading";
 import alert from "@/plugins/alert";
@@ -179,22 +179,25 @@ export const campaignStore = defineStore("campaign", {
         loading.hide();
       }
     },
-    // async fetchPartners() {
-    //   try {
-    //     loading.show();
-    //     const res = await Maintainer.fetchPartnerList();
-    //     if (!res) {
-    //       alert.error("Error occurred when fetching partners!", "Please try again later!");
-    //       return;
-    //     }
-    //     const partners = get(res, "data", []);
-    //     if (!partners && partners.length == 0) return;
-    //     this.partners = partners;
-    //   } catch (error) {
-    //   } finally {
-    //     loading.hide();
-    //   }
-    // },
+    async fetchPartners() {
+      try {
+        loading.show();
+        const res = await Partner.fetch();
+        if (!res) {
+          alert.error(
+            "Error occurred when fetching partners!",
+            "Please try again later!"
+          );
+          return;
+        }
+        const partners = get(res, "data", []);
+        if (!partners && partners.length == 0) return;
+        this.partners = partners;
+      } catch (error) {
+      } finally {
+        loading.hide();
+      }
+    },
     async fetchVoucher() {
       const user = userStore();
       try {

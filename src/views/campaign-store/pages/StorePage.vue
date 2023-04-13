@@ -21,14 +21,14 @@
             :items="campaignStore.partners"
             item-text="brandName"
             item-value="id"
-            multiple
             return-object
+            multiple
             flat
             solo
             dense
             outlined
-            hide-details
             clearable
+            hide-details
           >
             <template v-slot:selection="{ item, index }">
               <v-chip v-if="index === 0">
@@ -227,6 +227,7 @@ export default {
     await this.campaignStore.fetchVoucher();
     await this.userStore.fetchUserVoucher();
     await this.campaignStore.fetchCategories();
+    await this.campaignStore.fetchPartners();
     if (this.userStore.isConnected) {
       await this.campaignStore.checkIncludes();
     }
@@ -310,7 +311,7 @@ export default {
   height: max-content;
 }
 .select {
-  max-width: 250px;
+  max-width: 280px;
 }
 .search-select {
   max-width: 450px;
