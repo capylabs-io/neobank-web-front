@@ -89,15 +89,13 @@
 import { get } from "lodash";
 import moment from "moment";
 import { mapStores } from "pinia";
-import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
 import { userStore } from "@/stores/userStore";
-import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
+import { campaignStore } from "@/views/campaign-store/stores/campaignStore";
 
 export default {
   computed: {
     ...mapStores(campaignStore),
     ...mapStores(userStore),
-    ...mapStores(inventoryStore),
     getCategoryIcon() {
       return get(
         this.campaignStore.detailCard,
@@ -126,7 +124,7 @@ export default {
     async cancel() {
       try {
         await this.campaignStore.fetchVoucher();
-        await this.inventoryStore.fetchUserVoucher();
+        await this.userStore.fetchUserVoucher();
         await this.userStore.fetchUserMetadata();
         await this.campaignStore.checkIncludes();
         this.campaignStore.purchaseCampaignNoti = false;

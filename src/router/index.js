@@ -32,19 +32,21 @@ const routes = [
       isUserPage: true,
     },
     children: [
-      // {
-      //   path: "/inventory",
-      //   name: "Inventory",
-      //   component: () => import("../views/redeem/pages/inventory/Redeem-inventory.vue"),
-      //   meta: {
-      //     requiresAuth: true,
-      // isUserPage: true
-      //   },
-      // },
+      {
+        path: "/inventory",
+        name: "Inventory",
+        component: () =>
+          import("../views/inventory/pages/Redeem-inventory.vue"),
+        meta: {
+          requiresAuth: true,
+          isUserPage: true,
+        },
+      },
       {
         path: "/account-setting",
         name: "Account Setting",
-        component: () => import("../views/account-setting/pages/account-setting.vue"),
+        component: () =>
+          import("../views/account-setting/pages/account-setting.vue"),
         meta: {
           requiresAuth: true,
           isUserPage: true,

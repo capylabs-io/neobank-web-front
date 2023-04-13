@@ -35,7 +35,7 @@
             md="4"
             sm="6"
             xs="12"
-            v-for="card in inventoryStore.slicedUserVoucher"
+            v-for="card in userStore.slicedUserVoucher"
             :key="card.id"
           >
             <inventoryCard :id="card.id" :cards="card" />
@@ -45,8 +45,8 @@
     </div>
     <div class="pagination">
       <v-pagination
-        v-model="inventoryStore.userVoucherPage"
-        :length="inventoryStore.totalUserVoucherPerPage"
+        v-model="userStore.userVoucherPage"
+        :length="userStore.totalUserVoucherPerPage"
         light
         circle
         color="#5752e3"
@@ -58,17 +58,15 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
-import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
-import inventoryCard from "@/views/redeem/components/inventory/inventory-card.vue";
+import { campaignStore } from "@/views/campaign-store/stores/campaignStore";
 export default {
   components: {
-    inventoryCard: inventoryCard,
+    inventoryCard: () => import("../components/inventory-card.vue"),
     InventoryDetailDrawer: () =>
-      import("../../components/inventory/inventory-card-drawer.vue"),
+      import("../components/inventory-card-drawer.vue"),
   },
   async created() {
-    await this.inventoryStore.fetchUserVoucher();
+    await this.userStore.fetchUserVoucher();
   },
   data() {
     return {};
@@ -76,7 +74,6 @@ export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(campaignStore),
-    ...mapStores(inventoryStore),
   },
   watch: {
     group() {

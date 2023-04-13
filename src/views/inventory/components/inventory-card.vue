@@ -42,13 +42,11 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
-import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
+import { campaignStore } from "@/views/campaign-store/stores/campaignStore";
 export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(campaignStore),
-    ...mapStores(inventoryStore),
   },
   props: ["cards"],
   data() {
@@ -59,9 +57,9 @@ export default {
   },
   methods: {
     openClick() {
-      this.inventoryStore.drawer = true;
-      this.inventoryStore.ivenCardData = this.cards;
-      this.inventoryStore.ivenVoucherQr = this.cards.qrCodeUrl;
+      this.userStore.drawer = true;
+      this.userStore.ivenCardData = this.cards;
+      this.userStore.ivenVoucherQr = this.cards.qrCodeUrl;
     },
   },
 };

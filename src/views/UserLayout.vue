@@ -19,7 +19,9 @@ export default {
     NavigationDrawer: () => import("@/components/navigation-drawer.vue"),
   },
   async created() {
-    await this.userStore.fetchUserMetadata();
+    if (this.userStore.isConnected) {
+      await this.userStore.fetchUserMetadata();
+    }
   },
 };
 </script>

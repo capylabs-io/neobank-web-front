@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-model="inventoryStore.drawer"
+    v-model="userStore.drawer"
     fixed
     right
     hide-overlay
@@ -13,10 +13,6 @@
     >
       <div class="drawer-image d-flex flex-column">
         <div class="full-width">
-          <!-- <v-img
-            class="drawer-image"
-            :src="inventoryStore.ivenCardData.campaign.data.attributes.thumbnailUrl"
-          ></v-img> -->
           <v-img class="drawer-image" :src="categoryImage"></v-img>
         </div>
       </div>
@@ -24,17 +20,15 @@
         <v-img class="drawer-icon mx-auto" :src="categoryIcon" />
       </div>
       <div class="mt-3 font-weight-bold text-center text-lg">
-        <!-- <span class="mt-3"> {{ inventoryStore.ivenCardData.campaign.data.attributes.title }} </span> -->
         <span class="mt-3"> {{ categoryTitle }} </span>
       </div>
 
       <div class="mt-3 text-left draw-text">
-        <!-- {{ inventoryStore.ivenCardData.campaign.data.attributes.fullDescription }} -->
         {{ categoryDescription }}
       </div>
       <v-spacer></v-spacer>
       <div class="qr-img mx-auto mt-3 justify-space-between">
-        <v-img class="" :src="inventoryStore.ivenVoucherQr" />
+        <v-img class="" :src="userStore.ivenVoucherQr" />
       </div>
     </div>
   </v-navigation-drawer>
@@ -43,36 +37,34 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
 import { get } from "lodash";
 export default {
   computed: {
     ...mapStores(userStore),
-    ...mapStores(inventoryStore),
     categoryIcon() {
       return get(
-        this.inventoryStore,
+        this.userStore,
         "ivenCardData.campaignCategory.data.attributes.iconUrl",
         require("@/assets/views/category/category-icon-example.png")
       );
     },
     categoryImage() {
       return get(
-        this.inventoryStore,
+        this.userStore,
         "ivenCardData.campaign.data.attributes.thumbnailUrl",
         require("@/assets/redeem/card/baemin-card.webp")
       );
     },
     categoryTitle() {
       return get(
-        this.inventoryStore,
+        this.userStore,
         "ivenCardData.campaign.data.attributes.title",
         "title"
       );
     },
     categoryDescription() {
       return get(
-        this.inventoryStore,
+        this.userStore,
         "ivenCardData.campaign.data.attributes.fullDescription",
         ""
       );

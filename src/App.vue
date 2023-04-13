@@ -35,9 +35,6 @@ export default {
     },
   },
   async created() {
-    // if (this.userStore.jwt) {
-    //   await this.inventoryStore.fetchUserVoucher();
-    // }
   },
   data() {
     return {

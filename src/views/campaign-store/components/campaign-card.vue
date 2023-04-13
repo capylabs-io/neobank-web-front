@@ -146,7 +146,6 @@ import { get } from "lodash";
 import moment from "moment";
 import { userStore } from "@/stores/userStore";
 import { campaignStore } from "../stores/campaignStore";
-import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
 import { mapStores } from "pinia";
 
 export default {
@@ -163,7 +162,6 @@ export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(campaignStore),
-    ...mapStores(inventoryStore),
     canPurchase() {
       const currentPrice = get(this.campaign, "price", 0);
       const currentToken = get(
@@ -243,7 +241,7 @@ export default {
               this.$loading.show();
               await this.campaignStore.purchaseVoucher();
               await this.campaignStore.fetchVoucher();
-              await this.inventoryStore.fetchUserVoucher();
+              await this.userStore.fetchUserVoucher();
               await this.userStore.fetchUserMetadata();
               this.campaignStore.drawerDetail = false;
               this.campaignStore.purchaseCampaignNoti = true;

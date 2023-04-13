@@ -75,17 +75,15 @@
 </template>
 
 <script>
-import clothesCard from "@/views/redeem/components/campaign/clothes-card.vue";
 import { userStore } from "@/stores/userStore";
-import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
-import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
+import { campaignStore } from "@/views/campaign-store/stores/campaignStore";
 import { mapStores } from "pinia";
 
 export default {
   props: ["voucher", "userVoucher"],
   components: {
     // voucherCard: voucherCard,
-    clothesCard: clothesCard,
+    clothesCard: () => import("../components/clothes-card.vue"),
     CampaignCard: () => import("../components/campaign-card.vue"),
     CardDetailDrawer: () => import("../components/card-detail-drawer.vue"),
     PurchasedCampaignNoti: () =>
@@ -94,7 +92,6 @@ export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(campaignStore),
-    ...mapStores(inventoryStore),
   },
   created() {},
   data() {
@@ -137,18 +134,15 @@ export default {
         { index: 2 },
       ],
 
-      index: 0,
+      index: 1,
     };
   },
   async created() {
-    if (this.userStore.jwt) {
-      this.index = 1;
-    } else {
-      this.index = 2;
-    }
     await this.campaignStore.fetchVoucher();
-    await this.inventoryStore.fetchUserVoucher();
-    await this.campaignStore.checkIncludes();
+    await this.userStore.fetchUserVoucher();
+    if (this.userStore.isConnected) {
+      await this.campaignStore.checkIncludes();
+    }
   },
   methods: {
     clothesTab() {

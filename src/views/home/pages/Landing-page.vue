@@ -80,7 +80,6 @@ export default {
   },
   created() {
     window.addEventListener("scroll", this.handleScroll);
-    this.change();
   },
   // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
   beforeDestroy() {

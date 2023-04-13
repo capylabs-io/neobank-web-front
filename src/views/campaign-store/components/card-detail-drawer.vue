@@ -129,14 +129,12 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { campaignStore } from "@/views/redeem/components/campaign/stores/campaignStore";
-import { inventoryStore } from "@/views/redeem/components/inventory/stores/inventoryStore";
+import { campaignStore } from "@/views/campaign-store/stores/campaignStore";
 import { get } from "lodash";
 export default {
   computed: {
     ...mapStores(userStore),
     ...mapStores(campaignStore),
-    ...mapStores(inventoryStore),
     categoryIcon() {
       return get(
         this.campaignStore,
@@ -160,31 +158,6 @@ export default {
       var number = this.campaignStore.detailCard.attributes.quantity;
       number--;
       this.campaignStore.detailCard.attributes.quantity = number + "";
-    },
-    buy() {
-      this.$dialog.confirm({
-        title: "Confirm Purchase Voucher",
-        topContent:
-          "Are you sure you want to purchase this voucher? This action cannot be undone!",
-        okText: "Confirm",
-        cancelText: "Cancel",
-        done: async () => {
-          try {
-            this.$loading.show();
-            this.campaignStore.voucherId = this.campaignStore.detailCard.id;
-            await this.campaignStore.purchaseVoucher();
-            await this.inventoryStore.fetchUserVoucher();
-            await this.userStore.fetchUserMetadata();
-            await this.campaignStore.fetchVoucher();
-            this.campaignStore.drawerDetail = false;
-            window.location.reload();
-          } catch (error) {
-            this.$alert.error("Error occured! Error: " + error);
-          } finally {
-            this.$loading.hide();
-          }
-        },
-      });
     },
   },
 };
