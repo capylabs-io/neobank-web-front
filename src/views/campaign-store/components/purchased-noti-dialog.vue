@@ -23,7 +23,41 @@
         <div class="mt-2 mid-content text-center text-lg font-weight-bold">
           {{ campaignStore.detailCard.title }}
         </div>
-        <div class="mt-2 bottom-content">
+        <v-row class="mt-2 bottom-content">
+          <v-col cols="6"
+            ><div class="font-weight-bold">START DATE:</div>
+            <div class="mt-2 font-weight-bold">END DATE:</div>
+            <div class="mt-2 font-weight-bold">CATEGORY:</div>
+            <div class="mt-2 font-weight-bold">PRICE:</div></v-col
+          >
+          <v-col cols="6">
+            <div>{{ campaignStore.detailCard.startDate | ddmmyyyy }}</div>
+            <div class="mt-2">
+              {{ campaignStore.detailCard.endDate | ddmmyyyy }}
+            </div>
+            <div class="mt-2 d-flex align-center">
+              <v-img
+                max-width="15px"
+                max-height="15px"
+                :src="getCategoryIcon"
+                cover
+                class="mr-2"
+              ></v-img>
+              {{ getCategoryName }}
+            </div>
+            <div class="d-flex align-center mt-2">
+              {{ campaignStore.detailCard.price }}
+              <v-img
+                class="ml-2 token-icon"
+                max-height="15px"
+                max-width="15px"
+                :src="require(`@/assets/redeem/coin.webp`)"
+                contain
+              />
+            </div>
+          </v-col>
+        </v-row>
+        <!-- <div class="mt-2 bottom-content">
           <div>
             StartDate: {{ campaignStore.detailCard.startDate | ddmmyyyy }}
           </div>
@@ -58,7 +92,7 @@
               />
             </div>
           </div>
-        </div>
+        </div> -->
       </v-card>
       <v-card-actions class="pa-0 mt-6">
         <v-btn

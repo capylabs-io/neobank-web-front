@@ -77,7 +77,6 @@
             outlined
             dense
             hide-details
-            clearable
           ></v-select>
         </div>
       </div>
