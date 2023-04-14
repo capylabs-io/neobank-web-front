@@ -20,7 +20,7 @@ export const campaignStore = defineStore("campaign", {
     index: 1,
 
     voucherPage: 1,
-    vouchersPerPage: 4,
+    vouchersPerPage: 8,
 
     sortBy: "",
     voucherId: "",
@@ -69,23 +69,16 @@ export const campaignStore = defineStore("campaign", {
       let filtered = this.sortedCampaigns;
       if (this.searchKey)
         filtered = filtered.filter((campaign) =>
-          campaign.title
-            .toLowerCase()
-            .includes(this.searchKey.trim().toLowerCase())
+          campaign.title.toLowerCase().includes(this.searchKey.trim().toLowerCase())
         );
       if (this.filterPartner && this.filterPartner.length > 0) {
         const filterIds = this.filterPartner.map((filter) => filter.id);
-        filtered = filtered.filter(
-          (campaign) =>
-            campaign.partner && filterIds.includes(campaign.partner.id)
-        );
+        filtered = filtered.filter((campaign) => campaign.partner && filterIds.includes(campaign.partner.id));
       }
       if (this.filterCategory && this.filterCategory.length > 0) {
         const filterIds = this.filterCategory.map((filter) => filter.id);
         filtered = filtered.filter(
-          (campaign) =>
-            campaign.campaignCategory &&
-            filterIds.includes(campaign.campaignCategory.id)
+          (campaign) => campaign.campaignCategory && filterIds.includes(campaign.campaignCategory.id)
         );
       }
       return filtered;
@@ -103,16 +96,10 @@ export const campaignStore = defineStore("campaign", {
           sortedCampaigns.sort((a, b) => b.title.localeCompare(a.title));
           break;
         case "newest":
-          sortedCampaigns.sort(
-            (a, b) =>
-              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          );
+          sortedCampaigns.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
           break;
         case "oldest":
-          sortedCampaigns.sort(
-            (a, b) =>
-              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-          );
+          sortedCampaigns.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
           break;
         case "priceUp":
           sortedCampaigns
@@ -128,13 +115,10 @@ export const campaignStore = defineStore("campaign", {
       return sortedCampaigns;
     },
     totalVoucherPage() {
-      if (!this.voucherData || this.sortedCampaigns.length == 0) return 1;
-      if (this.sortedCampaigns.length % this.vouchersPerPage == 0)
-        return this.sortedCampaigns.length / this.vouchersPerPage;
-      else
-        return (
-          Math.floor(this.sortedCampaigns.length / this.vouchersPerPage) + 1
-        );
+      if (!this.voucherData || this.filteredCampaigns.length == 0) return 1;
+      if (this.filteredCampaigns.length % this.vouchersPerPage == 0)
+        return this.filteredCampaigns.length / this.vouchersPerPage;
+      else return Math.floor(this.filteredCampaigns.length / this.vouchersPerPage) + 1;
     },
   },
   actions: {
@@ -157,10 +141,7 @@ export const campaignStore = defineStore("campaign", {
         loading.show();
         const res = await Category.fetch();
         if (!res) {
-          alert.error(
-            "Error occurred when fetching categories!",
-            "Please try again later!"
-          );
+          alert.error("Error occurred when fetching categories!", "Please try again later!");
           return;
         }
         const categories = get(res, "data.data", []);
@@ -184,10 +165,7 @@ export const campaignStore = defineStore("campaign", {
         loading.show();
         const res = await Partner.fetch();
         if (!res) {
-          alert.error(
-            "Error occurred when fetching partners!",
-            "Please try again later!"
-          );
+          alert.error("Error occurred when fetching partners!", "Please try again later!");
           return;
         }
         const partners = get(res, "data", []);
@@ -209,8 +187,6 @@ export const campaignStore = defineStore("campaign", {
         }
         this.voucherData = res.data;
         this.voucherDataId = this.voucherData.map((index) => index.id);
-        console.log("storeVoucher", this.voucherData);
-        console.log("storeVoucherid", this.voucherDataId);
       } catch (error) {
         console.error(`Error: ${error}`);
         alert.error(error);
@@ -228,7 +204,6 @@ export const campaignStore = defineStore("campaign", {
           alert.error(`Error occurred! Please try again later!`);
           return;
         }
-        console.log("purchase", res.data);
         alert.success("Voucher Purchased successfully!");
       } catch (error) {
         console.error(`Error: ${error}`);
@@ -240,8 +215,6 @@ export const campaignStore = defineStore("campaign", {
 
     changeVoucherFilter(sortBy) {
       this.sortBy = sortBy;
-      console.log("sortBy", this.sortBy);
-      console.log("sortedCampaign", this.sortedCampaigns);
     },
     setDetailStoreCard(cards) {
       this.detailCard = cards;
@@ -253,9 +226,7 @@ export const campaignStore = defineStore("campaign", {
     checkIncludes() {
       const user = userStore();
       if (this.voucherDataId && user.userVoucherId) {
-        this.voucherPurchased = this.voucherDataId.filter((data) =>
-          user.userVoucherId.includes(data)
-        );
+        this.voucherPurchased = this.voucherDataId.filter((data) => user.userVoucherId.includes(data));
       }
       console.log("Purchased voucher", this.voucherPurchased);
     },

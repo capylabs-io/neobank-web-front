@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-deprecated-filter -->
 <template>
   <v-dialog v-model="campaignStore.purchaseCampaignNoti" width="420px">
-    <v-card class="pa-6">
+    <v-card class="border-radius-16 pa-6">
       <v-card-title class="pa-0 title--text card-title mb-4">
         Purchased Detail<v-spacer />
       </v-card-title>
@@ -10,7 +10,7 @@
         style="max-width: 450px"
       >
       </v-card-text>
-      <v-card class="detail-purchased">
+      <v-card class="detail-purchased border-radius-8 pa-4">
         <div class="top-content" style="white-space: pre-line">
           <div class="neutral30-border border-radius-16 overflow-hidden">
             <v-img
@@ -27,11 +27,11 @@
           <div>
             StartDate: {{ campaignStore.detailCard.startDate | ddmmyyyy }}
           </div>
-          <br />
-          <div>EndDate: {{ campaignStore.detailCard.endDate | ddmmyyyy }}</div>
-          <br />
+          <div class="mt-2">
+            EndDate: {{ campaignStore.detailCard.endDate | ddmmyyyy }}
+          </div>
 
-          <div class="d-flex align-center">
+          <div class="d-flex align-center mt-2">
             <div>Category:</div>
             <div class="d-flex align-center ml-1">
               <v-img
@@ -45,8 +45,7 @@
             </div>
           </div>
 
-          <br />
-          <div class="d-flex align-center">
+          <div class="d-flex align-center mt-2">
             <div>Price:</div>
             <div class="d-flex align-center ml-1">
               {{ campaignStore.detailCard.price }}
@@ -61,10 +60,10 @@
           </div>
         </div>
       </v-card>
-      <v-card-actions class="pa-0 mt-4">
+      <v-card-actions class="pa-0 mt-6">
         <v-btn
           color="primary"
-          class="px-6 btn text-none"
+          class="px-4 btn text-none border-radius-8"
           outlined
           dense
           @click="cancel"
@@ -74,7 +73,7 @@
         <v-spacer></v-spacer>
         <v-btn
           color="primary"
-          class="px-6 btn text-none elevation-0 ml-4"
+          class="px-4 btn text-none elevation-0 ml-4 border-radius-8"
           dense
           @click="done"
         >

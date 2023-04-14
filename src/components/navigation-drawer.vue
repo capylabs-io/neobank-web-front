@@ -62,7 +62,7 @@
             <v-list-item-icon class="mr-2">
               <v-icon>mdi-store </v-icon>
             </v-list-item-icon>
-            <v-list-item-title class="text-md">Redeem Store</v-list-item-title>
+            <v-list-item-title class="text-md">Reward Centre</v-list-item-title>
           </v-list-item>
           <v-list-item
             class="border-radius-8 px-2 mt-3 text-left"
@@ -152,6 +152,7 @@ export default {
 
 .active-item {
   background: var(--v-primary5-base) !important;
+  color: var(--v-primary-base) !important;
   .v-icon {
     color: var(--v-primary50-base) !important;
   }

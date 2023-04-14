@@ -225,10 +225,10 @@ export default {
   },
   async created() {
     await this.campaignStore.fetchVoucher();
-    await this.userStore.fetchUserVoucher();
     await this.campaignStore.fetchCategories();
     await this.campaignStore.fetchPartners();
     if (this.userStore.isConnected) {
+      await this.userStore.fetchUserVoucher();
       await this.campaignStore.checkIncludes();
     }
   },

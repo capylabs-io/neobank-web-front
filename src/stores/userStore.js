@@ -61,14 +61,10 @@ export const userStore = defineStore("user", {
           sortedInventory.sort((a, b) => b.title.localeCompare(a.title));
           break;
         case "priceUp":
-          sortedInventory
-            .filter((voucher) => voucher.price)
-            .sort((a, b) => a.price - b.price);
+          sortedInventory.filter((voucher) => voucher.price).sort((a, b) => a.price - b.price);
           break;
         case "priceDown":
-          sortedInventory
-            .filter((voucher) => voucher.price)
-            .sort((a, b) => b.price - a.price);
+          sortedInventory.filter((voucher) => voucher.price).sort((a, b) => b.price - a.price);
           break;
       }
       return sortedInventory;
@@ -77,10 +73,7 @@ export const userStore = defineStore("user", {
       if (!this.userVoucher || this.sortedInventory.length == 0) return 1;
       if (this.sortedInventory.length % this.userVoucherPerPage == 0)
         return this.sortedInventory.length / this.userVoucherPerPage;
-      else
-        return (
-          Math.floor(this.sortedInventory.length / this.userVoucherPerPage) + 1
-        );
+      else return Math.floor(this.sortedInventory.length / this.userVoucherPerPage) + 1;
     },
   },
   actions: {
@@ -277,10 +270,6 @@ export const userStore = defineStore("user", {
       this.currentPassword = "";
       this.newPassword = "";
       this.confirmNewPassword = "";
-    },
-    isEditEnable() {
-      if (this.email && this.password) return false;
-      return true;
     },
   },
   persist: [

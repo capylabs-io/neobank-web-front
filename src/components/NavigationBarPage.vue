@@ -27,10 +27,10 @@
           class="text-decoration-none align-self-center"
           active-class="active"
         >
-          <div class="text-capitalize">REDEEM</div>
+          <div class="text-capitalize">REWARD</div>
         </router-link>
       </div>
-      <div class="d-flex gap-8 align-center" v-if="!userStore.jwt">
+      <div class="d-flex gap-8 align-center" v-if="!userStore.isConnected">
         <v-btn
           class="text-capitalize"
           variant="text"

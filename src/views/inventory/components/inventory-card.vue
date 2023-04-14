@@ -42,11 +42,9 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { campaignStore } from "@/views/campaign-store/stores/campaignStore";
 export default {
   computed: {
     ...mapStores(userStore),
-    ...mapStores(campaignStore),
   },
   props: ["cards"],
   data() {

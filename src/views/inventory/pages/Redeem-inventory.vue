@@ -58,7 +58,6 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { campaignStore } from "@/views/campaign-store/stores/campaignStore";
 export default {
   components: {
     inventoryCard: () => import("../components/inventory-card.vue"),
@@ -73,7 +72,6 @@ export default {
   },
   computed: {
     ...mapStores(userStore),
-    ...mapStores(campaignStore),
   },
   watch: {
     group() {

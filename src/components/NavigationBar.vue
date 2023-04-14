@@ -30,7 +30,7 @@
         <div class="text-none text-uppercase nav-link">REDEEM</div>
       </router-link>
       <router-link
-        v-if="!userStore.jwt"
+        v-if="!userStore.isConnected"
         to="/login"
         class="text-decoration-none align-self-center"
         active-class="active"
@@ -66,10 +66,9 @@
         class="text-decoration-none align-self-center"
         active-class="active"
       >
-        <div class="text-none text-uppercase nav-link">REDEEM</div>
+        <div class="text-none text-uppercase nav-link">REWARD</div>
       </router-link>
       <router-link
-        v-if="!userStore.jwt"
         to="/login"
         class="text-decoration-none align-self-center"
         active-class="active"
