@@ -18,13 +18,13 @@
       >
         <div class="text-none text-uppercase nav-link">Home</div>
       </router-link>
-      <router-link
+      <!-- <router-link
         to="/world"
         class="text-decoration-none align-self-center"
         active-class="active"
       >
         <div class="text-none text-uppercase nav-link">World</div>
-      </router-link>
+      </router-link> -->
       <router-link
         to="/store"
         class="text-decoration-none align-self-center"

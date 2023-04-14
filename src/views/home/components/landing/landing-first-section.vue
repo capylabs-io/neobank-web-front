@@ -8,52 +8,67 @@
     <div class="neutral40--text text-xl text-center font-weight-400">
       Say hello to a new metaverse wolrd.
     </div>
-    <v-card
-      class="d-flex mx-auto col-gap-28 justify-center align-center section-card pa-8"
-    >
-      <div
-        class="right d-flex flex-column justify-center align-center row-gap-25"
-        data-aos="fade-left"
-      >
-        <div class="rocket-icon mx-auto pa-4">
-          <v-icon large color="white">mdi-rocket-launch</v-icon>
-        </div>
-        <div class="white--text text-dp-sm text-center font-weight-700">
-          Who is using VParadise?
-        </div>
-        <div class="text-left text-md white--text font-weight-400">
-          VParadise was created to serve 3 mains users including: Customers,
-          Bank and their Partners. Each users will have different ways to
-          interact with the system and gain benefits from it
-        </div>
+    <div v-for="(item, index) in sectionContent" :key="index">
+      <slider :index="index" :visibleContent="visibleContent" :content="item">
         <div class="d-flex btn-group">
-          <v-btn icon class="mr-3 arrow-btn" color="white"
+          <v-btn icon class="mr-3 arrow-btn" color="white" @click="prev()"
             ><v-icon small>mdi-arrow-left</v-icon></v-btn
           >
-          <v-btn icon color="white" class="arrow-btn"
+          <v-btn icon color="white" class="arrow-btn" @click="next()"
             ><v-icon small>mdi-arrow-right</v-icon></v-btn
           >
         </div>
-      </div>
-      <div class="left d-flex justify-center align-center">
-        <div
-          class="first-section-image mx-auto"
-          data-aos="fade-right"
-          data-aos-delay="50"
-          :style="{
-            backgroundImage:
-              'url(' + require(`@/assets/home/image4.webp`) + ')',
-          }"
-        />
-      </div>
-    </v-card>
+      </slider>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  components: {
+    slider: () => import("../landing/components/slider-content.vue"),
+  },
   data() {
-    return {};
+    return {
+      visibleContent: 0,
+      sectionContent: [
+        {
+          image: require(`@/assets/home/image4.webp`),
+          content:
+            "Simply put, VParadise is a bank. We are a community bank that does many of the things other banks do. Like – lend money, manage your deposits, offer online banking, and provide other financial services.",
+          title: "What is VParadise",
+        },
+        {
+          image: require(`@/assets/home/image2.webp`),
+          content:
+            "VParadise was created to serve 3 mains users including: Customers, Bank and their Partners. Each users will have different ways to interact with the system and gain benefits from it",
+          title: "Who is using VParadise? ",
+        },
+        {
+          image: require(`@/assets/home/image3.webp`),
+          content:
+            "VParadise is the first banking product on the market that create a 3D virtual world to enhance customers experience. Anyone can participate in this virtual world to explore and gain rewards for themselves ",
+          title: "What makes it different?",
+        },
+      ],
+    };
+  },
+  methods: {
+    next() {
+      if (this.visibleContent >= this.sectionContent.length - 1) {
+        this.visibleContent = 0;
+      } else {
+        this.visibleContent++;
+      }
+    },
+
+    prev() {
+      if (this.visibleContent <= 0) {
+        this.visibleContent = this.sectionContent.length - 1;
+      } else {
+        this.visibleContent--;
+      }
+    },
   },
 };
 </script>

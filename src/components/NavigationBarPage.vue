@@ -15,13 +15,13 @@
         >
           <div class="text-capitalize">HOME</div>
         </router-link>
-        <router-link
+        <!-- <router-link
           to="/world"
           class="text-decoration-none align-self-center"
           active-class="active"
         >
           <div class="text-capitalize">WORLD</div>
-        </router-link>
+        </router-link> -->
         <router-link
           to="/store"
           class="text-decoration-none align-self-center"
