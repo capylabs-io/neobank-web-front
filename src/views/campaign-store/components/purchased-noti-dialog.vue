@@ -24,26 +24,26 @@
           {{ campaignStore.detailCard.title }}
         </div>
         <v-row no-gutters class="mt-3">
-          <v-col cols="6">
-            <div class="font-weight-bold">START DATE:</div>
+          <v-col cols="4">
+            <div class="font-weight-bold">Start Date:</div>
           </v-col>
-          <v-col cols="6">
+          <v-col cols="8">
             <div>{{ campaignStore.detailCard.startDate | ddmmyyyy }}</div>
           </v-col>
         </v-row>
         <v-row no-gutters class="mt-2">
-          <v-col cols="6"><div class="font-weight-bold">END DATE:</div> </v-col>
-          <v-col cols="6"
+          <v-col cols="4"><div class="font-weight-bold">End Date:</div> </v-col>
+          <v-col cols="8"
             ><div>
               {{ campaignStore.detailCard.endDate | ddmmyyyy }}
             </div></v-col
           >
         </v-row>
         <v-row no-gutters class="mt-2">
-          <v-col cols="6">
-            <div class="font-weight-bold">CATEGORY:</div>
+          <v-col cols="4">
+            <div class="font-weight-bold">Category:</div>
           </v-col>
-          <v-col cols="6">
+          <v-col cols="8">
             <div class="d-flex align-center">
               <v-img
                 max-width="15px"
@@ -57,8 +57,8 @@
           >
         </v-row>
         <v-row no-gutters class="mt-2">
-          <v-col cols="6"> <div class="font-weight-bold">PRICE:</div> </v-col>
-          <v-col cols="6">
+          <v-col cols="4"> <div class="font-weight-bold">Price:</div> </v-col>
+          <v-col cols="8">
             <div class="d-flex align-center">
               {{ campaignStore.detailCard.price }}
               <v-img
