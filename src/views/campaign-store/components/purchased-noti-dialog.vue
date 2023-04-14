@@ -23,19 +23,28 @@
         <div class="mt-2 mid-content text-center text-lg font-weight-bold">
           {{ campaignStore.detailCard.title }}
         </div>
-        <v-row class="mt-2 bottom-content">
-          <v-col cols="6"
-            ><div class="font-weight-bold">START DATE:</div>
-            <div class="mt-2 font-weight-bold">END DATE:</div>
-            <div class="mt-2 font-weight-bold">CATEGORY:</div>
-            <div class="mt-2 font-weight-bold">PRICE:</div></v-col
-          >
+        <v-row no-gutters class="mt-3">
+          <v-col cols="6">
+            <div class="font-weight-bold">START DATE:</div>
+          </v-col>
           <v-col cols="6">
             <div>{{ campaignStore.detailCard.startDate | ddmmyyyy }}</div>
-            <div class="mt-2">
+          </v-col>
+        </v-row>
+        <v-row no-gutters class="mt-2">
+          <v-col cols="6"><div class="font-weight-bold">END DATE:</div> </v-col>
+          <v-col cols="6"
+            ><div>
               {{ campaignStore.detailCard.endDate | ddmmyyyy }}
-            </div>
-            <div class="mt-2 d-flex align-center">
+            </div></v-col
+          >
+        </v-row>
+        <v-row no-gutters class="mt-2">
+          <v-col cols="6">
+            <div class="font-weight-bold">CATEGORY:</div>
+          </v-col>
+          <v-col cols="6">
+            <div class="d-flex align-center">
               <v-img
                 max-width="15px"
                 max-height="15px"
@@ -44,8 +53,13 @@
                 class="mr-2"
               ></v-img>
               {{ getCategoryName }}
-            </div>
-            <div class="d-flex align-center mt-2">
+            </div></v-col
+          >
+        </v-row>
+        <v-row no-gutters class="mt-2">
+          <v-col cols="6"> <div class="font-weight-bold">PRICE:</div> </v-col>
+          <v-col cols="6">
+            <div class="d-flex align-center">
               {{ campaignStore.detailCard.price }}
               <v-img
                 class="ml-2 token-icon"
@@ -53,46 +67,9 @@
                 max-width="15px"
                 :src="require(`@/assets/redeem/coin.webp`)"
                 contain
-              />
-            </div>
-          </v-col>
+              /></div
+          ></v-col>
         </v-row>
-        <!-- <div class="mt-2 bottom-content">
-          <div>
-            StartDate: {{ campaignStore.detailCard.startDate | ddmmyyyy }}
-          </div>
-          <div class="mt-2">
-            EndDate: {{ campaignStore.detailCard.endDate | ddmmyyyy }}
-          </div>
-
-          <div class="d-flex align-center mt-2">
-            <div>Category:</div>
-            <div class="d-flex align-center ml-1">
-              <v-img
-                width="23"
-                height="23"
-                :src="getCategoryIcon"
-                cover
-                class="mr-2"
-              ></v-img>
-              {{ getCategoryName }}
-            </div>
-          </div>
-
-          <div class="d-flex align-center mt-2">
-            <div>Price:</div>
-            <div class="d-flex align-center ml-1">
-              {{ campaignStore.detailCard.price }}
-              <v-img
-                class="token-icon ml-2"
-                max-height="15px"
-                max-width="15px"
-                :src="require(`@/assets/redeem/coin.webp`)"
-                contain
-              />
-            </div>
-          </div>
-        </div> -->
       </v-card>
       <v-card-actions class="pa-0 mt-6">
         <v-btn
