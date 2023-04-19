@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import { Auth, User, Voucher } from "@/plugins/api.js";
+import { Auth, Category, Partner, User, Voucher } from "@/plugins/api.js";
 import { get } from "lodash-es";
 import loading from "@/plugins/loading";
 import alert from "@/plugins/alert";
@@ -24,29 +24,79 @@ export const userStore = defineStore("user", {
 
     drawer: false,
     userVoucherPage: 1,
-    userVoucherPerPage: 10,
+    userVoucherPerPage: 8,
 
     sortBy: "",
     ivenVoucherQr: "",
     invenVoucherIconUrl: "",
+    searchKey: "",
+    sortBy: "",
 
     bearerToken: {},
     ivenCardData: {},
 
     userVoucher: [],
     userVoucherId: [],
+    filterPartner: [],
+    filterCategory: [],
+    categories: [],
+    partners: [],
     file: null,
   }),
   getters: {
     isConnected() {
       return !!this.userData && !!this.jwt;
     },
+    filters() {
+      return [
+        ...this.filterPartner.map((filter) => {
+          return {
+            filterName: filter.brandName,
+            filterType: "partner",
+            id: filter.id,
+          };
+        }),
+        ...this.filterCategory.map((filter) => {
+          return {
+            filterName: filter.name,
+            filterType: "category",
+            id: filter.id,
+          };
+        }),
+      ];
+    },
     slicedUserVoucher() {
       if (!this.userVoucher || this.userVoucher.length == 0) return [];
-      return this.sortedInventory.slice(
+      return this.filteredInventory.slice(
         (this.userVoucherPage - 1) * this.userVoucherPerPage,
         this.userVoucherPage * this.userVoucherPerPage
       );
+    },
+    filteredInventory() {
+      if (!this.userVoucher || this.userVoucher.length == 0) return [];
+      let filtered = this.sortedInventory;
+      if (this.searchKey)
+        filtered = filtered.filter((campaign) =>
+          campaign.campaign.data.attributes.title
+            .toLowerCase()
+            .includes(this.searchKey.trim().toLowerCase())
+        );
+      if (this.filterPartner && this.filterPartner.length > 0) {
+        const filterIds = this.filterPartner.map((filter) => filter.id);
+        filtered = filtered.filter(
+          (campaign) =>
+            campaign.partner && filterIds.includes(campaign.partner.data.id)
+        );
+      }
+      if (this.filterCategory && this.filterCategory.length > 0) {
+        const filterIds = this.filterCategory.map((filter) => filter.id);
+        filtered = filtered.filter(
+          (campaign) =>
+            campaign.campaignCategory &&
+            filterIds.includes(campaign.campaignCategory.data.id)
+        );
+      }
+      return filtered;
     },
     sortedInventory() {
       if (!this.userVoucher || this.userVoucher.length == 0) return [];
@@ -54,17 +104,51 @@ export const userStore = defineStore("user", {
       if (!this.sortBy) return sortedInventory;
       switch (this.sortBy) {
         default:
-        case "desc":
-          sortedInventory.sort((a, b) => a.title.localeCompare(b.title));
+        case "asc":
+          sortedInventory.sort((a, b) =>
+            a.campaign.data.attributes.title.localeCompare(
+              b.campaign.data.attributes.title
+            )
+          );
           break;
         case "desc":
-          sortedInventory.sort((a, b) => b.title.localeCompare(a.title));
+          sortedInventory.sort((a, b) =>
+            b.campaign.data.attributes.title.localeCompare(
+              a.campaign.data.attributes.title
+            )
+          );
+          break;
+        case "newest":
+          sortedInventory.sort(
+            (a, b) =>
+              new Date(b.campaign.data.attributes.createdAt).getTime() -
+              new Date(a.campaign.data.attributes.createdAt).getTime()
+          );
+          break;
+        case "oldest":
+          sortedInventory.sort(
+            (a, b) =>
+              new Date(a.campaign.data.attributes.createdAt).getTime() -
+              new Date(b.campaign.data.attributes.createdAt).getTime()
+          );
           break;
         case "priceUp":
-          sortedInventory.filter((voucher) => voucher.price).sort((a, b) => a.price - b.price);
+          sortedInventory
+            // .filter((voucher) => voucher.price)
+            .sort(
+              (a, b) =>
+                a.campaign.data.attributes.price -
+                b.campaign.data.attributes.price
+            );
           break;
         case "priceDown":
-          sortedInventory.filter((voucher) => voucher.price).sort((a, b) => b.price - a.price);
+          sortedInventory
+            // .filter((voucher) => voucher.price)
+            .sort(
+              (a, b) =>
+                b.campaign.data.attributes.price -
+                a.campaign.data.attributes.price
+            );
           break;
       }
       return sortedInventory;
@@ -73,7 +157,10 @@ export const userStore = defineStore("user", {
       if (!this.userVoucher || this.sortedInventory.length == 0) return 1;
       if (this.sortedInventory.length % this.userVoucherPerPage == 0)
         return this.sortedInventory.length / this.userVoucherPerPage;
-      else return Math.floor(this.sortedInventory.length / this.userVoucherPerPage) + 1;
+      else
+        return (
+          Math.floor(this.sortedInventory.length / this.userVoucherPerPage) + 1
+        );
     },
   },
   actions: {
@@ -270,6 +357,69 @@ export const userStore = defineStore("user", {
       this.currentPassword = "";
       this.newPassword = "";
       this.confirmNewPassword = "";
+    },
+    changeVoucherFilter(sortBy) {
+      this.sortBy = sortBy;
+    },
+    async fetchCategories() {
+      try {
+        loading.show();
+        const res = await Category.fetch();
+        if (!res) {
+          alert.error(
+            "Error occurred when fetching categories!",
+            "Please try again later!"
+          );
+          return;
+        }
+        const categories = get(res, "data.data", []);
+        if (!categories && categories.length == 0) return;
+        const mappedCategories = categories.map((category) => {
+          return {
+            id: category.id,
+            name: get(category, "attributes.name", "Category Name"),
+            icon: get(category, "attributes.iconUrl", ""),
+          };
+        });
+        this.categories = mappedCategories;
+      } catch (error) {
+        alert.error("Error occurred!", error.message);
+      } finally {
+        loading.hide();
+      }
+    },
+    removeFilter(removedFilter) {
+      if (!removedFilter) return;
+      if (removedFilter.filterType == "partner") {
+        const indexOfObject = this.filterPartner.findIndex((filter) => {
+          return removedFilter.id == filter.id;
+        });
+        this.filterPartner.splice(indexOfObject, 1);
+      } else if (removedFilter.filterType == "category") {
+        const indexOfObject = this.filterCategory.findIndex((filter) => {
+          return removedFilter.id == filter.id;
+        });
+        this.filterCategory.splice(indexOfObject, 1);
+      }
+    },
+    async fetchPartners() {
+      try {
+        loading.show();
+        const res = await Partner.fetch();
+        if (!res) {
+          alert.error(
+            "Error occurred when fetching partners!",
+            "Please try again later!"
+          );
+          return;
+        }
+        const partners = get(res, "data", []);
+        if (!partners && partners.length == 0) return;
+        this.partners = partners;
+      } catch (error) {
+      } finally {
+        loading.hide();
+      }
     },
   },
   persist: [

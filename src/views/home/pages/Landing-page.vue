@@ -28,6 +28,7 @@
       <v-btn
         color="lightblue"
         class="white--text pa-5"
+        href="https://dev-neobank-game.capylabs.io/"
       >
         <div class="text-decoration-none text-sm">Discover now</div>
         <v-icon color="white"> mdi-arrow-right-thin </v-icon>

@@ -1,33 +1,116 @@
 <template>
   <div class="d-flex flex-column justify-space-between full-height">
     <InventoryDetailDrawer />
-    <div>
-      <!-- <div class="d-flex justify-space-between button-filter">
+    <div class="full-height">
+      <div class="d-flex justify-space-between button-filter">
         <div class="d-flex column-gap-10 left-filter-group pa-1">
-          <v-btn class="clothes active" rounded text @click="clothesTab()">
-            Clothes
-          </v-btn>
-          <v-btn class="voucher" rounded text @click="voucherTab()">
+          <v-btn class="voucher active" rounded text @click="voucherTab()">
             Voucher
           </v-btn>
+          <v-btn class="clothes" rounded text @click="clothesTab()" disabled>
+            In-game Items
+          </v-btn>
         </div>
-        <div class="right-filter-group">
-          <v-select
-            class="btn-customize"
-            v-model="campaignStore.sortBy"
-            label="SortBy"
-            :items="sort"
-            item-text="name"
-            :menu-props="{ maxHeight: '400' }"
+
+        <div class="right-filter-group gap-8 d-flex align-center">
+          <!-- <v-autocomplete
+            class="select border-radius-6"
+            placeholder="Filter by Partner"
+            v-model="userStore.filterPartner"
+            :items="userStore.partners"
+            item-text="brandName"
+            item-value="id"
+            return-object
+            multiple
+            flat
             solo
             dense
-            flat
+            outlined
+            clearable
             hide-details
-            persistent-hint
+          >
+            <template v-slot:selection="{ item, index }">
+              <v-chip v-if="index === 0">
+                <span>{{ item.brandName }}</span>
+              </v-chip>
+              <span v-if="index === 1" class="grey--text text-caption">
+                (+{{ userStore.filterPartner.length - 1 }} others)
+              </span>
+            </template>
+          </v-autocomplete> -->
+          <v-select
+            v-model="userStore.filterCategory"
+            :items="userStore.categories"
+            item-text="name"
+            item-value="id"
+            class="select border-radius-6"
+            placeholder="Filter by Category"
+            return-object
+            multiple
+            flat
+            solo
+            dense
+            outlined
+            clearable
+            hide-details
+          >
+            <template v-slot:selection="{ item, index }">
+              <v-chip v-if="index === 0">
+                <span>{{ item.name }}</span>
+              </v-chip>
+              <span v-if="index === 1" class="grey--text text-caption">
+                (+{{ userStore.filterCategory.length - 1 }} others)
+              </span>
+            </template>
+          </v-select>
+
+          <v-select
+            class="select border-radius-6"
+            label="SortBy"
+            item-text="name"
+            :items="sort"
+            :menu-props="{ maxHeight: '400' }"
+            @change="userStore.changeVoucherFilter($event)"
+            flat
+            solo
+            outlined
+            dense
+            hide-details
           ></v-select>
         </div>
-      </div> -->
-      <div class="">
+      </div>
+      <div class="d-flex align-center mt-4">
+      <div class="flex-grow-1 pr-4">
+        <div class="text-sm font-weight-bold">Applied Filter:</div>
+        <div class="d-flex gap-4 mt-1" v-if="userStore.filters.length > 0">
+          <v-chip
+            color="primary"
+            v-for="(filter, index) in userStore.filters"
+            :key="index"
+            @click:close="userStore.removeFilter(filter)"
+            label
+            close
+            >{{ filter.filterName }}
+          </v-chip>
+        </div>
+        <div class="mt-1" v-else>
+          <v-chip color="primary" label>All </v-chip>
+        </div>
+      </div>
+    </div>
+      <v-text-field
+        v-model="userStore.searchKey"
+        class="border-radius-6 search-select mt-4"
+        placeholder="Search By Name"
+        prepend-inner-icon="mdi-magnify"
+        flat
+        solo
+        outlined
+        dense
+        hide-details
+        clearable
+      ></v-text-field>
+      <div class="mt-6">
         <v-row>
           <v-col
             cols="12"
@@ -43,6 +126,7 @@
         </v-row>
       </div>
     </div>
+
     <div class="pagination">
       <v-pagination
         v-model="userStore.userVoucherPage"
@@ -66,9 +150,39 @@ export default {
   },
   async created() {
     await this.userStore.fetchUserVoucher();
+    await this.userStore.fetchCategories();
+    await this.userStore.fetchPartners();
   },
   data() {
-    return {};
+    return {
+      sort: [
+        {
+          value: "asc",
+          name: "Name(A-Z)",
+        },
+        {
+          value: "desc",
+          name: "Name(Z-A)",
+        },
+        {
+          value: "priceUp",
+          name: "Price-Up",
+        },
+        {
+          value: "priceDown",
+          name: "Price-Down",
+        },
+        {
+          value: "newest",
+          name: "Newest",
+        },
+        {
+          value: "oldest",
+          name: "Oldest",
+        },
+      ],
+      index: 1,
+    };
   },
   computed: {
     ...mapStores(userStore),
@@ -142,5 +256,11 @@ export default {
   border-radius: 8px;
   border: 1px solid #e3e8ef;
   height: max-content;
+}
+.select {
+  max-width: 280px;
+}
+.search-select {
+  max-width: 450px;
 }
 </style>
