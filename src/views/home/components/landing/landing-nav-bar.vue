@@ -33,6 +33,7 @@
         <div class="text-none text-uppercase nav-link">Reward</div>
       </router-link>
       <router-link
+        v-if="!userStore.isConnected"
         to="/login"
         class="text-decoration-none align-self-center"
         active-class="active"
