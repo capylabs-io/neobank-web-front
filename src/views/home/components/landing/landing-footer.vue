@@ -89,7 +89,7 @@ export default {};
   width: 100%;
   font-size: 14px;
   height: 360px;
-  background-color: #0c0e12 !important;
+  background-color: transparent !important;
   @media (max-width: 1280px) {
     height: max-content;
   }
