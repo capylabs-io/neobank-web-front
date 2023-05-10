@@ -20,7 +20,7 @@
           >100</span
         >
       </div>
-      <div class="token-icon">
+      <div class="icon">
         P
         <!-- <v-img
           :style="{ 'border-radius': '40px' }"
@@ -90,5 +90,8 @@ export default {
     opacity: 1;
   }
 }
-
+.icon {
+  font-size: 18px;
+  color: white;
+}
 </style>
