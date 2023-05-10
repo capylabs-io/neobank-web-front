@@ -1,38 +1,25 @@
 <template>
   <v-app>
-    <!-- <app-navbar v-if="voucherStore.pageIndex == 1" /> -->
-    <NavBarLanding v-if="voucherStore.pageIndex == 1" />
-    <page-navbar v-else-if="voucherStore.pageIndex == 2" />
-    <div v-else />
+    <HomeNavigationBar v-if="isHome" />
+    <PageNavigationBar v-else-if="isUserPage" />
     <v-main>
-      <Loading />
       <PluginLoading />
       <PluginSnackbar />
       <PluginConfirmDialog />
-      <SnackBar />
       <router-view :key="$route.fullPath" />
     </v-main>
-    <!-- <app-footer v-if="voucherStore.pageIndex == 1" /> -->
   </v-app>
 </template>
 <script>
-import FooterVue from "./components/Footer.vue";
 import NavBarLanding from "@/views/home/components/landing/landing-nav-bar.vue";
-import HomeNavigationBar from "./components/NavigationBar.vue";
 import PageNavigationBar from "./components/NavigationBarPage.vue";
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
-import { voucherStore } from "@/stores/voucherStore";
-import { inventoryStore } from "@/stores/inventoryStore";
-import SnackBar from "@/components/snack-bar/snack-bar.vue";
+import { get } from "lodash";
 export default {
   components: {
-    // "app-navbar": HomeNavigationBar,
-    "page-navbar": PageNavigationBar,
-    // "app-footer": FooterVue,
-    NavBarLanding: NavBarLanding,
-    Loading: () => import("@/components/global-loading/global-loading.vue"),
-    SnackBar,
+    PageNavigationBar: PageNavigationBar,
+    HomeNavigationBar: NavBarLanding,
     PluginLoading: () => import("@/components/plugin/PluginLoading.vue"),
     PluginSnackbar: () => import("@/components/plugin/PluginAlert.vue"),
     PluginConfirmDialog: () =>
@@ -40,17 +27,17 @@ export default {
   },
   computed: {
     ...mapStores(userStore),
-    ...mapStores(voucherStore),
-    ...mapStores(inventoryStore),
+    isHome() {
+      return get(this.$route, "meta.isHome", false);
+    },
+    isUserPage() {
+      return get(this.$route, "meta.isUserPage", false);
+    },
   },
-  async created() {
-    // if (this.userStore.jwt) {
-    //   await this.inventoryStore.fetchUserVoucher();
-    // }
-  },
+  async created() {},
   data() {
     return {
-      index: 2,
+      index: 1,
     };
   },
 };
@@ -223,7 +210,6 @@ body {
 
 //Other
 .token-icon {
-  border: 1px solid black;
-  border-radius: 40px;
+  font-size: 18px;
 }
 </style>

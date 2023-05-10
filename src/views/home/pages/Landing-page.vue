@@ -28,13 +28,13 @@
       <v-btn
         color="lightblue"
         class="white--text pa-5"
-        href="https://neobank-game.capylabs.io/"
+        href="https://dev-neobank-game.capylabs.io/"
       >
         <div class="text-decoration-none text-sm">Discover now</div>
         <v-icon color="white"> mdi-arrow-right-thin </v-icon>
       </v-btn>
     </div>
-    
+
     <introduction />
     <v-img class="redblur-image" :src="require(`@/assets/red-blur.webp`)">
     </v-img>
@@ -58,7 +58,6 @@ import secondsection from "../components/landing/landing-second-section.vue";
 import thirdSectionVue from "../components/landing/landing-third-section.vue";
 import { mapStores } from "pinia";
 import { homeStore } from "@/views/home/store/homeStore";
-import { voucherStore } from "../../../stores/voucherStore";
 
 export default {
   name: "HomeView",
@@ -70,7 +69,6 @@ export default {
     FooterLanding: FooterLanding,
   },
   computed: {
-    ...mapStores(voucherStore),
     ...mapStores(homeStore),
   },
   data() {
@@ -82,16 +80,12 @@ export default {
   },
   created() {
     window.addEventListener("scroll", this.handleScroll);
-    this.change();
   },
   // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
-    change() {
-      this.voucherStore.pageIndex = 1;
-    },
     handleScroll() {
       const doorway = document.querySelector(".doorway");
       const introduction = document.querySelector(".introduction");
@@ -109,8 +103,8 @@ export default {
         doorway.style.zIndex = "1";
         doorway.style.display = "none";
         container.style.opacity = "1";
-        introduction.style.animation = " zoom-in-zoom-out 0.7s ease-out";
-        content.style.animation = " zoom-in-zoom-out 0.7s ease-out";
+        introduction.style.animation = " zoom-in-zoom-out 0.1s ease-out";
+        content.style.animation = " zoom-in-zoom-out 0.1s ease-out";
         container.style.animation = " zoom-out-zoom-in 2s ease-out";
       } else {
         introduction.style.position = "fixed";

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/home/pages/Home.vue";
+import { userStore } from "@/stores/userStore";
+import alert from "@/plugins/alert";
 
 // import i18n from "@/i18n";
 Vue.use(VueRouter);
@@ -18,26 +19,46 @@ const routes = [
     path: "/home",
     name: "home",
     component: () => import("../views/home/pages/Landing-page.vue"),
+    meta: {
+      isHome: true,
+    },
   },
   {
     path: "/account",
     name: "Account",
-    component: () => import("../views/redeem/pages/UserLayout.vue"),
+    component: () => import("../views/UserLayout.vue"),
+    meta: {
+      requiresAuth: true,
+      isUserPage: true,
+    },
     children: [
       {
         path: "/inventory",
         name: "Inventory",
-        component: () => import("../views/redeem/pages/Redeem-inventory.vue"),
+        component: () =>
+          import("../views/inventory/pages/Redeem-inventory.vue"),
+        meta: {
+          requiresAuth: true,
+          isUserPage: true,
+        },
       },
       {
         path: "/account-setting",
         name: "Account Setting",
-        component: () => import("../views/redeem/pages/account-setting.vue"),
+        component: () =>
+          import("../views/account-setting/pages/account-setting.vue"),
+        meta: {
+          requiresAuth: true,
+          isUserPage: true,
+        },
       },
       {
         path: "/store",
         name: "Store",
-        component: () => import("../views/redeem/pages/StorePage.vue"),
+        component: () => import("../views/campaign-store/pages/StorePage.vue"),
+        meta: {
+          isUserPage: true,
+        },
       },
     ],
   },
@@ -71,15 +92,13 @@ const router = new VueRouter({
     return { x: 0, y: 0 };
   },
 });
-// router.beforeEach((to, from, next) => {
-//   // use the language from the routing param or default language
-//   let language = to.params.lang;
-//   if (!language) {
-//     language = "en";
-//   }
-//   // set the current language for i18n.
-//   i18n.locale = language;
-//   next();
-// });
+router.beforeEach((to, from, next) => {
+  const user = userStore();
+  if (to.meta && to.meta.requiresAuth && !user.isConnected) {
+    alert.error("You have to login before accessing this page!");
+    next("/login");
+  }
+  next();
+});
 
 export default router;

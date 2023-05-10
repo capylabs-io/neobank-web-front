@@ -1,33 +1,57 @@
 <template>
   <v-app-bar class="white-bg nav-bar" elevation="1" app clipped-left>
-    <div class="d-flex gap-24 DMSans black--text align-center pa-7">
-      <div>
-        <v-img
-          class="nav-logo align-self-center"
-          :src="require(`@/assets/home/web-logo.webp`)"
-        />
+    <div class="full-width d-flex justify-space-between">
+      <div class="d-flex gap-24 DMSans black--text align-center pa-7">
+        <div>
+          <v-img
+            class="nav-logo align-self-center"
+            :src="require(`@/assets/project-logo.webp`)"
+          />
+        </div>
+        <router-link
+          to="/home"
+          class="text-decoration-none align-self-center"
+          active-class="active"
+        >
+          <div class="text-capitalize">HOME</div>
+        </router-link>
+        <!-- <router-link
+          to="/world"
+          class="text-decoration-none align-self-center"
+          active-class="active"
+        >
+          <div class="text-capitalize">WORLD</div>
+        </router-link> -->
+        <router-link
+          to="/store"
+          class="text-decoration-none align-self-center"
+          active-class="active"
+        >
+          <div class="text-capitalize">REWARD</div>
+        </router-link>
       </div>
-      <router-link
-        to="/home"
-        class="text-decoration-none align-self-center"
-        active-class="active"
-      >
-        <div class="text-capitalize">HOME</div>
-      </router-link>
-      <router-link
-        to="/world"
-        class="text-decoration-none align-self-center"
-        active-class="active"
-      >
-        <div class="text-capitalize">WORLD</div>
-      </router-link>
-      <router-link
-        to="/store"
-        class="text-decoration-none align-self-center"
-        active-class="active"
-      >
-        <div class="text-capitalize">REDEEM</div>
-      </router-link>
+      <div class="d-flex gap-8 align-center" v-if="!userStore.isConnected">
+        <v-btn
+          class="text-capitalize"
+          variant="text"
+          outlined
+          depressed
+          to="/register"
+        >
+          Sign Up
+        </v-btn>
+
+        <v-btn
+          class="text-capitalize white--text"
+          type="submit"
+          form="check-edit-bank-account"
+          color="primary"
+          depressed
+          to="/login"
+        >
+          Login
+        </v-btn>
+      </div>
     </div>
   </v-app-bar>
 </template>
@@ -55,7 +79,6 @@ a {
   position: fixed;
   left: 0;
   top: 0;
-  width: 100%;
   background-color: white;
   height: 80px;
   font-size: 16px;

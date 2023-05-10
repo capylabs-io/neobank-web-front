@@ -36,10 +36,10 @@
         <div class="text-xl text-left mt-sm-4">Password</div>
         <v-text-field
           v-model="userStore.password"
-          :append-icon="userStore.isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
-          :type="userStore.isShowPass ? 'text' : 'password'"
+          :append-icon="isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="isShowPass ? 'text' : 'password'"
           :rules="rules.password"
-          @click:append="userStore.isShowPass = !userStore.isShowPass"
+          @click:append="isShowPass = !isShowPass"
           solo
           dense
           background-color="cream"
@@ -48,10 +48,10 @@
         <div class="text-xl text-left mt-sm-4">Re-enter password</div>
         <v-text-field
           v-model="userStore.cfpassword"
-          :append-icon="userStore.isShowcPass ? 'mdi-eye' : 'mdi-eye-off'"
-          :type="userStore.isShowcPass ? 'text' : 'password'"
+          :append-icon="isShowcPass ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="isShowcPass ? 'text' : 'password'"
           :rules="[passwordConfirmationRule]"
-          @click:append="userStore.isShowcPass = !userStore.isShowcPass"
+          @click:append="isShowcPass = !isShowcPass"
           solo
           dense
           background-color="cream"
@@ -59,7 +59,7 @@
         />
         <div>
           <v-checkbox
-            v-model="userStore.rememberMe"
+            v-model="userStore.acceptTerm"
             class="text-lg"
             hide-details="true"
             label="Accept Terms and Services"
@@ -92,8 +92,7 @@ import FacebookIcon from "@/components/svg/facebook.vue";
 import GoogleIcon from "@/components/svg/google.vue";
 import AppleIcon from "@/components/svg/apple.vue";
 import { mapStores } from "pinia";
-import { userStore } from "../../../stores/userStore";
-import { voucherStore } from "../../../stores/voucherStore";
+import { userStore } from "@/stores/userStore";
 import { rules } from "@/plugins/rules";
 export default {
   components: {},
@@ -106,7 +105,6 @@ export default {
   },
   computed: {
     ...mapStores(userStore),
-    ...mapStores(voucherStore),
     passwordConfirmationRule() {
       return () =>
         this.userStore.password === this.userStore.cfpassword ||
@@ -117,6 +115,8 @@ export default {
     return {
       rules: rules,
       isShow: true,
+      isShowPass: false,
+      isShowcPass: false,
     };
   },
   methods: {
@@ -125,9 +125,6 @@ export default {
         params: "vn",
         name: url,
       });
-    },
-    change() {
-      this.voucherStore.pageIndex = 3;
     },
     submitForm() {
       if (this.$refs.form.validate()) {

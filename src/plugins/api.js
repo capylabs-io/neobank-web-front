@@ -1,9 +1,16 @@
 import axios from "axios";
 import utils from "@/plugins/utils";
+import { get } from "lodash";
 
 // axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT;
-axios.defaults.baseURL = "https://neobank-dev-api.capylabs.io/api/";
+axios.defaults.baseURL = get(
+  process.env,
+  "VUE_APP_API_ENDPOINT",
+  "https://neobank-dev-api.capylabs.io/api/"
+);
 const USER_API = "/users/";
+const CATEGORY_API = "/campaign-categories/";
+const PARTNER_API = "/user/partners";
 
 const APIHelper = (api) => ({
   search: (params, option) =>
@@ -54,7 +61,12 @@ export const Auth = {
   resetPassword: (resetPasswordData) =>
     axios.post("auth/reset-password", resetPasswordData),
 };
-
+export const Category = {
+  ...APIHelper(CATEGORY_API),
+};
+export const Partner = {
+  ...APIHelper(PARTNER_API),
+};
 export const User = {
   ...APIHelper(USER_API),
 
@@ -120,11 +132,11 @@ export const User = {
     }),
 };
 export const Voucher = {
-  fetchVouchers: (token) =>
+  fetchVouchers: () =>
     axios.get("user/campaigns", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
+      // headers: {
+      //   Authorization: "Bearer " + token,
+      // },
     }),
   purchaseVouchers: (id, token) =>
     axios.post(

@@ -26,17 +26,22 @@
         <div class="text-xl text-left mt-sm-4">Password</div>
         <v-text-field
           v-model="userStore.password"
-          :append-icon="userStore.isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
-          :type="userStore.isShowPass ? 'text' : 'password'"
+          :append-icon="isShowPass ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="isShowPass ? 'text' : 'password'"
           :rules="rules.password"
-          @click:append="userStore.isShowPass = !userStore.isShowPass"
+          @click:append="isShowPass = !isShowPass"
           solo
           dense
           background-color="cream"
           class="mt-2"
         />
         <div>
-          <v-checkbox class="text-lg" hide-details="true" label="Remember me" />
+          <v-checkbox
+            class="text-lg"
+            hide-details="true"
+            label="Remember me"
+            v-model="userStore.rememberMe"
+          />
         </div>
 
         <div class="text-center mt-5">
@@ -67,36 +72,25 @@
 
 <script>
 import { mapStores } from "pinia";
-import { userStore } from "../../../stores/userStore";
-import { voucherStore } from "../../../stores/voucherStore";
+import { userStore } from "@/stores/userStore";
 import { rules } from "@/plugins/rules";
 export default {
   components: {},
   created() {
-    this.change();
     this.userStore.email = "";
     this.userStore.password = "";
   },
   computed: {
     ...mapStores(userStore),
-    ...mapStores(voucherStore),
   },
   data() {
     return {
       rules: rules,
       isShow: true,
+      isShowPass: false,
     };
   },
   methods: {
-    gotoRouter(url) {
-      this.$router.push({
-        params: "vn",
-        name: url,
-      });
-    },
-    change() {
-      this.voucherStore.pageIndex = 3;
-    },
     submitForm() {
       if (this.$refs.form.validate()) {
         this.userStore.signIn();

@@ -18,22 +18,21 @@
       >
         <div class="text-none text-uppercase nav-link">Home</div>
       </router-link>
-      <router-link
+      <!-- <router-link
         to="/world"
         class="text-decoration-none align-self-center"
         active-class="active"
       >
         <div class="text-none text-uppercase nav-link">World</div>
-      </router-link>
+      </router-link> -->
       <router-link
         to="/store"
         class="text-decoration-none align-self-center"
         active-class="active"
       >
-        <div class="text-none text-uppercase nav-link">Redeem</div>
+        <div class="text-none text-uppercase nav-link">Reward</div>
       </router-link>
       <router-link
-        v-if="!userStore.jwt"
         to="/login"
         class="text-decoration-none align-self-center"
         active-class="active"
