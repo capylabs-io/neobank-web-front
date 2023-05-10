@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="d-flex flex-column footer justify-space-between pb-10">
+  <div class="d-flex flex-column app-footer justify-space-between pb-10">
     <div class="mx-auto d-flex flex-column align-center mt-5">
       <div class="d-flex">
         <v-img
@@ -85,7 +85,7 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-.footer {
+.app-footer {
   width: 100%;
   font-size: 14px;
   height: 360px;
