@@ -53,6 +53,10 @@ body {
   color: var(--v-neutral100-base) !important;
 }
 
+.v-application .footer {
+  background-color: transparent !important;
+  border-color: none !important;
+}
 .theme--light.v-list-item--active::before {
   opacity: 0 !important;
 }
