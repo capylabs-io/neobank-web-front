@@ -20,11 +20,12 @@
           >100</span
         >
       </div>
-      <div>
-        <v-img
+      <div class="token-icon">
+        P
+        <!-- <v-img
           :style="{ 'border-radius': '40px' }"
           :src="require(`@/assets/redeem/coin.webp`)"
-        />
+        /> -->
       </div>
     </v-btn>
     <v-btn
@@ -89,4 +90,5 @@ export default {
     opacity: 1;
   }
 }
+
 </style>

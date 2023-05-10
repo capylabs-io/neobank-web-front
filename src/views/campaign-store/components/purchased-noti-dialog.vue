@@ -61,14 +61,16 @@
           <v-col cols="8">
             <div class="d-flex align-center">
               {{ campaignStore.detailCard.price }}
-              <v-img
+              <div class="ml-2 token-icon">P</div>
+              <!-- <v-img
                 class="ml-2 token-icon"
                 max-height="15px"
                 max-width="15px"
                 :src="require(`@/assets/redeem/coin.webp`)"
                 contain
-              /></div
-          ></v-col>
+              /> -->
+            </div></v-col
+          >
         </v-row>
       </v-card>
       <v-card-actions class="pa-0 mt-6">

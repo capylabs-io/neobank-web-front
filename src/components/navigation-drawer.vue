@@ -39,11 +39,12 @@
           class="d-flex left-profile-section align-center font-weight-bold mx-auto mt-2"
         >
           <span class="text-dp-xs">{{ userToken }}</span>
-          <div class="ml-2">
-            <v-img
+          <div class="ml-2 token-icon">
+            P
+            <!-- <v-img
               :style="{ 'border-radius': '40px' }"
               :src="require(`@/assets/redeem/coin.webp`)"
-            />
+            /> -->
           </div>
         </div>
       </div>
@@ -113,8 +114,8 @@
     </div>
   </v-navigation-drawer>
 </template>
-  
-  <script>
+
+<script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
 import { get } from "lodash";
@@ -139,8 +140,8 @@ export default {
   },
 };
 </script>
-  
-  <style lang="scss" scoped>
+
+<style lang="scss" scoped>
 .avatar-img {
   width: 36px;
   height: 36px;
@@ -158,4 +159,3 @@ export default {
   }
 }
 </style>
-  

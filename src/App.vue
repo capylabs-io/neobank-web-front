@@ -34,8 +34,7 @@ export default {
       return get(this.$route, "meta.isUserPage", false);
     },
   },
-  async created() {
-  },
+  async created() {},
   data() {
     return {
       index: 1,
@@ -211,7 +210,6 @@ body {
 
 //Other
 .token-icon {
-  border: 1px solid black;
-  border-radius: 40px;
+  font-size: 18px;
 }
 </style>
