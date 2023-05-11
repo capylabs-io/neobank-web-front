@@ -349,10 +349,11 @@ export const userStore = defineStore("user", {
     },
     logout() {
       this.jwt = "";
+      this.userData = {};
       if (!this.rememberMe) {
-        this.userData = {};
         this.email = "";
       }
+      this.userVoucherId = [];
       this.password = "";
       this.currentPassword = "";
       this.newPassword = "";
