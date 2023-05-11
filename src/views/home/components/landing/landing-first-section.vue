@@ -77,6 +77,7 @@ export default {
 .firstSection {
   height: max-content;
   width: 1290px;
+  padding-bottom: 50px;
   @media (max-width: 1280px) {
     margin-top: 70px;
     height: max-content;
