@@ -10,8 +10,7 @@
     data-aos-delay="200"
     data-aos-duration="11000"
     data-aos-easing="ease-in-out"
-  >
-  </div>
+  ></div>
 </template>
 
 <script>
@@ -34,6 +33,7 @@ export default {
   z-index: 3;
   overflow-x: hidden !important;
   overflow-y: hidden !important;
+  padding-bottom: 50px;
 }
 
 .introduction:before {
@@ -93,6 +93,5 @@ export default {
   height: 48px;
   border-radius: 40px;
 }
-
 </style>
 >
