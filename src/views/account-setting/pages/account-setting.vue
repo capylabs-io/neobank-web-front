@@ -34,7 +34,8 @@
                 v-model="userStore.userData.userMetadata.bankAccount"
                 v-else
                 height="36px"
-                type="text"
+                :rules="rules.number"
+                type="number"
                 class="pa-0"
                 outlined
                 dense
@@ -90,6 +91,8 @@ import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
 import informationEdit from "../components/information-edit.vue";
 import passwordChange from "../components/password-change.vue";
+import { rules } from "@/plugins/rules";
+
 export default {
   components: {
     informationEdit: informationEdit,
@@ -100,12 +103,14 @@ export default {
   },
   data() {
     return {
+      rules: rules,
       bankAccountEdit: false,
     };
   },
   methods: {
     updateBankAccount() {
       this.userStore.updateBankAccount();
+      this.bankAccountEdit = false;
     },
   },
 };

@@ -174,8 +174,9 @@ export default {
   methods: {
     changeYourPassword() {
       this.userStore.changePassword();
-      this.userStore.logout();
-      this.$router.push("/login");
+      this.changePassword = false;
+      // this.userStore.logout();
+      // this.$router.push("/login");
     },
   },
 };

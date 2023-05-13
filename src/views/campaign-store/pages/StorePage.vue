@@ -131,9 +131,13 @@
         </v-row>
       </div>
 
-      <div v-if="index == 2" class="mt-6 full-width">
-        <v-row>
-          <!-- TODO: use vue-responsive-components to make right container responsive better -->
+      <div
+        v-if="index == 2"
+        class="mt-10 full-width d-flex align-center justify-center clothes-card-list"
+      >
+        <!-- TODO: use vue-responsive-components to make right container responsive better -->
+        <div class="pt-10 font-50">Out Of Stock</div>
+        <!-- <v-row>
           <v-col
             cols="12"
             xl="2"
@@ -144,7 +148,7 @@
           >
             <clothesCard :status="card" />
           </v-col>
-        </v-row>
+        </v-row> -->
       </div>
     </div>
     <div class="pagination mt-5">
@@ -168,7 +172,7 @@ export default {
   props: ["voucher", "userVoucher"],
   components: {
     // voucherCard: voucherCard,
-    clothesCard: () => import("../components/clothes-card.vue"),
+    // clothesCard: () => import("../components/clothes-card.vue"),
     CampaignCard: () => import("../components/campaign-card.vue"),
     CardDetailDrawer: () => import("../components/card-detail-drawer.vue"),
     PurchasedCampaignNoti: () =>
@@ -314,6 +318,12 @@ export default {
 }
 .search-select {
   max-width: 450px;
+}
+.clothes-card-list {
+  height: 50%;
+}
+.font-50 {
+  font-size: 25px;
 }
 .v-select {
   padding: 0;

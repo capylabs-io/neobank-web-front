@@ -164,6 +164,7 @@
             v-model="userStore.userData.userMetadata.phoneNumber"
             height="36px"
             type="text"
+            :rules="rules.phone"
             class="pa-0"
             placeholder=""
             outlined
@@ -221,12 +222,15 @@
 <script>
 import { mapStores } from "pinia";
 import { userStore } from "@/stores/userStore";
+import { rules } from "@/plugins/rules";
+
 export default {
   computed: {
     ...mapStores(userStore),
   },
   data() {
     return {
+      rules: rules,
       profileEdit: false,
     };
   },
@@ -238,6 +242,8 @@ export default {
 
     editAccount() {
       this.userStore.updateAccountSetting();
+      this.profileEdit = false;
+
     },
   },
 };

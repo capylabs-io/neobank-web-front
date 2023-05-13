@@ -204,8 +204,9 @@ export const userStore = defineStore("user", {
             return;
           }
           alert.success("Register successfully!");
-          this.jwt = res.data.jwt;
-          this.userData = res.data.user;
+          // this.jwt = res.data.jwt;
+          // this.userData = res.data.user;
+          // this.updateMetaData(res.data.user.id);
           this.updateMetaData(res.data.user.id);
           this.router.push("/login");
         } else {
