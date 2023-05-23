@@ -4,15 +4,28 @@
     <CardDetailDrawer />
     <div class="full-height">
       <div class="d-flex justify-space-between button-filter">
-        <div class="d-flex column-gap-10 left-filter-group pa-1">
+        <!-- <div class="d-flex column-gap-10 left-filter-group pa-1">
           <v-btn class="voucher active" rounded text @click="voucherTab()">
             Voucher
           </v-btn>
           <v-btn class="clothes" rounded text @click="clothesTab()">
             In-game Items
           </v-btn>
+        </div> -->
+        <div class="left-filter-group d-flex align-center">
+          <v-text-field
+            v-model="campaignStore.searchKey"
+            class="border-radius-6 search-select"
+            placeholder="Search By Name"
+            prepend-inner-icon="mdi-magnify"
+            flat
+            solo
+            outlined
+            dense
+            hide-details
+            clearable
+          ></v-text-field>
         </div>
-
         <div class="right-filter-group gap-8 d-flex align-center">
           <v-autocomplete
             class="select border-radius-6"
@@ -102,19 +115,8 @@
           </div>
         </div>
       </div>
-      <v-text-field
-        v-model="campaignStore.searchKey"
-        class="border-radius-6 search-select mt-4"
-        placeholder="Search By Name"
-        prepend-inner-icon="mdi-magnify"
-        flat
-        solo
-        outlined
-        dense
-        hide-details
-        clearable
-      ></v-text-field>
-      <div v-if="index == 1" class="full-width mt-6 card-container">
+
+      <div class="full-width mt-6 card-container">
         <!-- TODO: use vue-responsive-components to make right container responsive better -->
         <v-row>
           <v-col
@@ -131,13 +133,12 @@
         </v-row>
       </div>
 
-      <div
+      <!-- <div
         v-if="index == 2"
         class="mt-10 full-width d-flex align-center justify-center clothes-card-list"
       >
-        <!-- TODO: use vue-responsive-components to make right container responsive better -->
         <div class="pt-10 font-50">Out Of Stock</div>
-        <!-- <v-row>
+        <v-row>
           <v-col
             cols="12"
             xl="2"
@@ -148,8 +149,8 @@
           >
             <clothesCard :status="card" />
           </v-col>
-        </v-row> -->
-      </div>
+        </v-row>
+      </div> -->
     </div>
     <div class="pagination mt-5">
       <v-pagination
@@ -236,20 +237,6 @@ export default {
     }
   },
   methods: {
-    clothesTab() {
-      this.index = 2;
-      const clothes = document.querySelector(".clothes");
-      const voucher = document.querySelector(".voucher");
-      clothes.classList.add("active");
-      voucher.classList.remove("active");
-    },
-    voucherTab() {
-      this.index = 1;
-      const clothes = document.querySelector(".clothes");
-      const voucher = document.querySelector(".voucher");
-      clothes.classList.remove("active");
-      voucher.classList.add("active");
-    },
   },
 };
 </script>
@@ -303,9 +290,7 @@ export default {
   z-index: 4;
 }
 .left-filter-group {
-  background-color: white;
   height: max-content;
-  border-radius: 12px;
 }
 .right-filter-group {
   width: max-content;

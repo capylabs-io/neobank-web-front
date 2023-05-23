@@ -3,13 +3,19 @@
     <InventoryDetailDrawer />
     <div class="full-height">
       <div class="d-flex justify-space-between button-filter">
-        <div class="d-flex column-gap-10 left-filter-group pa-1">
-          <v-btn class="voucher active" rounded text @click="voucherTab()">
-            Voucher
-          </v-btn>
-          <v-btn class="clothes" rounded text @click="clothesTab()" disabled>
-            In-game Items
-          </v-btn>
+        <div class="d-flex left-filter-group d-flex align-center">
+          <v-text-field
+            v-model="userStore.searchKey"
+            class="border-radius-6 search-select"
+            placeholder="Search By Name"
+            prepend-inner-icon="mdi-magnify"
+            flat
+            solo
+            outlined
+            dense
+            hide-details
+            clearable
+          ></v-text-field>
         </div>
 
         <div class="right-filter-group gap-8 d-flex align-center">
@@ -80,38 +86,27 @@
         </div>
       </div>
       <div class="d-flex align-center mt-4">
-      <div class="flex-grow-1 pr-4">
-        <div class="text-sm font-weight-bold">Applied Filter:</div>
-        <div class="d-flex gap-4 mt-1" v-if="userStore.filters.length > 0">
-          <v-chip
-            color="primary"
-            v-for="(filter, index) in userStore.filters"
-            :key="index"
-            @click:close="userStore.removeFilter(filter)"
-            label
-            close
-            >{{ filter.filterName }}
-          </v-chip>
-        </div>
-        <div class="mt-1" v-else>
-          <v-chip color="primary" label>All </v-chip>
+        <div class="flex-grow-1 pr-4">
+          <div class="text-sm font-weight-bold">Applied Filter:</div>
+          <div class="d-flex gap-4 mt-1" v-if="userStore.filters.length > 0">
+            <v-chip
+              color="primary"
+              v-for="(filter, index) in userStore.filters"
+              :key="index"
+              @click:close="userStore.removeFilter(filter)"
+              label
+              close
+              >{{ filter.filterName }}
+            </v-chip>
+          </div>
+          <div class="mt-1" v-else>
+            <v-chip color="primary" label>All </v-chip>
+          </div>
         </div>
       </div>
-    </div>
-      <v-text-field
-        v-model="userStore.searchKey"
-        class="border-radius-6 search-select mt-4"
-        placeholder="Search By Name"
-        prepend-inner-icon="mdi-magnify"
-        flat
-        solo
-        outlined
-        dense
-        hide-details
-        clearable
-      ></v-text-field>
+
       <div class="mt-6">
-        <v-row>
+        <v-row v-if="userStore.slicedUserVoucher">
           <v-col
             cols="12"
             xl="3"
@@ -124,6 +119,12 @@
             <inventoryCard :id="card.id" :cards="card" />
           </v-col>
         </v-row>
+        <div
+          v-if="userStore.slicedUserVoucher.length <= 0"
+          class="pt-10 font-50"
+        >
+          Your inventory is empty!
+        </div>
       </div>
     </div>
 
@@ -243,9 +244,7 @@ export default {
   z-index: 4;
 }
 .left-filter-group {
-  background-color: white;
   height: max-content;
-  border-radius: 12px;
 }
 
 .right-filter-group {
