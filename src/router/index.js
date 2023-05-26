@@ -72,6 +72,11 @@ const routes = [
     name: "Register",
     component: () => import("../views/login/pages/Register.vue"),
   },
+  {
+    path: "/404",
+    name: "Page Not Found",
+    component: () => import("../views/notFoundPage.vue"),
+  },
   // {
   //   path: "/:lang",
   //   component: {
